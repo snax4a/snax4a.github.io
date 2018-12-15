@@ -1,0 +1,526 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>12.4 Dynamiczne tablice wielowymiarowe</TITLE>
+<META NAME="description" CONTENT="12.4 Dynamiczne tablice wielowymiarowe">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node79.html">
+<LINK REL="previous" HREF="node77.html">
+<LINK REL="up" HREF="node74.html">
+<LINK REL="next" HREF="node79.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1834"
+  HREF="node77.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1840"
+  HREF="node74.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1846"
+  HREF="node79.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1842"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1844"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1835"
+  HREF="node77.html">12.3 Zwalnianie pamięci &mdash;&nbsp;operator</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1841"
+  HREF="node74.html">12. Zarządzanie pamięcią</A>
+<B>Dalej:</B> <A NAME="tex2html1847"
+  HREF="node79.html">12.5 Zarządzanie pamięcią w&nbsp;C</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001340000000000000000"></A>
+            <A NAME="pam:dyntab"></A>
+<BR>
+<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">4</SPAN> Dynamiczne tablice wielowymiarowe
+</H1>
+
+<P>
+Pokazaliśmy, jak można dynamicznie alokować pamięć na tablice
+jednowymiarowe lub wielowymiarowe, ale takie w&nbsp;których tylko jeden,
+mianowicie pierwszy, wymiar nie jest z&nbsp;góry znany.
+Często jednak<A NAME="14440"></A>
+zachodzi potrzeba dynamicznego tworzenia tablic wielowymiarowych,
+na przykład dwuwymiarowych, ale takich, w&nbsp;których wszystkie wymiary są
+określane dynamicznie w&nbsp;trakcie wykonania programu. Pokażemy teraz jeden
+ze sposobów, w&nbsp;jaki można to zadanie zrealizować.
+
+<P>
+Załóżmy, że chcemy zaalokować miejsce na tablicę liczb
+typu
+<!--O--><span class='typ'>double<!--C--></span>
+ o&nbsp;wymiarach <SPAN CLASS="MATH">2&#215;3</SPAN>. Chcielibyśmy odnosić
+się do tej tablicy za pomocą normalnej składni z&nbsp;użyciem
+indeksów w&nbsp;nawiasach kwadratowych. Na przykład
+<!--O--><span class='zmienna'>m[1][2]<!--C--></span>
+
+powinno oznaczać element z&nbsp;wiersza drugiego i&nbsp;kolumny trzeciej &mdash;&nbsp;indeksy
+liczymy jak zwykle od zera &mdash;&nbsp;tablicy (macierzy)
+<!--O--><span class='zmienna'>m<!--C--></span>.
+
+<P>
+Co oznacza
+<!--O--><span class='zmienna'>m[1][2]<!--C--></span>? Wiemy, że jest to skrócony zapis
+wyrażenia '
+<FONT COLOR="#000000"><TT>*(m[1] + 2)</TT></FONT>' (patrz
+            rozdział o <A HREF="node25.html#tabstat:arytm">arytmetyce wskaźników</A> ).
+Zatem
+<!--O--><span class='zmienna'>m[1]<!--C--></span>
+ musi być wskaźnikiem typu
+<!--O--><span class='typ'>double*<!--C--></span>.
+A zatem
+<!--O--><span class='zmienna'>m<!--C--></span>
+ jest tablicą wskaźników, której kolejne
+elementy wskazują na początki kolejnych wierszy. A&nbsp;co to jest
+
+<FONT COLOR="#000000"><TT>m[1]</TT></FONT>? To z&nbsp;kolei '
+<FONT COLOR="#000000"><TT>*(m + 1)</TT></FONT>'; skoro wartością tego
+wyrażenia ma być wskaźnik typu
+<!--O--><span class='typ'>double*<!--C--></span>, to samo
+<!--O--><span class='zmienna'>m<!--C--></span>
+
+musi być wskaźnikiem do wskaźnika, a&nbsp;więc mieć typ
+<!--O--><span class='typ'>double**<!--C--></span>.
+
+<P>
+Możemy to przedstawić na rysunku:
+<DIV ALIGN="CENTER">
+<IMG
+  WIDTH="531" HEIGHT="170" ALIGN="BOTTOM" BORDER="0"
+ SRC="./matrix.png"
+ ALT="Image matrix">
+
+</DIV>
+W górnym rzędzie mamy sześć elementów naszej tablicy liczb typu
+
+<!--O--><span class='typ'>double<!--C--></span>. Liczby wewnątrz prostokątów oznaczają wartości tych elementów,
+tu przykładowo 1.5, 2.5 itd. Na prawo podane są nazwy zmiennych będących
+elementami tej tablicy. Poniżej podaliśmy przykładowe adresy kolejnych
+elementów &mdash;&nbsp;odległe od siebie o&nbsp;osiem, bo liczby typu
+<!--O--><span class='typ'>double<!--C--></span>
+
+zajmują zwykle osiem bajtów (uwaga: w&nbsp;układzie szesnastkowym, w&nbsp;którym
+zwykle podaje się adresy, <!-- MATH
+ $38_{16} + 8_{16} = 40_{16}$
+ -->
+<SPAN CLASS="MATH">38<SUB>16</SUB> +8<SUB>16</SUB> = 40<SUB>16</SUB></SPAN>, co w&nbsp;układzie
+dziesiętnym jest równoważne <!-- MATH
+ $56 + 8 = 64$
+ -->
+<SPAN CLASS="MATH">56 + 8 = 64</SPAN>). Górny rząd zatem reprezentuje
+naszą dwuwymiarową tablicę w&nbsp;postaci &bdquo;wypłaszczonej&rdquo;; w ciągłym obszarze
+pamięci po kolei umieszczone są kolejne wiersze tablicy.
+
+<P>
+W rzędzie środkowym mamy dwuelementową tablicę <FONT COLOR="#7b003e"><I>wskaźników</I></FONT>.
+Wartościami są adresy początków wierszy właściwej tablicy liczb.
+Elementy tej tablicy, jako wskaźniki, są czterobajtowe (lub ośmiobajtowe
+na platformie 64-bitowej): adresy kolejnych elementów odległe są zatem
+o&nbsp;cztery bajty.
+
+<P>
+W dolnym rzędzie mamy pojedynczą zmienną
+<!--O--><span class='zmienna'>m<!--C--></span>, której
+wartością jest z&nbsp;kolei adres tablicy ze środkowego rzędu, a&nbsp;więc
+adres tablicy wskaźników typu
+<!--O--><span class='typ'>double*<!--C--></span>. Zatem jest to wskaźnik
+do wskaźnika: typ
+<!--O--><span class='zmienna'>m<!--C--></span>
+ to
+<!--O--><span class='typ'>double**<!--C--></span>.
+
+<P>
+Zobaczmy, jak można to zrealizować w&nbsp;programie:
+<BR><A NAME="matrix2dim.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">89</SPAN>:</SPAN>
+      <A NAME="tex2html96"
+  HREF="source-files/matrix2dim.cpp">
+<!--O--><span class='downl'>matrix2dim.cpp<!--C--></span></A>
+<A NAME="14886"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Dynamiczna tablica dwuwymiarowa</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">double</font><font color="#990000">**</font> <b><font color="#000000">allocMatrix2D</font></b><font color="#990000">(</font>size_t<font color="#990000">,</font>size_t<font color="#990000">);</font>
+ <font SIZE="-2" color="black">     5.  </font><font color="#009900">void</font>     <b><font color="#000000">deleteMatrix2D</font></b><font color="#990000">(</font><font color="#009900">double</font><font color="#990000">**&amp;);</font>
+ <font SIZE="-2" color="black">     6.  </font>
+ <font SIZE="-2" color="black">     7.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     8.  </font>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#008080">size_t</font> dim1 <font color="#990000">=</font> <font color="#993399">2</font><font color="#990000">,</font> dim2 <font color="#990000">=</font> <font color="#993399">3</font><font color="#990000">;</font>  <i><font color="#9A1900">// NIE stałe!</font></i>
+ <font SIZE="-2" color="black">    10.  </font>
+ <font SIZE="-2" color="black">    11.  </font>      <i><font color="#9A1900">// alokowanie</font></i>
+ <font SIZE="-2" color="black">    12.  </font>    <font color="#009900">double</font><font color="#990000">**</font> matrix2d <font color="#990000">=</font> <b><font color="#000000">allocMatrix2D</font></b><font color="#990000">(</font>dim1<font color="#990000">,</font>dim2<font color="#990000">);</font>     <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">    13.  </font>
+ <font SIZE="-2" color="black">    14.  </font>      <i><font color="#9A1900">// wpisywanie wartości</font></i>
+ <font SIZE="-2" color="black">    15.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#008080">size_t</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> dim1<font color="#990000">;</font> <font color="#990000">++</font>i<font color="#990000">)</font>                 <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    16.  </font>        <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#008080">size_t</font> j <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> j <font color="#990000">&lt;</font> dim2<font color="#990000">;</font> <font color="#990000">++</font>j<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    17.  </font>            matrix2d<font color="#990000">[</font>i<font color="#990000">][</font>j<font color="#990000">]</font> <font color="#990000">=</font> <font color="#993399">3</font><font color="#990000">*</font>i<font color="#990000">+</font>j<font color="#990000">+</font><font color="#993399">1.5</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font>
+ <font SIZE="-2" color="black">    19.  </font>      <i><font color="#9A1900">// drukowanie</font></i>
+ <font SIZE="-2" color="black">    20.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#008080">size_t</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> dim1<font color="#990000">;</font> <font color="#990000">++</font>i<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    21.  </font>        <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#008080">size_t</font> j <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> j <font color="#990000">&lt;</font> dim2<font color="#990000">;</font> <font color="#990000">++</font>j<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    22.  </font>            cout <font color="#990000">&lt;&lt;</font> matrix2d<font color="#990000">[</font>i<font color="#990000">][</font>j<font color="#990000">]</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    23.  </font>        cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    24.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    25.  </font>
+ <font SIZE="-2" color="black">    26.  </font>      <i><font color="#9A1900">// usuwanie</font></i>
+ <font SIZE="-2" color="black">    27.  </font>    <b><font color="#000000">deleteMatrix2D</font></b><font color="#990000">(</font>matrix2d<font color="#990000">);</font>                         <span class="ding">&#x278C;</span>
+ <font SIZE="-2" color="black">    28.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    29.  </font>
+ <font SIZE="-2" color="black">    30.  </font><font color="#009900">double</font><font color="#990000">**</font> <b><font color="#000000">allocMatrix2D</font></b><font color="#990000">(</font><font color="#008080">size_t</font> dim1<font color="#990000">,</font> <font color="#008080">size_t</font> dim2<font color="#990000">)</font> <font color="#FF0000">{</font>    <span class="ding">&#x278D;</span>
+ <font SIZE="-2" color="black">    31.  </font>    <font color="#009900">double</font><font color="#990000">**</font> matrix2d <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <font color="#009900">double</font><font color="#990000">*[</font>dim1<font color="#990000">];</font>
+ <font SIZE="-2" color="black">    32.  </font>    <font color="#009900">double</font><font color="#990000">*</font>  dumm     <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <font color="#009900">double</font><font color="#990000">[</font>dim1<font color="#990000">*</font>dim2<font color="#990000">];</font>
+ <font SIZE="-2" color="black">    33.  </font>
+ <font SIZE="-2" color="black">    34.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#008080">size_t</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> dim1<font color="#990000">;</font> <font color="#990000">++</font>i<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    35.  </font>        matrix2d<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">=</font> dumm <font color="#990000">+</font> i<font color="#990000">*</font>dim2<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    36.  </font>
+ <font SIZE="-2" color="black">    37.  </font>    <b><font color="#0000FF">return</font></b> matrix2d<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    38.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    39.  </font>
+ <font SIZE="-2" color="black">    40.  </font><font color="#009900">void</font> <b><font color="#000000">deleteMatrix2D</font></b><font color="#990000">(</font><font color="#009900">double</font><font color="#990000">**&amp;</font> matrix2d<font color="#990000">)</font> <font color="#FF0000">{</font>             <span class="ding">&#x278E;</span>
+ <font SIZE="-2" color="black">    41.  </font>    <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> matrix2d<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">    42.  </font>    <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> matrix2d<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    43.  </font>    matrix2d <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    44.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Dwywymiarowa tablica (macierz) jest tworzona przez funkcję
+
+<!--O--><span class='funkcja'>allocMatrix2D<!--C--></span>
+ (<span class="ding">&#x278D;</span>).
+Zmienne
+<!--O--><span class='zmienna'>dim1<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>dim2<!--C--></span>
+ oznaczają wymiary tablicy:
+
+<!--O--><span class='zmienna'>dim1<!--C--></span>
+ jest liczbą wierszy,
+<!--O--><span class='zmienna'>dim2<!--C--></span>
+ liczbą kolumn.
+
+<P>
+Najpierw tworzymy zmienną
+<!--O--><span class='zmienna'>matrix2d<!--C--></span>
+
+typu
+<!--O--><span class='typ'>double**<!--C--></span>
+ i&nbsp;wpisujemy tam adres zaalokowanej tablicy wskaźników
+typu
+<!--O--><span class='typ'>double*<!--C--></span>. Liczba tych wskaźników odpowiada liczbie wierszy
+w&nbsp;macierzy. Na rysunku zmienna
+<!--O--><span class='zmienna'>m<!--C--></span>
+ odpowiada zmiennej
+
+<!--O--><span class='zmienna'>macierz2d<!--C--></span>, a&nbsp;tablica ze środkowego rzędu odpowiada tablicy
+wskaźników wskazywanej przez
+<!--O--><span class='zmienna'>matrix2d<!--C--></span>.
+
+<P>
+Następnie tworzymy właściwą tablicę liczb. Ich ilość to iloczyn wymiarów.
+Adres zawarty w&nbsp;
+<!--O--><span class='zmienna'>dumm<!--C--></span>
+ to adres początku tej tablicy (na rysunku
+jest to adres 0x30).
+
+<P>
+Teraz w&nbsp;pętli wypełniamy tablicę wskaźników ze środkowego rzędu na rysunku:
+do kolejnych elementów wpisujemy adresy początków wierszy tablicy liczb.
+Są one od siebie odległe o&nbsp;tyle wielokrotności długości jednej zmiennej
+typu
+<!--O--><span class='typ'>double<!--C--></span>, ile wynosi liczba kolumn (u&nbsp;nas jest to
+<!--O--><span class='zmienna'>dim2<!--C--></span>),
+czyli jak długi jest jeden wiersz.
+
+<P>
+Do funkcji wywołującej zwracamy wartość zmiennej
+<!--O--><span class='zmienna'>matrix2d<!--C--></span>,
+która może być używana zgodnie ze składnią macierzową.
+
+<P>
+W programie głównym używamy tej macierzy: wpisujemy wartości
+i&nbsp;drukujemy testowe wyniki
+<PRE>
+    1.5 2.5 3.5
+    4.5 5.5 6.5
+</PRE>
+Po użyciu naszej macierzy, w&nbsp;linii&nbsp;<span class="ding">&#x278C;</span> usuwamy ją wywołując funkcję
+
+<!--O--><span class='funkcja'>deleteMatrix2d<!--C--></span>
+ (<span class="ding">&#x278E;</span>). W&nbsp;funkcji tej musimy wywołać operator
+
+<!--O--><span class='klucz'>delete<!--C--></span>
+ dwa razy, bo tyle razy użyliśmy operatora
+<!--O--><span class='klucz'>new<!--C--></span>
+
+konstruując macierz. Najpierw zwalniamy tablicę liczb &mdash;&nbsp;jej adres to
+adres początku pierwszego wiersza (o numerze 0), a&nbsp;zatem jest to adres
+zawarty w&nbsp;
+<!--O--><span class='zmienna'>macierz2d[0]<!--C--></span>. Potem zwalniamy tablicę wskaźników
+wskazywaną przez
+<!--O--><span class='zmienna'>macierz2d<!--C--></span>. Kolejność jest tu istotna: gdybyśmy
+usunęli najpierw tablicę wskaźników, to do tablicy liczb nie mielibyśmy
+już dostępu. Na zakończenie zerujemy na wszelki wypadek wskaźnik
+
+<!--O--><span class='zmienna'>macierz2d<!--C--></span>. Przesłaliśmy go do funkcji przez referencję,
+aby to wyzerowanie było skuteczne również w&nbsp;funkcji wywołującej.
+
+<P>
+W podobny sposób można budować tablice więcej niż dwuwymiarowe.
+Na przykład poniższy program pokazuje, jak można to zrobić dla
+macierzy dwu-, trzy- i&nbsp;czterowymiarowych (tym razem są to macierze
+liczb całkowitych):
+<BR><A NAME="macierze.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">90</SPAN>:</SPAN>
+      <A NAME="tex2html97"
+  HREF="source-files/macierze.cpp">
+<!--O--><span class='downl'>macierze.cpp<!--C--></span></A>
+<A NAME="14898"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Dynamiczne tablice wielowymiarowe</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">int</font><font color="#990000">**</font>   <b><font color="#000000">allocMatrix2D</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">,</font><font color="#009900">int</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">     5.  </font><font color="#009900">void</font>    <b><font color="#000000">deleteMatrix2D</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">**&amp;);</font>
+ <font SIZE="-2" color="black">     6.  </font>
+ <font SIZE="-2" color="black">     7.  </font><font color="#009900">int</font><font color="#990000">***</font>  <b><font color="#000000">allocMatrix3D</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">,</font><font color="#009900">int</font><font color="#990000">,</font><font color="#009900">int</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">     8.  </font><font color="#009900">void</font>    <b><font color="#000000">deleteMatrix3D</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">***&amp;);</font>
+ <font SIZE="-2" color="black">     9.  </font>
+ <font SIZE="-2" color="black">    10.  </font><font color="#009900">int</font><font color="#990000">****</font> <b><font color="#000000">allocMatrix4D</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">,</font><font color="#009900">int</font><font color="#990000">,</font><font color="#009900">int</font><font color="#990000">,</font><font color="#009900">int</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    11.  </font><font color="#009900">void</font>    <b><font color="#000000">deleteMatrix4D</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">****&amp;);</font>
+ <font SIZE="-2" color="black">    12.  </font>
+ <font SIZE="-2" color="black">    13.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    14.  </font>   <font color="#009900">int</font> dim1 <font color="#990000">=</font> <font color="#993399">7</font><font color="#990000">,</font> dim2 <font color="#990000">=</font> <font color="#993399">9</font><font color="#990000">,</font> dim3 <font color="#990000">=</font> <font color="#993399">12</font><font color="#990000">,</font> dim4 <font color="#990000">=</font> <font color="#993399">5</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>
+ <font SIZE="-2" color="black">    16.  </font>    <i><font color="#9A1900">// Macierze dwuwymiarowe //////////////////</font></i>
+ <font SIZE="-2" color="black">    17.  </font>
+ <font SIZE="-2" color="black">    18.  </font>    <i><font color="#9A1900">// alokowanie</font></i>
+ <font SIZE="-2" color="black">    19.  </font>    <font color="#009900">int</font><font color="#990000">**</font> matrix2d <font color="#990000">=</font> <b><font color="#000000">allocMatrix2D</font></b><font color="#990000">(</font>dim1<font color="#990000">,</font>dim2<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    20.  </font>
+ <font SIZE="-2" color="black">    21.  </font>    <i><font color="#9A1900">// test</font></i>
+ <font SIZE="-2" color="black">    22.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> <font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> dim1<font color="#990000">;</font> i<font color="#990000">++</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    23.  </font>        <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> <font color="#009900">int</font> j <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> j <font color="#990000">&lt;</font> dim2<font color="#990000">;</font> j<font color="#990000">++</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    24.  </font>            matrix2d<font color="#990000">[</font>i<font color="#990000">][</font>j<font color="#990000">]</font> <font color="#990000">=</font> i<font color="#990000">+</font>j<font color="#990000">+</font><font color="#993399">2</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    25.  </font>
+ <font SIZE="-2" color="black">    26.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Macierz dwuwymiarowa"</font> <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    27.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" Element srodkowy: "</font>
+ <font SIZE="-2" color="black">    28.  </font>         <font color="#990000">&lt;&lt;</font> matrix2d<font color="#990000">[</font>dim1<font color="#990000">/</font><font color="#993399">2</font><font color="#990000">][</font>dim2<font color="#990000">/</font><font color="#993399">2</font><font color="#990000">]</font> <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    29.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"     Powinno byc : "</font>
+ <font SIZE="-2" color="black">    30.  </font>         <font color="#990000">&lt;&lt;</font> dim1<font color="#990000">/</font><font color="#993399">2</font> <font color="#990000">+</font> dim2<font color="#990000">/</font><font color="#993399">2</font> <font color="#990000">+</font><font color="#993399">2</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    31.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" Element ostatni : "</font>
+ <font SIZE="-2" color="black">    32.  </font>         <font color="#990000">&lt;&lt;</font> matrix2d<font color="#990000">[</font>dim1<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">][</font>dim2<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">]</font> <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    33.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"     Powinno byc : "</font>
+ <font SIZE="-2" color="black">    34.  </font>         <font color="#990000">&lt;&lt;</font> dim1 <font color="#990000">+</font> dim2 <font color="#990000">&lt;&lt;</font> endl <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    35.  </font>
+ <font SIZE="-2" color="black">    36.  </font>    <i><font color="#9A1900">// usuwanie</font></i>
+ <font SIZE="-2" color="black">    37.  </font>    <b><font color="#000000">deleteMatrix2D</font></b><font color="#990000">(</font>matrix2d<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    38.  </font>
+ <font SIZE="-2" color="black">    39.  </font>    <i><font color="#9A1900">// Macierze trzywymiarowe ///////////////////////</font></i>
+ <font SIZE="-2" color="black">    40.  </font>
+ <font SIZE="-2" color="black">    41.  </font>    <i><font color="#9A1900">// alokowanie</font></i>
+ <font SIZE="-2" color="black">    42.  </font>    <font color="#009900">int</font><font color="#990000">***</font> matrix3d <font color="#990000">=</font> <b><font color="#000000">allocMatrix3D</font></b><font color="#990000">(</font>dim1<font color="#990000">,</font>dim2<font color="#990000">,</font>dim3<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    43.  </font>
+ <font SIZE="-2" color="black">    44.  </font>    <i><font color="#9A1900">// test</font></i>
+ <font SIZE="-2" color="black">    45.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> <font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> dim1<font color="#990000">;</font> i<font color="#990000">++</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    46.  </font>        <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> <font color="#009900">int</font> j <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> j <font color="#990000">&lt;</font> dim2<font color="#990000">;</font> j<font color="#990000">++</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    47.  </font>            <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> <font color="#009900">int</font> k <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> k <font color="#990000">&lt;</font> dim3<font color="#990000">;</font> k<font color="#990000">++</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    48.  </font>                matrix3d<font color="#990000">[</font>i<font color="#990000">][</font>j<font color="#990000">][</font>k<font color="#990000">]</font> <font color="#990000">=</font> i<font color="#990000">+</font>j<font color="#990000">+</font>k<font color="#990000">+</font><font color="#993399">3</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    49.  </font>
+ <font SIZE="-2" color="black">    50.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Macierz trzywymiarowa"</font> <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    51.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" Element srodkowy: "</font>
+ <font SIZE="-2" color="black">    52.  </font>         <font color="#990000">&lt;&lt;</font> matrix3d<font color="#990000">[</font>dim1<font color="#990000">/</font><font color="#993399">2</font><font color="#990000">][</font>dim2<font color="#990000">/</font><font color="#993399">2</font><font color="#990000">][</font>dim3<font color="#990000">/</font><font color="#993399">2</font><font color="#990000">]</font> <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    53.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"     Powinno byc : "</font>
+ <font SIZE="-2" color="black">    54.  </font>         <font color="#990000">&lt;&lt;</font> dim1<font color="#990000">/</font><font color="#993399">2</font> <font color="#990000">+</font> dim2<font color="#990000">/</font><font color="#993399">2</font> <font color="#990000">+</font> dim3<font color="#990000">/</font><font color="#993399">2</font> <font color="#990000">+</font> <font color="#993399">3</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    55.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" Element ostatni : "</font>
+ <font SIZE="-2" color="black">    56.  </font>         <font color="#990000">&lt;&lt;</font> matrix3d<font color="#990000">[</font>dim1<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">][</font>dim2<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">][</font>dim3<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">]</font> <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    57.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"     Powinno byc : "</font>
+ <font SIZE="-2" color="black">    58.  </font>         <font color="#990000">&lt;&lt;</font> dim1 <font color="#990000">+</font> dim2 <font color="#990000">+</font> dim3 <font color="#990000">&lt;&lt;</font> endl <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    59.  </font>
+ <font SIZE="-2" color="black">    60.  </font>    <i><font color="#9A1900">// usuwanie</font></i>
+ <font SIZE="-2" color="black">    61.  </font>    <b><font color="#000000">deleteMatrix3D</font></b><font color="#990000">(</font>matrix3d<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    62.  </font>
+ <font SIZE="-2" color="black">    63.  </font>    <i><font color="#9A1900">// Macierze czterowymiarowe ///////////////////////////</font></i>
+ <font SIZE="-2" color="black">    64.  </font>
+ <font SIZE="-2" color="black">    65.  </font>    <i><font color="#9A1900">// alokowanie</font></i>
+ <font SIZE="-2" color="black">    66.  </font>    <font color="#009900">int</font><font color="#990000">****</font> matrix4d <font color="#990000">=</font> <b><font color="#000000">allocMatrix4D</font></b><font color="#990000">(</font>dim1<font color="#990000">,</font>dim2<font color="#990000">,</font>dim3<font color="#990000">,</font>dim4<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    67.  </font>
+ <font SIZE="-2" color="black">    68.  </font>    <i><font color="#9A1900">// test</font></i>
+ <font SIZE="-2" color="black">    69.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> <font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> dim1<font color="#990000">;</font> i<font color="#990000">++</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    70.  </font>        <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> <font color="#009900">int</font> j <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> j <font color="#990000">&lt;</font> dim2<font color="#990000">;</font> j<font color="#990000">++</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    71.  </font>            <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> <font color="#009900">int</font> k <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> k <font color="#990000">&lt;</font> dim3<font color="#990000">;</font> k<font color="#990000">++</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    72.  </font>                <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> <font color="#009900">int</font> m <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> m <font color="#990000">&lt;</font> dim4<font color="#990000">;</font> m<font color="#990000">++</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    73.  </font>                    matrix4d<font color="#990000">[</font>i<font color="#990000">][</font>j<font color="#990000">][</font>k<font color="#990000">][</font>m<font color="#990000">]</font> <font color="#990000">=</font> i<font color="#990000">+</font>j<font color="#990000">+</font>k<font color="#990000">+</font>m<font color="#990000">+</font><font color="#993399">4</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    74.  </font>
+ <font SIZE="-2" color="black">    75.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Macierz czterowymiarowa"</font> <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    76.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" Element srodkowy: "</font>
+ <font SIZE="-2" color="black">    77.  </font>         <font color="#990000">&lt;&lt;</font> matrix4d<font color="#990000">[</font>dim1<font color="#990000">/</font><font color="#993399">2</font><font color="#990000">][</font>dim2<font color="#990000">/</font><font color="#993399">2</font><font color="#990000">][</font>dim3<font color="#990000">/</font><font color="#993399">2</font><font color="#990000">][</font>dim4<font color="#990000">/</font><font color="#993399">2</font><font color="#990000">]</font>
+ <font SIZE="-2" color="black">    78.  </font>         <font color="#990000">&lt;&lt;</font> endl <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"     Powinno byc : "</font>
+ <font SIZE="-2" color="black">    79.  </font>         <font color="#990000">&lt;&lt;</font> dim1<font color="#990000">/</font><font color="#993399">2</font> <font color="#990000">+</font> dim2<font color="#990000">/</font><font color="#993399">2</font> <font color="#990000">+</font> dim3<font color="#990000">/</font><font color="#993399">2</font> <font color="#990000">+</font> dim4<font color="#990000">/</font><font color="#993399">2</font> <font color="#990000">+</font> <font color="#993399">4</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    80.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" Element ostatni : "</font>
+ <font SIZE="-2" color="black">    81.  </font>         <font color="#990000">&lt;&lt;</font> matrix4d<font color="#990000">[</font>dim1<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">][</font>dim2<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">][</font>dim3<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">][</font>dim4<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">]</font>
+ <font SIZE="-2" color="black">    82.  </font>         <font color="#990000">&lt;&lt;</font> endl <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"     Powinno byc : "</font>
+ <font SIZE="-2" color="black">    83.  </font>         <font color="#990000">&lt;&lt;</font> dim1 <font color="#990000">+</font> dim2 <font color="#990000">+</font> dim3 <font color="#990000">+</font> dim4 <font color="#990000">&lt;&lt;</font> endl <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    84.  </font>
+ <font SIZE="-2" color="black">    85.  </font>    <i><font color="#9A1900">// usuwanie</font></i>
+ <font SIZE="-2" color="black">    86.  </font>    <b><font color="#000000">deleteMatrix4D</font></b><font color="#990000">(</font>matrix4d<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    87.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    88.  </font>
+ <font SIZE="-2" color="black">    89.  </font><font color="#009900">int</font><font color="#990000">**</font> <b><font color="#000000">allocMatrix2D</font></b><font color="#990000">(</font><font color="#009900">int</font> dim1<font color="#990000">,</font> <font color="#009900">int</font> dim2<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    90.  </font>    <font color="#009900">int</font><font color="#990000">**</font> matrix2d <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">*[</font>dim1<font color="#990000">];</font>
+ <font SIZE="-2" color="black">    91.  </font>    <font color="#009900">int</font><font color="#990000">*</font>  dumm     <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">[</font>dim1<font color="#990000">*</font>dim2<font color="#990000">];</font>
+ <font SIZE="-2" color="black">    92.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> <font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> dim1<font color="#990000">;</font> i<font color="#990000">++</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    93.  </font>        matrix2d<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">=</font> dumm <font color="#990000">+</font> i<font color="#990000">*</font>dim2<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    94.  </font>    <b><font color="#0000FF">return</font></b> matrix2d<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    95.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    96.  </font>
+ <font SIZE="-2" color="black">    97.  </font><font color="#009900">void</font> <b><font color="#000000">deleteMatrix2D</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">**&amp;</font> matrix2d<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    98.  </font>    <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> matrix2d<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">    99.  </font>    <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> matrix2d<font color="#990000">;</font>
+ <font SIZE="-2" color="black">   100.  </font>    matrix2d <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">   101.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">   102.  </font>
+ <font SIZE="-2" color="black">   103.  </font><font color="#009900">int</font><font color="#990000">***</font> <b><font color="#000000">allocMatrix3D</font></b><font color="#990000">(</font><font color="#009900">int</font> dim1<font color="#990000">,</font> <font color="#009900">int</font> dim2<font color="#990000">,</font> <font color="#009900">int</font> dim3<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">   104.  </font>    <font color="#009900">int</font><font color="#990000">***</font> matrix3d <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">**[</font>dim1<font color="#990000">];</font>
+ <font SIZE="-2" color="black">   105.  </font>    <font color="#009900">int</font><font color="#990000">**</font>  dumm     <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">*[</font>dim1<font color="#990000">*</font>dim2<font color="#990000">];</font>
+ <font SIZE="-2" color="black">   106.  </font>    <font color="#009900">int</font><font color="#990000">*</font>   d        <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">[</font>dim1<font color="#990000">*</font>dim2<font color="#990000">*</font>dim3<font color="#990000">];</font>
+ <font SIZE="-2" color="black">   107.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> <font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> dim1<font color="#990000">;</font> i<font color="#990000">++</font> <font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">   108.  </font>        matrix3d<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">=</font> dumm <font color="#990000">+</font> i<font color="#990000">*</font>dim2<font color="#990000">;</font>
+ <font SIZE="-2" color="black">   109.  </font>        <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> <font color="#009900">int</font> j <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> j <font color="#990000">&lt;</font> dim2<font color="#990000">;</font> j<font color="#990000">++</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">   110.  </font>            dumm<font color="#990000">[</font>i<font color="#990000">*</font>dim2<font color="#990000">+</font>j<font color="#990000">]</font> <font color="#990000">=</font> d <font color="#990000">+</font> <font color="#990000">(</font>i<font color="#990000">*</font>dim2<font color="#990000">+</font>j<font color="#990000">)*</font>dim3<font color="#990000">;</font>
+ <font SIZE="-2" color="black">   111.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">   112.  </font>    <b><font color="#0000FF">return</font></b> matrix3d<font color="#990000">;</font>
+ <font SIZE="-2" color="black">   113.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">   114.  </font>
+ <font SIZE="-2" color="black">   115.  </font><font color="#009900">void</font> <b><font color="#000000">deleteMatrix3D</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">***&amp;</font> matrix3d<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">   116.  </font>    <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> matrix3d<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">][</font><font color="#993399">0</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">   117.  </font>    <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> matrix3d<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">   118.  </font>    <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> matrix3d<font color="#990000">;</font>
+ <font SIZE="-2" color="black">   119.  </font>    matrix3d <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">   120.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">   121.  </font>
+ <font SIZE="-2" color="black">   122.  </font><font color="#009900">int</font><font color="#990000">****</font> <b><font color="#000000">allocMatrix4D</font></b><font color="#990000">(</font><font color="#009900">int</font> dim1<font color="#990000">,</font><font color="#009900">int</font> dim2<font color="#990000">,</font><font color="#009900">int</font> dim3<font color="#990000">,</font><font color="#009900">int</font> dim4<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">   123.  </font>    <font color="#009900">int</font><font color="#990000">****</font> matrix4d <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">***[</font>dim1<font color="#990000">];</font>
+ <font SIZE="-2" color="black">   124.  </font>    <font color="#009900">int</font><font color="#990000">***</font>  dumm     <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">**[</font>dim1<font color="#990000">*</font>dim2<font color="#990000">];</font>
+ <font SIZE="-2" color="black">   125.  </font>    <font color="#009900">int</font><font color="#990000">**</font>   dum      <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">*[</font>dim1<font color="#990000">*</font>dim2<font color="#990000">*</font>dim3<font color="#990000">];</font>
+ <font SIZE="-2" color="black">   126.  </font>    <font color="#009900">int</font><font color="#990000">*</font>    d        <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">[</font>dim1<font color="#990000">*</font>dim2<font color="#990000">*</font>dim3<font color="#990000">*</font>dim4<font color="#990000">];</font>
+ <font SIZE="-2" color="black">   127.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> <font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> dim1<font color="#990000">;</font> i<font color="#990000">++</font> <font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">   128.  </font>        matrix4d<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">=</font> dumm <font color="#990000">+</font> i<font color="#990000">*</font>dim2<font color="#990000">;</font>
+ <font SIZE="-2" color="black">   129.  </font>        <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> <font color="#009900">int</font> j <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> j <font color="#990000">&lt;</font> dim2<font color="#990000">;</font> j<font color="#990000">++</font> <font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">   130.  </font>            dumm<font color="#990000">[</font>i<font color="#990000">*</font>dim2<font color="#990000">+</font>j<font color="#990000">]</font> <font color="#990000">=</font> dum <font color="#990000">+</font> <font color="#990000">(</font>i<font color="#990000">*</font>dim2<font color="#990000">+</font>j<font color="#990000">)*</font>dim3<font color="#990000">;</font>
+ <font SIZE="-2" color="black">   131.  </font>            <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> <font color="#009900">int</font> k <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> k <font color="#990000">&lt;</font> dim3<font color="#990000">;</font> k<font color="#990000">++</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">   132.  </font>                dum<font color="#990000">[(</font>i<font color="#990000">*</font>dim2<font color="#990000">+</font>j<font color="#990000">)*</font>dim3<font color="#990000">+</font>k<font color="#990000">]</font> <font color="#990000">=</font>
+ <font SIZE="-2" color="black">   133.  </font>                    d <font color="#990000">+</font> <font color="#990000">((</font>i<font color="#990000">*</font>dim2<font color="#990000">+</font>j<font color="#990000">)*</font>dim3<font color="#990000">+</font>k<font color="#990000">)*</font>dim4<font color="#990000">;</font>
+ <font SIZE="-2" color="black">   134.  </font>        <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">   135.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">   136.  </font>    <b><font color="#0000FF">return</font></b> matrix4d<font color="#990000">;</font>
+ <font SIZE="-2" color="black">   137.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">   138.  </font>
+ <font SIZE="-2" color="black">   139.  </font><font color="#009900">void</font> <b><font color="#000000">deleteMatrix4D</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">****&amp;</font> matrix4d<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">   140.  </font>    <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> matrix4d<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">][</font><font color="#993399">0</font><font color="#990000">][</font><font color="#993399">0</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">   141.  </font>    <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> matrix4d<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">][</font><font color="#993399">0</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">   142.  </font>    <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> matrix4d<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">   143.  </font>    <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> matrix4d<font color="#990000">;</font>
+ <font SIZE="-2" color="black">   144.  </font>    matrix4d <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">   145.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Zasada tworzenia i&nbsp;usuwania tablic wielowymiarowych jest podobna do
+tej, którą omówiliśmy dla macierzy dwuwymiarowych, choć konstrukcje,
+jak widać, stają się szybko niepokojąco &bdquo;wielopiętrowe&rdquo;...
+Wynik tego programu to:
+<PRE>
+    Macierz dwuwymiarowa
+     Element srodkowy: 9
+         Powinno byc : 9
+     Element ostatni : 16
+         Powinno byc : 16
+
+    Macierz trzywymiarowa
+     Element srodkowy: 16
+         Powinno byc : 16
+     Element ostatni : 28
+         Powinno byc : 28
+
+    Macierz czterowymiarowa
+     Element srodkowy: 19
+         Powinno byc : 19
+     Element ostatni : 33
+         Powinno byc : 33
+</PRE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1834"
+  HREF="node77.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1840"
+  HREF="node74.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1846"
+  HREF="node79.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1842"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1844"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1835"
+  HREF="node77.html">12.3 Zwalnianie pamięci &mdash;&nbsp;operator</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1841"
+  HREF="node74.html">12. Zarządzanie pamięcią</A>
+<B>Dalej:</B> <A NAME="tex2html1847"
+  HREF="node79.html">12.5 Zarządzanie pamięcią w&nbsp;C</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

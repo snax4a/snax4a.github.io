@@ -1,0 +1,1565 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>17.1 C-napisy</TITLE>
+<META NAME="description" CONTENT="17.1 C-napisy">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node113.html">
+<LINK REL="previous" HREF="node111.html">
+<LINK REL="up" HREF="node111.html">
+<LINK REL="next" HREF="node113.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2356"
+  HREF="node111.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2362"
+  HREF="node111.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2368"
+  HREF="node113.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2364"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2366"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2357"
+  HREF="node111.html">17. Napisy</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2363"
+  HREF="node111.html">17. Napisy</A>
+<B>Dalej:</B> <A NAME="tex2html2369"
+  HREF="node113.html">17.2 Napisy w&nbsp;C++</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Podrozdzia&#322;y</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html2370"
+  HREF="node112.html#SECTION001811000000000000000"><SPAN CLASS="arabic">17</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Funkcje operujące na C-napisach</A>
+<LI><A NAME="tex2html2371"
+  HREF="node112.html#SECTION001812000000000000000"><SPAN CLASS="arabic">17</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Funkcje operujące na znakach</A>
+<LI><A NAME="tex2html2372"
+  HREF="node112.html#SECTION001813000000000000000"><SPAN CLASS="arabic">17</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Funkcje konwertujące</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION001810000000000000000"></A><A NAME="nap:cnap"></A>
+<BR>
+<SPAN CLASS="arabic">17</SPAN>.<SPAN CLASS="arabic">1</SPAN> C-napisy
+</H1>
+
+<P>
+W tradycyjnym C<A NAME="21032"></A>
+typ
+<!--O--><span class='typ'>char<!--C--></span>
+ i&nbsp;
+<!--O--><span class='typ'>char*<!--C--></span>
+ są generycznymi typami
+służącymi do bezpośrednich odniesień do pamięci.
+Niektóre operacje na napisach są więc bardzo podobne
+do podanych wcześniej operacji działających  bezpośrednio
+na pamięci (patrz
+      rozdział o&nbsp;zarządzaniu <A HREF="node80.html#pam:funpam">pamięcią</A> ).
+
+<P>
+Napis jest traktowany jak tablica znaków zawierająca
+znak
+<!--O--><span class='zmienna'>NUL<!--C--></span><A NAME="21042"></A> na końcu.
+Nazwa
+<!--O--><span class='zmienna'>NUL<!--C--></span>
+ (przez
+jedno 'L') jest nazwą znaku, ale nie odpowiada żadnej nazwie
+zdefiniowanej w&nbsp;języku. Literałem tego znaku jest '<!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>0' &mdash;&nbsp;
+<FONT COLOR="#7b003e"><I>nie</I></FONT> jest to w żadnym przypadku
+<!--O--><span class='zmienna'>NULL<!--C--></span>
+ (taki symbol,
+definiowany za pomocą dyrektywy preprocesora, oznacza
+<FONT COLOR="#7b003e"><I>wskaźnik</I></FONT> pusty).
+
+<P>
+Należy pamiętać, że
+
+<P>
+
+<div class='wazne'>
+jeśli inicjalizujemy napis zadeklarowany jako typu
+
+<!--O--><span class='typ'>char*<!--C--></span>
+ literałem napisowym, to <FONT COLOR="#7b003e"><I>nie</I></FONT> będzie
+    on modyfikowalny.
+
+
+</div>
+
+<P>
+Aby napis był modyfikowalny, należy go zadeklarować jawnie
+jako tablicę:
+<pre><tt> <font SIZE="-2" color="black">     1.  </font>    <font color="#009900">char</font><font color="#990000">*</font> s1   <font color="#990000">=</font> <font color="#FF0000">"Ula"</font><font color="#990000">;</font>  <i><font color="#9A1900">// Niemodyfikowalny, wymiar 4</font></i>
+ <font SIZE="-2" color="black">     2.  </font>    <font color="#009900">char</font>  s2<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">"Ula"</font><font color="#990000">;</font>  <i><font color="#9A1900">// Modyfikowalny,    wymiar 4</font></i>
+ <font SIZE="-2" color="black">     3.  </font>    <font color="#009900">char</font>  s3<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">{</font><font color="#FF0000">'U'</font><font color="#990000">,</font> <font color="#FF0000">'l'</font><font color="#990000">,</font> <font color="#FF0000">'a'</font><font color="#990000">,</font> <font color="#FF0000">'</font><font color="#CC33CC">\0</font><font color="#FF0000">'</font><font color="#FF0000">}</font>       <i><font color="#9A1900">// Jak s2</font></i>
+</tt></pre>
+Definicje C-napisów
+<!--O--><span class='zmienna'>s2<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>s3<!--C--></span>
+ są w&nbsp;zasadzie
+równoważne. Forma z&nbsp;linii&nbsp;2 jest oczywiście wygodniejsza,
+bo wymaga mniej pisania. Zauważmy, że w&nbsp;obu pierwszych formach
+kompilator sam zadba o&nbsp;wstawienie jako ostatniego znaku tablicy
+znaku
+<!--O--><span class='zmienna'>NUL<!--C--></span>
+ (czyli '<!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>0').
+Używając formy z&nbsp;linii&nbsp;3 musimy sami o&nbsp;tym pamiętać.
+We wszystkich przypadkach tablica zawierać będzie cztery znaki:
+trzy litery słowa
+<!--O--><span class='zmienna'>Ula<!--C--></span>
+ i&nbsp;znak
+<!--O--><span class='zmienna'>NUL<!--C--></span>.
+W&nbsp;dwóch ostatnich przypadkach jest to zwykła tablica,
+utworzona na stosie. Natomiast tablica utworzona
+w sposób przedstawiony w&nbsp;linii&nbsp;1 jest alokowana gdzie indziej
+i&nbsp;jest <FONT COLOR="#7b003e"><I>niemodyfikowalna</I></FONT>. Należy o&nbsp;tym pamiętać przy
+przekazywaniu tego rodzaju napisów do funkcji. Typem
+<!--O--><span class='zmienna'>s1<!--C--></span>
+
+jest
+<!--O--><span class='typ'>char*<!--C--></span>, a&nbsp;więc kompilator zgodzi się na wysłanie
+
+<!--O--><span class='zmienna'>s1<!--C--></span>
+ do funkcji, których odpowiedni parametr <FONT COLOR="#7b003e"><I>nie</I></FONT> był
+wcale zadeklarowany jako
+<!--O--><span class='typ'>const char*<!--C--></span>. Tym niemniej,
+próba modyfikacji takiego napisu przez funkcję skończy się
+załamaniem programu.
+Używając zatem formy z&nbsp;linii&nbsp;1 lepiej, mimo że nie jest to przez
+język wymagane, samemu zadeklarować typ wskaźnika jako
+
+<!--O--><span class='typ'>const char*<!--C--></span>. Kompilator będzie wówczas sprawdzał, czy
+funkcje, do których napis ten wysyłamy, &bdquo;obiecują&rdquo;, poprzez
+deklarację typu parametru jako
+<!--O--><span class='klucz'>const char*<!--C--></span>, że napisu tego
+nie zmodyfikują.
+
+<P>
+Podobnie jest z&nbsp;literałami napisowymi użytymi
+jako argument funkcji; jeśli wywołamy funkcję
+<!--O--><span class='funkcja'>fun<!--C--></span>
+
+o&nbsp;parametrze typu
+<!--O--><span class='typ'>char*<!--C--></span>
+ z&nbsp;literałem jako argumentem,
+na przykład
+
+<FONT COLOR="#000000"><TT>func("Jan")</TT></FONT>,
+to chociaż parametr nie jest
+zadeklarowany jako niemodyfikowalny, próba zmiany zawartości
+napisu wewnątrz funkcji nie uda się!
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Do funkcji działających na C-napisach mamy dostęp poprzez
+dołączenie pliku nagłówkowego
+<!--O--><span class='plik'>cstring<!--C--></span>. Funkcje operujące
+na pojedynczych znakach zawarte są w&nbsp;
+<!--O--><span class='plik'>cctype<!--C--></span>, przydatne funkcje
+konwertujące natomiast &mdash;&nbsp;w&nbsp;
+<!--O--><span class='plik'>cstdlib<!--C--></span>.
+
+<P>
+
+<H2><A NAME="SECTION001811000000000000000"></A><A NAME="nap:cstring"></A>
+<BR>
+<SPAN CLASS="arabic">17</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Funkcje operujące na C-napisach
+</H2>
+
+<P>
+Wymieńmy<A NAME="21073"></A>
+najważniejsze z&nbsp;funkcji dostarczanych w&nbsp;pliku nagłówkowym
+
+<!--O--><span class='plik'>cstring<!--C--></span><A NAME="21075"></A>(<!--O--><span class='plik'>string.h<!--C--></span>
+ w&nbsp;C). Należą one
+do standardu&nbsp;C i&nbsp;zawsze są dostępne.
+
+<P>
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>size_t strlen(const char* s)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21080"></A><A NAME="21081"></A>
+      podaje długość napisu
+<!--O--><span class='zmienna'>s<!--C--></span>
+ w&nbsp;znakach <FONT COLOR="#7b003e"><I>nie</I></FONT>
+      licząc znaku
+<!--O--><span class='zmienna'>NUL<!--C--></span>
+ na jego końcu.
+      Typ
+<!--O--><span class='typ'>size_t<!--C--></span><A NAME="21086"></A> jest pewnym typem całościowym.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>char* strcat(char* dest, const char* src)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21090"></A><A NAME="21091"></A>
+      dodaje zawartość napisu
+<!--O--><span class='zmienna'>src<!--C--></span>
+ do napisu
+<!--O--><span class='zmienna'>dest<!--C--></span>
+
+      (konkatenacja);<A NAME="21094"></A>
+      zwraca
+<!--O--><span class='zmienna'>dest<!--C--></span>. Użytkownik
+      musi zadbać o&nbsp;to, by
+<!--O--><span class='zmienna'>dest<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>src<!--C--></span>
+ kończyły
+      się znakiem
+<!--O--><span class='zmienna'>NUL<!--C--></span>
+
+      i&nbsp;żeby obszar pamięci zarezerwowany pod adresem wskazywanym
+      przez
+<!--O--><span class='zmienna'>dest<!--C--></span>
+ był wystarczający do pomieszczenia obu
+      napisów (i&nbsp;kończącego znaku
+<!--O--><span class='zmienna'>NUL<!--C--></span>). Pierwszy znak
+
+<!--O--><span class='zmienna'>NUL<!--C--></span>
+ w&nbsp;napisie
+<!--O--><span class='zmienna'>dest<!--C--></span>
+ jest nadpisywany przez
+      pierwszy znak
+<!--O--><span class='zmienna'>scr<!--C--></span>
+ i&nbsp;poczynając od tej pozycji
+      przekopiowywane są znaki z&nbsp;
+<!--O--><span class='zmienna'>src<!--C--></span>
+ aż do
+      kończącego go znaku
+<!--O--><span class='zmienna'>NUL<!--C--></span>
+ włącznie.
+      Częsty błąd polega na dodawaniu do niezainicjowanego napisu
+
+<pre><tt>       <font color="#009900">char</font> s<font color="#990000">[</font><font color="#993399">100</font><font color="#990000">];</font>
+       <b><font color="#000000">strcat</font></b><font color="#990000">(</font>s<font color="#990000">,</font><font color="#FF0000">"jakis napis"</font><font color="#990000">);</font>
+</tt></pre>
+
+      co jest błędem, bo program będzie szukał
+      znaku
+<!--O--><span class='zmienna'>NUL<!--C--></span>
+ w&nbsp;napisie
+<!--O--><span class='zmienna'>s<!--C--></span>, ale go nie znajdzie!
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>char* strncat(char* dest, const char* src, size_t n)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21115"></A><A NAME="21116"></A>
+      jest podobne do funkcji poprzedniej, tylko kopiuje co najwyżej
+
+<!--O--><span class='zmienna'>n<!--C--></span>
+ znaków, kończąc kopiowanie, jeśli napotkany i
+      przekopiowany
+      został znak
+<!--O--><span class='zmienna'>NUL<!--C--></span>. Jeśli znak
+<!--O--><span class='zmienna'>NUL<!--C--></span>
+ nie został
+      napotkany po przekopiowaniu
+<!--O--><span class='zmienna'>n<!--C--></span>
+ znaków, to go dostawia
+      jako
+<!--O--><span class='zmienna'>n+1<!--C--></span>-szy znak. W takim przypadku zapisanych
+      więc zostanie w&nbsp;sumie
+<!--O--><span class='zmienna'>n+1<!--C--></span>
+ znaków!
+      Na przykład
+
+<pre><tt>       <font color="#009900">char</font> t1<font color="#990000">[</font><font color="#993399">20</font><font color="#990000">]</font> <font color="#990000">=</font> <font color="#FF0000">{</font><font color="#FF0000">'</font><font color="#CC33CC">\0</font><font color="#FF0000">'</font><font color="#FF0000">}</font><font color="#990000">;</font> <i><font color="#9A1900">// konieczne !</font></i>
+       <b><font color="#000000">strncat</font></b><font color="#990000">(</font>t1<font color="#990000">,</font><font color="#FF0000">"123456789"</font><font color="#990000">,</font><font color="#993399">5</font><font color="#990000">);</font>
+       cout <font color="#990000">&lt;&lt;</font> t1 <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" ma "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#000000">strlen</font></b><font color="#990000">(</font>t1<font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" znakow"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+</tt></pre>
+
+      wydrukuje '12345 ma 5 znakow',
+      co świadczy o&nbsp;tym, że w&nbsp;tablicy
+<!--O--><span class='zmienna'>t1<!--C--></span>
+ zapisanych
+      zostało 6 znaków: pięć cyfr '12345' i&nbsp;znak
+<!--O--><span class='zmienna'>NUL<!--C--></span>.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>char* strcpy(char* dest, const char* src)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21132"></A><A NAME="21133"></A>
+      kopiuje znaki od wskazywanego przez
+<!--O--><span class='zmienna'>src<!--C--></span>
+ do obszaru
+      wskazywanego przez
+<!--O--><span class='zmienna'>dest<!--C--></span>. Dotychczasowa zawartość
+      obszaru pamięci od adresu
+<!--O--><span class='zmienna'>dest<!--C--></span>
+ jest nadpisywana.
+      Kopiowanie kończy się, gdy przekopiowanym znakiem
+      jest znak
+<!--O--><span class='zmienna'>NUL<!--C--></span>. Użytkownik musi zatem
+      zadbać o&nbsp;to, żeby pod adresem
+<!--O--><span class='zmienna'>dest<!--C--></span>
+ była
+      zarezerwowana odpowiednia
+      ilość pamięci i&nbsp;żeby napis
+<!--O--><span class='zmienna'>src<!--C--></span>
+ kończył się
+      znakiem
+<!--O--><span class='zmienna'>NUL<!--C--></span>! Funkcja zwraca
+<!--O--><span class='zmienna'>dest<!--C--></span>.
+      Na przykład funkcja
+<!--O--><span class='funkcja'>strcat<!--C--></span>
+ mogłaby być
+      zaimplementowana następująco:
+
+<pre><tt>       <font color="#009900">char</font><font color="#990000">*</font> <b><font color="#000000">strcat</font></b><font color="#990000">(</font><font color="#009900">char</font><font color="#990000">*</font> dest<font color="#990000">,</font> <b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> src<font color="#990000">)</font> <font color="#FF0000">{</font>
+           <font color="#009900">char</font><font color="#990000">*</font> s <font color="#990000">=</font> dest <font color="#990000">+</font> <b><font color="#000000">strlen</font></b><font color="#990000">(</font>dest<font color="#990000">);</font>
+           <b><font color="#000000">strcpy</font></b><font color="#990000">(</font>s<font color="#990000">,</font> src<font color="#990000">);</font>
+           <b><font color="#0000FF">return</font></b> dest<font color="#990000">;</font>
+       <font color="#FF0000">}</font>
+</tt></pre>
+
+      za pomocą
+<!--O--><span class='funkcja'>strcpy<!--C--></span>
+ i&nbsp;
+<!--O--><span class='funkcja'>strlen<!--C--></span>.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>char* strncpy(char* dest, const char* src, size_t n)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21152"></A><A NAME="21153"></A>
+      kopiuje dokładnie
+<!--O--><span class='zmienna'>n<!--C--></span>
+ znaków od wskazywanego
+      przez
+<!--O--><span class='zmienna'>src<!--C--></span>
+ do obszaru
+      wskazywanego przez
+<!--O--><span class='zmienna'>dest<!--C--></span>. Dotychczasowa zawartość
+      obszaru pamięci od adresu
+<!--O--><span class='zmienna'>dest<!--C--></span>
+ jest nadpisywana.
+      Gdy napotkany zostanie znak
+<!--O--><span class='zmienna'>NUL<!--C--></span>, jest kopiowany i&nbsp;dalej
+      wpisywane
+      są do obszaru docelowego same znaki
+<!--O--><span class='zmienna'>NUL<!--C--></span>, aż
+      całkowita liczba zapisanych znaków będzie wynosić
+      dokładnie
+<!--O--><span class='zmienna'>n<!--C--></span>. Jeśli wśród
+<!--O--><span class='zmienna'>n<!--C--></span>
+
+      pierwszych znaków w&nbsp;napisie źródłowym
+<!--O--><span class='zmienna'>src<!--C--></span>
+
+      znaku
+<!--O--><span class='zmienna'>NUL<!--C--></span>
+ nie będzie, to przekopiowanych zostanie
+
+<!--O--><span class='zmienna'>n<!--C--></span>
+ znaków a&nbsp;
+<!--O--><span class='zmienna'>NUL<!--C--></span>
+ dostawiony <FONT COLOR="#7b003e"><I>nie</I></FONT> będzie.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>int strcmp(const char* s1, const char* s2)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21170"></A><A NAME="21171"></A>
+      porównuje leksykograficznie (&bdquo;słownikowo&rdquo;) dwa napisy,
+      zwracając <SPAN CLASS="MATH">-1</SPAN>, jeśli napis
+<!--O--><span class='zmienna'>s1<!--C--></span>
+ jest wcześniejszy
+      niż
+<!--O--><span class='zmienna'>s2<!--C--></span>, <SPAN CLASS="MATH">+1</SPAN>, jeśli
+<!--O--><span class='zmienna'>s1<!--C--></span>
+ jest
+      późniejszy, i&nbsp;0, jeśli napisy są identyczne.
+      Napis
+<!--O--><span class='zmienna'>s1<!--C--></span>
+ jest wcześniejszy, jeśli zachodzi któryś
+      z&nbsp;poniższych warunków:
+<BR>
+a) napisy są takie same aż do pewnej pozycji, a&nbsp;na pierwszej
+      pozycji, na której występuje różnica, znak w&nbsp;
+<!--O--><span class='zmienna'>s1<!--C--></span>
+
+      jest numerycznie mniejszy od odpowiadającego
+      znaku z&nbsp;
+<!--O--><span class='zmienna'>s2<!--C--></span>;
+<BR>
+b) napis
+<!--O--><span class='zmienna'>s1<!--C--></span>
+ jest krótszy niż
+<!--O--><span class='zmienna'>s2<!--C--></span>
+
+      i&nbsp;wszystkie jego znaki (nie licząc kończącego znaku
+
+<!--O--><span class='zmienna'>NUL<!--C--></span>) są takie same jak znaki w&nbsp;
+<!--O--><span class='zmienna'>s2<!--C--></span>
+ na
+      odpowiadających pozycjach.
+<BR>
+Oba napisy muszą oczywiście być zakończone znakiem
+
+<!--O--><span class='zmienna'>NUL<!--C--></span>. Na przykład
+
+<pre><tt>       <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> <font color="#990000">!</font> <b><font color="#000000">strcmp</font></b><font color="#990000">(</font>s1<font color="#990000">,</font>s2<font color="#990000">)</font> <font color="#990000">)</font>
+           cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Takie same</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+       <b><font color="#0000FF">else</font></b>
+           cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Rozne</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+</tt></pre>
+
+      zadziała, bo jakakolwiek wartość niezerowa
+      zwrócona przez
+<!--O--><span class='funkcja'>strcmp<!--C--></span>
+ zostanie potraktowana jak
+
+<!--O--><span class='klucz'>true<!--C--></span>, a&nbsp;po zanegowaniu operatorem '!'
+      jak
+<!--O--><span class='klucz'>false<!--C--></span>.
+<BR>
+Przykład poniższy to program wykorzystujący funkcję
+
+<!--O--><span class='funkcja'>strcmp<!--C--></span>. Funkcja
+<!--O--><span class='funkcja'>first_last<!--C--></span>
+ pobiera
+      tablicę napisów i&nbsp;przez referencje, aby móc je modyfikować,
+      dwa wskaźniki typu
+<!--O--><span class='typ'>char*<!--C--></span>
+ (linie&nbsp;20-26). Następnie
+      wpisuje do wskaźnika
+<!--O--><span class='zmienna'>p<!--C--></span>
+ adres początku napisu
+      z&nbsp;tablicy najwcześniejszego leksykograficznie, a&nbsp;do
+<!--O--><span class='zmienna'>q<!--C--></span>
+
+      adres napisu ostatniego w&nbsp;tym porządku.
+<A NAME="sorslo.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">133</SPAN>:</SPAN>
+      <A NAME="tex2html140"
+  HREF="source-files/sorslo.cpp">
+<!--O--><span class='downl'>sorslo.cpp<!--C--></span></A>
+<A NAME="22129"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Porównywanie napisów</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cstring&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><font color="#009900">void</font>  <b><font color="#000000">first_last</font></b><font color="#990000">(</font><font color="#009900">char</font><font color="#990000">**,</font><font color="#009900">char</font><font color="#990000">*&amp;,</font><font color="#009900">char</font><font color="#990000">*&amp;);</font>
+ <font SIZE="-2" color="black">     6.  </font>
+ <font SIZE="-2" color="black">     7.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     8.  </font>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#009900">char</font> <font color="#990000">*</font>nam<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">{</font> <font color="#FF0000">"Katarzyna"</font><font color="#990000">,</font> <font color="#FF0000">"Magdalena"</font><font color="#990000">,</font>
+ <font SIZE="-2" color="black">    10.  </font>                       <font color="#FF0000">"Alicja"</font><font color="#990000">,</font>     <font color="#FF0000">"Wanda"</font><font color="#990000">,</font>
+ <font SIZE="-2" color="black">    11.  </font>                      <font color="#FF0000">"Izabela"</font><font color="#990000">,</font>    <font color="#FF0000">"Aldona"</font><font color="#990000">,</font> <font color="#FF0000">""</font> <font color="#FF0000">}</font><font color="#990000">,</font>
+ <font SIZE="-2" color="black">    12.  </font>                  <font color="#990000">*</font>p<font color="#990000">,*</font>q<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>
+ <font SIZE="-2" color="black">    14.  </font>    <b><font color="#000000">first_last</font></b><font color="#990000">(</font>nam<font color="#990000">,</font>p<font color="#990000">,</font>q<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    15.  </font>
+ <font SIZE="-2" color="black">    16.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Pierwsza: "</font> <font color="#990000">&lt;&lt;</font> p <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    17.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Ostatnia: "</font> <font color="#990000">&lt;&lt;</font> q <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    19.  </font>
+ <font SIZE="-2" color="black">    20.  </font><font color="#009900">void</font> <b><font color="#000000">first_last</font></b><font color="#990000">(</font><font color="#009900">char</font><font color="#990000">**</font> s<font color="#990000">,</font> <font color="#009900">char</font><font color="#990000">*&amp;</font> p<font color="#990000">,</font> <font color="#009900">char</font><font color="#990000">*&amp;</font> q<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    21.  </font>    p <font color="#990000">=</font> q <font color="#990000">=</font> <font color="#990000">*</font>s<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    22.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font> <font color="#990000">**++</font>s <font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    23.  </font>        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> <b><font color="#000000">strcmp</font></b><font color="#990000">(*</font>s<font color="#990000">,</font> p<font color="#990000">)</font> <font color="#990000">&lt;</font> <font color="#993399">0</font> <font color="#990000">)</font> p <font color="#990000">=</font> <font color="#990000">*</font>s<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    24.  </font>        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> <b><font color="#000000">strcmp</font></b><font color="#990000">(*</font>s<font color="#990000">,</font> q<font color="#990000">)</font> <font color="#990000">&gt;</font> <font color="#993399">0</font> <font color="#990000">)</font> q <font color="#990000">=</font> <font color="#990000">*</font>s<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    25.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    26.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Zauważmy, że nie przesłaliśmy do funkcji wymiaru tablicy
+      napisów (liczby imion); zamiast tego jako ostatni napis
+      w&nbsp;tablicy umieściliśmy (linia&nbsp;11) napis pusty &mdash;&nbsp;złożony
+      wobec tego tylko ze znaku
+<!--O--><span class='zmienna'>NUL<!--C--></span>, który zostanie
+      automatycznie dodany przez kompilator. Jest to technika bardzo
+      często stosowana w&nbsp;wielu funkcjach bibliotecznych&nbsp;C
+      (dla tablic napisów). Kod funkcji
+<!--O--><span class='funkcja'>first_last<!--C--></span>
+
+      jest tu bardzo zwięzły; mógłby być dłuższy, ale bardziej
+      czytelny. Jednak zrozumienie go w&nbsp;podanej formie jest dobrym
+      ćwiczeniem na posługiwanie się wskaźnikami. Program drukuje
+      oczywiście 'Pierwsza: Aldona Ostatnia: Wanda'.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>int strcoll(const char* s1, const char* s2)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21205"></A><A NAME="21206"></A>
+      działa jak funkcja
+<!--O--><span class='funkcja'>strcmp<!--C--></span>, tylko uwzględnia
+      lokalizm. Na przykład, jeśli wybrane jest polskie <SPAN  CLASS="textit">locale</SPAN>,
+      to litera 'ą' jest za 'a', natomiast w&nbsp;wersji francuskiej
+      '&#226;' jest równoważne zwykłemu 'a' przy porównywaniu
+      leksykalnym.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>int strncmp(const char* s1,      const char* s2, size_t n)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21212"></A><A NAME="21213"></A>
+      jak funkcja
+<!--O--><span class='funkcja'>strcmp<!--C--></span>, tylko porównuje co najwyżej
+
+<!--O--><span class='zmienna'>n<!--C--></span>
+ znaków.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>char* strchr(const char* s, int c)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21219"></A><A NAME="21220"></A>
+      zwraca wskaźnik do pierwszego wystąpienia znaku
+<FONT COLOR="#000000"><TT>(char)c</TT></FONT>
+      w&nbsp;napisie
+<!--O--><span class='zmienna'>s<!--C--></span>
+ lub wskaźnik pusty
+<!--O--><span class='klucz'>nullptr<!--C--></span>
+
+      (<!--O--><span class='zmienna'>NULL<!--C--></span>), jeśli tego znaku w&nbsp;tym napisie nie ma. Na przykład
+
+<pre><tt>       cout <font color="#990000">&lt;&lt;</font> <b><font color="#000000">strchr</font></b><font color="#990000">(</font><font color="#FF0000">"Daniel Defoe"</font><font color="#990000">,</font><font color="#FF0000">'f'</font><font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+</tt></pre>
+
+      wypisze 'foe'. Funkcja zliczająca liczbę
+      wystąpień znaku
+<FONT COLOR="#000000"><TT>(char)c</TT></FONT> w&nbsp;napisie
+<!--O--><span class='zmienna'>s<!--C--></span>
+
+      mogłaby mieć postać
+
+<pre><tt>       <font color="#009900">int</font> <b><font color="#000000">count</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> s<font color="#990000">,</font> <font color="#009900">int</font> c<font color="#990000">)</font> <font color="#FF0000">{</font>
+           <font color="#009900">int</font> n <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+           <b><font color="#0000FF">while</font></b> <font color="#990000">(</font>s <font color="#990000">=</font> <b><font color="#000000">strchr</font></b><font color="#990000">(</font>s<font color="#990000">,</font>c<font color="#990000">))</font> <font color="#990000">++</font>s<font color="#990000">,++</font>n<font color="#990000">;</font>
+           <b><font color="#0000FF">return</font></b> n<font color="#990000">;</font>
+       <font color="#FF0000">}</font>
+</tt></pre>
+
+      W szczególności <FONT COLOR="#7b003e"><I>można</I></FONT> za pomocą
+<!--O--><span class='funkcja'>strchr<!--C--></span>
+
+      szukać znaku
+<!--O--><span class='zmienna'>NUL<!--C--></span>.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>char* strrchr(const char* s, int c)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21243"></A><A NAME="21244"></A>
+      zwraca wskaźnik do ostatniego wystąpienia znaku
+<FONT COLOR="#000000"><TT>(char)c</TT></FONT>
+      w&nbsp;napisie
+<!--O--><span class='zmienna'>s<!--C--></span>
+ lub wskaźnik pusty
+<!--O--><span class='klucz'>nullptr<!--C--></span>
+
+      (<!--O--><span class='zmienna'>NULL<!--C--></span>), jeśli tego znaku w&nbsp;tym napisie nie ma.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>size_t strspn(const char* s, const char* set)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21253"></A><A NAME="21254"></A>
+      zwraca długość najdłuższego początkowego podciągu w
+
+<!--O--><span class='zmienna'>s<!--C--></span>
+ który składa się wyłącznie ze znaków zawartych
+      w&nbsp;
+<!--O--><span class='zmienna'>set<!--C--></span>
+ (w szczególności może to być zero lub
+      długość całego napisu
+<!--O--><span class='zmienna'>s<!--C--></span>). Na przykład
+
+<pre><tt>       cout <font color="#990000">&lt;&lt;</font> <b><font color="#000000">strspn</font></b><font color="#990000">(</font><font color="#FF0000">"sound and fury"</font><font color="#990000">,</font><font color="#FF0000">"os nudda"</font><font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+</tt></pre>
+
+      wypisze&nbsp;10.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>size_t strcspn(const char* s, const char* set)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21265"></A><A NAME="21266"></A>
+      zwraca długość najdłuższego początkowego podciągu w
+
+<!--O--><span class='zmienna'>s<!--C--></span>, który składa się wyłącznie ze znaków
+      <FONT COLOR="#7b003e"><I>nie</I></FONT> zawartych w&nbsp;napisie
+<!--O--><span class='zmienna'>set<!--C--></span>.
+      Na przykład
+
+<pre><tt>       cout <font color="#990000">&lt;&lt;</font> <b><font color="#000000">strcspn</font></b><font color="#990000">(</font><font color="#FF0000">"sound and fury"</font><font color="#990000">,</font><font color="#FF0000">"xyztdv"</font><font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+</tt></pre>
+
+      wypisze&nbsp;4.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>char* strpbrk(const char* s, const char* set)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21277"></A><A NAME="21278"></A>
+      zwraca wskaźnik do pierwszego znaku
+      w&nbsp;
+<!--O--><span class='zmienna'>s<!--C--></span>, który jest zawarty w&nbsp;
+<!--O--><span class='zmienna'>set<!--C--></span>, lub
+
+<!--O--><span class='klucz'>nullptr<!--C--></span>, jeśli w&nbsp;
+<!--O--><span class='zmienna'>set<!--C--></span>
+ nie ma
+      znaków występujących w&nbsp;
+<!--O--><span class='zmienna'>s<!--C--></span>.
+      Na przykład
+
+<pre><tt>       cout <font color="#990000">&lt;&lt;</font> <b><font color="#000000">strpbrk</font></b><font color="#990000">(</font><font color="#FF0000">"Daniel Defoe"</font><font color="#990000">,</font><font color="#FF0000">"wKlor"</font><font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+</tt></pre>
+
+      wypisze 'l Defoe'.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>char* strstr(const char* s, const char* sub)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21291"></A><A NAME="21292"></A>
+      zwraca wskaźnik do pierwszego znaku w&nbsp;
+<!--O--><span class='zmienna'>s<!--C--></span>, od którego
+      rozpoczyna się w&nbsp;nim podciąg identyczny z&nbsp;
+<!--O--><span class='zmienna'>sub<!--C--></span>
+
+      (pierwsze jego wystąpienie). Funkcja zwraca wskaźnik zerowy,
+      jeśli podciąg
+<!--O--><span class='zmienna'>sub<!--C--></span>
+ nie występuje w&nbsp;
+<!--O--><span class='zmienna'>s<!--C--></span>.
+
+<pre><tt>       cout <font color="#990000">&lt;&lt;</font> <b><font color="#000000">strstr</font></b><font color="#990000">(</font><font color="#FF0000">"Daniel Defoe"</font><font color="#990000">,</font><font color="#FF0000">"De"</font><font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+</tt></pre>
+
+      wypisze 'Defoe'.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>char* strtok(char* str, const char* set)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21304"></A><A NAME="21305"></A>
+      funkcja ta jest &bdquo;tokenizerem&rdquo;,<A NAME="21306"></A>
+      czyli funkcją pozwalającą rozłożyć napis na leksemy
+      (&bdquo;słowa&rdquo;) oddzielone znakami ze zbioru znaków w&nbsp;napisie
+
+<!--O--><span class='zmienna'>set<!--C--></span>, które wobec tego traktowane są jako separatory
+      (np. odstęp, przecinek, dwukropek, itd.). Działanie funkcji
+      oparte jest na istnieniu wewnętrznego wskaźnika typu
+
+<!--O--><span class='typ'>char*<!--C--></span>. Kolejne wywołania
+<!--O--><span class='funkcja'>strtok<!--C--></span>
+ zwracają
+      kolejne leksemy. Przy pierwszym wywołaniu
+<!--O--><span class='zmienna'>str<!--C--></span>
+ jest
+      napisem, który chcemy rozłożyć; w&nbsp;kolejnych wywołaniach
+      pierwszym argumentem powinien być wskaźnik zerowy
+<!--O--><span class='klucz'>nullptr<!--C--></span>,
+      co informuje funkcję, że należy kontynuować przetwarzanie
+      od końca ostatnio zwróconego leksemu. Pomiędzy wywołaniami
+      nie wolno zmieniać napisu
+<!--O--><span class='zmienna'>str<!--C--></span>
+ &mdash;&nbsp;sama funkcja go
+      jednak zmienia, co oznacza, że nie można przekazać napisu
+      niemodyfikowalnego, np. zadanego jako literał napisowy.
+      Wolno natomiast przy kolejnych wywołaniach zmieniać zbiór
+      separatorów w&nbsp;
+<!--O--><span class='zmienna'>set<!--C--></span>.
+      Funkcja działa następująco:
+
+<P>
+Jeśli
+<!--O--><span class='zmienna'>str<!--C--></span>
+ nie jest
+<!--O--><span class='klucz'>nullptr<!--C--></span>
+ (czyli kiedy
+      rozpoczynamy analizę pewnego napisu), ignorowane są
+      wszystkie wiodące znaki z&nbsp;
+<!--O--><span class='zmienna'>str<!--C--></span>, które należą do
+      zbioru separatorów
+<!--O--><span class='zmienna'>set<!--C--></span>. Jeśli wszystkie znaki
+      w&nbsp;
+<!--O--><span class='zmienna'>str<!--C--></span>
+ należą do
+<!--O--><span class='zmienna'>set<!--C--></span>, czyli w&nbsp;napisie są
+      same separatory, to funkcja zwraca
+<!--O--><span class='klucz'>nullptr<!--C--></span>
+ i&nbsp;wskaźnik
+      wewnętrzny ustawiany jest też na
+<!--O--><span class='klucz'>nullptr<!--C--></span>, co kończy
+      przetwarzanie napisu. Jeśli natomiast tak nie było, to
+      wewnętrzny wskaźnik ustawiany jest na pierwszy napotkany znak
+      nie będący separatorem i&nbsp;dalej postępowanie jest takie jak
+      w&nbsp;przypadku, gdy
+<!--O--><span class='zmienna'>str<!--C--></span>
+ jest
+<!--O--><span class='klucz'>nullptr<!--C--></span>.
+
+<P>
+Jeśli
+<!--O--><span class='zmienna'>str<!--C--></span>
+ jest
+<!--O--><span class='klucz'>nullptr<!--C--></span>
+ i&nbsp;wskaźnik wewnętrzny
+      też jest
+<!--O--><span class='klucz'>nullptr<!--C--></span>, to zwracany jest
+<!--O--><span class='klucz'>nullptr<!--C--></span>
+ i&nbsp;stan
+      wewnętrznego wskaźnika jest niezmieniany. Kończy to analizę
+      jednego napisu.
+
+<P>
+Jeśli
+<!--O--><span class='zmienna'>str<!--C--></span>
+ jest
+<!--O--><span class='klucz'>nullptr<!--C--></span>, ale wskaźnik wewnętrzny
+      nie jest
+<!--O--><span class='klucz'>nullptr<!--C--></span>, to funkcja szuka, poczynając od miejsca
+      wskazywanego przez wewnętrzny wskaźnik, pierwszego wystąpienia
+      separatora. Jeśli zostanie znaleziony, to jest nadpisywany
+      znakiem pustym '<!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>0', funkcja zwraca adres zawarty we wskaźniku
+      wewnętrznym, a&nbsp;sam wewnętrzny wskaźnik jest przesuwany na
+      pierwszy znak za wpisanym znakiem '<!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>0'. Jeśli natomiast
+      nie zostanie znaleziony, to funkcja zwraca adres zawarty we
+      wskaźniku wewnętrznym, a&nbsp;sam wewnętrzny wskaźnik
+      jest ustawiany na
+<!--O--><span class='klucz'>nullptr<!--C--></span>.
+
+<P>
+Brzmi to bardzo skomplikowanie, ale użycie nie jest takie
+      trudne. Na przykład poniższy program
+      <A NAME="tok.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">134</SPAN>:</SPAN>
+      <A NAME="tex2html141"
+  HREF="source-files/tok.cpp">
+<!--O--><span class='downl'>tok.cpp<!--C--></span></A>
+<A NAME="22165"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Tokenizer w&nbsp;C</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cstring&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">char</font> strin<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">"int* fun(char&amp; c,double** wtab);"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>    <font color="#009900">char</font> separ<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">")(,;"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#009900">char</font><font color="#990000">*</font> token<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>
+ <font SIZE="-2" color="black">    10.  </font>    token <font color="#990000">=</font> <b><font color="#000000">strtok</font></b><font color="#990000">(</font>strin<font color="#990000">,</font>separ<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    11.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font>token <font color="#990000">!=</font> <font color="#993399">0</font><font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    12.  </font>        cout <font color="#990000">&lt;&lt;</font> token <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>        token <font color="#990000">=</font> <b><font color="#000000">strtok</font></b><font color="#990000">(</font><font color="#993399">0</font><font color="#990000">,</font>separ<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    14.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    15.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+drukuje w&nbsp;kolejnych liniach
+<BR>      <code>int* fun</code>
+<BR>      <code>char&amp; c</code>
+<BR>      <code>double** wtab</code>
+
+<P></P>
+
+<P>
+Funkcje operujące na napisach są dobrym ćwiczeniem programistycznym.
+Na przykład niektóre ze standardowych funkcji udostępnianych przez
+nagłówek
+<!--O--><span class='plik'>cstring<!--C--></span>
+ mogą być zaimplementowane w&nbsp;pokazany
+poniżej sposób (i na wiele innych sposobów):
+<A NAME="emulstr.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">135</SPAN>:</SPAN>
+      <A NAME="tex2html142"
+  HREF="source-files/emulstr.cpp">
+<!--O--><span class='downl'>emulstr.cpp<!--C--></span></A>
+<A NAME="22173"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Implementacja funkcji napisowych</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><font color="#009900">char</font><font color="#990000">*</font> <b><font color="#000000">Strcpy</font></b><font color="#990000">(</font><font color="#009900">char</font><font color="#990000">*</font> target<font color="#990000">,</font> <b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> source<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     2.  </font>    <font color="#009900">char</font><font color="#990000">*</font> t <font color="#990000">=</font> target<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font> <font color="#990000">*</font>t<font color="#990000">++</font> <font color="#990000">=</font> <font color="#990000">*</font>source<font color="#990000">++</font> <font color="#990000">);</font>
+ <font SIZE="-2" color="black">     4.  </font>    <b><font color="#0000FF">return</font></b> target<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     5.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">     6.  </font>
+ <font SIZE="-2" color="black">     7.  </font><font color="#009900">char</font><font color="#990000">*</font> <b><font color="#000000">Strcat</font></b><font color="#990000">(</font><font color="#009900">char</font><font color="#990000">*</font> target<font color="#990000">,</font> <b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> source<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#009900">char</font><font color="#990000">*</font> t <font color="#990000">=</font> target<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font> <font color="#990000">*++</font>t <font color="#990000">);</font>
+ <font SIZE="-2" color="black">    10.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font> <font color="#990000">*</font>t<font color="#990000">++</font> <font color="#990000">=</font> <font color="#990000">*</font>source<font color="#990000">++</font> <font color="#990000">);</font>
+ <font SIZE="-2" color="black">    11.  </font>    <b><font color="#0000FF">return</font></b> target<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    12.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    13.  </font>
+ <font SIZE="-2" color="black">    14.  </font><font color="#009900">char</font><font color="#990000">*</font> <b><font color="#000000">Strncat</font></b><font color="#990000">(</font><font color="#009900">char</font><font color="#990000">*</font> target<font color="#990000">,</font> <b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> source<font color="#990000">,</font> <font color="#009900">int</font> n<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    15.  </font>    <font color="#009900">char</font><font color="#990000">*</font> t <font color="#990000">=</font> target<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font> <font color="#990000">*++</font>t <font color="#990000">);</font>
+ <font SIZE="-2" color="black">    17.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font> <font color="#990000">(*</font>t<font color="#990000">++</font> <font color="#990000">=</font> <font color="#990000">*</font>source<font color="#990000">++)</font> <font color="#990000">&amp;&amp;</font> n<font color="#990000">--);</font>
+ <font SIZE="-2" color="black">    18.  </font>    <font color="#990000">*(</font>t<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">)</font> <font color="#990000">=</font> <font color="#FF0000">'</font><font color="#CC33CC">\0</font><font color="#FF0000">'</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font>    <b><font color="#0000FF">return</font></b> target<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    20.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    21.  </font>
+ <font SIZE="-2" color="black">    22.  </font><font color="#009900">int</font> <b><font color="#000000">Strlen</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> source<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    23.  </font>    <b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> s <font color="#990000">=</font> source<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    24.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font> <font color="#990000">*</font>s<font color="#990000">++</font> <font color="#990000">);</font>
+ <font SIZE="-2" color="black">    25.  </font>    <b><font color="#0000FF">return</font></b> s<font color="#990000">-</font>source<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    26.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    27.  </font>
+ <font SIZE="-2" color="black">    28.  </font><font color="#009900">char</font><font color="#990000">*</font> <b><font color="#000000">Strchr</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> target<font color="#990000">,</font> <font color="#009900">int</font> c<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    29.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font> <font color="#990000">*</font>target <font color="#990000">&amp;&amp;</font> <font color="#990000">*</font>target<font color="#990000">++</font> <font color="#990000">!=</font> c <font color="#990000">);</font>
+ <font SIZE="-2" color="black">    30.  </font>    <b><font color="#0000FF">return</font></b> <font color="#990000">(</font><font color="#009900">char</font><font color="#990000">*)(*--</font>target <font color="#990000">?</font> target <font color="#990000">:</font> <font color="#993399">0</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    31.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+Można napisać te funkcje jeszcze zwięźlej, choć niekoniecznie
+bardziej zrozumiale...
+
+<P>
+
+<H2><A NAME="SECTION001812000000000000000"></A><A NAME="nap:cctype"></A>
+<BR>
+<SPAN CLASS="arabic">17</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Funkcje operujące na znakach
+</H2>
+
+<P>
+Po dołączeniu pliku nagłówkowego
+<!--O--><span class='plik'>cctype<!--C--></span><A NAME="21352"></A> mamy
+do dyspozycji szereg funkcji operujących na pojedynczych znakach.
+
+<P>
+Duża grupa funkcji, wszystkie o&nbsp;nazwach rozpoczynających się
+od
+<FONT COLOR="#000000"><TT>is</TT></FONT>, to funkcje sprawdzające, czy znak przesłany
+jako argument spełnia określone kryteria. Argument jest typu
+
+<!--O--><span class='typ'>int<!--C--></span>, ale brany pod uwagę jest tylko jego najmłodszy bajt.
+Wartością zwracaną jest zawsze wartość typu
+<!--O--><span class='typ'>int<!--C--></span>: niezerowa
+oznacza
+<!--O--><span class='klucz'>true<!--C--></span>, zerowa
+<!--O--><span class='klucz'>false<!--C--></span>. Tak więc wszystkie te
+funkcje mają nagłówek typu
+<pre><tt>       <font color="#009900">int</font> <b><font color="#000000">isJakasWlasnosc</font></b><font color="#990000">(</font><font color="#009900">int</font> c<font color="#990000">);</font>
+</tt></pre>
+Nie ma gwarancji (i zwykle tak nie jest), że
+<!--O--><span class='klucz'>true<!--C--></span>
+ odpowiada
+wartości 1; może to być <FONT COLOR="#7b003e"><I>dowolna</I></FONT> wartość niezerowa.
+
+<P>
+Wymieńmy funkcje z&nbsp;tej grupy:
+
+<UL>
+<LI>
+<!--O--><span class='funkcja'>isalnum<!--C--></span>
+ &mdash;&nbsp;
+          <A NAME="21365"></A><A NAME="21366"></A>
+          czy
+<FONT COLOR="#000000"><TT>(char)c</TT></FONT> jest literą lub cyfrą?
+</LI>
+<LI>
+<!--O--><span class='funkcja'>isalpha<!--C--></span>
+ &mdash;&nbsp;
+          <A NAME="21370"></A><A NAME="21371"></A>
+          czy
+<FONT COLOR="#000000"><TT>(char)c</TT></FONT> jest literą?
+</LI>
+<LI>
+<!--O--><span class='funkcja'>isdigit<!--C--></span>
+ &mdash;&nbsp;
+          <A NAME="21375"></A><A NAME="21376"></A>
+          czy
+<FONT COLOR="#000000"><TT>(char)c</TT></FONT> jest cyfrą?
+</LI>
+<LI>
+<!--O--><span class='funkcja'>isxdigit<!--C--></span>
+ &mdash;&nbsp;
+          <A NAME="21380"></A><A NAME="21381"></A>
+          czy
+<FONT COLOR="#000000"><TT>(char)c</TT></FONT> jest cyfrą szesnastkową?
+          Cyfry szesnastkowe to cyfry z&nbsp;zakresu 0-9 oraz litery,
+          małe i&nbsp;duże, z&nbsp;zakresu A-F.
+</LI>
+<LI>
+<!--O--><span class='funkcja'>iscntrl<!--C--></span>
+ &mdash;&nbsp;
+          <A NAME="21385"></A><A NAME="21386"></A>
+          czy
+<FONT COLOR="#000000"><TT>(char)c</TT></FONT> jest znakiem kontrolnym? Znaki
+          kontrolne to znaki o&nbsp;kodzie ASCII między&nbsp;0 a&nbsp;31 włącznie
+          oraz znak o&nbsp;kodzie ASCII&nbsp;127.
+</LI>
+<LI>
+<!--O--><span class='funkcja'>isprint<!--C--></span>
+ &mdash;&nbsp;
+          <A NAME="21390"></A><A NAME="21391"></A>
+          czy
+<FONT COLOR="#000000"><TT>(char)c</TT></FONT> jest znakiem drukowalnym? Znaki
+          drukowalne to wszystkie znaki, które nie są znakami
+          kontrolnymi.
+</LI>
+<LI>
+<!--O--><span class='funkcja'>isgraph<!--C--></span>
+ &mdash;&nbsp;
+          <A NAME="21395"></A><A NAME="21396"></A>
+          czy
+<FONT COLOR="#000000"><TT>(char)c</TT></FONT> jest znakiem widocznym? Znaki
+          widoczne to wszystkie znaki drukowalne (patrz wyżej)
+          z&nbsp;wyjątkiem znaku odstępu (o kodzie  ASCII 32).
+</LI>
+<LI>
+<!--O--><span class='funkcja'>ispunct<!--C--></span>
+ &mdash;&nbsp;
+          <A NAME="21400"></A><A NAME="21401"></A>
+          czy
+<FONT COLOR="#000000"><TT>(char)c</TT></FONT> jest znakiem interpunkcyjnym? Znaki
+          interpunkcyjne to wszystkie znaki widoczne (patrz wyżej)
+          z&nbsp;wyjątkiem liter i&nbsp;cyfr.
+</LI>
+<LI>
+<!--O--><span class='funkcja'>isspace<!--C--></span>
+ &mdash;&nbsp;
+          <A NAME="21405"></A><A NAME="21406"></A>
+          czy
+<FONT COLOR="#000000"><TT>(char)c</TT></FONT> jest białym znakiem?
+          Białe znaki to:
+          '&#92;t'
+          (tabulacja pozioma, symbol HT, kod ASCII 9),
+          '&#92;r'
+          (powrót karetki, CR, 13),
+          '&#92;n'
+          (nowa linia, LF, 10),
+          '&#92;v'
+          (tabulacja pionowa, VT, 11),
+          '&#92;f'
+          (wysuw strony, FF, 12) i&nbsp;odstęp (SPC, 32).
+</LI>
+<LI>
+<!--O--><span class='funkcja'>isupper<!--C--></span>
+ &mdash;&nbsp;
+          <A NAME="21410"></A><A NAME="21411"></A>
+          czy
+<FONT COLOR="#000000"><TT>(char)c</TT></FONT> jest dużą literą?
+</LI>
+<LI>
+<!--O--><span class='funkcja'>islower<!--C--></span>
+ &mdash;&nbsp;
+          <A NAME="21415"></A><A NAME="21416"></A>
+          czy
+<FONT COLOR="#000000"><TT>(char)c</TT></FONT> jest małą literą?
+</LI>
+</UL>
+
+<P>
+Prócz tego biblioteka dołączana przez nagłówek
+<!--O--><span class='plik'>cctype<!--C--></span>
+
+zawiera dwie przydatne standardowe funkcje, również typu
+
+<!--O--><span class='typ'>int<!--C--></span>
+ <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='typ'>int<!--C--></span>:
+
+<UL>
+<LI>
+<!--O--><span class='funkcja'>tolower<!--C--></span>
+ &mdash;&nbsp;
+          <A NAME="21425"></A><A NAME="21426"></A>
+          zwraca dla znaku, który jest dużą literą,
+          odpowiadający mu znak małej litery (H <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN> h).
+          Dla znaków nie będących dużą literą zwraca
+          ten sam znak.
+</LI>
+<LI>
+<!--O--><span class='funkcja'>toupper<!--C--></span>
+ &mdash;&nbsp;
+          <A NAME="21428"></A><A NAME="21429"></A>
+          zwraca dla znaku, który jest małą literą,
+          odpowiadający mu znak dużej litery (n <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN> N).
+          Dla znaków nie będących małą literą zwraca
+          ten sam znak.
+</LI>
+</UL>
+
+<P>
+Na przykład funkcja
+<!--O--><span class='funkcja'>uplow<!--C--></span>
+ w&nbsp;programie
+<A NAME="upplow.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">136</SPAN>:</SPAN>
+      <A NAME="tex2html143"
+  HREF="source-files/upplow.cpp">
+<!--O--><span class='downl'>upplow.cpp<!--C--></span></A>
+<A NAME="22239"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Operacje na znakach</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cctype&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><font color="#009900">int</font> <b><font color="#000000">uplow</font></b><font color="#990000">(</font><font color="#009900">char</font><font color="#990000">*</font> s<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">int</font> cnt <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>    <b><font color="#0000FF">do</font></b> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     8.  </font>        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#000000">isalpha</font></b><font color="#990000">(*</font>s<font color="#990000">))</font>
+ <font SIZE="-2" color="black">     9.  </font>            <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> cnt <font color="#990000">==</font> <font color="#993399">0</font> <font color="#990000">||</font> <font color="#990000">!</font><b><font color="#000000">isalpha</font></b><font color="#990000">(*(</font>s<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">)))</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    10.  </font>                <font color="#990000">*</font>s <font color="#990000">=</font> <font color="#990000">(</font><font color="#009900">char</font><font color="#990000">)</font><b><font color="#000000">toupper</font></b><font color="#990000">(*</font>s<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    11.  </font>                cnt<font color="#990000">++;</font>
+ <font SIZE="-2" color="black">    12.  </font>            <font color="#FF0000">}</font> <b><font color="#0000FF">else</font></b>
+ <font SIZE="-2" color="black">    13.  </font>                <font color="#990000">*</font>s <font color="#990000">=</font> <font color="#990000">(</font><font color="#009900">char</font><font color="#990000">)</font><b><font color="#000000">tolower</font></b><font color="#990000">(*</font>s<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    14.  </font>    <font color="#FF0000">}</font> <b><font color="#0000FF">while</font></b> <font color="#990000">(*</font>s<font color="#990000">++);</font>
+ <font SIZE="-2" color="black">    15.  </font>    <b><font color="#0000FF">return</font></b> cnt<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    17.  </font>
+ <font SIZE="-2" color="black">    18.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    19.  </font>    <font color="#009900">char</font> napis<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">"to jEST DlUgI,dluGI nAPIs!"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    20.  </font>
+ <font SIZE="-2" color="black">    21.  </font>    <font color="#009900">int</font> ile <font color="#990000">=</font> <b><font color="#000000">uplow</font></b><font color="#990000">(</font>napis<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    22.  </font>    cout <font color="#990000">&lt;&lt;</font> ile <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" slow, napis = </font><font color="#CC33CC">\'</font><font color="#FF0000">"</font> <font color="#990000">&lt;&lt;</font> napis <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\'\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    23.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+zamienia w&nbsp;przekazanym napisie wszystkie początkowe litery słów
+na duże, a&nbsp;pozostałe na małe, zwracając liczbę znalezionych
+słów. Uruchomienie tego programu daje:
+<BR>
+5 slow, napis = 'To Jest Dlugi,Dlugi Napis!'.
+
+<P>
+
+<H2><A NAME="SECTION001813000000000000000"></A><A NAME="nap:cstdlib"></A>
+<BR>
+<SPAN CLASS="arabic">17</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Funkcje konwertujące
+</H2>
+
+<P>
+Plik nagłówkowy<A NAME="21437"></A>
+
+<!--O--><span class='plik'>cstdlib<!--C--></span><A NAME="21439"></A> dostarcza kilku przydatnych
+funkcji konwertujących. Stosowanie ich wymaga starannego sprawdzania
+możliwych błędów. Służy do tego globalna zmienna
+
+<!--O--><span class='zmienna'>errno<!--C--></span><A NAME="21441"></A> (może to
+być makro preprocesora, ze względu na programy wielowątkowe,
+ale z&nbsp;punktu widzenia programisty zachowuje się jak zmienna globalna).
+Aby móc z&nbsp;niej korzystać, należy dołączyć plik
+nagłówkowy
+<!--O--><span class='plik'>cerrno<!--C--></span>.<A NAME="21443"></A>
+
+<P>
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>double strtod(const char* str, char** ptr)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21447"></A><A NAME="21448"></A>
+      (<SPAN  CLASS="textit">string to double</SPAN>)
+      zwraca liczbę typu
+<!--O--><span class='typ'>double<!--C--></span>
+ zapisaną w&nbsp;początkowej części
+      napisu
+<!--O--><span class='zmienna'>str<!--C--></span>. Wiodące białe znaki są ignorowane.
+      Wczytywanie znaków kończy się po napotkaniu pierwszego
+      &bdquo;złego&rdquo; znaku, to znaczy znaku, który nie może być
+      traktowany jako kontynuacja zapisu wczytywanej liczby.
+      Jest rozpoznawany zapis liczb w&nbsp;postaci liczb całkowitych
+      dziesiętnych (jak 127), liczb w&nbsp;zapisie z&nbsp;kropką dziesiętną
+      (jak 123,34) i&nbsp;liczb w&nbsp;formacie naukowym (z literą 'e', dużą lub
+      małą, przed wykładnikiem potęgi dziesięciu hyfn 1.2E-11).
+
+<P>
+Wskaźnik
+<!--O--><span class='zmienna'>str<!--C--></span>
+ wskazuje napis zawierający na początku
+      liczbę przeznaczoną do &bdquo;wyczytania&rdquo;. Za tą liczbą mogą
+      występować w&nbsp;napisie inne znaki: pozostaną one w&nbsp;strumieniu
+      wejściowym i&nbsp;będą mogły być wczytane przez następną
+      operację czytania.
+      Drugim argumentem funkcji powinien być <FONT COLOR="#7b003e"><I>adres</I></FONT> wskaźnika
+      typu
+<!--O--><span class='typ'>char*<!--C--></span>
+ &mdash;&nbsp;dlatego typem parametru jest
+<!--O--><span class='typ'>char**<!--C--></span>.
+      Może to być adres pusty (czyli
+<!--O--><span class='klucz'>nullptr<!--C--></span>
+ albo po
+      prostu zero), ale nie jest to wskazane: lepiej przesłać do
+      funkcji adres istniejącej zmiennej wskaźnikowej typu
+
+<!--O--><span class='typ'>char*<!--C--></span>.
+
+<P>
+Po prawidłowej konwersji zwracana jest &bdquo;wyczytana&rdquo; liczba
+      w&nbsp;postaci wartości typu
+<!--O--><span class='typ'>double<!--C--></span>. Jeśli
+<!--O--><span class='zmienna'>ptr<!--C--></span>
+ nie
+      był pusty, do wskaźnika wskazywanego przez
+<!--O--><span class='zmienna'>ptr<!--C--></span>
+
+      wpisywany jest adres pierwszego znaku w&nbsp;napisie
+<!--O--><span class='zmienna'>str<!--C--></span>
+
+      <FONT COLOR="#7b003e"><I>za</I></FONT> wczytaną reprezentacją liczby (w szczególności
+      może to być adres kończącego napis
+<!--O--><span class='zmienna'>str<!--C--></span>
+ znaku
+      '<!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>0'. Jeśli posłaliśmy do funkcji
+<!--O--><span class='klucz'>nullptr<!--C--></span>
+
+      jako drugi argument, to informacji tej nie dostaniemy.
+      Wartość
+<!--O--><span class='zmienna'>errno<!--C--></span>
+ jest zero.
+
+<P>
+Jeśli napis nie zawiera legalnego zapisu liczby, to zwracane jest
+      zero, a&nbsp;do wskaźnika wskazywanego przez
+<!--O--><span class='zmienna'>ptr<!--C--></span>, jeśli
+      nie był to wskaźnik pusty, wpisywany jest adres początku napisu
+
+<!--O--><span class='zmienna'>str<!--C--></span>, czyli wartość samego
+<!--O--><span class='zmienna'>str<!--C--></span>.
+      Tę równość wskaźników można zatem sprawdzić w&nbsp;programie,
+      gdy zwróconą wartością jest zero &mdash;&nbsp;jeśli wartości tych
+      wskaźników są takie same, to znaczy, że zwrócone zero
+      nie jest &bdquo;prawdziwe&rdquo;.
+
+<P>
+Jeśli napis zawiera legalny zapis liczby, ale liczba ta
+      przekracza dopuszczalny zakres (nadmiar, ang.&nbsp;<FONT COLOR="#7b003e"><I>overflow</I></FONT>),
+      <A NAME="21478"></A><A NAME="21479"></A> zwracana jest wartość
+      <SPAN CLASS="MATH">&#177;</SPAN>
+<!--O--><span class='zmienna'>HUGE_VAL<!--C--></span><A NAME="21481"></A> z&nbsp;właściwym znakiem
+      (ta stała oznacza
+<!--O--><span class='zmienna'>inf<!--C--></span><A NAME="21483"></A> &mdash;&nbsp;
+      nieskończoność). Zmienna
+<!--O--><span class='zmienna'>errno<!--C--></span>
+ jest wtedy ustawiana
+      na
+<!--O--><span class='zmienna'>ERANGE<!--C--></span>. Do wskaźnika wskazywanego przez
+<!--O--><span class='zmienna'>ptr<!--C--></span>
+
+      wpisywany jest adres pierwszego znaku za reprezentacją liczby,
+      tak jak w&nbsp;przypadku udanej konwersji.
+
+<P>
+Jeśli napis zawiera legalny zapis liczby, ale liczba ta ma
+      za małą wartość bezwzględną, aby była odróżnialna od
+      zera (niedomiar, ang.&nbsp;<FONT COLOR="#7b003e"><I>underflow</I></FONT>),
+      <A NAME="21490"></A><A NAME="21491"></A> zwracane jest zero.
+      Zmienna
+<!--O--><span class='zmienna'>errno<!--C--></span>
+ jest ustawiana na
+<!--O--><span class='zmienna'>ERANGE<!--C--></span>, a&nbsp;do
+      wskaźnika wskazywanego przez
+<!--O--><span class='zmienna'>ptr<!--C--></span>
+ wpisywany jest adres
+      pierwszego znaku za reprezentacją liczby, tak jak w&nbsp;przypadku
+      udanej konwersji.
+
+<P></P>
+
+<P>
+Następujący programik ilustruje te definicje:
+<A NAME="strtod.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">137</SPAN>:</SPAN>
+      <A NAME="tex2html144"
+  HREF="source-files/strtod.cpp">
+<!--O--><span class='downl'>strtod.cpp<!--C--></span></A>
+<A NAME="22267"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Funkcja konwertująca <SPAN  CLASS="textsl">strtod</SPAN></SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iomanip&gt;</font>   <i><font color="#9A1900">// setw</font></i>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cstdlib&gt;</font>   <i><font color="#9A1900">// strtod</font></i>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cerrno&gt;</font>    <i><font color="#9A1900">// errno</font></i>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>
+ <font SIZE="-2" color="black">     7.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#009900">char</font><font color="#990000">*</font>  ptr<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#009900">double</font> x<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>    <font color="#009900">char</font><font color="#990000">*</font>  str<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font>
+ <font SIZE="-2" color="black">    12.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"ERANGE = "</font> <font color="#990000">&lt;&lt;</font> ERANGE <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>
+ <font SIZE="-2" color="black">    14.  </font>    <i><font color="#9A1900">// = 1 = OK</font></i>
+ <font SIZE="-2" color="black">    15.  </font>    str <font color="#990000">=</font> <font color="#FF0000">"-1.2e+2xxx"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>    x <font color="#990000">=</font> <b><font color="#000000">strtod</font></b><font color="#990000">(</font>str<font color="#990000">,&amp;</font>ptr<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    17.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"=1=  str = "</font> <font color="#990000">&lt;&lt;</font> str <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"; x = "</font>
+ <font SIZE="-2" color="black">    18.  </font>         <font color="#990000">&lt;&lt;</font> <b><font color="#000000">setw</font></b><font color="#990000">(</font><font color="#993399">4</font><font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> x <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"; errno = "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#000000">setw</font></b><font color="#990000">(</font><font color="#993399">2</font><font color="#990000">)</font>
+ <font SIZE="-2" color="black">    19.  </font>         <font color="#990000">&lt;&lt;</font> errno <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"; ptr = "</font> <font color="#990000">&lt;&lt;</font> ptr <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    20.  </font>
+ <font SIZE="-2" color="black">    21.  </font>    <i><font color="#9A1900">// = 2 =  Not a Number</font></i>
+ <font SIZE="-2" color="black">    22.  </font>    str <font color="#990000">=</font> <font color="#FF0000">"abcdefghij"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    23.  </font>    x <font color="#990000">=</font> <b><font color="#000000">strtod</font></b><font color="#990000">(</font>str<font color="#990000">,&amp;</font>ptr<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    24.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"=2=  str = "</font> <font color="#990000">&lt;&lt;</font> str <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"; x = "</font>
+ <font SIZE="-2" color="black">    25.  </font>         <font color="#990000">&lt;&lt;</font> <b><font color="#000000">setw</font></b><font color="#990000">(</font><font color="#993399">4</font><font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> x <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"; errno = "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#000000">setw</font></b><font color="#990000">(</font><font color="#993399">2</font><font color="#990000">)</font>
+ <font SIZE="-2" color="black">    26.  </font>         <font color="#990000">&lt;&lt;</font> errno <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"; ptr = "</font> <font color="#990000">&lt;&lt;</font> ptr <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    27.  </font>
+ <font SIZE="-2" color="black">    28.  </font>    <i><font color="#9A1900">// = 3 =  Overflow</font></i>
+ <font SIZE="-2" color="black">    29.  </font>    str <font color="#990000">=</font> <font color="#FF0000">"-9e+9999xx"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    30.  </font>    x <font color="#990000">=</font> <b><font color="#000000">strtod</font></b><font color="#990000">(</font>str<font color="#990000">,&amp;</font>ptr<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    31.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"=3=  str = "</font> <font color="#990000">&lt;&lt;</font> str <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"; x = "</font>
+ <font SIZE="-2" color="black">    32.  </font>         <font color="#990000">&lt;&lt;</font> <b><font color="#000000">setw</font></b><font color="#990000">(</font><font color="#993399">4</font><font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> x <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"; errno = "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#000000">setw</font></b><font color="#990000">(</font><font color="#993399">2</font><font color="#990000">)</font>
+ <font SIZE="-2" color="black">    33.  </font>         <font color="#990000">&lt;&lt;</font> errno <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"; ptr = "</font> <font color="#990000">&lt;&lt;</font> ptr <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    34.  </font>
+ <font SIZE="-2" color="black">    35.  </font>    <i><font color="#9A1900">// = 4 =  Underflow</font></i>
+ <font SIZE="-2" color="black">    36.  </font>    str <font color="#990000">=</font> <font color="#FF0000">"-9e-9999xx"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    37.  </font>    x <font color="#990000">=</font> <b><font color="#000000">strtod</font></b><font color="#990000">(</font>str<font color="#990000">,&amp;</font>ptr<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    38.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"=4=  str = "</font> <font color="#990000">&lt;&lt;</font> str <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"; x = "</font>
+ <font SIZE="-2" color="black">    39.  </font>         <font color="#990000">&lt;&lt;</font> <b><font color="#000000">setw</font></b><font color="#990000">(</font><font color="#993399">4</font><font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> x <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"; errno = "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#000000">setw</font></b><font color="#990000">(</font><font color="#993399">2</font><font color="#990000">)</font>
+ <font SIZE="-2" color="black">    40.  </font>         <font color="#990000">&lt;&lt;</font> errno <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"; ptr = "</font> <font color="#990000">&lt;&lt;</font> ptr <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    41.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+Wydruk z&nbsp;tego programu:
+<PRE>
+    ERANGE = 34
+    =1=  str = -1.2e+2xxx; x = -120; errno =  0; ptr = xxx
+    =2=  str = abcdefghij; x =    0; errno =  0; ptr = abcdefghij
+    =3=  str = -9e+9999xx; x = -inf; errno = 34; ptr = xx
+    =4=  str = -9e-9999xx; x =    0; errno = 34; ptr = xx
+</PRE>
+
+<P>
+Na podobnej zasadzie działają funkcje:
+
+<P>
+
+
+<!--O--><span class='funkcja'>long strtol(const char* str, char** ptr)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21503"></A><A NAME="21504"></A>
+      (<SPAN  CLASS="textit">string to long</SPAN>)
+      zwraca liczbę typu
+<!--O--><span class='typ'>long<!--C--></span>
+ zapisaną w&nbsp;początkowej części
+      napisu
+<!--O--><span class='zmienna'>str<!--C--></span>. Działa tak jak opisana wcześniej
+      funkcja
+<!--O--><span class='funkcja'>strtod<!--C--></span>, tyle że w&nbsp;przypadku nadmiaru
+      zwraca nie <SPAN CLASS="MATH">&#177;</SPAN>
+<!--O--><span class='zmienna'>HUGE_VAL<!--C--></span>, ale stałe
+
+<!--O--><span class='zmienna'>LONG_MAX<!--C--></span>
+ lub
+<!--O--><span class='zmienna'>LONG_MIN<!--C--></span>. Niedomiar
+      oczywiście wystąpić nie może.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>long strtol(const char* str, char** ptr,                       int base)<!--C--></span>
+
+      &mdash;&nbsp;
+      jak funkcja poprzednia, ale zwraca liczbę typu
+<!--O--><span class='typ'>long<!--C--></span>
+
+      odczytując ją z&nbsp;napisu
+<!--O--><span class='zmienna'>str<!--C--></span>
+ w&nbsp;układzie o&nbsp;podstawie
+
+<!--O--><span class='zmienna'>base<!--C--></span>. Podstawa może być liczbą od 2 do 36.
+      Dla podstaw większych od dziesięciu jako cyfry interpretowane
+      są kolejne litery (duże lub małe) poczynając od litery 'a',
+      która oznacza cyfrę 10. Jeśli podstawa wynosi 16,
+      reprezentacja napisowa liczby może się zaczynać od '0x'
+      (lub '0X') &mdash;&nbsp;te znaki są wtedy ignorowane. Na przykład
+
+<FONT COLOR="#000000"><TT>strtol("J23",&amp;ptr,20)</TT></FONT>
+      zwraca 7643 <!-- MATH
+ $= 19\cdot 400 + 2\cdot 20 + 3$
+ -->
+<SPAN CLASS="MATH">= 19&#8901;400 + 2&#8901;20 + 3</SPAN>.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>unsigned long strtoul(const char* str, char** ptr)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21523"></A><A NAME="21524"></A>
+      (<SPAN  CLASS="textit">string to unsigned long</SPAN>)
+      zwraca liczbę typu
+<!--O--><span class='typ'>unsigned long<!--C--></span>
+ zapisaną w&nbsp;początkowej
+      części napisu
+<!--O--><span class='zmienna'>str<!--C--></span>. Działa tak jak dwuargumentowa
+      funkcja
+<!--O--><span class='funkcja'>strtol<!--C--></span>, tyle że w&nbsp;przypadku nadmiaru
+      zwraca
+<!--O--><span class='zmienna'>ULONG_MAX<!--C--></span>.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>unsigned long strtoul(const char* str, char** ptr,                         int base)<!--C--></span>
+
+      &mdash;&nbsp;
+      jak trzyargumentowa funkcja
+<!--O--><span class='funkcja'>strtol<!--C--></span>, ale zwraca
+      wartość typu
+<!--O--><span class='typ'>unsigned long<!--C--></span>.
+
+<P></P>
+
+<P>
+Prócz wymienionych istnieją, ze względu na wsteczną zgodność,
+tradycyjne choć niezalecane funkcje konwertujące:
+
+<P>
+
+
+<!--O--><span class='funkcja'>double atof(const char* str)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21538"></A><A NAME="21539"></A>
+      (<SPAN  CLASS="textit">ascii to floating</SPAN>)
+      działa podobnie jak funkcja
+<!--O--><span class='funkcja'>strtod<!--C--></span>, ale nie ma
+      drugiego argumentu. W przypadku błędu zwraca zero,
+      lub jeśli nastąpił nadmiar, <SPAN CLASS="MATH">&#177;</SPAN>
+<!--O--><span class='zmienna'>HUGE_VAL<!--C--></span>.
+      Ustawia, niezależnie od przyczyny niepowodzenia,
+      wartość
+<!--O--><span class='zmienna'>errno<!--C--></span>
+ na
+<!--O--><span class='zmienna'>ERANGE<!--C--></span>.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>int atoi(const char* str)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21548"></A><A NAME="21549"></A>
+      (<SPAN  CLASS="textit">ascii to integer</SPAN>)
+      działa podobnie jak funkcja
+<!--O--><span class='funkcja'>strtol<!--C--></span>, ale zwraca
+      wartość typu
+<!--O--><span class='typ'>int<!--C--></span>
+ (a nie
+<!--O--><span class='typ'>long<!--C--></span>) i&nbsp;nie ma drugiego
+      argumentu. Obsługa błędów podobnie jak dla funkcji
+
+<!--O--><span class='funkcja'>atof<!--C--></span>.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>long atol(const char* str)<!--C--></span>
+
+      &mdash;&nbsp;
+      <A NAME="21558"></A><A NAME="21559"></A>
+      (<SPAN  CLASS="textit">ascii to long</SPAN>)
+      działa podobnie jak funkcja
+<!--O--><span class='funkcja'>strtol<!--C--></span>, ale nie ma
+      drugiego argumentu. Obsługa błędów podobnie jak dla funkcji
+
+<!--O--><span class='funkcja'>atof<!--C--></span>.
+
+<P></P>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2356"
+  HREF="node111.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2362"
+  HREF="node111.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2368"
+  HREF="node113.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2364"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2366"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2357"
+  HREF="node111.html">17. Napisy</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2363"
+  HREF="node111.html">17. Napisy</A>
+<B>Dalej:</B> <A NAME="tex2html2369"
+  HREF="node113.html">17.2 Napisy w&nbsp;C++</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

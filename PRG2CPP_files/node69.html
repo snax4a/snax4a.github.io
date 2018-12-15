@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>11.10 Funkcje rozwijane</TITLE>
+<META NAME="description" CONTENT="11.10 Funkcje rozwijane">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node70.html">
+<LINK REL="previous" HREF="node68.html">
+<LINK REL="up" HREF="node59.html">
+<LINK REL="next" HREF="node70.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1703"
+  HREF="node68.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1709"
+  HREF="node59.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1715"
+  HREF="node70.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1711"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1713"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1704"
+  HREF="node68.html">11.9 Funkcje statyczne</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1710"
+  HREF="node59.html">11. Funkcje</A>
+<B>Dalej:</B> <A NAME="tex2html1716"
+  HREF="node70.html">11.11 Przeciążanie funkcji</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0012100000000000000000"></A><A NAME="funk:inlin"></A>
+<BR>
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">10</SPAN> Funkcje rozwijane
+</H1>
+
+<P>
+Funkcje, zarówno globalne, jak i, o&nbsp;czym się przekonamy
+w&nbsp;późniejszych rozdziałach, będące składowymi klas, mogą być
+<FONT COLOR="#7b003e"><B>rozwijane</B></FONT><A NAME="11939"></A><A NAME="11940"></A>
+(ang.&nbsp;<FONT COLOR="#7b003e"><I>inlined</I></FONT>). O&nbsp;takich funkcjach mówi się też
+<FONT COLOR="#7b003e"><B>funkcje otwarte</B></FONT><A NAME="11943"></A>
+lub <FONT COLOR="#7b003e"><B>wklejane</B></FONT>.<A NAME="11945"></A>
+Rozwijanie oznacza, że kod (instrukcje maszynowe) funkcji jest przez
+kompilator umieszczany w&nbsp;każdym miejscu pliku wykonywalnego, gdzie
+funkcja powinna, według treści programu, być wywołana. Zatem tak
+naprawdę taka funkcja w&nbsp;ogóle nie będzie wywoływana i, co
+więcej, w&nbsp;ogóle w&nbsp;kodzie wynikowym jako osobna funkcja nie będzie
+istnieć.
+
+<P>
+Gdybyśmy na przykład napisali trywialną funkcję typu
+<pre><tt>       <font color="#009900">int</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">int</font> m<font color="#990000">)</font> <font color="#FF0000">{</font>
+           <b><font color="#0000FF">return</font></b> <font color="#993399">2</font><font color="#990000">*</font>m<font color="#990000">;</font>
+       <font color="#FF0000">}</font>
+</tt></pre>
+to korzyść z&nbsp;niej byłaby wątpliwa: wywołanie funkcji wiąże się
+z&nbsp;zapamiętaniem aktualnego stanu rejestrów, wykonaniem skoku,
+powrotu itd.; jest to operacja dość kosztowna. Program może być
+nieco dłuższy, ale wykonywać się będzie szybciej, jeśli mnożenie
+przez dwa umieścimy bezpośrednio w&nbsp;kodzie w&nbsp;każdym miejscu, gdzie
+tę funkcję wołaliśmy, a&nbsp;wywołania funkcji i&nbsp;samą funkcję
+w&nbsp;ogóle usuniemy.
+Z drugiej strony, umieszczanie takiego samego czy bardzo podobnego
+fragmentu kodu w&nbsp;wielu miejscach programu mogłoby być niezwykle
+uciążliwe, a&nbsp;co gorsza, czyniłoby ten program zupełnie nieczytelnym.
+Strach pomyśleć, co by było, gdybyśmy taki zastępujący wywołanie funkcji
+fragment musieli zmodyfikować: trzeba by to robić w&nbsp;każdym miejscu
+uważając na ewentualne konflikty nazw i&nbsp;kontekst, w&nbsp;jakim ten fragment
+pojawia się w&nbsp;różnych częściach programu. Aby to sobie ułatwić, możemy po
+prostu zadanie to zlecić kompilatorowi. W naszym programie definiujemy
+funkcję z&nbsp;modyfikatorem
+<!--O--><span class='klucz'>inline<!--C--></span>, na przykład
+<pre><tt>       <b><font color="#0000FF">inline</font></b> <font color="#009900">int</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">int</font> m<font color="#990000">)</font> <font color="#FF0000">{</font>
+           <b><font color="#0000FF">return</font></b> <font color="#993399">2</font><font color="#990000">*</font>m<font color="#990000">;</font>
+       <font color="#FF0000">}</font>
+</tt></pre>
+Modyfikator
+<!--O--><span class='klucz'>inline<!--C--></span>
+ mówi, że kompilator <SPAN  CLASS="textit">nie</SPAN>
+powinien tej funkcji kompilować tak jak innych funkcji, ale
+zastąpić każde jej wywołanie fragmentem kodu odpowiadającym jej
+treści. Wykonywalny plik wynikowy może być nieco dłuższy, ale
+wykonywać się będzie szybciej; łatwiej też będzie zmienić
+mnożenie przez dwa na mnożenie przez trzy &mdash;&nbsp;w&nbsp;tekście programu
+zrobimy to w&nbsp;jednym miejscu, a&nbsp;kompilator zadba o&nbsp;to, by w&nbsp;kodzie
+wykonywalnym zmiana zaszła we wszystkich miejscach gdzie tej funkcji
+użyliśmy.
+
+<P>
+
+<P>
+
+<div class='wazne'>
+W miejscu, gdzie następuje w&nbsp;programie wywołanie funkcji
+    rozwijanej, musi być już znana definicja funkcji!
+
+
+</div>
+
+<P>
+Definicja, a&nbsp;nie tylko deklaracja. Ponieważ kompilator musi
+zastąpić wywołanie funkcji jej treścią, sama deklaracja <SPAN  CLASS="textit">nie</SPAN>
+wystarczy. Pociąga to pewną niekonsekwencję w&nbsp;stosunku do tego, co
+mówiliśmy wcześniej: normalne funkcje, czyli funkcje nierozwijane,
+a&nbsp;więc <FONT COLOR="#7b003e"><B>zamknięte</B></FONT>,<A NAME="11956"></A>
+deklarować można wiele razy, ale definiować tylko raz.
+W&nbsp;przypadku funkcji rozwijanych definicja (taka sama) musi istnieć
+w&nbsp;każdym module, gdzie funkcja jest używana, i&nbsp;to leksykalnie przed
+miejscem tego użycia. Zwykle najwygodniej jest zatem umieścić
+tę definicję w&nbsp;pliku nagłówkowym i&nbsp;włączać na początku
+każdego modułu, gdzie funkcja ma być użyta.
+
+<P>
+Pamiętać jednak trzeba, że dodanie do definicji modyfikatora
+
+<!--O--><span class='klucz'>inline<!--C--></span>
+ nie gwarantuje, że funkcja rzeczywiście zostanie
+rozwinięta. Po prostu, jest to często dla kompilatora za trudne;
+jeśli istnieje prawdopodobieństwo błędu lub zniekształcenia
+możliwych intencji programisty &mdash;&nbsp;których przecież kompilator
+dokładnie nie zna &mdash;&nbsp;to funkcja <FONT COLOR="#7b003e"><I>nie</I></FONT> będzie rozwijana: zostanie
+skompilowana jako normalna funkcja, czyli
+funkcja zamknięta.<A NAME="11959"></A>
+To, czy dana funkcja zdefiniowana z&nbsp;modyfikatorem
+<!--O--><span class='klucz'>inline<!--C--></span>
+
+będzie czy nie będzie rozwinięta, zależy w&nbsp;dużym stopniu
+od użytego kompilatora. Niektóre kompilatory informują o&nbsp;tym podczas
+kompilacji (choć większość tego nie robi).
+
+<P>
+Zwykle funkcja nie będzie rozwinięta, jeśli zawiera
+skomplikowane instrukcje warunkowe, pętle, szczególnie z&nbsp;&bdquo;ifami&rdquo;
+w&nbsp;środku, wywołania rekurencyjne itd.
+
+<P>
+Jako rozwijane (zadeklarowane jako
+<!--O--><span class='klucz'>inline<!--C--></span>)
+definiuje się najczęściej krótkie, proste funkcje, ale takie, które
+wywoływane są wielokrotnie, bo na przykład używane są wewnątrz mocno
+zagnieżdżonej pętli. W&nbsp;zasadzie zazwyczaj <FONT COLOR="#7b003e"><I>nie</I></FONT> rozwijamy funkcji
+aż do końcowego etapu pisania programu: wtedy dopiero sprawdzamy
+(za pomocą profilowania), które funkcje &bdquo;zjadają&rdquo; najwięcej czasu i&nbsp;te
+właśnie funkcje rozwijamy (obserwując, czy daje to jakiś zauważalny
+pozytywny efekt).
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1703"
+  HREF="node68.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1709"
+  HREF="node59.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1715"
+  HREF="node70.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1711"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1713"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1704"
+  HREF="node68.html">11.9 Funkcje statyczne</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1710"
+  HREF="node59.html">11. Funkcje</A>
+<B>Dalej:</B> <A NAME="tex2html1716"
+  HREF="node70.html">11.11 Przeciążanie funkcji</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,421 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>16.7 Pliki wewnętrzne</TITLE>
+<META NAME="description" CONTENT="16.7 Pliki wewnętrzne">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="previous" HREF="node109.html">
+<LINK REL="up" HREF="node103.html">
+<LINK REL="next" HREF="node111.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2321"
+  HREF="node109.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2325"
+  HREF="node103.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2331"
+  HREF="node111.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2327"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2329"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2322"
+  HREF="node109.html">16.6 Obsługa błędów strumieni</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2326"
+  HREF="node103.html">16. Operacje wejścia/wyjścia</A>
+<B>Dalej:</B> <A NAME="tex2html2332"
+  HREF="node111.html">17. Napisy</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Podrozdzia&#322;y</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html2333"
+  HREF="node110.html#SECTION001771000000000000000"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> Tablice znaków jako pliki wewnętrzne</A>
+<LI><A NAME="tex2html2334"
+  HREF="node110.html#SECTION001772000000000000000"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> Napisy C++ jako pliki wewnętrzne</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION001770000000000000000"></A><A NAME="io:plinter"></A>
+<BR>
+<SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">7</SPAN> Pliki wewnętrzne
+</H1>
+
+<P>
+Rolę plików<A NAME="19797"></A>
+mogą też pełnić napisy, czyli tablice znaków
+w stylu C i&nbsp;napisy w&nbsp;stylu C++, a&nbsp;więc obiekty klasy
+<!--O--><span class='klasa'>string<!--C--></span>.
+
+<P>
+
+<H2><A NAME="SECTION001771000000000000000"></A><A NAME="io:plinterc"></A>
+<BR>
+<SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> Tablice znaków jako pliki wewnętrzne
+</H2>
+
+<P>
+Napis w&nbsp;stylu C jest ciągłym obszarem pamięci, do którego odnosimy
+się jak do tablicy znaków. Obszar ten może być traktowany jako plik,
+do którego dane mogą być zapisywane lub z&nbsp;którego mogą być
+odczytywane.
+
+<P>
+Aby korzystać z&nbsp;tego rodzaju &bdquo;plików&rdquo;, należy dołączyć
+plik nagłówkowy
+<!--O--><span class='plik'>strstream<!--C--></span>,<A NAME="19802"></A> który daje
+nam dostęp do klasy strumieniowej wejściowej
+<!--O--><span class='klasa'>istrstream<!--C--></span>
+
+<A NAME="19804"></A> i&nbsp;wyjściowej
+<!--O--><span class='klasa'>ostrstream<!--C--></span>.<A NAME="19806"></A>
+
+<P>
+
+<P>
+
+<div class='wazne'>
+Ten nagłówek został usunięty ze standardu, ale jest
+    implementowany przez wszystkie kompilatory C++ dla zachowania
+    wstecznej zgodności. Przy kompilacji mogą pojawić
+    się ostrzeżenia!
+
+
+</div>
+
+<P>
+
+<P>
+Obiekt strumieniowy klasy wyjściowej
+<!--O--><span class='klasa'>ostrstream<!--C--></span>
+ tworzymy na
+dwa sposoby:
+
+<UL>
+<LI>
+<FONT COLOR="#000000"><TT>ostrstream strum;</TT></FONT> &mdash;&nbsp;bez argumentu konstruktora.
+          Możemy wtedy wpisywać do niego dowolnie wiele znaków,
+          stosując formatowanie, manipulatory itd.
+          <FONT COLOR="#7b003e"><I>Po zakończeniu</I></FONT>
+          wpisywania wywołujemy na rzecz tego obiektu bezargumentową
+          funkcję
+<!--O--><span class='funkcja'>str<!--C--></span>,<A NAME="19814"></A>
+          która zwraca wskaźnik
+          typu
+<!--O--><span class='typ'>char*<!--C--></span>
+ do początku wynikowej tablicy znaków.
+          Jeśli chcemy, aby był to prawidłowy C-napis (co nie
+          zawsze jest konieczne), musimy sami zadbać o&nbsp;to, aby
+          ostatnim wpisanym znakiem był znak '<!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>0'; na przykład
+          przez instrukcję <TT>strum &lt;&lt; ends</TT> jako ostatnią
+          instrukcję pisania. Zwrócona tablica znaków zaalokowana
+          jest na stercie za pomocą funkcji
+<!--O--><span class='funkcja'>malloc<!--C--></span>, zatem
+          jeśli nie jest nam już potrzebna, usunąć ją trzeba za
+          pomocą wywołania funkcji
+<!--O--><span class='funkcja'>free<!--C--></span>
+
+          (patrz rozdział o <A HREF="node79.html#pam:pamc">zarządzaniu pamięcią</A> ).
+          Nie ma tu metody
+<!--O--><span class='funkcja'>close<!--C--></span>.
+</LI>
+<LI>
+<FONT COLOR="#000000"><TT>ostrstream strum(char* tab, size_t len);</TT></FONT>
+          &mdash;&nbsp;
+          dane wpisywane będą do tablicy znaków
+<!--O--><span class='zmienna'>tab<!--C--></span>;
+          wielkość dostępnej pamięci określa drugi argument
+
+<!--O--><span class='zmienna'>len<!--C--></span>
+
+          (typu
+<!--O--><span class='typ'>size_t<!--C--></span>,<A NAME="19831"></A>
+          który jest pewnym typem całościowym).
+          Po otwarciu strumienia  możemy do niego
+          pisać używając normalnych operacji, jak
+          operator <TT>&lt;&lt;</TT>, funkcje
+<!--O--><span class='funkcja'>write<!--C--></span>,
+
+<!--O--><span class='funkcja'>put<!--C--></span>
+ itd. Jeśli podczas zapisywania do strumienia
+          liczba zapisanych bajtów miałaby przekroczyć
+<!--O--><span class='zmienna'>len<!--C--></span>,
+          to jako ostatni bajt (o indeksie
+<!--O--><span class='zmienna'>len-1<!--C--></span>) powinien
+          być wpisany znak
+<!--O--><span class='zmienna'>NUL<!--C--></span>
+ (czyli '<!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>0'), stan
+          strumienia powinien być
+<!--O--><span class='zmienna'>bad<!--C--></span>, co oznacza, że dalsze
+          operacje zapisywania będą ignorowane. Zabezpiecza nas to
+          przed przypadkowym &bdquo;mazaniem po pamięci&rdquo;.
+</LI>
+</UL>
+
+<P>
+Przykład:
+<A NAME="intfilo.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">131</SPAN>:</SPAN>
+      <A NAME="tex2html138"
+  HREF="source-files/intfilo.cpp">
+<!--O--><span class='downl'>intfilo.cpp<!--C--></span></A>
+<A NAME="20371"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Zapis do plików wewnętrznych</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;strstream&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cstdlib&gt;</font>   <i><font color="#9A1900">// free</font></i>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     5.  </font>
+ <font SIZE="-2" color="black">     6.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     7.  </font>    <i><font color="#9A1900">// wersja "gumowa"</font></i>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#008080">ostrstream</font> napis1<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    napis1 <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Poczatek, "</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"dalszy ciag, "</font>
+ <font SIZE="-2" color="black">    10.  </font>           <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"koniec."</font>    <font color="#990000">&lt;&lt;</font> ends<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font>    <font color="#009900">char</font><font color="#990000">*</font> n <font color="#990000">=</font> napis1<font color="#990000">.</font><b><font color="#000000">str</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    12.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Napis jest: "</font> <font color="#990000">&lt;&lt;</font> n <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>    <b><font color="#000000">free</font></b><font color="#990000">(</font>n<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    14.  </font>
+ <font SIZE="-2" color="black">    15.  </font>    <i><font color="#9A1900">// wersja tablicowa</font></i>
+ <font SIZE="-2" color="black">    16.  </font>    <font color="#009900">char</font> tab<font color="#990000">[</font><font color="#993399">30</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">    17.  </font>    <font color="#008080">ostrstream</font> <b><font color="#000000">napis2</font></b><font color="#990000">(</font>tab<font color="#990000">,</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>tab<font color="#990000">));</font>
+ <font SIZE="-2" color="black">    18.  </font>    napis2 <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Magda "</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Kasia "</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Marta"</font> <font color="#990000">&lt;&lt;</font> ends<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font>    cout <font color="#990000">&lt;&lt;</font> tab <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    20.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+Program ten wypisuje na ekranie
+<PRE>
+    Napis jest: Poczatek, dalszy ciag, koniec.
+    Magda Kasia Marta
+</PRE>
+Zauważmy, że pamięci na napis
+<!--O--><span class='zmienna'>n<!--C--></span>
+ nie alokujemy.
+Jest ona alokowana automatycznie i&nbsp;jej adres jest zwracany
+przez metodę
+<!--O--><span class='funkcja'>str<!--C--></span>
+ (linia&nbsp;11).
+
+<P>
+Podobnie można z&nbsp;tablicy znaków czytać, tworząc obiekt
+klasy
+<!--O--><span class='klasa'>istrstream<!--C--></span>.
+
+<UL>
+<LI>
+<FONT COLOR="#000000"><TT>istrstream strum(char* t, size_t len);</TT></FONT>
+          &mdash;&nbsp;
+          &bdquo;plikiem&rdquo; będzie obszar pamięci o&nbsp;długości
+
+<!--O--><span class='zmienna'>len<!--C--></span>
+ od bajtu wskazywanego przez
+<!--O--><span class='zmienna'>tab<!--C--></span>.
+</LI>
+<LI>'
+<FONT COLOR="#000000"><TT>istrstream istr(char* tab);</TT></FONT>' &mdash;&nbsp;
+          &bdquo;plikiem&rdquo; będzie tu obszar od bajtu wskazywanego przez
+
+<!--O--><span class='zmienna'>tab<!--C--></span>
+ do znaku
+<!--O--><span class='zmienna'>NUL<!--C--></span>, który będzie
+          traktowany jak znak końca pliku.
+</LI>
+</UL>
+
+<P>
+Pliki wewnętrzne oparte na C-napisach są czasem używane do
+reprezentowania pliku dyskowego, szczególnie jeśli zachodzi
+potrzeba częstego &bdquo;skakania&rdquo; do różnych części pliku,
+co może być drogie, gdyż wymaga wielu operacji dostępu do pliku.
+Może wtedy być bardziej opłacalne wczytanie całego pliku do
+tablicy znaków i&nbsp;dalej używanie jej jak pliku wewnętrznego.
+
+<P>
+
+<H2><A NAME="SECTION001772000000000000000"></A><A NAME="io:plintercpp"></A>
+<BR>
+<SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> Napisy C++ jako pliki wewnętrzne
+</H2>
+
+<P>
+Podobnie jak tablice znaków, do reprezentowania plików
+wewnętrznych mogą być używane obiekty klasy
+<!--O--><span class='klasa'>string<!--C--></span>.
+Jest to łatwiejsze i&nbsp;bezpieczniejsze niż używanie tablic znaków.
+
+<P>
+Aby korzystać z&nbsp;tego udogodnienia, należy dołączyć,
+prócz pliku
+<!--O--><span class='plik'>string<!--C--></span>,
+plik nagłówkowy
+<!--O--><span class='plik'>sstream<!--C--></span>. Zdefiniowane tam są klasy
+strumieniowe wejściowa
+<!--O--><span class='klasa'>istringstream<!--C--></span>
+ i&nbsp;wyjściowa
+
+<!--O--><span class='klasa'>ostringstream<!--C--></span>
+ korzystające z&nbsp;napisów klasy
+<!--O--><span class='klasa'>string<!--C--></span>.<A NAME="19866"></A><A NAME="19867"></A><A NAME="19868"></A>
+
+<P>
+Strumień wyjściowy można utworzyć za pomocą
+konstruktora domyślnego:
+<pre><tt>       <font color="#008080">ostringstream</font> strm<font color="#990000">;</font>
+</tt></pre>
+i pisać do niego jak do normalnego strumienia
+<pre><tt>       strm <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"To be"</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" or not to be"</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">", etc."</font><font color="#990000">;</font>
+</tt></pre>
+Nie trzeba martwić się o&nbsp;przepełnienie, bo pamięć
+w&nbsp;miarę potrzeby jest alokowana automatycznie.
+Po zakończeniu pisania do strumienia, wywołujemy na jego rzecz
+metodę
+<!--O--><span class='funkcja'>str<!--C--></span>,<A NAME="19874"></A><A NAME="19875"></A>
+która zwraca napis (obiekt klasy
+<!--O--><span class='klasa'>string<!--C--></span>) zawierający
+rezultat, na przykład:
+<pre><tt>       <font color="#008080">string</font> s <font color="#990000">=</font> strm<font color="#990000">.</font><b><font color="#000000">str</font></b><font color="#990000">();</font>
+       cout <font color="#990000">&lt;&lt;</font> s <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+</tt></pre>
+Można też skonstruować strumień z&nbsp;wpisanym już fragmentem w&nbsp;trybie
+dopisywania na końcu
+<pre><tt>       <font color="#008080">ostringstream</font> <b><font color="#000000">ostr</font></b><font color="#990000">(</font><font color="#FF0000">"Jakis napis"</font><font color="#990000">,</font> ios<font color="#990000">::</font>ate<font color="#990000">);</font>
+       ostr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Dalsza czesc"</font><font color="#990000">;</font>
+</tt></pre>
+a następnie dopisywać dalsze fragmenty, jak w&nbsp;przykładzie powyżej.
+
+<P>
+Istniejący obiekt klasy
+<!--O--><span class='klasa'>string<!--C--></span>
+ też może być otwarty
+jako wejściowy plik wewnętrzny, jak w&nbsp;przykładzie poniżej:
+<A NAME="intstr.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">132</SPAN>:</SPAN>
+      <A NAME="tex2html139"
+  HREF="source-files/intstr.cpp">
+<!--O--><span class='downl'>intstr.cpp<!--C--></span></A>
+<A NAME="20387"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Napisy C++ jako pliki wewnętrzne</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;sstream&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><font color="#009900">void</font> <b><font color="#000000">words</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> string<font color="#990000">&amp;</font> s<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#008080">istringstream</font> <b><font color="#000000">istr</font></b><font color="#990000">(</font>s<font color="#990000">);</font>
+ <font SIZE="-2" color="black">     7.  </font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#008080">string</font> word<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font> istr <font color="#990000">&gt;&gt;</font> word <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    10.  </font>        cout <font color="#990000">&lt;&lt;</font> word <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    12.  </font>
+ <font SIZE="-2" color="black">    13.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    14.  </font>    <font color="#008080">string</font> s <font color="#990000">=</font> <font color="#FF0000">"Bach Haydn"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>    <font color="#008080">ostringstream</font> <b><font color="#000000">ostr</font></b><font color="#990000">(</font>s<font color="#990000">,</font> ios<font color="#990000">::</font>ate<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    16.  </font>    ostr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" Chopin"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font>    <font color="#008080">string</font> s1 <font color="#990000">=</font> ostr<font color="#990000">.</font><b><font color="#000000">str</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    18.  </font>    <b><font color="#000000">words</font></b><font color="#990000">(</font>s1<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    19.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+Najpierw, w&nbsp;linii&nbsp;15, otwieramy wewnętrzny plik wyjściowy
+zainicjowany zawartością napisu
+<!--O--><span class='zmienna'>s<!--C--></span>. Dodajemy do niego pewne
+dane (linia&nbsp;16) i&nbsp;pobieramy wynikową zawartość do
+<!--O--><span class='zmienna'>s1<!--C--></span>.
+Następnie
+<!--O--><span class='zmienna'>s1<!--C--></span>
+ jest przekazywane do funkcji
+<!--O--><span class='funkcja'>words<!--C--></span>,
+która ten napis otwiera do czytania jako wejściowy plik
+wewnętrzny (linia&nbsp;6). Z pliku tego czytamy kolejne słowa oddzielone
+znakiem odstępu, według normalnych zasad czytania ze strumienia.
+Zauważmy, że po osiągnięciu końca pliku, stan strumienia
+przejdzie w&nbsp;
+<!--O--><span class='zmienna'>bad<!--C--></span>, co zakończy pętlę z&nbsp;linii&nbsp;9-10.
+Program drukuje zatem
+<PRE>
+    Bach
+    Haydn
+    Chopin
+</PRE>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2321"
+  HREF="node109.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2325"
+  HREF="node103.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2331"
+  HREF="node111.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2327"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2329"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2322"
+  HREF="node109.html">16.6 Obsługa błędów strumieni</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2326"
+  HREF="node103.html">16. Operacje wejścia/wyjścia</A>
+<B>Dalej:</B> <A NAME="tex2html2332"
+  HREF="node111.html">17. Napisy</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

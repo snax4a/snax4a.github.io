@@ -1,0 +1,782 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>19.1 Konwersje od i&nbsp;do typu definiowanego</TITLE>
+<META NAME="description" CONTENT="19.1 Konwersje od i&nbsp;do typu definiowanego">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node121.html">
+<LINK REL="previous" HREF="node119.html">
+<LINK REL="up" HREF="node119.html">
+<LINK REL="next" HREF="node121.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2497"
+  HREF="node119.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2503"
+  HREF="node119.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2509"
+  HREF="node121.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2505"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2507"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2498"
+  HREF="node119.html">19. Jeszcze o&nbsp;konwersjach</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2504"
+  HREF="node119.html">19. Jeszcze o&nbsp;konwersjach</A>
+<B>Dalej:</B> <A NAME="tex2html2510"
+  HREF="node121.html">19.2 Konwersje jawne</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Podrozdzia&#322;y</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html2511"
+  HREF="node120.html#SECTION002011000000000000000"><SPAN CLASS="arabic">19</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Konwersja <SPAN  CLASS="textit">do</SPAN> typu definiowanego</A>
+<LI><A NAME="tex2html2512"
+  HREF="node120.html#SECTION002012000000000000000"><SPAN CLASS="arabic">19</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Konwersja <SPAN  CLASS="textit">od</SPAN> typu definiowanego</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION002010000000000000000"></A><A NAME="konw:oddo"></A>
+<BR>
+<SPAN CLASS="arabic">19</SPAN>.<SPAN CLASS="arabic">1</SPAN> Konwersje od i&nbsp;do typu definiowanego
+</H1>
+
+<P>
+Jeśli zdefiniowaliśmy klasę, a&nbsp;więc nowy typ danych (zmiennych),
+to często chcielibyśmy określić, w&nbsp;jaki sposób ma być
+dokonywana konwersja od obiektów innych typów <FONT COLOR="#7b003e"><I>do</I></FONT> obiektów
+zdefiniowanej przez nas klasy. Z drugiej strony, chcielibyśmy czasem
+zdefiniować konwersje odwrotne: <FONT COLOR="#7b003e"><I>od</I></FONT> obiektów naszej
+klasy do obiektów innych typów (wbudowanych, bibliotecznych
+lub też zdefiniowanych przez nas).
+
+<P>
+
+<H2><A NAME="SECTION002011000000000000000"></A>
+           <A NAME="konw:do"></A>
+<BR>
+<SPAN CLASS="arabic">19</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Konwersja <SPAN  CLASS="textit">do</SPAN> typu definiowanego
+</H2>
+
+<P>
+Przypuśćmy,<A NAME="25028"></A>
+że klasa
+<!--O--><span class='klasa'>A<!--C--></span>
+ ma konstruktor, który może
+być wywołany z&nbsp;jednym argumentem typu
+<!--O--><span class='klasa'>B<!--C--></span>. A zatem albo
+jest to konstruktor jednoparametrowy z&nbsp;parametrem typu
+<!--O--><span class='klasa'>B<!--C--></span>,
+albo pierwszy parametr ma taki typ, a&nbsp;pozostałe parametry mają
+wartości domyślne. Typ
+<!--O--><span class='klasa'>B<!--C--></span>
+ może być
+typem wbudowanym (<!--O--><span class='typ'>double<!--C--></span>,
+<!--O--><span class='typ'>int<!--C--></span>, ...), albo typem
+przez nas zdefiniowanym.
+
+<P>
+Załóżmy teraz, że użyjemy obiektu klasy
+<!--O--><span class='klasa'>B<!--C--></span>
+ w&nbsp;kontekście,
+w&nbsp;którym wymagany jest obiekt typu
+<!--O--><span class='klasa'>A<!--C--></span>. Jeśli opisany wyżej
+konstruktor w&nbsp;klasie
+<!--O--><span class='klasa'>A<!--C--></span>
+ istnieje, to dokonana zostanie
+konwersja
+<!--O--><span class='klasa'>B<!--C--></span>
+ <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='klasa'>A<!--C--></span>
+ poprzez utworzenie
+nowego obiektu klasy
+<!--O--><span class='klasa'>A<!--C--></span>
+ z&nbsp;dostarczeniem danego obiektu
+klasy
+<!--O--><span class='klasa'>B<!--C--></span>
+ do konstruktora jako jedynego argumentu.
+
+<P>
+Na przykład, jeśli istnieje funkcja o&nbsp;parametrze typu
+<!--O--><span class='klasa'>A<!--C--></span>
+
+<pre><tt>       <font color="#009900">void</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#008080">A</font> a<font color="#990000">)</font> <font color="#FF0000">{</font> <font color="#990000">...</font> <font color="#FF0000">}</font>
+</tt></pre>
+a&nbsp;jej wywołanie ma postać
+<FONT COLOR="#000000"><TT>fun(4.25)</TT></FONT>, to mamy do czynienia
+z&nbsp;niezgodnością typów, bo argument jest typu
+<!--O--><span class='typ'>double<!--C--></span>.
+Błędu jednak <FONT COLOR="#7b003e"><I>nie</I></FONT> będzie, jeśli klasa
+<!--O--><span class='klasa'>A<!--C--></span>
+ ma konstruktor,
+który można wywołać z jednym argumentem typu
+<!--O--><span class='typ'>double<!--C--></span>. Jeśli
+bowiem taki <FONT COLOR="#7b003e"><B>konstruktor konwertujący</B></FONT>
+<A NAME="25052"></A> jest, to zostanie utworzony obiekt
+klasy
+<!--O--><span class='klasa'>A<!--C--></span>
+ z&nbsp;użyciem tego konstruktora (do którego zostanie
+przesłana jako argument wartość 4.25). Tak utworzony obiekt zostanie
+następnie przesłany do funkcji
+<!--O--><span class='funkcja'>fun<!--C--></span>.
+
+<P>
+A co będzie, jeśli tę samą funkcję wywołamy z&nbsp;argumentem
+całkowitym, na przykład '
+<FONT COLOR="#000000"><TT>fun(4)</TT></FONT>'? Takie wywołanie
+<FONT COLOR="#7b003e"><I>też</I></FONT> będzie wtedy prawidłowe! Nie ma, co prawda, bezpośredniej
+konwersji
+<!--O--><span class='typ'>int<!--C--></span>
+ <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='klasa'>A<!--C--></span>, bo nie ma w klasie
+
+<!--O--><span class='klasa'>A<!--C--></span>
+ konstruktora pobierającego jeden argument typu
+<!--O--><span class='typ'>int<!--C--></span>.
+Istnieje jednak standardowa konwersja
+<!--O--><span class='typ'>int<!--C--></span>
+ <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+
+<!--O--><span class='typ'>double<!--C--></span>, a&nbsp;zdefiniowaną mamy, poprzez odpowiedni konstruktor,
+konwersję
+<!--O--><span class='typ'>double<!--C--></span>
+ <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='klasa'>A<!--C--></span>. Zatem za pomocą
+takiej dwustopniowej konstrukcji można skonwertować wartość
+całkowitą do obiektu klasy
+<!--O--><span class='klasa'>A<!--C--></span>: najpierw utworzona
+zostanie tymczasowa zmienna typu
+<!--O--><span class='typ'>double<!--C--></span>, a&nbsp;z niej
+obiekt klasy
+<!--O--><span class='klasa'>A<!--C--></span>. W sekwencji kilku konwersji prowadzących do
+celu takich konwersji pośrednich może być nawet więcej. Ważne
+jest jednak, że
+
+<P>
+
+<P>
+
+<div class='wazne'>
+tylko jedna z&nbsp;konwersji w&nbsp;tej sekwencji może być
+    konwersją definiowaną przez użytkownika; pozostałe muszą
+    być konwersjami standardowymi.
+
+
+</div>
+
+<P>
+Gdybyśmy bowiem dopuścili dowolne sekwencje konwersji, to
+możliwości byłoby tak wiele, że trudno byłoby
+w&nbsp;nich wszystkich zorientować się samemu programiście; w
+szczególności, trudno byłoby nawet przewidzieć, jakie typy takimi
+sekwencjami konwersji można połączyć, a&nbsp;jakie nie.
+
+<P>
+Zresztą, możliwość użycia w&nbsp;sekwencji nawet jednej konwersji
+zdefiniowanej przez użytkownika może być niewygodna. Jest tak wtedy,
+gdy potrzebujemy w&nbsp;naszej klasie konstruktora jednoparametrowego, ale
+wcale nie chcemy, aby był on wykorzystywany niejawnie do konwersji.
+Takie konwersje mogą się bowiem pojawić w&nbsp;najmniej spodziewanych
+miejscach, gdzie po prostu nie przewidzieliśmy, że będą przez
+kompilator wygenerowane. Dlatego istnieje specjalne słowo kluczowe,
+
+<!--O--><span class='klucz'>explicit<!--C--></span>,<A NAME="25071"></A>
+które może być użyte jako modyfikator konstruktora. Jeśli
+go użyjemy, to konstruktor taki <FONT COLOR="#7b003e"><I>nie</I></FONT> będzie nigdy wykorzystany
+jako konstruktor konwertujący, a&nbsp;tylko wtedy, gdy służy swemu
+właściwemu celowi, to znaczy gdy jawnie tworzymy obiekty klasy.
+
+<P>
+Przyjrzyjmy się programowi:
+<BR><A NAME="convto.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">154</SPAN>:</SPAN>
+      <A NAME="tex2html162"
+  HREF="source-files/convto.cpp">
+<!--O--><span class='downl'>convto.cpp<!--C--></span></A>
+<A NAME="25365"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Konwersja do klasy definiowanej</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">Point</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">int</font> x<font color="#990000">,</font> y<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    <b><font color="#000000">Point</font></b><font color="#990000">(</font><font color="#009900">int</font> x <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">,</font> <font color="#009900">int</font> y <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">)</font> <font color="#990000">:</font> <b><font color="#000000">x</font></b><font color="#990000">(</font>x<font color="#990000">),</font> <b><font color="#000000">y</font></b><font color="#990000">(</font>y<font color="#990000">)</font> <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">     7.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>
+ <font SIZE="-2" color="black">     9.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">Segment</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    10.  </font>    <font color="#008080">Point</font> A<font color="#990000">,</font> B<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font>    <i><font color="#9A1900">// explicit</font></i>
+ <font SIZE="-2" color="black">    12.  </font>    <b><font color="#000000">Segment</font></b><font color="#990000">(</font><font color="#008080">Point</font> A <font color="#990000">=</font> <b><font color="#000000">Point</font></b><font color="#990000">(),</font> <font color="#008080">Point</font> B <font color="#990000">=</font> <b><font color="#000000">Point</font></b><font color="#990000">())</font>
+ <font SIZE="-2" color="black">    13.  </font>        <font color="#990000">:</font> <b><font color="#000000">A</font></b><font color="#990000">(</font>A<font color="#990000">),</font> <b><font color="#000000">B</font></b><font color="#990000">(</font>B<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    14.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    15.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>
+ <font SIZE="-2" color="black">    17.  </font><font color="#009900">void</font> <b><font color="#000000">showPoint</font></b><font color="#990000">(</font><font color="#008080">Point</font> A<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    18.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Point["</font> <font color="#990000">&lt;&lt;</font> A<font color="#990000">.</font>x <font color="#990000">&lt;&lt;</font> <font color="#FF0000">","</font> <font color="#990000">&lt;&lt;</font> A<font color="#990000">.</font>y <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"]"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    20.  </font>
+ <font SIZE="-2" color="black">    21.  </font><font color="#009900">void</font> <b><font color="#000000">showSegment</font></b><font color="#990000">(</font><font color="#008080">Segment</font> AB<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    22.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Segment: "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    23.  </font>    <b><font color="#000000">showPoint</font></b><font color="#990000">(</font>AB<font color="#990000">.</font>A<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    24.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"--"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    25.  </font>    <b><font color="#000000">showPoint</font></b><font color="#990000">(</font>AB<font color="#990000">.</font>B<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    26.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    27.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    28.  </font>
+ <font SIZE="-2" color="black">    29.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    30.  </font>    <font color="#009900">int</font> k <font color="#990000">=</font> <font color="#993399">7</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    31.  </font>    <b><font color="#000000">showPoint</font></b><font color="#990000">(</font>k<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    32.  </font>
+ <font SIZE="-2" color="black">    33.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    34.  </font>
+ <font SIZE="-2" color="black">    35.  </font>    <font color="#008080">Point</font> <b><font color="#000000">A</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">,</font><font color="#993399">1</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    36.  </font>    <b><font color="#000000">showSegment</font></b><font color="#990000">(</font>A<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    37.  </font>    <i><font color="#9A1900">// showSegment(k);</font></i>
+ <font SIZE="-2" color="black">    38.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Zdefiniowaliśmy tu dwie klasy:
+<!--O--><span class='klasa'>Point<!--C--></span>
+ i&nbsp;
+<!--O--><span class='klasa'>Segment<!--C--></span>.
+Oba posiadają konstruktory, które mogą być wywołane z&nbsp;jednym
+argumentem: klasa
+<!--O--><span class='klasa'>Point<!--C--></span>
+ z&nbsp;argumentem typu
+<!--O--><span class='typ'>int<!--C--></span>,
+a klasa
+<!--O--><span class='klasa'>Segment<!--C--></span>
+ z&nbsp;argumentem typu
+<!--O--><span class='klasa'>Point<!--C--></span>
+ (oba
+konstruktory są wieloparametrowe, ale dzięki zastosowaniu parametrów
+domyślnych mogą być wywołane z&nbsp;jednym argumentem &mdash;&nbsp;
+patrz
+rozdział o&nbsp;argumentach <A HREF="node63.html#funk:argdom">domyślnych</A> funkcji.
+
+<P>
+Następnie zdefiniowane są dwie funkcje,
+<!--O--><span class='funkcja'>showPoint<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='funkcja'>showSegment<!--C--></span>, których parametry są typu
+
+<!--O--><span class='klasa'>Point<!--C--></span>
+ i&nbsp;
+<!--O--><span class='klasa'>Segment<!--C--></span>.
+
+<P>
+Przyjrzyjmy się teraz funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>. W linii&nbsp;31 wywołujemy
+funkcję
+<!--O--><span class='funkcja'>showPoint<!--C--></span>
+ z&nbsp;argumentem typu
+<!--O--><span class='typ'>int<!--C--></span>.
+Funkcji o&nbsp;takiej nazwie i&nbsp;takim typie parametru <FONT COLOR="#7b003e"><I>nie ma</I></FONT>.
+Jest taka funkcja, tyle że z&nbsp;parametrem typu
+<!--O--><span class='klasa'>Point<!--C--></span>.
+Kompilator sprawdzi zatem, czy istnieje konwersja
+
+<!--O--><span class='typ'>int<!--C--></span>
+ <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='klasa'>Point<!--C--></span>, to znaczy, czy istnieje
+konstruktor w&nbsp;klasie
+<!--O--><span class='klasa'>Point<!--C--></span>, który można wywołać z&nbsp;jednym
+argumentem typu
+<!--O--><span class='typ'>int<!--C--></span>. Taki konstruktor istnieje, zatem konwersja
+zostanie dokonana: obiekt klasy
+<!--O--><span class='klasa'>Point<!--C--></span>
+ na podstawie
+wartości całkowitej zostanie utworzony i&nbsp;wysłany do funkcji
+
+<!--O--><span class='funkcja'>showPoint<!--C--></span>, jak o&nbsp;tym świadczy pierwsza linia wydruku:
+<PRE>
+    Point[7,0]
+    Segment: Point[1,1]--Point[0,0]
+</PRE>
+W linii&nbsp;35 tworzymy obiekt
+<!--O--><span class='zmienna'>A<!--C--></span>
+ klasy
+<!--O--><span class='klasa'>Point<!--C--></span>
+
+i&nbsp;posyłamy go do funkcji
+<!--O--><span class='funkcja'>showSegment<!--C--></span>. Znów dokonana musi
+być konwersja, aby to wywołanie mogło być prawidłowe.
+Funkcja oczekuje argumentu typu
+<!--O--><span class='klasa'>Segment<!--C--></span>, zatem
+obiekt tej klasy zostanie utworzony z&nbsp;obiektu&nbsp;
+<!--O--><span class='zmienna'>A<!--C--></span>
+ za pomocą
+wywołania konstruktora klasy
+<!--O--><span class='klasa'>Segment<!--C--></span>
+ z&nbsp;wartością
+
+<!--O--><span class='zmienna'>A<!--C--></span>
+ jako argumentem. Świadczy o&nbsp;tym druga linia wydruku.
+
+<P>
+Zauważmy, że wywołanie z&nbsp;wykomentowanej linii&nbsp;37 byłoby
+nieprawidłowe. Wymagałoby konwersji dwustopniowej: najpierw
+
+<!--O--><span class='typ'>int<!--C--></span>
+ <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='klasa'>Point<!--C--></span>, potem
+<!--O--><span class='klasa'>Point<!--C--></span>
+
+<!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='klasa'>Segment<!--C--></span>. A zatem użyte musiałyby być
+dwie konwersje definiowane w&nbsp;programie: to jest jednak niemożliwe.
+
+<P>
+Spróbujmy teraz uaktywnić wykomentowaną linię&nbsp;11.
+Konstruktor klasy
+<!--O--><span class='klasa'>Segment<!--C--></span>
+ jest teraz zdefiniowany z
+modyfikatorem
+<!--O--><span class='klucz'>explicit<!--C--></span>. Nie może zatem pełnić roli
+konstruktora konwertującego
+<!--O--><span class='klasa'>Point<!--C--></span>
+ <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+
+<!--O--><span class='klasa'>Segment<!--C--></span>. Wywołanie z&nbsp;linii&nbsp;36 staje się teraz
+nieprawidłowe, bo wymaga właśnie takiej konwersji.
+Taki program, z&nbsp;&bdquo;odkomentowaną&rdquo; linią&nbsp;11, jest wobec tego
+błędny:
+<PRE>
+    cpp&gt; g++ -Wall -pedantic-errors convto.cpp
+    convto.cpp: In function `int main()':
+    convto.cpp:36: error: conversion from `Point' to
+           non-scalar type `Segment' requested
+</PRE>
+
+<P>
+Jako drugi przykład rozpatrzmy klasę
+<!--O--><span class='klasa'>Modulo<!--C--></span>, której
+użyliśmy już w&nbsp;programach <A HREF="node116.html#modsev.cpp">
+<!--O--><span class='plik'>modsev.cpp<!--C--></span></A>
+i&nbsp;<A HREF="node117.html#modsev1.cpp">
+<!--O--><span class='plik'>modsev1.cpp<!--C--></span></A>. Teraz zauważmy, jak konstruktor
+konwertujący ułatwi nam przeciążenie operatora dodawania liczb
+typu
+<!--O--><span class='klasa'>Modulo<!--C--></span>.
+<BR><A NAME="modcon.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">155</SPAN>:</SPAN>
+      <A NAME="tex2html163"
+  HREF="source-files/modcon.cpp">
+<!--O--><span class='downl'>modcon.cpp<!--C--></span></A>
+<A NAME="25384"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Konwersje ułatwiające przeciążenia operatorów</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Modulo</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">int</font> numb<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">     7.  </font>    <b><font color="#0000FF">static</font></b> <font color="#009900">int</font> modul<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>
+ <font SIZE="-2" color="black">     9.  </font>    <b><font color="#000000">Modulo</font></b><font color="#990000">()</font> <font color="#990000">:</font> <b><font color="#000000">numb</font></b><font color="#990000">(</font><font color="#993399">0</font><font color="#990000">)</font> <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    10.  </font>
+ <font SIZE="-2" color="black">    11.  </font>    <b><font color="#000000">Modulo</font></b><font color="#990000">(</font><font color="#009900">int</font> numb<font color="#990000">)</font> <font color="#990000">:</font> <b><font color="#000000">numb</font></b><font color="#990000">(</font>numb<font color="#990000">%</font>modul<font color="#990000">)</font> <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    12.  </font>
+ <font SIZE="-2" color="black">    13.  </font>    <b><font color="#0000FF">friend</font></b> <font color="#008080">Modulo</font> <b><font color="#0000FF">operator</font></b><font color="#990000">+(</font>Modulo<font color="#990000">,</font>Modulo<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    14.  </font>    <b><font color="#0000FF">friend</font></b> ostream<font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">&lt;&lt;(</font>ostream<font color="#990000">&amp;,</font><b><font color="#0000FF">const</font></b> Modulo<font color="#990000">&amp;);</font>
+ <font SIZE="-2" color="black">    15.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font><font color="#009900">int</font> Modulo<font color="#990000">::</font>modul <font color="#990000">=</font> <font color="#993399">7</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font>
+ <font SIZE="-2" color="black">    18.  </font><font color="#008080">Modulo</font> <b><font color="#0000FF">operator</font></b><font color="#990000">+(</font><font color="#008080">Modulo</font> m<font color="#990000">,</font> <font color="#008080">Modulo</font> n<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    19.  </font>    <b><font color="#0000FF">return</font></b> <b><font color="#000000">Modulo</font></b><font color="#990000">(</font>m<font color="#990000">.</font>numb <font color="#990000">+</font> n<font color="#990000">.</font>numb<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    20.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    21.  </font>
+ <font SIZE="-2" color="black">    22.  </font>ostream<font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">&lt;&lt;(</font>ostream<font color="#990000">&amp;</font> str<font color="#990000">,</font> <b><font color="#0000FF">const</font></b> Modulo<font color="#990000">&amp;</font> m<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    23.  </font>    <b><font color="#0000FF">return</font></b> str <font color="#990000">&lt;&lt;</font> m<font color="#990000">.</font>numb<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    24.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    25.  </font>
+ <font SIZE="-2" color="black">    26.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    27.  </font>
+ <font SIZE="-2" color="black">    28.  </font>    <font color="#008080">Modulo</font> <b><font color="#000000">m</font></b><font color="#990000">(</font><font color="#993399">5</font><font color="#990000">),</font> <b><font color="#000000">n</font></b><font color="#990000">(</font><font color="#993399">6</font><font color="#990000">),</font> k<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    29.  </font>
+ <font SIZE="-2" color="black">    30.  </font>    k <font color="#990000">=</font> m <font color="#990000">+</font> n<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    31.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"m + n (mod "</font> <font color="#990000">&lt;&lt;</font> Modulo<font color="#990000">::</font>modul
+ <font SIZE="-2" color="black">    32.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">") = "</font>        <font color="#990000">&lt;&lt;</font> k <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    33.  </font>
+ <font SIZE="-2" color="black">    34.  </font>    k <font color="#990000">=</font> m <font color="#990000">+</font> <font color="#993399">6</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    35.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"m + 6 (mod "</font> <font color="#990000">&lt;&lt;</font> Modulo<font color="#990000">::</font>modul
+ <font SIZE="-2" color="black">    36.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">") = "</font>        <font color="#990000">&lt;&lt;</font> k <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    37.  </font>
+ <font SIZE="-2" color="black">    38.  </font>    k <font color="#990000">=</font> <font color="#993399">6</font> <font color="#990000">+</font> m<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    39.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"6 + m (mod "</font> <font color="#990000">&lt;&lt;</font> Modulo<font color="#990000">::</font>modul
+ <font SIZE="-2" color="black">    40.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">") = "</font>        <font color="#990000">&lt;&lt;</font> k <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    41.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Tym razem operator dodawania obiektów klasy
+<!--O--><span class='klasa'>Modulo<!--C--></span>
+
+definiujemy poprzez zaprzyjaźnioną funkcję globalną, a&nbsp;nie jako
+metodę. Zauważmy, że zdefiniowaliśmy tylko jedną taką
+funkcję (linie&nbsp;18-20): z oboma parametrami typu
+<!--O--><span class='klasa'>Modulo<!--C--></span>.
+Jak widać w&nbsp;funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>, używamy jej jednak do dodawania
+dwóch obiektów klasy
+<!--O--><span class='klasa'>Modulo<!--C--></span>
+ (linia&nbsp;30), do dodawania liczby
+typu
+<!--O--><span class='typ'>int<!--C--></span>
+ do obiektu klasy
+<!--O--><span class='klasa'>Modulo<!--C--></span>
+ (linia&nbsp;34), jak i&nbsp;do
+dodawania obiektu klasy
+<!--O--><span class='klasa'>Modulo<!--C--></span>
+ do liczby (linia&nbsp;38).
+We wszystkich przypadkach przeciążenie działa prawidłowo:
+<PRE>
+    m + n (mod 7) = 4
+    m + 6 (mod 7) = 4
+    6 + m (mod 7) = 4
+</PRE>
+Ta ostatnia forma dodawania, <SPAN  CLASS="textit">liczba+obiekt</SPAN>, nie byłaby możliwa
+do zrealizowania przez przeciążenie operatora dodawania za pomocą
+metody, bo po lewej stronie mamy tu liczbę, a&nbsp;nie obiekt klasy.
+Dlaczego mogliśmy zdefiniować tylko jedną formę funkcji
+przeciążającej operator dodawania, tę z&nbsp;oboma parametrami typu
+
+<!--O--><span class='klasa'>Modulo<!--C--></span>? Było to możliwe dzięki konstruktorowi z&nbsp;linii&nbsp;11,
+który jest konstruktorem konwertującym
+<!--O--><span class='typ'>int<!--C--></span>
+ <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+
+<!--O--><span class='klasa'>Modulo<!--C--></span>. Za jego pomocą argument całkowity zostanie
+przekonwertowany automatycznie do typu
+<!--O--><span class='klasa'>Modulo<!--C--></span>
+ tam, gdzie
+konieczność takiej konwersji będzie wynikała z kontekstu,
+i&nbsp;to niezależnie od tego, czy liczba występuje po lewej, czy po
+prawej stronie operatora '
+<FONT COLOR="#000000"><TT>+</TT></FONT>'.
+
+<P>
+
+<H2><A NAME="SECTION002012000000000000000"></A>
+           <A NAME="konw:od"></A>
+<BR>
+<SPAN CLASS="arabic">19</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Konwersja <SPAN  CLASS="textit">od</SPAN> typu definiowanego
+</H2>
+
+<P>
+Opisanym sposobem możemy przekształcać obiekty pewnej klasy
+(w&nbsp;szczególności typu wbudowanego) na obiekty definiowanej przez nas
+klasy. Można również &bdquo;nauczyć&rdquo; kompilator operacji odwrotnej:
+konwertowania obiektów definiowanej przez nas klasy na obiekty
+innego typu (w szczególności typu wbudowanego). Jest to jedyne
+wyjście, gdy klasa docelowa, czyli ta, <FONT COLOR="#7b003e"><I>do</I></FONT> której ma nastąpić
+konwersja, jest dla nas niedostępna i&nbsp;nie możemy w&nbsp;niej dodefiniować
+konstruktora konwertującego (bo, na przykład, typem docelowym jest
+typ wbudowany w&nbsp;ogóle nie będący klasą, albo klasa docelowa pochodzi
+z&nbsp;biblioteki, której nie możemy lub nie chcemy modyfikować).
+
+<P>
+W takiej sytuacji w&nbsp;definiowanej przez nas klasie definiujemy
+<FONT COLOR="#7b003e"><B>metodę konwertującą</B></FONT> (ang.&nbsp;<FONT COLOR="#7b003e"><I>conversion method</I></FONT>).
+Jest to bezparametrowa<A NAME="25152"></A>
+metoda o&nbsp;nazwie '
+<!--O--><span class='funkcja'>operator Typ<!--C--></span>', gdzie
+
+<!--O--><span class='typ'>Typ<!--C--></span>
+ jest nazwą typu (klasy) docelowego &mdash;&nbsp;może to być
+typ wbudowany, jak
+<!--O--><span class='typ'>int<!--C--></span>
+ czy
+<!--O--><span class='typ'>double<!--C--></span>, a&nbsp;może też być
+to typ przez nas zdefiniowany.
+
+<P>
+Dla metod konwertujących, wyjątkowo, <FONT COLOR="#7b003e"><I>nie</I></FONT> podaje się typu
+zwracanego, ale nie oznacza to, że metoda jest bezrezultatowa.
+Wartość zwracana musi mieć typ określony nazwą metody; musi zatem
+zawierać instrukcję
+<!--O--><span class='klucz'>return<!--C--></span>
+ zwracającą wartość tego typu.
+Ponieważ jest to metoda, zawsze będzie działać na rzecz konkretnego
+obiektu: jej zadaniem jest &bdquo;wyprodukowanie&rdquo; obiektu odpowiedniego
+typu (do którego następuje konwersja) na podstawie obiektu, na rzecz
+którego działa. Oczywiście, nie powinna zmieniać obiektu źródłowego,
+a&nbsp;więc powinna być zadeklarowana jako
+<!--O--><span class='klucz'>const<!--C--></span>. Można też,
+podobnie jak konstruktory konwertujące, deklarować takie metody jako
+
+<!--O--><span class='klucz'>explicit<!--C--></span>: zapobiega to przypadkowym, niezamierzonym konwersjom,
+ale też powoduje konieczność stosowania konwersji jawnych tam,
+gdzie ich chcemy.
+
+<P>
+Rozważmy przykład, podobny do tego z&nbsp;programu <A HREF="#convto.cpp">
+<!--O--><span class='plik'>convto.cpp<!--C--></span></A>:
+<BR><A NAME="convfrom.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">156</SPAN>:</SPAN>
+      <A NAME="tex2html164"
+  HREF="source-files/convfrom.cpp">
+<!--O--><span class='downl'>convfrom.cpp<!--C--></span></A>
+<A NAME="25414"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Konwersja od klasy definiowanej</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cmath&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> std<font color="#990000">::</font>cout<font color="#990000">;</font> <b><font color="#0000FF">using</font></b> std<font color="#990000">::</font>endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">Point</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">double</font> x<font color="#990000">,</font> y<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>    <b><font color="#000000">Point</font></b><font color="#990000">(</font><font color="#009900">double</font> x <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">,</font> <font color="#009900">double</font> y <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">)</font> <font color="#990000">:</font> <b><font color="#000000">x</font></b><font color="#990000">(</font>x<font color="#990000">),</font> <b><font color="#000000">y</font></b><font color="#990000">(</font>y<font color="#990000">)</font> <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">     8.  </font>    <b><font color="#0000FF">operator</font></b> <font color="#009900">double</font><font color="#990000">()</font> <b><font color="#0000FF">const</font></b> <font color="#FF0000">{</font>         <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">     9.  </font>        <b><font color="#0000FF">return</font></b> std<font color="#990000">::</font><b><font color="#000000">sqrt</font></b><font color="#990000">(</font>x<font color="#990000">*</font>x<font color="#990000">+</font>y<font color="#990000">*</font>y<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    10.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    11.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    12.  </font>
+ <font SIZE="-2" color="black">    13.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">Segment</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    14.  </font>    <font color="#008080">Point</font> A<font color="#990000">,</font> B<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>    <b><font color="#000000">Segment</font></b><font color="#990000">(</font><font color="#008080">Point</font> A <font color="#990000">=</font> <b><font color="#000000">Point</font></b><font color="#990000">(),</font> <font color="#008080">Point</font> B <font color="#990000">=</font> <b><font color="#000000">Point</font></b><font color="#990000">())</font>
+ <font SIZE="-2" color="black">    16.  </font>        <font color="#990000">:</font> <b><font color="#000000">A</font></b><font color="#990000">(</font>A<font color="#990000">),</font> <b><font color="#000000">B</font></b><font color="#990000">(</font>B<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    17.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    18.  </font>    <b><font color="#0000FF">operator</font></b> <b><font color="#000000">Point</font></b><font color="#990000">()</font> <b><font color="#0000FF">const</font></b> <font color="#FF0000">{</font>          <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    19.  </font>        <b><font color="#0000FF">return</font></b> <b><font color="#000000">Point</font></b><font color="#990000">(</font> <font color="#990000">(</font>A<font color="#990000">.</font>x<font color="#990000">+</font>B<font color="#990000">.</font>x<font color="#990000">)/</font><font color="#993399">2</font><font color="#990000">,</font> <font color="#990000">(</font>A<font color="#990000">.</font>y<font color="#990000">+</font>B<font color="#990000">.</font>y<font color="#990000">)/</font><font color="#993399">2</font> <font color="#990000">);</font>
+ <font SIZE="-2" color="black">    20.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    21.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    22.  </font>
+ <font SIZE="-2" color="black">    23.  </font><font color="#009900">void</font> <b><font color="#000000">showPoint</font></b><font color="#990000">(</font><font color="#008080">Point</font> A<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    24.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Point["</font> <font color="#990000">&lt;&lt;</font> A<font color="#990000">.</font>x <font color="#990000">&lt;&lt;</font> <font color="#FF0000">","</font> <font color="#990000">&lt;&lt;</font> A<font color="#990000">.</font>y <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"]"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    25.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    26.  </font>
+ <font SIZE="-2" color="black">    27.  </font><font color="#009900">void</font> <b><font color="#000000">showSegment</font></b><font color="#990000">(</font><font color="#008080">Segment</font> AB<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    28.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Segment: "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    29.  </font>    <b><font color="#000000">showPoint</font></b><font color="#990000">(</font>AB<font color="#990000">.</font>A<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    30.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"--"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    31.  </font>    <b><font color="#000000">showPoint</font></b><font color="#990000">(</font>AB<font color="#990000">.</font>B<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    32.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    33.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    34.  </font>
+ <font SIZE="-2" color="black">    35.  </font><font color="#009900">void</font> <b><font color="#000000">showDouble</font></b><font color="#990000">(</font><font color="#009900">double</font> d<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    36.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Double "</font> <font color="#990000">&lt;&lt;</font> d<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    37.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    38.  </font>
+ <font SIZE="-2" color="black">    39.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    40.  </font>    <font color="#008080">Point</font> <b><font color="#000000">A</font></b><font color="#990000">(</font><font color="#993399">3</font><font color="#990000">,</font><font color="#993399">4</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    41.  </font>    <b><font color="#000000">showPoint</font></b><font color="#990000">(</font>A<font color="#990000">);</font>                     <span class="ding">&#x278C;</span>
+ <font SIZE="-2" color="black">    42.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    43.  </font>    <b><font color="#000000">showDouble</font></b><font color="#990000">(</font>A<font color="#990000">);</font>                    <span class="ding">&#x278D;</span>
+ <font SIZE="-2" color="black">    44.  </font>
+ <font SIZE="-2" color="black">    45.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    46.  </font>
+ <font SIZE="-2" color="black">    47.  </font>    <font color="#008080">Segment</font> <b><font color="#000000">BC</font></b><font color="#990000">(</font><b><font color="#000000">Point</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">,</font><font color="#993399">1</font><font color="#990000">),</font><b><font color="#000000">Point</font></b><font color="#990000">(</font><font color="#993399">3</font><font color="#990000">,</font><font color="#993399">3</font><font color="#990000">));</font>
+ <font SIZE="-2" color="black">    48.  </font>    <b><font color="#000000">showSegment</font></b><font color="#990000">(</font>BC<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    49.  </font>    <b><font color="#000000">showPoint</font></b><font color="#990000">(</font>BC<font color="#990000">);</font>                    <span class="ding">&#x278E;</span>
+ <font SIZE="-2" color="black">    50.  </font>
+ <font SIZE="-2" color="black">    51.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    52.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Do klasy
+<!--O--><span class='klasa'>Point<!--C--></span>
+ dodaliśmy tu metodę konwertującą
+
+<!--O--><span class='funkcja'>operator double()<!--C--></span>
+ (<span class="ding">&#x278A;</span>). Zwraca ona odległość
+punktu od początku układu współrzędnych w&nbsp;postaci wartości typu
+
+<!--O--><span class='typ'>double<!--C--></span>
+ (w&nbsp;tym przypadku jest to wartość typu wbudowanego).
+Podobnie, do klasy
+<!--O--><span class='klasa'>Segment<!--C--></span>
+ dodana została metoda
+konwertująca do klasy
+<!--O--><span class='klasa'>Point<!--C--></span>
+ (<span class="ding">&#x278B;</span>). Zwraca ona obiekt
+klasy
+<!--O--><span class='klasa'>Point<!--C--></span>
+ reprezentujący geometryczny środek odcinka.
+Dodana też została funkcja
+<!--O--><span class='funkcja'>showDouble<!--C--></span>, która wypisuje
+przekazaną przez argument liczbę typu
+<!--O--><span class='typ'>double<!--C--></span>.
+
+<P>
+W linii <span class="ding">&#x278C;</span> wywołujemy funkcję
+<!--O--><span class='funkcja'>showPoint<!--C--></span>
+ z&nbsp;argumentem
+typu
+<!--O--><span class='klasa'>Point<!--C--></span>, a&nbsp;więc typu zadeklarowanego parametru funkcji.
+Zaraz potem wywołujemy z&nbsp;tym samym argumentem funkcję
+
+<!--O--><span class='funkcja'>showDouble<!--C--></span>
+ (<span class="ding">&#x278D;</span>). Funkcja ta spodziewa się argumentu typu
+
+<!--O--><span class='typ'>double<!--C--></span>. Zatem potrzebna jest konwersja
+<!--O--><span class='klasa'>Point<!--C--></span>
+
+<!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='typ'>double<!--C--></span>. Ponieważ taką konwersję zdefiniowaliśmy,
+wywołanie jest prawidłowe: przed przekazaniem do funkcji obiekt
+
+<!--O--><span class='zmienna'>A<!--C--></span>
+ klasy
+<!--O--><span class='klasa'>Point<!--C--></span>
+ zostanie skonwertowany do
+typu
+<!--O--><span class='typ'>double<!--C--></span>, o&nbsp;czym świadczy druga linia wydruku:
+<PRE>
+    Point[3,4]
+    Double 5
+    Segment: Point[1,1]--Point[3,3]
+    Point[2,2]
+</PRE>
+Podobnie będzie w&nbsp;linii&nbsp;<span class="ding">&#x278E;</span>. Do funkcji
+<!--O--><span class='funkcja'>showPoint<!--C--></span>,
+która ma parametr typu
+<!--O--><span class='typ'>Point<!--C--></span>, przesyłamy obiekt
+klasy
+<!--O--><span class='klasa'>Segment<!--C--></span>. Zostanie zatem użyta metoda konwertująca
+klasy
+<!--O--><span class='klasa'>Segment<!--C--></span>
+ (<span class="ding">&#x278B;</span>) definiująca konwersję
+<!--O--><span class='klasa'>Segment<!--C--></span>
+
+<!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='typ'>Point<!--C--></span>.
+
+<P>
+Zauważmy, że w&nbsp;drugim przypadku ten sam cel moglibyśmy osiągnąć
+definiując konstruktor przyjmujący jeden argument typu
+<!--O--><span class='typ'>Segment<!--C--></span>
+
+w&nbsp;klasie
+<!--O--><span class='klasa'>Point<!--C--></span>. Nie było to jednak możliwe w&nbsp;przypadku
+poprzednim, gdyż nie da się zdefiniować konstruktora
+konwertującego w&nbsp;klasie
+<!--O--><span class='typ'>double<!--C--></span>
+ (przede wszystkim dlatego, że
+takiej klasy nie ma!).
+
+<P>
+Zauważmy na koniec, że metody konwertujące są dziedziczone
+i&nbsp;mogą być wirtualne &mdash;&nbsp;sens tego omówimy w&nbsp;jednym z&nbsp;następnych
+rozdziałów.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2497"
+  HREF="node119.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2503"
+  HREF="node119.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2509"
+  HREF="node121.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2505"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2507"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2498"
+  HREF="node119.html">19. Jeszcze o&nbsp;konwersjach</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2504"
+  HREF="node119.html">19. Jeszcze o&nbsp;konwersjach</A>
+<B>Dalej:</B> <A NAME="tex2html2510"
+  HREF="node121.html">19.2 Konwersje jawne</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

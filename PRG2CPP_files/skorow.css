@@ -1,0 +1,37 @@
+/* arkusz stylu do spisu tresci
+        T.R. Werner, Aug 2002 */
+
+h1,h2,h2,h3,h4,h5,h6
+{
+ color:               #663300;
+ font-family:         sans-serif;
+ font-weight:         bold;
+}
+
+body
+{
+ background-color:    #ffffda;
+ color:               #663300;
+ font-family:         sans-serif;
+}
+
+a:link
+{
+ text-decoration:     underline;
+ color:               #ff9900;
+}
+a:visited
+{
+ text-decoration:     underline;
+ color:               #663300;
+}
+a:hover
+{
+ text-decoration:     underline;
+ color:               #990000;
+}
+a:active
+{
+ text-decoration:     underline;
+ color:               #ffffda;
+}

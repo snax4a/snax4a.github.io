@@ -1,0 +1,418 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>2.2 Proste operacje We/Wy</TITLE>
+<META NAME="description" CONTENT="2.2 Proste operacje We/Wy">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node8.html">
+<LINK REL="previous" HREF="node6.html">
+<LINK REL="up" HREF="node5.html">
+<LINK REL="next" HREF="node8.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html744"
+  HREF="node6.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html750"
+  HREF="node5.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html756"
+  HREF="node8.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html752"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html754"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html745"
+  HREF="node6.html">2.1 Najprostsze programy</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html751"
+  HREF="node5.html">2. Zaczynamy</A>
+<B>Dalej:</B> <A NAME="tex2html757"
+  HREF="node8.html">2.3 Funkcje</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Podrozdzia&#322;y</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html758"
+  HREF="node7.html#SECTION00321000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Wyprowadzanie danych</A>
+<LI><A NAME="tex2html759"
+  HREF="node7.html#SECTION00322000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Wprowadzanie danych</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00320000000000000000"></A><A NAME="zaczyn:wewy"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Proste operacje We/Wy
+</H1>
+
+<P>
+Po dołączeniu do naszego programu pliku nagłówkowego
+
+<!--O--><span class='plik'>iostream<!--C--></span>
+ zdefiniowane są (lub tylko zadeklarowane, ale
+to na razie nie jest dla nas istotne), między innymi, identyfikatory
+
+<!--O--><span class='zmienna'>cout<!--C--></span><A NAME="1142"></A> i&nbsp;
+<!--O--><span class='zmienna'>cin<!--C--></span>.<A NAME="1144"></A>
+Są to nazwy obiektów reprezentujących standardowe strumienie:
+<FONT COLOR="#7b003e"><B>wejściowy</B></FONT><A NAME="1146"></A>
+(ang.&nbsp;<FONT COLOR="#7b003e"><I>standard input stream, stdin</I></FONT>)
+i <FONT COLOR="#7b003e"><B>wyjściowy</B></FONT><A NAME="1149"></A>
+(ang.&nbsp;<FONT COLOR="#7b003e"><I>standard output stream, stdout</I></FONT>).
+
+<P>
+
+<H2><A NAME="SECTION00321000000000000000"></A><A NAME="zaczyn:wyj"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Wyprowadzanie danych
+</H2>
+
+<P>
+Obiekt
+<!--O--><span class='zmienna'>cout<!--C--></span>, jak powiedzieliśmy, reprezentuje
+standardowy strumień wyjściowy. Jest to predefiniowany obiekt
+klasy
+<!--O--><span class='klasa'>ostream<!--C--></span>,<A NAME="1155"></A>
+której definicja jest widoczna dzięki
+dołączeniu pliku nagłówkowego
+<!--O--><span class='plik'>iostream<!--C--></span>.
+Strumień wyjściowy to strumień danych wyprowadzanych z&nbsp;programu
+do &bdquo;świata zewnętrznego&rdquo;, który to świat jest w&nbsp;tym wypadku
+tożsamy z&nbsp;ekranem komputera. Skrót
+
+<!--O--><span class='zmienna'>cout<!--C--></span>
+ należy rozumieć jako <FONT COLOR="#7b003e"><I>console output</I></FONT> i&nbsp;wymawiać
+<SPAN  CLASS="textit">si-aut</SPAN> (porównując z&nbsp;Javą, najbliższym odpowiednikiem
+<!--O--><span class='zmienna'>cout<!--C--></span>
+
+jest obiekt
+<!--O--><span class='zmienna'>System.out<!--C--></span>). Ponieważ
+<!--O--><span class='zmienna'>cout<!--C--></span>
+ jest obiektem,
+można na jego rzecz wywoływać metody (funkcje) zdefiniowane w&nbsp;jego klasie.
+Metody te poznamy
+        w&nbsp;rozdziale o <A HREF="node103.html#chap:io">operacjach WE/WY</A> .
+Na razie nie musimy ich znać, aby zacząć obiektu
+<!--O--><span class='zmienna'>cout<!--C--></span>
+
+używać: dla wygody programisty został bowiem dostarczony
+mechanizm <FONT COLOR="#7b003e"><B>wstawiania do strumienia</B></FONT> za pomocą operatora
+'<TT>&lt;&lt;</TT>' <A NAME="1172"></A>
+(dwa znaki mniejszości, bez odstępu
+pomiędzy nimi). Konstrukcja jest taka jak w&nbsp;linii&nbsp;<span class="ding">&#x278C;</span> programu
+z&nbsp;pliku <A HREF="node6.html#helloWorld.cpp">
+<!--O--><span class='plik'>helloWorld.cpp<!--C--></span></A>. Piszemy więc
+<pre><tt>       cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Hello, World"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+</tt></pre>
+aby wstawić napis, podany tu dosłownie jako literał, do
+strumienia &bdquo;płynącego&rdquo; na ekran, reprezentowany tu przez
+
+<!--O--><span class='zmienna'>cout<!--C--></span>.
+Następnie, po kolejnej parze znaków '<TT>&lt;&lt;</TT>',
+do tego samego strumienia wstawiamy coś, czego
+identyfikatorem jest
+<!--O--><span class='zmienna'>endl<!--C--></span>.<A NAME="1180"></A>
+Ta nazwa nie jest ujęta w&nbsp;cudzysłowy, bo nie chcemy zobaczyć
+na ekranie napisu &#34;
+<!--O--><span class='zmienna'>endl<!--C--></span>&#34;.
+Jest to tzw.&nbsp;manipulator<A NAME="1182"></A> (zdefiniowany również dzięki
+dołączeniu pliku nagłówkowego
+<!--O--><span class='plik'>iostream<!--C--></span>). Jego wstawienie
+do strumienia wyjściowego powoduje dodanie znaku nowej linii
+(i&nbsp;opróżnienie bufora).
+Gdybyśmy
+<!--O--><span class='zmienna'>endl<!--C--></span>
+ nie dodali, to znak nowej linii nie byłby
+wyprowadzony i&nbsp;następna operacja pisania na ekran kontynuowana byłaby
+w&nbsp;tym samym wierszu. Podobny efekt moglibyśmy osiągnąć dodając
+znak nowej linii do samego napisu:
+'<TT>&#34;Hello, World&#92;n&#34;</TT>'.
+Dwuznak '<TT>&#92;n</TT>'
+pojawiający się wewnątrz napisu oznacza
+właśnie znak nowej linii. Efekt byłby podobny, ale nie identyczny:
+wstawienie manipulatora
+<!--O--><span class='zmienna'>endl<!--C--></span>
+ powoduje dodatkowo
+natychmiastowe opróżnienie bufora wyjściowego i&nbsp;wyprowadzenie napisu
+na ekran. Bez niego natomiast napis nie musi być wyprowadzony
+natychmiast: system może zaczekać, aż w&nbsp;buforze wyjściowym
+uzbiera się więcej danych i&nbsp;wyprowadzić je dopiero wtedy łącznie.
+
+<P>
+W tym przykładzie wstawiliśmy do strumienia dwa elementy (obiekty):
+napis i&nbsp;manipulator. Moglibyśmy wstawić ich więcej.
+Zauważmy jednak, że wstawianie danych do strumienia wyjściowego
+odbywa się pojedynczo: każda dana musi być poprzedzona
+znakami '<TT>&lt;&lt;</TT>'. A zatem np.&nbsp;<FONT COLOR="#7b003e"><I>nie</I></FONT> można
+oddzielać poszczególnych elementów przecinkami
+<pre><tt>       cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Hello, World"</font> <font color="#990000">,</font> endl<font color="#990000">;</font> <i><font color="#9A1900">// NIE!!!</font></i>
+</tt></pre>
+Prawidłowa jest natomiast konstrukcja
+<pre><tt>       cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Pierwsza linia,"</font>    <font color="#990000">&lt;&lt;</font> endl
+            <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"druga linia,"</font>       <font color="#990000">&lt;&lt;</font> endl
+            <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"i w koncu trzecia."</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+</tt></pre>
+która jest, zauważmy, jedną instrukcją, wyprowadzającą
+na ekran trzy napisy i&nbsp;trzy znaki końca linii.
+
+<P>
+Znający Javę pamiętają, że jest tam dozwolona konstrukcja
+<pre><tt>       <font color="#009900">int</font> k <font color="#990000">=</font> <font color="#993399">7</font><font color="#990000">;</font>
+       <font color="#009900">double</font> x <font color="#990000">=</font> <font color="#993399">8.6</font><font color="#990000">;</font>
+       System<font color="#990000">.</font>out<font color="#990000">.</font><b><font color="#000000">println</font></b><font color="#990000">(</font>k<font color="#990000">);</font>
+       System<font color="#990000">.</font>out<font color="#990000">.</font><b><font color="#000000">println</font></b><font color="#990000">(</font>x<font color="#990000">);</font>
+</tt></pre>
+Te instrukcje spowodują wypisanie na ekran liczb 7 i&nbsp;8.6,
+mimo że typ argumentu jest w&nbsp;obu przypadkach inny, a&nbsp;w żadnym nie
+jest odniesieniem do obiektu klasy
+<!--O--><span class='klasa'>String<!--C--></span>. Dzieje się tak
+dzięki przeciążeniu metody
+<!--O--><span class='funkcja'>println<!--C--></span>.
+Podobny mechanizm działa w&nbsp;C++ dla operatora '<TT>&lt;&lt;</TT>'.
+Wstawiać do strumienia możemy nie tylko napisy, ale zmienne
+typów wbudowanych lub innych, dla których działanie
+operatora '<TT>&lt;&lt;</TT>' zostało zdefiniowane, jak np.&nbsp;obiekty klasy
+
+<!--O--><span class='klasa'>string<!--C--></span>
+ w&nbsp;przykładzie poniżej:
+<BR><A NAME="jan.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">3</SPAN>:</SPAN>
+      <A NAME="tex2html3"
+  HREF="source-files/jan.cpp">
+<!--O--><span class='downl'>jan.cpp<!--C--></span></A>
+<A NAME="1550"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Operator '<SPAN CLASS="MATH"><IMG
+ WIDTH="30" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$ \ll$"></SPAN>'</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;string&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">double</font> waga <font color="#990000">=</font> <font color="#993399">76.5</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>    <font color="#009900">int</font>  wzrost <font color="#990000">=</font> <font color="#993399">182</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#008080">string</font> imie <font color="#990000">=</font> <font color="#FF0000">"Jan"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    cout <font color="#990000">&lt;&lt;</font> imie   <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" wazy "</font> <font color="#990000">&lt;&lt;</font> waga <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" kg i ma "</font>
+ <font SIZE="-2" color="black">    10.  </font>         <font color="#990000">&lt;&lt;</font> wzrost <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" cm wzrostu."</font>  <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Programik powyższy wypisuje, jak łatwo się domyślić, napis
+<PRE>
+    Jan wazy 76.5 kg i ma 182 cm wzrostu.
+</PRE>
+Klasa
+<!--O--><span class='klasa'>string<!--C--></span>, użyta w&nbsp;tym przykładzie, zostanie omówiona
+w rozdziale o <A HREF="node113.html#nap:cppnap">napisach w&nbsp;C++</A> .
+Inne nowe elementy tego przykładu omówimy bardziej szczegółowo
+za chwilę.
+
+<P>
+
+<H2><A NAME="SECTION00322000000000000000"></A><A NAME="zaczyn:wej"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Wprowadzanie danych
+</H2>
+
+<P>
+Wprowadzanie danych odbywa się za pomocą podobnego mechanizmu.
+Tym razem obiektem reprezentującym strumień informacji wchodzących
+do programu ze świata zewnętrznego
+jest obiekt
+<!--O--><span class='zmienna'>cin<!--C--></span><A NAME="1216"></A>
+z&nbsp;klasy
+<!--O--><span class='klasa'>istream<!--C--></span>,<A NAME="1218"></A> dostępnej dzięki
+dołączeniu pliku
+<!--O--><span class='plik'>iostream<!--C--></span>. Źródłem tej informacji jest
+domyślnie klawiatura komputera. Nazwa
+<!--O--><span class='zmienna'>cin<!--C--></span>
+ pochodzi od
+<FONT COLOR="#7b003e"><I>console input</I></FONT> (i&nbsp;wymawiać ją należy <SPAN  CLASS="textit">si-in</SPAN>).
+Jak
+<!--O--><span class='zmienna'>cout<!--C--></span>, również
+<!--O--><span class='zmienna'>cin<!--C--></span>
+ jest obiektem,
+a&nbsp;zatem można na jego rzecz wywoływać metody zdefiniowane w&nbsp;jego
+klasie. Na razie jednak będziemy korzystać głównie z&nbsp;mechanizmu
+<FONT COLOR="#7b003e"><B>wyjmowania ze strumienia</B></FONT>
+<A NAME="1226"></A>
+za pomocą operatora '<TT>&gt;&gt;</TT>' (dwa znaki większości, bez żadnego
+odstępu pomiędzy nimi).
+<BR><A NAME="czyt.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">4</SPAN>:</SPAN>
+      <A NAME="tex2html4"
+  HREF="source-files/czyt.cpp">
+<!--O--><span class='downl'>czyt.cpp<!--C--></span></A>
+<A NAME="1571"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Operator '<SPAN CLASS="MATH"><IMG
+ WIDTH="30" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img4.png"
+ ALT="$ \gg$"></SPAN>'</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;string&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#008080">string</font> imie<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>    <font color="#009900">int</font> wzrost<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#009900">double</font> waga<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Podaj imie, wzrost i wage: "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>    cin  <font color="#990000">&gt;&gt;</font> imie <font color="#990000">&gt;&gt;</font> wzrost <font color="#990000">&gt;&gt;</font> waga<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font>    cout <font color="#990000">&lt;&lt;</font> imie <font color="#990000">&lt;&lt;</font> <font color="#FF0000">", masz "</font> <font color="#990000">&lt;&lt;</font> wzrost  <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" cm wzrostu "</font>
+ <font SIZE="-2" color="black">    12.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"i wazysz "</font> <font color="#990000">&lt;&lt;</font> waga <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" kg"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Wykonanie programu miało następujący przebieg:
+<PRE>
+    cpp&gt; ./czyt
+    Podaj imie, wzrost i wage: Tomasz 182 76.5
+    Tomasz, masz 182 cm wzrostu i wazysz 76.5 kg
+    cpp&gt;
+</PRE>
+
+<P>
+Zauważmy tu następujące fakty:
+
+<UL>
+<LI>Kierunek &bdquo;strzałek&rdquo; wskazuje na kierunek przepływu
+          informacji, tak więc dla
+<!--O--><span class='zmienna'>cout<!--C--></span>
+ informacja
+          płynie w&nbsp;lewo, a&nbsp;więc <FONT COLOR="#7b003e"><I>do</I></FONT>
+<!--O--><span class='zmienna'>cout<!--C--></span>, czyli
+          w&nbsp;kierunku ekranu; dla
+<!--O--><span class='zmienna'>cin<!--C--></span>
+ płynie natomiast
+          <FONT COLOR="#7b003e"><I>od</I></FONT>
+<!--O--><span class='zmienna'>cin<!--C--></span>, czyli z&nbsp;klawiatury.
+</LI>
+<LI>Każdy obiekt wyjmowany jest ze strumienia osobno;
+          <FONT COLOR="#7b003e"><I>nie</I></FONT> można ich np.&nbsp;po prostu oddzielać przecinkami.
+</LI>
+<LI>Wartości danych wpisywane z&nbsp;klawiatury muszą zgadzać się
+          co do typu z&nbsp;tym, czego oczekuje program: w&nbsp;powyższym
+          programie oczekiwane są dane typu
+<!--O--><span class='klasa'>string<!--C--></span>
+ (napis),
+
+<!--O--><span class='typ'>int<!--C--></span>
+ (liczba całkowita) i&nbsp;
+<!--O--><span class='typ'>double<!--C--></span>
+ (liczba
+          rzeczywista, być może z&nbsp;nieznikającą częścią
+          ułamkową) i&nbsp;w takiej kolejności należy je
+          wpisać. Jeśli np.&nbsp;spróbujemy drugą daną
+          (<!--O--><span class='zmienna'>wzrost<!--C--></span>) wpisać w&nbsp;postaci liczby z&nbsp;kropką
+          dziesiętną, to wczytywanie zakończy się błędem
+          (którego możemy nie zauważyć, jeśli sami tego
+          jakoś nie sprawdzimy!).
+</LI>
+<LI>Poszczególne elementy danych wejściowych wpisujemy
+          oddzielając je dowolnie długą niepustą sekwencją białych
+          znaków (znaki odstępu - SP, tabulacji - HT, nowej linii
+          - LF, powrotu karetki - CR). Białe znaki
+          przed pierwszą daną są ignorowane, każda następna niepusta
+          sekwencja białych znaków jest traktowana jako separator
+          oddzielający dane. W szczególności wynika stąd, że tą
+          metodą nie da się wczytać napisów, które zawierają
+          białe znaki, np.&nbsp;odstęp. Gdybyśmy, na przykład, utworzyli
+          zmienną typu
+<!--O--><span class='klasa'>string<!--C--></span>
+ o&nbsp;nazwie
+<!--O--><span class='zmienna'>imieNazwisko<!--C--></span>
+
+          i&nbsp;usiłowali wczytać jej wartość w&nbsp;ten sposób:
+<BR>          <code>    cin &gt;&gt; imieNazwisko;</code>
+<BR>
+to po wpisaniu na klawiaturze
+          np.&nbsp;'<TT>Jan Kowalski</TT>' wartością zmiennej byłby
+          napis '<TT>Jan</TT>'; napis '<TT>Kowalski</TT>' pozostałby
+          w&nbsp;buforze klawiatury nie &bdquo;wyczytany&rdquo; i&nbsp;zostałby wczytany
+          przez następną instrukcję wejścia (powodując
+          najprawdopodobniej błąd).
+</LI>
+</UL>
+Operacje czytania i&nbsp;pisania, a&nbsp;więc operacje wejścia i&nbsp;wyjścia,
+należą do najbardziej zawiłych prawie w&nbsp;każdym języku programowania.
+W&nbsp;szczególności dotyczy to czytania z&nbsp;klawiatury, ze
+względu na nieprzewidywalność zachowań użytkowników... Tak jest i&nbsp;w C++. Szczegóły odłożymy więc do
+   rozdziału o <A HREF="node103.html#chap:io">operacjach we/wy</A> .
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html744"
+  HREF="node6.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html750"
+  HREF="node5.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html756"
+  HREF="node8.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html752"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html754"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html745"
+  HREF="node6.html">2.1 Najprostsze programy</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html751"
+  HREF="node5.html">2. Zaczynamy</A>
+<B>Dalej:</B> <A NAME="tex2html757"
+  HREF="node8.html">2.3 Funkcje</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>8.2 Etykiety</TITLE>
+<META NAME="description" CONTENT="8.2 Etykiety">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node42.html">
+<LINK REL="previous" HREF="node40.html">
+<LINK REL="up" HREF="node39.html">
+<LINK REL="next" HREF="node42.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1269"
+  HREF="node40.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1275"
+  HREF="node39.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1281"
+  HREF="node42.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1277"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1279"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1270"
+  HREF="node40.html">8.1 Rodzaje instrukcji</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1276"
+  HREF="node39.html">8. Instrukcje</A>
+<B>Dalej:</B> <A NAME="tex2html1282"
+  HREF="node42.html">8.3 Deklaracje</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00920000000000000000"></A><A NAME="instr:label"></A>
+<BR>
+<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">2</SPAN> Etykiety
+</H1>
+
+<P>
+Każda instrukcja czynna (a więc nie deklaracja) może być
+poprzedzona <FONT COLOR="#7b003e"><B>etykietą</B></FONT>.<A NAME="7761"></A>
+Etykieta to dowolny identyfikator i
+następujący po nim dwukropek. Instrukcją opatrzoną etykietą
+może, w&nbsp;szczególności, być instrukcja pusta.
+Etykieta może być wykorzystana do wykonania skoku<A NAME="7762"></A>
+za pomocą instrukcji
+<!--O--><span class='klucz'>goto<!--C--></span><A NAME="7764"></A> (patrz
+dalej), jak w&nbsp;poniższym przykładzie.
+<BR><A NAME="labincpp.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">45</SPAN>:</SPAN>
+      <A NAME="tex2html48"
+  HREF="source-files/labincpp.cpp">
+<!--O--><span class='downl'>labincpp.cpp<!--C--></span></A>
+<A NAME="8267"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Skok do instrukcji z&nbsp;etykietą</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">int</font> tab<font color="#990000">[</font><font color="#993399">2</font><font color="#990000">][</font><font color="#993399">2</font><font color="#990000">][</font><font color="#993399">2</font><font color="#990000">]</font><font color="#FF0000">{{{</font><font color="#993399">1</font><font color="#990000">,</font><font color="#993399">2</font><font color="#FF0000">}</font><font color="#990000">,</font><font color="#FF0000">{</font><font color="#993399">3</font><font color="#990000">,</font><font color="#993399">4</font><font color="#FF0000">}}</font><font color="#990000">,</font><font color="#FF0000">{{</font><font color="#993399">5</font><font color="#990000">,</font><font color="#993399">6</font><font color="#FF0000">}</font><font color="#990000">,</font><font color="#FF0000">{</font><font color="#993399">7</font><font color="#990000">,</font><font color="#993399">8</font><font color="#FF0000">}}}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">bool</font> jest <font color="#990000">=</font> <b><font color="#0000FF">false</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> <font color="#993399">2</font><font color="#990000">;</font> i<font color="#990000">++)</font>
+ <font SIZE="-2" color="black">     8.  </font>        <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> j <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> j <font color="#990000">&lt;</font> <font color="#993399">2</font><font color="#990000">;</font> j<font color="#990000">++)</font>
+ <font SIZE="-2" color="black">     9.  </font>            <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> k <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> k <font color="#990000">&lt;</font> <font color="#993399">2</font><font color="#990000">;</font> k<font color="#990000">++)</font>
+ <font SIZE="-2" color="black">    10.  </font>                <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>tab<font color="#990000">[</font>i<font color="#990000">][</font>j<font color="#990000">][</font>k<font color="#990000">]</font> <font color="#990000">==</font> <font color="#993399">5</font><font color="#990000">)</font> <font color="#FF0000">{</font>    <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">    11.  </font>                    jest <font color="#990000">=</font> <b><font color="#0000FF">true</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    12.  </font>                    <b><font color="#0000FF">goto</font></b> LAB<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>                <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    14.  </font>    LAB<font color="#990000">:</font><b><font color="#0000FF">if</font></b><font color="#990000">(</font>jest<font color="#990000">)</font>                            <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    15.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"5 jest w tablicy"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>    <b><font color="#0000FF">else</font></b>
+ <font SIZE="-2" color="black">    17.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"5 nie wystepuje w w tablicy"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+W programie tym, wewnątrz zagnieżdżonej pętli
+<!--O--><span class='klucz'>for<!--C--></span>
+
+poszukiwany jest element trzywymiarowej tablicy liczbowej,
+który jest równy&nbsp;5. Jeśli zostanie znaleziony (<span class="ding">&#x278A;</span>),
+to zmienną
+<!--O--><span class='zmienna'>jest<!--C--></span>
+ ustawiamy na
+<!--O--><span class='klucz'>true<!--C--></span>
+ i, dzięki
+instrukcji skoku, wychodzimy z&nbsp;zewnętrznej pętli &mdash;&nbsp;przepływ
+sterowania przechodzi do linii <span class="ding">&#x278B;</span> z&nbsp;etykietą
+<!--O--><span class='zmienna'>LAB:<!--C--></span>.
+Omówiona dalej instrukcja
+zaniechania
+<!--O--><span class='klucz'>break<!--C--></span><A NAME="7773"></A>
+spowodowałaby wyjście tylko z&nbsp;pętli wewnętrznej
+(a&nbsp;instrukcji
+<!--O--><span class='klucz'>break<!--C--></span>
+ z&nbsp;etykietą, znanej z
+Javy,<A NAME="7775"></A> w&nbsp;C/C++ <FONT COLOR="#7b003e"><I>nie</I></FONT> ma).
+
+<P>
+Innym rodzajem etykiet są etykiety w&nbsp;instrukcji
+<!--O--><span class='klucz'>switch<!--C--></span>.
+Jest ich tylko dwie:
+<!--O--><span class='klucz'>case<!--C--></span>
+ i&nbsp;
+<!--O--><span class='klucz'>default<!--C--></span>
+
+(podrozdział o&nbsp;instrukcji <A HREF="node47.html#instr:decyz">switch</A> ).
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1269"
+  HREF="node40.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1275"
+  HREF="node39.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1281"
+  HREF="node42.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1277"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1279"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1270"
+  HREF="node40.html">8.1 Rodzaje instrukcji</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1276"
+  HREF="node39.html">8. Instrukcje</A>
+<B>Dalej:</B> <A NAME="tex2html1282"
+  HREF="node42.html">8.3 Deklaracje</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

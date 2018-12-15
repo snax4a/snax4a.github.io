@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>14. Klasy (I)</TITLE>
+<META NAME="description" CONTENT="14. Klasy (I)">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node96.html">
+<LINK REL="previous" HREF="node82.html">
+<LINK REL="up" HREF="PRG2CPP.html">
+<LINK REL="next" HREF="node86.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1930"
+  HREF="node84.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1936"
+  HREF="PRG2CPP.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1942"
+  HREF="node86.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1938"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1940"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1931"
+  HREF="node84.html">13.2 Unie</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1937"
+  HREF="PRG2CPP.html">Programowanie w C++</A>
+<B>Dalej:</B> <A NAME="tex2html1943"
+  HREF="node86.html">14.1 Wstęp</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001500000000000000000"></A>
+        <A NAME="chap:klasy"></A>
+<BR>
+<SPAN CLASS="arabic">14</SPAN>. Klasy (I)
+</H1>
+
+<P>
+W tym rozdziale rozpoczniemy dyskusję klas: podstawowego elementu
+programowania obiektowego.
+
+<P>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Podrozdzia&#322;y</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html1944"
+  HREF="node86.html"><SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">1</SPAN> Wstęp</A>
+<LI><A NAME="tex2html1945"
+  HREF="node87.html"><SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">2</SPAN> Dostępność składowych</A>
+<LI><A NAME="tex2html1946"
+  HREF="node88.html"><SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">3</SPAN> Pola klasy</A>
+<LI><A NAME="tex2html1947"
+  HREF="node89.html"><SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">4</SPAN> Metody</A>
+<LI><A NAME="tex2html1948"
+  HREF="node90.html"><SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">5</SPAN> Statyczne funkcje składowe</A>
+<LI><A NAME="tex2html1949"
+  HREF="node91.html"><SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">6</SPAN> Konstruktory</A>
+<LI><A NAME="tex2html1950"
+  HREF="node92.html"><SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">7</SPAN> Destruktory</A>
+<LI><A NAME="tex2html1951"
+  HREF="node93.html"><SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">8</SPAN> Tworzenie obiektów</A>
+<LI><A NAME="tex2html1952"
+  HREF="node94.html"><SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">9</SPAN> Tablice obiektów</A>
+<LI><A NAME="tex2html1953"
+  HREF="node95.html"><SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">10</SPAN> Pola bitowe</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1930"
+  HREF="node84.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1936"
+  HREF="PRG2CPP.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1942"
+  HREF="node86.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1938"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1940"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1931"
+  HREF="node84.html">13.2 Unie</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1937"
+  HREF="PRG2CPP.html">Programowanie w C++</A>
+<B>Dalej:</B> <A NAME="tex2html1943"
+  HREF="node86.html">14.1 Wstęp</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

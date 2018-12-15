@@ -1,0 +1,412 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>12.3 Zwalnianie pamięci &mdash;&nbsp;operator delete</TITLE>
+<META NAME="description" CONTENT="12.3 Zwalnianie pamięci &mdash;&nbsp;operator delete">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node78.html">
+<LINK REL="previous" HREF="node76.html">
+<LINK REL="up" HREF="node74.html">
+<LINK REL="next" HREF="node78.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1820"
+  HREF="node76.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1826"
+  HREF="node74.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1832"
+  HREF="node78.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1828"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1830"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1821"
+  HREF="node76.html">12.2 Przydzielanie pamięci &mdash;&nbsp;operator</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1827"
+  HREF="node74.html">12. Zarządzanie pamięcią</A>
+<B>Dalej:</B> <A NAME="tex2html1833"
+  HREF="node78.html">12.4 Dynamiczne tablice wielowymiarowe</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001330000000000000000"></A>
+            <A NAME="pam:delete"></A>
+<BR>
+<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">3</SPAN> Zwalnianie pamięci &mdash;&nbsp;operator <SPAN  CLASS="textsl">delete</SPAN>
+</H1>
+
+<P>
+Zarezerwowaną<A NAME="14368"></A><A NAME="14369"></A>
+za pomocą
+<!--O--><span class='klucz'>new<!--C--></span>
+ pamięć należy zwolnić, gdy
+nie będzie już potrzebna. Wykonuje się to za pomocą
+operatora
+<!--O--><span class='klucz'>delete<!--C--></span>.<A NAME="14372"></A><A NAME="14373"></A>
+Jeśli zaalokowaliśmy, za pomocą
+<!--O--><span class='klucz'>new<!--C--></span>, pamięć na pojedynczy obiekt,
+to składnia jest następująca:
+<pre><tt>       <b><font color="#0000FF">delete</font></b> pi<font color="#990000">;</font>
+</tt></pre>
+Argumentem operatora (w przykładzie powyżej jest to wartość zmiennej
+wskaźnikowej
+<!--O--><span class='zmienna'>pi<!--C--></span>) musi być wyrażenie, którego wartością jest
+dokładnie ten sam adres, który został nam &bdquo;przysłany&rdquo; przez
+operator
+<!--O--><span class='klucz'>new<!--C--></span>.
+
+<P>
+
+<P>
+
+<div class='wazne'>
+Operatora
+<!--O--><span class='klucz'>delete<!--C--></span>
+ nie wolno zastosować do adresu który
+    nie został uprzednio zwrócony przez operator
+<!--O--><span class='klucz'>new<!--C--></span>.
+
+
+</div>
+
+<P>
+Natychmiast po wykonaniu tej instrukcji pamięć, którą do tej pory
+zajmował obiekt wskazywany przez
+<!--O--><span class='zmienna'>pi<!--C--></span>, jest zwalniana i&nbsp;może
+być użyta przez system do zapisania innych danych. Z tego powodu, choć
+nie tylko z&nbsp;tego,
+
+<P>
+
+<P>
+
+<div class='wazne'>
+operatora
+<!--O--><span class='klucz'>delete<!--C--></span>
+ nie wolno zastosować dwa razy do tego
+    samego adresu.
+
+
+</div>
+
+<P>
+Zwróćmy uwagę, że sama zmienna
+<!--O--><span class='zmienna'>pi<!--C--></span>
+ <FONT COLOR="#7b003e"><I>nie</I></FONT> jest usuwana, ani
+nawet nie jest zmieniana jej wartość &mdash;&nbsp;to pamięć wskazywana przez tę
+zmienną jest zwalniana!
+
+<P>
+Inna jest składnia przy zwalnianiu pamięci przydzielonej
+na tablicę, czyli poprzez
+<!--O--><span class='klucz'>new<!--C--></span>
+ z&nbsp;podaniem wymiaru w&nbsp;nawiasach
+kwadratowych. Aby tak zaalokowaną pamięć zwolnić, należy użyć
+operatora
+<!--O--><span class='klucz'>delete[]<!--C--></span><A NAME="14387"></A><A NAME="14388"></A>
+<pre><tt>       <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> pi<font color="#990000">;</font>
+</tt></pre>
+Wartość wyrażenia, które jest
+argumentem
+<!--O--><span class='klucz'>delete<!--C--></span>
+ (w powyższym przykładzie
+<!--O--><span class='zmienna'>pi<!--C--></span>)
+musi być adresem zwróconym uprzednio przez operator
+<!--O--><span class='klucz'>new<!--C--></span>
+
+alokującego tablicę, a&nbsp;nie pojedynczy obiekt. W&nbsp;nawiasach kwadratowych
+nie podajemy żadnego wymiaru &mdash;&nbsp;musiał być podany podczas alokowania tej
+pamięci za pomocą
+<!--O--><span class='klucz'>new<!--C--></span>
+ i&nbsp;jest zapamiętywany. Dlatego, jak
+wspominaliśmy, alokowanie pamięci na jeden egzemplarz obiektu jest czym
+innym niż alokowanie pamięci na tablicę jednoelementową.
+
+<P>
+
+<P>
+
+<div class='wazne'>
+Jeśli alokujemy pamięć na pojedynczy obiekt, to trzeba ją
+    zwolnić za pomocą
+<!--O--><span class='klucz'>delete<!--C--></span>. Jeśli alokujemy pamięć na
+    tablicę (nawet jednoelementową), to trzeba ją zwolnić
+    za pomocą
+<!--O--><span class='klucz'>delete[]<!--C--></span>.
+
+
+</div>
+
+<P>
+Zwalnianie pamięci przydzielonej przez &bdquo;nietablicowe&rdquo;
+<!--O--><span class='klucz'>new<!--C--></span>
+
+za pomocą &bdquo;tablicowego&rdquo;
+<!--O--><span class='klucz'>delete<!--C--></span>
+ lub odwrotnie jest
+błędem niewychwytywanym przez kompilator, a&nbsp;powodującym
+nieprzewidywalne, ale raczej opłakane, skutki.
+
+<P>
+Operator
+<!--O--><span class='klucz'>delete<!--C--></span>, w&nbsp;obu formach &mdash;&nbsp;zwykłej i&nbsp;tablicowej,
+jest tak zdefiniowany, że jego użycie nie powoduje żadnego skutku,
+jeśli podany adres jest pusty (czyli
+<!--O--><span class='zmienna'>NULL<!--C--></span>,
+<!--O--><span class='klucz'>nullptr<!--C--></span>,
+albo po prostu zero). Dlatego, aby uniknąć przypadkowego
+wielokrotnego zwalniania tego samego obszaru pamięci, co powoduje
+najczęściej katastrofalny błąd wykonania, można, po użyciu
+
+<!--O--><span class='klucz'>delete<!--C--></span>, w&nbsp;odpowiednią zmienna wskaźnikową wpisać
+adres pusty
+<pre><tt> <font SIZE="-2" color="black">     1.  </font>    <font color="#009900">int</font><font color="#990000">*</font> pi <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">[</font><font color="#993399">40</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">     2.  </font>    <i><font color="#9A1900">// ...</font></i>
+ <font SIZE="-2" color="black">     3.  </font>    <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> pi<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>    pi <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     5.  </font>    <i><font color="#9A1900">//</font></i>
+ <font SIZE="-2" color="black">     6.  </font>    <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> pi<font color="#990000">;</font> <i><font color="#9A1900">// teraz nieszkodliwe</font></i>
+</tt></pre>
+W linii&nbsp;3 zwalniamy pamięć przydzieloną w&nbsp;linii&nbsp;1 i&nbsp;natychmiast
+zerujemy zmienną
+<!--O--><span class='zmienna'>pi<!--C--></span>. Teraz, jeśli w&nbsp;dalszej części
+programu spróbujemy jeszcze raz zwolnić tę samą pamięć, nic
+złego się nie stanie.
+
+<P>
+Jako przykład rozważmy następujący problem. Chcemy napisać
+funkcję
+<!--O--><span class='funkcja'>minmaxmed<!--C--></span>
+ znajdującą element najmniejszy,
+największy i&nbsp;medianę z&nbsp;danych zawartych w&nbsp;tablicy (mediana
+to taka wartość, że połowa elementów jest od niej nie większa,
+i połowa jest od niej nie mniejsza). Choć istnieją szybsze metody
+znajdowania mediany, najprościej zrozumieć następującą.
+Najpierw sortujemy tablicę, czyli przestawiamy jej elementy tak,
+aby uzyskać kolejność niemalejącą. Wtedy pierwszy element jest
+na pewno minimalnym, ostatni maksymalnym, a&nbsp;mediana środkowym lub
+średnią z&nbsp;dwóch środkowych, jeśli liczba elementów jest parzysta.
+
+<P>
+Problem w&nbsp;tym, że aby ten algorytm zrealizować, musimy poprzestawiać
+elementy tablicy, co być może nie jest dopuszczalne, bo będzie ona
+jeszcze potrzebna w&nbsp;takiej formie, w&nbsp;jakiej jest. Możemy zatem stworzyć
+tablicę roboczą, przekopiować tam naszą tablicę i&nbsp;szukać wyniku używając
+tylko tej tablicy roboczej. Realizuje to funkcja
+<!--O--><span class='funkcja'>minmaxmed<!--C--></span>
+
+poniższego programu:
+<BR><A NAME="mediana.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">88</SPAN>:</SPAN>
+      <A NAME="tex2html95"
+  HREF="source-files/mediana.cpp">
+<!--O--><span class='downl'>mediana.cpp<!--C--></span></A>
+<A NAME="14831"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Alokowanie tablic</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">void</font>   <b><font color="#000000">pisztab</font></b><font color="#990000">(</font>ostream<font color="#990000">&amp;,</font><b><font color="#0000FF">const</font></b> <font color="#009900">int</font><font color="#990000">[],</font>size_t<font color="#990000">);</font>
+ <font SIZE="-2" color="black">     5.  </font><font color="#009900">void</font>   <b><font color="#000000">inssort</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">[],</font>size_t<font color="#990000">);</font>
+ <font SIZE="-2" color="black">     6.  </font><font color="#009900">double</font> <b><font color="#000000">minmaxmed</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">int</font><font color="#990000">[],</font>size_t<font color="#990000">,</font><font color="#009900">int</font><font color="#990000">&amp;,</font><font color="#009900">int</font><font color="#990000">&amp;);</font>
+ <font SIZE="-2" color="black">     7.  </font>
+ <font SIZE="-2" color="black">     8.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#009900">int</font> tab<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">{</font><font color="#993399">7</font><font color="#990000">,</font><font color="#993399">2</font><font color="#990000">,</font><font color="#993399">6</font><font color="#990000">,</font><font color="#993399">4</font><font color="#990000">,</font><font color="#993399">7</font><font color="#990000">,</font><font color="#993399">5</font><font color="#FF0000">}</font><font color="#990000">,</font> min<font color="#990000">,</font> max<font color="#990000">;</font>              <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">    10.  </font>    <font color="#008080">size_t</font> size <font color="#990000">=</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>tab<font color="#990000">)/</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>tab<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">]);</font>
+ <font SIZE="-2" color="black">    11.  </font>
+ <font SIZE="-2" color="black">    12.  </font>    <font color="#009900">double</font> mediana <font color="#990000">=</font> <b><font color="#000000">minmaxmed</font></b><font color="#990000">(</font>tab<font color="#990000">,</font>size<font color="#990000">,</font>min<font color="#990000">,</font>max<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    13.  </font>
+ <font SIZE="-2" color="black">    14.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"min = "</font> <font color="#990000">&lt;&lt;</font> min <font color="#990000">&lt;&lt;</font> <font color="#FF0000">", max = "</font> <font color="#990000">&lt;&lt;</font> max
+ <font SIZE="-2" color="black">    15.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">", mediana = "</font>  <font color="#990000">&lt;&lt;</font>  mediana   <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>
+ <font SIZE="-2" color="black">    17.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Tablica  oryginalna: "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font>    <b><font color="#000000">pisztab</font></b><font color="#990000">(</font>cout<font color="#990000">,</font> tab<font color="#990000">,</font> size<font color="#990000">);</font>                         <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    19.  </font>
+ <font SIZE="-2" color="black">    20.  </font>    <b><font color="#000000">inssort</font></b><font color="#990000">(</font>tab<font color="#990000">,</font> size<font color="#990000">);</font>                               <span class="ding">&#x278C;</span>
+ <font SIZE="-2" color="black">    21.  </font>
+ <font SIZE="-2" color="black">    22.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Tablica posortowana: "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    23.  </font>    <b><font color="#000000">pisztab</font></b><font color="#990000">(</font>cout<font color="#990000">,</font> tab<font color="#990000">,</font> size<font color="#990000">);</font>                         <span class="ding">&#x278D;</span>
+ <font SIZE="-2" color="black">    24.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    25.  </font>
+ <font SIZE="-2" color="black">    26.  </font><font color="#009900">void</font> <b><font color="#000000">pisztab</font></b><font color="#990000">(</font>ostream<font color="#990000">&amp;</font> str<font color="#990000">,</font> <b><font color="#0000FF">const</font></b> <font color="#009900">int</font> t<font color="#990000">[],</font> <font color="#008080">size_t</font> size<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    27.  </font>    str <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"[ "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    28.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#008080">size_t</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> size<font color="#990000">;</font> <font color="#990000">++</font>i<font color="#990000">)</font> str <font color="#990000">&lt;&lt;</font> t<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    29.  </font>    str <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"]"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    30.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    31.  </font>
+ <font SIZE="-2" color="black">    32.  </font><font color="#009900">void</font> <b><font color="#000000">inssort</font></b><font color="#990000">(</font><font color="#009900">int</font> a<font color="#990000">[],</font> <font color="#008080">size_t</font> siz<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    33.  </font>    <font color="#008080">size_t</font> indmin <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    34.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#008080">size_t</font> i <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> siz<font color="#990000">;</font> <font color="#990000">++</font>i<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    35.  </font>        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>a<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">&lt;</font> a<font color="#990000">[</font>indmin<font color="#990000">])</font> indmin <font color="#990000">=</font> i<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    36.  </font>    <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>indmin <font color="#990000">!=</font> <font color="#993399">0</font><font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    37.  </font>        <font color="#009900">int</font> p <font color="#990000">=</font> a<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">    38.  </font>        a<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">]</font> <font color="#990000">=</font> a<font color="#990000">[</font>indmin<font color="#990000">];</font>
+ <font SIZE="-2" color="black">    39.  </font>        a<font color="#990000">[</font>indmin<font color="#990000">]</font> <font color="#990000">=</font> p<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    40.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    41.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#008080">size_t</font> i <font color="#990000">=</font> <font color="#993399">2</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> siz<font color="#990000">;</font> <font color="#990000">++</font>i<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    42.  </font>        <font color="#008080">size_t</font> j <font color="#990000">=</font> i<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    43.  </font>        <font color="#009900">int</font> v <font color="#990000">=</font> a<font color="#990000">[</font>i<font color="#990000">];</font>
+ <font SIZE="-2" color="black">    44.  </font>        <b><font color="#0000FF">while</font></b> <font color="#990000">(</font>v <font color="#990000">&lt;</font> a<font color="#990000">[</font>j<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">])</font> <font color="#FF0000">{</font> a<font color="#990000">[</font>j<font color="#990000">]</font> <font color="#990000">=</font> a<font color="#990000">[</font>j<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">];</font> j<font color="#990000">--;</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    45.  </font>        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>i <font color="#990000">!=</font> j <font color="#990000">)</font> a<font color="#990000">[</font>j<font color="#990000">]</font> <font color="#990000">=</font> v<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    46.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    47.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    48.  </font>
+ <font SIZE="-2" color="black">    49.  </font><font color="#009900">double</font> <b><font color="#000000">minmaxmed</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">int</font> t<font color="#990000">[],</font> <font color="#008080">size_t</font> size<font color="#990000">,</font>
+ <font SIZE="-2" color="black">    50.  </font>                 <font color="#009900">int</font><font color="#990000">&amp;</font> min<font color="#990000">,</font> <font color="#009900">int</font><font color="#990000">&amp;</font> max<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    51.  </font>    <font color="#009900">int</font><font color="#990000">*</font> tab <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">[</font>size<font color="#990000">];</font>                         <span class="ding">&#x278E;</span>
+ <font SIZE="-2" color="black">    52.  </font>
+ <font SIZE="-2" color="black">    53.  </font>    <i><font color="#9A1900">// byłoby lepiej za pomocą memcpy...</font></i>
+ <font SIZE="-2" color="black">    54.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#008080">size_t</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> size<font color="#990000">;</font> <font color="#990000">++</font>i<font color="#990000">)</font> tab<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">=</font> t<font color="#990000">[</font>i<font color="#990000">];</font>  <span class="ding">&#x278F;</span>
+ <font SIZE="-2" color="black">    55.  </font>
+ <font SIZE="-2" color="black">    56.  </font>    <b><font color="#000000">inssort</font></b><font color="#990000">(</font>tab<font color="#990000">,</font> size<font color="#990000">);</font>                               <span class="ding">&#x2790;</span>
+ <font SIZE="-2" color="black">    57.  </font>
+ <font SIZE="-2" color="black">    58.  </font>    min <font color="#990000">=</font> tab<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">    59.  </font>    max <font color="#990000">=</font> tab<font color="#990000">[</font>size<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">    60.  </font>
+ <font SIZE="-2" color="black">    61.  </font>    <font color="#009900">double</font> mediana <font color="#990000">=</font> size<font color="#990000">%</font><font color="#993399">2</font> <font color="#990000">==</font> <font color="#993399">0</font> <font color="#990000">?</font>
+ <font SIZE="-2" color="black">    62.  </font>                <font color="#993399">0.5</font><font color="#990000">*(</font>tab<font color="#990000">[</font>size<font color="#990000">/</font><font color="#993399">2</font><font color="#990000">]</font> <font color="#990000">+</font> tab<font color="#990000">[</font>size<font color="#990000">/</font><font color="#993399">2</font><font color="#990000">-</font><font color="#993399">1</font><font color="#990000">])</font>
+ <font SIZE="-2" color="black">    63.  </font>              <font color="#990000">:</font> tab<font color="#990000">[</font>size<font color="#990000">/</font><font color="#993399">2</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">    64.  </font>    <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> tab<font color="#990000">;</font>                                    <span class="ding">&#x2791;</span>
+ <font SIZE="-2" color="black">    65.  </font>    <b><font color="#0000FF">return</font></b> mediana<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    66.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Funkcja
+<!--O--><span class='funkcja'>minmaxmed<!--C--></span>
+ otrzymuje tablicę (wskaźnik)
+<!--O--><span class='zmienna'>t<!--C--></span>
+
+&mdash;&nbsp;odpowiadający jej parametr deklarujemy z&nbsp;modyfikatorem
+<!--O--><span class='klucz'>const<!--C--></span>,
+aby nie dopuścić do przypadkowego zniszczenia oryginalnej tablicy.
+Następnie (<span class="ding">&#x278E;</span>) alokujemy pamięć na nową tablicę o&nbsp;takim
+rozmiarze jak
+<!--O--><span class='zmienna'>t<!--C--></span>
+ i&nbsp;przekopiowujemy tam wszystkie elementy (<span class="ding">&#x278F;</span>).
+Dopiero tę tablicę sortujemy (<span class="ding">&#x2790;</span>), znajdujemy rezultaty i&nbsp;wpisujemy
+je do
+<!--O--><span class='zmienna'>min<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>max<!--C--></span>, które były przekazane przez
+referencje, a&nbsp;więc zmiana ich wartości będzie widoczna w&nbsp;funkcji
+wywołującej. Na końcu zwracamy przez wartość medianę.
+
+<P>
+Przed wyjściem z&nbsp;funkcji musimy zwolnić zarezerwowaną pamięć
+(<span class="ding">&#x2791;</span>). Zmienna wskaźnikowa
+<!--O--><span class='zmienna'>tab<!--C--></span>
+ jest bowiem
+lokalna; po wyjściu z&nbsp;funkcji przestanie istnieć i&nbsp;nie będzie już
+żadnego sposobu, aby odnieść się do zaalokowanej tablicy,
+w&nbsp;szczególności usunąć ją. Pamięć, jaką zajmuje ta tablica robocza
+byłaby &bdquo;zajęta&rdquo; do końca programu, choć bezużyteczna. Zauważmy, że taki
+wyciek pamięci powstawałby <FONT COLOR="#7b003e"><I>za każdym wywołaniem</I></FONT> funkcji
+
+<!--O--><span class='funkcja'>minmaxmed<!--C--></span>
+ i&nbsp;straty pamięci kumulowałyby się.
+
+<P>
+Użyta w&nbsp;programie funkcja
+<!--O--><span class='funkcja'>inssort<!--C--></span>
+ (<span class="ding">&#x278C;</span> i&nbsp;<span class="ding">&#x2790;</span>) realizuje
+znany, choć w&nbsp;ogólnym przypadku nie najszybszy, algorytm sortowania,
+tzw.&nbsp;<FONT COLOR="#7b003e"><I>sortowanie przez wstawianie</I></FONT> <A NAME="14422"></A> <A NAME="14423"></A> (ang.&nbsp;<FONT COLOR="#7b003e"><I>insertion sort</I></FONT>),
+a&nbsp;konkretnie jego wersję z&nbsp;&bdquo;wartownikiem&rdquo;. Algorytm ten jest
+niesłychanie efektywny dla tablic prawie posortowanych,
+a&nbsp;więc takich, do których uporządkowania wystarcza niewiele przestawień
+&mdash;&nbsp;sytuacje takie zdarzają się zaskakująco często w&nbsp;praktyce.
+
+<P>
+W programie głównym tworzymy tablicę (<span class="ding">&#x278A;</span>) i&nbsp;wysyłamy ją
+do funkcji
+<!--O--><span class='funkcja'>minmaxmed<!--C--></span>. Następnie drukujemy wyniki. W&nbsp;lini
+<span class="ding">&#x278B;</span> drukujemy zawartość tablicy, aby przekonać się,
+że istotnie nie uległa zmianie w&nbsp;funkcji
+<!--O--><span class='funkcja'>minmaxmed<!--C--></span>.
+Tę tablicę następnie sortujemy (<span class="ding">&#x278C;</span>) i&nbsp;drukujemy jeszcze raz (<span class="ding">&#x278D;</span>),
+aby wygodniej było sprawdzić prawidłowość otrzymanych wyników
+<PRE>
+    min = 2, max = 7, mediana = 5.5
+    Tablica  oryginalna: [ 7 2 6 4 7 5 ]
+    Tablica posortowana: [ 2 4 5 6 7 7 ]
+</PRE>
+Zauważmy, że funkcja
+<!--O--><span class='funkcja'>pisztab<!--C--></span>
+ drukująca zawartość
+tablicy napisana jest tak, że może pisać do dowolnego strumienia
+reprezentowanego obiektem klasy
+<!--O--><span class='klasa'>ostream<!--C--></span>. My posyłamy do
+funkcji obiekt
+<!--O--><span class='zmienna'>cout<!--C--></span>, bo innego jeszcze nie znamy, ale
+dzięki temu zabiegowi ta sama funkcja mogłaby być użyta
+na przykład przy pisaniu do pliku
+(patrz rozdział o <A HREF="node103.html#chap:io">operacjach we/wy</A> ).
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1820"
+  HREF="node76.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1826"
+  HREF="node74.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1832"
+  HREF="node78.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1828"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1830"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1821"
+  HREF="node76.html">12.2 Przydzielanie pamięci &mdash;&nbsp;operator</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1827"
+  HREF="node74.html">12. Zarządzanie pamięcią</A>
+<B>Dalej:</B> <A NAME="tex2html1833"
+  HREF="node78.html">12.4 Dynamiczne tablice wielowymiarowe</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

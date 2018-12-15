@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>12.5 Zarządzanie pamięcią w&nbsp;C</TITLE>
+<META NAME="description" CONTENT="12.5 Zarządzanie pamięcią w&nbsp;C">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node80.html">
+<LINK REL="previous" HREF="node78.html">
+<LINK REL="up" HREF="node74.html">
+<LINK REL="next" HREF="node80.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1848"
+  HREF="node78.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1854"
+  HREF="node74.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1860"
+  HREF="node80.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1856"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1858"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1849"
+  HREF="node78.html">12.4 Dynamiczne tablice wielowymiarowe</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1855"
+  HREF="node74.html">12. Zarządzanie pamięcią</A>
+<B>Dalej:</B> <A NAME="tex2html1861"
+  HREF="node80.html">12.6 Funkcje operujące na</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001350000000000000000"></A>
+            <A NAME="pam:pamc"></A>
+<BR>
+<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">5</SPAN> Zarządzanie pamięcią w&nbsp;C
+</H1>
+
+<P>
+Operatory
+<!--O--><span class='klucz'>new<!--C--></span>
+ i&nbsp;
+<!--O--><span class='klucz'>delete<!--C--></span>
+ są charakterystyczne dla
+języka C++. W&nbsp;C podobne zadania realizowane są za pomocą innych
+funkcji &mdash;&nbsp;aby z&nbsp;nich korzystać, należy dołączyć plik
+nagłówkowy
+<!--O--><span class='plik'>cstdlib<!--C--></span>.<A NAME="14510"></A> Ponieważ stosuje je się
+bardzo często w&nbsp;istniejącym kodzie, omówimy je tu pokrótce. Nawet
+pisząc w&nbsp;C++ używa się czasem funkcji z&nbsp;C, gdyż bywają efektywniejsze,
+choć są często bardziej niebezpieczne i&nbsp;trudniejsze w&nbsp;programowaniu.
+
+<P>
+Funkcja
+<!--O--><span class='funkcja'>malloc<!--C--></span>
+
+<A NAME="14512"></A><A NAME="14513"></A> (ang.&nbsp;<FONT COLOR="#7b003e"><I>memory allocation</I></FONT>)
+przydziela obszar w&nbsp;pamięci wolnej. Jej prototyp ma postać
+<pre><tt>       <font color="#009900">void</font><font color="#990000">*</font> <b><font color="#000000">malloc</font></b><font color="#990000">(</font><font color="#008080">size_t</font> size<font color="#990000">);</font>
+
+</tt></pre>
+Typ
+<!--O--><span class='typ'>size_t<!--C--></span><A NAME="14518"></A> jest aliasem typu całościowego bez znaku,
+który może zależeć od implementacji (zwykle jest tożsamy
+z&nbsp;
+<!--O--><span class='typ'>unsigned long<!--C--></span>). Funkcja
+<!--O--><span class='funkcja'>malloc<!--C--></span>
+ alokuje
+<!--O--><span class='zmienna'>size<!--C--></span>
+
+bajtów pamięci dynamicznej i&nbsp;zwraca wskaźnik do początku zarezerwowanego
+obszaru jako wskaźnik typu
+<!--O--><span class='typ'>void*<!--C--></span>. Nie ma tu rozróżnienia między
+alokowaniem pamięci na pojedynczy obiekt i&nbsp;na tablicę;
+zawsze musimy podać liczbę <FONT COLOR="#7b003e"><I>bajtów</I></FONT>. Funkcja
+<!--O--><span class='funkcja'>malloc<!--C--></span>
+
+jest rzeczywiście funkcją, wywołuje się ją zatem podając
+argument w&nbsp;nawiasach okrągłych. Zwraca surowy adres w&nbsp;pamięci, bez
+żadnej informacji o&nbsp;typie obiektów, jakie będą tam wpisane.
+A zatem przed przypisaniem tego adresu do zmiennej wskaźnikowej pewnego
+typu należy dokonać odpowiedniej konwersji, czego nie musieliśmy
+robić w&nbsp;przypadku operatora
+<!--O--><span class='klucz'>new<!--C--></span>. Na przykład
+<pre><tt> <font SIZE="-2" color="black">     1.  </font>    <font color="#009900">int</font><font color="#990000">*</font> k <font color="#990000">=</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">*)</font> <b><font color="#000000">malloc</font></b><font color="#990000">(</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">));</font>
+ <font SIZE="-2" color="black">     2.  </font>    <font color="#990000">*</font>k <font color="#990000">=</font> <font color="#993399">5</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>    <i><font color="#9A1900">// ...</font></i>
+ <font SIZE="-2" color="black">     4.  </font>    <font color="#009900">int</font> size<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     5.  </font>    cin <font color="#990000">&gt;&gt;</font> size<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">int</font><font color="#990000">*</font> m <font color="#990000">=</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">*)</font> <b><font color="#000000">malloc</font></b><font color="#990000">(</font>size<font color="#990000">*</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">));</font>
+ <font SIZE="-2" color="black">     7.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> size<font color="#990000">;</font> <font color="#990000">++</font>i<font color="#990000">)</font>
+ <font SIZE="-2" color="black">     8.  </font>        m<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">=</font> <font color="#993399">2</font><font color="#990000">*</font>i<font color="#990000">;</font>
+</tt></pre>
+Zauważmy, że nawet alokując pamięć na pojedynczą zmienną
+w&nbsp;linii pierwszej tego przykładu musieliśmy jawnie podać
+liczbę potrzebnych bajtów. W przypadku niepowodzenia funkcja
+
+<!--O--><span class='funkcja'>malloc<!--C--></span>
+ zwraca wskaźnik zerowy(<!--O--><span class='zmienna'>NULL<!--C--></span>; w&nbsp;standardzie
+C++14<A NAME="14530"></A> jest to raczej
+<!--O--><span class='klucz'>nullptr<!--C--></span>). Przydzielona pamięć
+nie jest w&nbsp;żaden sposób inicjowana.
+
+<P>
+Za pomocą innej funkcji,
+
+<!--O--><span class='funkcja'>calloc<!--C--></span>,<A NAME="14533"></A><A NAME="14534"></A>
+możemy zaalokować obszar pamięci i&nbsp;od razu zainicjować go zerami. Prototyp
+ma postać
+<pre><tt>       <font color="#009900">void</font><font color="#990000">*</font> <b><font color="#000000">calloc</font></b><font color="#990000">(</font><font color="#008080">size_t</font> count<font color="#990000">,</font> <font color="#008080">size_t</font> size<font color="#990000">);</font>
+</tt></pre>
+Parametr
+<!--O--><span class='zmienna'>count<!--C--></span>
+ oznacza liczbę elementów, jakie alokowany
+obszar ma pomieścić, a&nbsp;
+<!--O--><span class='zmienna'>size<!--C--></span>
+ rozmiar (w bajtach) jednego
+elementu. Zatem, aby zaalokować tablicę liczb całkowitych
+i&nbsp;zainicjować ją zerami, można napisać
+<pre><tt>       <font color="#009900">int</font> dim<font color="#990000">;</font>
+       cin <font color="#990000">&gt;&gt;</font> dim<font color="#990000">;</font>
+       <font color="#009900">int</font><font color="#990000">*</font> tab <font color="#990000">=</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">*)</font> <b><font color="#000000">calloc</font></b><font color="#990000">(</font>dim<font color="#990000">,</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">));</font>
+</tt></pre>
+Zauważmy, że wciąż nie ma tu informacji o&nbsp;typie elementów &mdash;&nbsp;zwracany
+jest wskaźnik typu
+<!--O--><span class='typ'>void*<!--C--></span>.
+
+<P>
+Istnieje również funkcja
+<!--O--><span class='funkcja'>realloc<!--C--></span>
+
+<A NAME="14543"></A><A NAME="14544"></A>
+zmieniająca rozmiar bloku pamięci
+dynamicznej wcześniej zaalokowanego:
+<pre><tt>       <font color="#009900">void</font><font color="#990000">*</font> <b><font color="#000000">realloc</font></b><font color="#990000">(</font><font color="#009900">void</font><font color="#990000">*</font> ptr<font color="#990000">,</font> <font color="#008080">size_t</font> size<font color="#990000">);</font>
+</tt></pre>
+której pierwszym argumentem jest wskaźnik zwrócony wcześniej przez
+
+<!--O--><span class='funkcja'>malloc<!--C--></span>,
+<!--O--><span class='funkcja'>calloc<!--C--></span>
+ lub
+<!--O--><span class='funkcja'>realloc<!--C--></span>,
+a&nbsp;
+<!--O--><span class='zmienna'>size<!--C--></span>
+ jest nowym rozmiarem.
+Jeśli rozmiar
+<!--O--><span class='zmienna'>size<!--C--></span>
+ jest większy niż ten który został
+podany przy wywołaniu funkcji
+<!--O--><span class='funkcja'>malloc<!--C--></span>,
+to zostanie zarezerwowany nowy obszar o&nbsp;zwiększonym rozmiarze,
+a&nbsp;zawartość poprzedniego bloku pamięci zostanie do niego skopiowana,
+po czym  stary obszar zostanie zwolniony.
+Funkcja zawsze zwraca adres nowego obszaru, który jednak może
+pokrywać się ze starym, jeśli
+<!--O--><span class='zmienna'>size<!--C--></span>
+ wcale nie jest większe
+od dotychczasowego rozmiaru.
+
+<P>
+W przypadku niepowodzenia
+<!--O--><span class='funkcja'>realloc<!--C--></span>
+ zwraca wskaźnik zerowy
+(<!--O--><span class='zmienna'>NULL<!--C--></span>,
+<!--O--><span class='klucz'>nullptr<!--C--></span>), a&nbsp;dotychczasowy blok pamięci
+pozostaje nienaruszony.
+
+<P>
+W tradycyjnym&nbsp;C do zwalniania pamięci dynamicznej służy funkcja
+
+<!--O--><span class='funkcja'>free<!--C--></span><A NAME="14558"></A><A NAME="14559"></A>
+<pre><tt>       <font color="#009900">void</font> <b><font color="#000000">free</font></b><font color="#990000">(</font><font color="#009900">void</font><font color="#990000">*</font> ptr<font color="#990000">);</font>
+</tt></pre>
+Wartością argumentu
+<!--O--><span class='zmienna'>ptr<!--C--></span>
+ musi być adres zwrócony wcześniej
+przez funkcję
+<!--O--><span class='funkcja'>malloc<!--C--></span>,
+<!--O--><span class='funkcja'>calloc<!--C--></span>
+ lub
+<!--O--><span class='funkcja'>realloc<!--C--></span>
+
+podczas alokacji (lub realokacji).
+
+<P>
+
+<P>
+
+<div class='wazne'>
+Obszar pamięci zaalokowany za pomocą operatora
+<!--O--><span class='klucz'>new<!--C--></span>
+
+    (<!--O--><span class='klucz'>new[]<!--C--></span>) należy zwalniać za pomocą
+<!--O--><span class='klucz'>delete<!--C--></span>
+
+    (<!--O--><span class='klucz'>delete[]<!--C--></span>). Jeśli do przydzielenia pamięci użyto funkcji
+
+<!--O--><span class='funkcja'>malloc<!--C--></span>,
+<!--O--><span class='funkcja'>calloc<!--C--></span>
+ lub
+<!--O--><span class='funkcja'>realloc<!--C--></span>, to zwolnić
+    ją trzeba za pomocą funkcji
+<!--O--><span class='funkcja'>free<!--C--></span>.
+
+
+</div>
+
+<P>
+Podobnie jak nie należy mieszać
+<!--O--><span class='klucz'>new<!--C--></span>
+ i&nbsp;
+<!--O--><span class='klucz'>delete<!--C--></span>
+
+tablicowych z&nbsp;nietablicowymi, nie wolno też mieszać funkcji
+przydzielających pamięc z&nbsp;C z&nbsp;funkcjami zwalniającymi pamięć
+z&nbsp;C++ i&nbsp;odwrotnie.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1848"
+  HREF="node78.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1854"
+  HREF="node74.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1860"
+  HREF="node80.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1856"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1858"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1849"
+  HREF="node78.html">12.4 Dynamiczne tablice wielowymiarowe</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1855"
+  HREF="node74.html">12. Zarządzanie pamięcią</A>
+<B>Dalej:</B> <A NAME="tex2html1861"
+  HREF="node80.html">12.6 Funkcje operujące na</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

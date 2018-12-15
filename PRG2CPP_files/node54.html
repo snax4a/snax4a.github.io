@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>9.1 Priorytety i&nbsp;wiązanie</TITLE>
+<META NAME="description" CONTENT="9.1 Priorytety i&nbsp;wiązanie">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node55.html">
+<LINK REL="previous" HREF="node53.html">
+<LINK REL="up" HREF="node53.html">
+<LINK REL="next" HREF="node55.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1468"
+  HREF="node53.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1474"
+  HREF="node53.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1480"
+  HREF="node55.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1476"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1478"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1469"
+  HREF="node53.html">9. Operatory</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1475"
+  HREF="node53.html">9. Operatory</A>
+<B>Dalej:</B> <A NAME="tex2html1481"
+  HREF="node55.html">9.2 Przegląd operatorów</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001010000000000000000"></A><A NAME="operat:prior"></A>
+<BR>
+<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">1</SPAN> Priorytety i&nbsp;wiązanie
+</H1>
+
+<P>
+Zapis infiksowy, wygodny i&nbsp;naturalny dla ludzi, prowadzi
+jednak do sytuacji, gdy z&nbsp;samego zapisu nie wynika kolejność
+wykonania działań w&nbsp;złożonych wyrażeniach.
+Na przykład w&nbsp;wyrażeniu
+<pre><tt>       a <font color="#990000">+</font> b <font color="#990000">/</font> c
+</tt></pre>
+zmienna
+<!--O--><span class='zmienna'>b<!--C--></span>
+ może być traktowana jako prawy
+argument operatora dodawania albo lewy argument operatora
+dzielenia. W pierwszym przypadku obliczymy <SPAN CLASS="MATH">(<I>a</I> + <I>b</I>)/<I>c</I></SPAN>,
+a&nbsp;w drugim <!-- MATH
+ $a\cdot(b/c)$
+ -->
+<SPAN CLASS="MATH"><I>a</I>&#8901;(<I>b</I>/<I>c</I>)</SPAN> otrzymując różny wynik.
+
+<P>
+Aby uniknąć tego rodzaju wieloznaczności, wprowadzono pojęcie
+priorytetu<A NAME="8821"></A> operatorów.
+Według priorytetu operatory dzielą się na szereg grup, w&nbsp;ramach
+których priorytety są jednakowe.
+W sytuacjach, jak opisana powyżej, gdy to samo wyrażenie
+może być potraktowane jako argument dwóch operatorów,
+najpierw zostanie wykonana operacja opisywana przez ten z&nbsp;tych dwóch
+operatorów który ma wyższy priorytet.
+Jeśli natomiast oba mają ten sam priorytet, kolejność wykonywania
+operacji będzie określona ich
+<FONT COLOR="#7b003e"><B>wiązaniem</B></FONT>:<A NAME="8823"></A>
+od lewej do prawej dla operatorów o&nbsp;wiązaniu lewym
+i&nbsp;od prawej do lewej dla operatorów o&nbsp;wiązaniu prawym.
+Aby ta reguła nie prowadziła do sprzeczności, operatory
+o&nbsp;takim samym priorytecie muszą mieć taki sam kierunek wiązania
+(co w&nbsp;istocie zachodzi). A zatem w&nbsp;wyrażeniu
+<pre><tt>       a <font color="#990000">+</font> b <font color="#990000">/</font> c
+</tt></pre>
+najpierw zostanie wykonane dzielenie, gdyż ma wyższy priorytet
+od dodawania. Ale w&nbsp;wyrażeniu
+<pre><tt>       a <font color="#990000">+</font> b <font color="#990000">-</font> c
+</tt></pre>
+najpierw zostanie wykonane dodawanie, gdyż ma ten sam priorytet
+co odejmowanie, a&nbsp;oba operatory mają wiązanie lewe.
+
+<P>
+Dla operatora przypisania wiązanie jest prawe. Tak więc
+w&nbsp;wyrażeniu
+<FONT COLOR="#000000"><TT>a=b=c</TT></FONT> przypisanie
+<FONT COLOR="#000000"><TT>b=c</TT></FONT>
+wykonane zostanie najpierw, a&nbsp;jego wynik (wartość
+<!--O--><span class='zmienna'>b<!--C--></span>
+
+po tej operacji) przypisany będzie do zmiennej
+<!--O--><span class='zmienna'>a<!--C--></span>.
+Ale np.&nbsp;operator wyboru składowej (&bdquo;kropka&rdquo;)
+ma wiązanie lewe, zatem
+<FONT COLOR="#000000"><TT>obiekt.sklad1.sklad2</TT></FONT> oznacza:
+<SPAN  CLASS="textit">najpierw</SPAN> wybierz składową
+<!--O--><span class='zmienna'>sklad1<!--C--></span>
+ obiektu
+
+<!--O--><span class='zmienna'>obiekt<!--C--></span>, potem z&nbsp;wynikowego obiektu składową
+
+<!--O--><span class='zmienna'>sklad2<!--C--></span>.
+
+<P>
+Wszystkie prefiksowe (przedrostkowe) operatory jednoargumentowe
+mają wiązanie prawe: najpierw działa operator z&nbsp;prawej
+strony, czyli bliższy argumentu.
+Tak więc
+<FONT COLOR="#000000"><TT>*++p</TT></FONT> to to samo co
+<FONT COLOR="#000000"><TT>*(++p)</TT></FONT>,
+natomiast
+<FONT COLOR="#000000"><TT>++*p</TT></FONT> to
+<FONT COLOR="#000000"><TT>++(*p)</TT></FONT>, bo choć
+przedrostkowy operator inkrementacji '
+<FONT COLOR="#000000"><TT>++</TT></FONT>' i&nbsp;operator
+wyłuskania wartości (dereferencji) '
+<FONT COLOR="#000000"><TT>*</TT></FONT>' mają ten sam
+priorytet, oba mają wiązanie prawe.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1468"
+  HREF="node53.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1474"
+  HREF="node53.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1480"
+  HREF="node55.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1476"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1478"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1469"
+  HREF="node53.html">9. Operatory</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1475"
+  HREF="node53.html">9. Operatory</A>
+<B>Dalej:</B> <A NAME="tex2html1481"
+  HREF="node55.html">9.2 Przegląd operatorów</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

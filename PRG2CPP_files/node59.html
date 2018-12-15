@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>11. Funkcje</TITLE>
+<META NAME="description" CONTENT="11. Funkcje">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node74.html">
+<LINK REL="previous" HREF="node56.html">
+<LINK REL="up" HREF="PRG2CPP.html">
+<LINK REL="next" HREF="node60.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1549"
+  HREF="node58.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1555"
+  HREF="PRG2CPP.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1561"
+  HREF="node60.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1557"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1559"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1550"
+  HREF="node58.html">10.2 Porządek wartościowania</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1556"
+  HREF="PRG2CPP.html">Programowanie w C++</A>
+<B>Dalej:</B> <A NAME="tex2html1562"
+  HREF="node60.html">11.1 Wstęp</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001200000000000000000"></A>
+        <A NAME="chap:funk"></A>
+<BR>
+<SPAN CLASS="arabic">11</SPAN>. Funkcje
+</H1>
+
+<P>
+Rozdział ten poświęcimy funkcjom. Na razie nie będziemy
+rozpatrywać funkcji będących składowymi klas &mdash;&nbsp;obiektem naszego
+zainteresowania w&nbsp;tym rozdziale będą tylko
+<FONT COLOR="#7b003e"><B>funkcja globalna</B></FONT>.<A NAME="11375"></A>
+<A NAME="11376"></A> Omówimy też pojęcie wskaźników
+funkcyjnych<A NAME="11377"></A>
+i&nbsp;na kilku prostych przykładach nauczymy się, jak je definiować
+i&nbsp;używać.
+
+<P>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Podrozdzia&#322;y</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html1563"
+  HREF="node60.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">1</SPAN> Wstęp</A>
+<LI><A NAME="tex2html1564"
+  HREF="node61.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">2</SPAN> Deklaracje i&nbsp;definicje funkcji</A>
+<LI><A NAME="tex2html1565"
+  HREF="node62.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">3</SPAN> Wywołanie funkcji</A>
+<LI><A NAME="tex2html1566"
+  HREF="node63.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">4</SPAN> Argumenty domyślne</A>
+<LI><A NAME="tex2html1567"
+  HREF="node64.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">5</SPAN> Zmienna liczba argumentów</A>
+<LI><A NAME="tex2html1568"
+  HREF="node65.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">6</SPAN> Argumenty referencyjne</A>
+<LI><A NAME="tex2html1569"
+  HREF="node66.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">7</SPAN> Referencje jako wartości zwracane funkcji</A>
+<LI><A NAME="tex2html1570"
+  HREF="node67.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">8</SPAN> Funkcje rekurencyjne</A>
+<LI><A NAME="tex2html1571"
+  HREF="node68.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">9</SPAN> Funkcje statyczne</A>
+<LI><A NAME="tex2html1572"
+  HREF="node69.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">10</SPAN> Funkcje rozwijane</A>
+<LI><A NAME="tex2html1573"
+  HREF="node70.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">11</SPAN> Przeciążanie funkcji</A>
+<LI><A NAME="tex2html1574"
+  HREF="node71.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">12</SPAN> Wskaźniki funkcyjne</A>
+<LI><A NAME="tex2html1575"
+  HREF="node72.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">13</SPAN> Funkcje lambda</A>
+<LI><A NAME="tex2html1576"
+  HREF="node73.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">14</SPAN> Szablony funkcji</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1549"
+  HREF="node58.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1555"
+  HREF="PRG2CPP.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1561"
+  HREF="node60.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1557"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1559"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1550"
+  HREF="node58.html">10.2 Porządek wartościowania</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1556"
+  HREF="PRG2CPP.html">Programowanie w C++</A>
+<B>Dalej:</B> <A NAME="tex2html1562"
+  HREF="node60.html">11.1 Wstęp</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

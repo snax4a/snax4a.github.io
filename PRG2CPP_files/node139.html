@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>22.7 Standardowe wyjątki</TITLE>
+<META NAME="description" CONTENT="22.7 Standardowe wyjątki">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="previous" HREF="node138.html">
+<LINK REL="up" HREF="node132.html">
+<LINK REL="next" HREF="node140.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2778"
+  HREF="node138.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2782"
+  HREF="node132.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2788"
+  HREF="node140.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2784"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2786"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2779"
+  HREF="node138.html">22.6 Ponawianie wyjątku</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2783"
+  HREF="node132.html">22. Wyjątki</A>
+<B>Dalej:</B> <A NAME="tex2html2789"
+  HREF="node140.html">23. Moduły i&nbsp;przestrzenie nazw</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002370000000000000000"></A>
+        <A NAME="wyjatki:std"></A>
+<BR>
+<SPAN CLASS="arabic">22</SPAN>.<SPAN CLASS="arabic">7</SPAN> Standardowe wyjątki
+</H1>
+
+<P>
+Standardowa biblioteka C++ definiuje wiele typów wyjątków, które
+są zgłaszane przez funkcje pochodzące z&nbsp;tej biblioteki (funkcje
+biblioteczne czystego C nie zgłaszają wyjątków).
+Wszystkie te typy wyprowadzone są z&nbsp;typu
+<!--O--><span class='klasa'>exception<!--C--></span>. Klasa ta
+deklaruje wirtualną metodę
+<!--O--><span class='funkcja'>what<!--C--></span>,<A NAME="27670"></A>
+<A NAME="27671"></A> dostarczającą, w&nbsp;postaci C-napisu, informację
+o&nbsp;wyjątku. W klasach pochodnych od
+<!--O--><span class='klasa'>exception<!--C--></span>
+ należy zatem
+zapewnić sensowną implementację tej metody.
+
+<P>
+Do najważniejszych wyjątków standardowych, które często przychodzi
+nam obsługiwać, należą:
+
+<P>
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='klasa'>bad_alloc<!--C--></span>
+ (nagłówek
+<!--O--><span class='plik'>new<!--C--></span>)
+      &mdash;&nbsp;
+      <A NAME="27677"></A><A NAME="27678"></A>
+      Zgłaszany jest przez operator
+<!--O--><span class='klucz'>new<!--C--></span><A NAME="27680"></A>
+      <A NAME="27681"></A> w&nbsp;razie
+      niemożności przydzielenia pamięci na tworzony obiekt.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='klasa'>bad_cast<!--C--></span>
+ (nagłówek
+<!--O--><span class='plik'>typeinfo<!--C--></span>)
+      &mdash;&nbsp;
+      <A NAME="27686"></A><A NAME="27687"></A>
+      Zgłaszany jest przez operator
+<!--O--><span class='klucz'>dynamic_cast<!--C--></span>,
+      <A NAME="27689"></A><A NAME="27690"></A>,
+      jeśli nie udała się żądana konwersja.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='klasa'>bad_typeid<!--C--></span>
+ (nagłówek
+<!--O--><span class='plik'>typeinfo<!--C--></span>)
+      &mdash;&nbsp;
+      <A NAME="27695"></A><A NAME="27696"></A>
+      Zgłaszany jest przez operator
+<!--O--><span class='klucz'>typeid<!--C--></span>,
+      <A NAME="27698"></A> jeśli wskaźnik
+      będący jego argumentem jest pusty.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='klasa'>bad_exception<!--C--></span>
+ (nagłówek
+<!--O--><span class='plik'>exception<!--C--></span>)
+      &mdash;&nbsp;
+      <A NAME="27703"></A><A NAME="27704"></A>
+      Zgłaszany jest, jeśli w&nbsp;funkcji wystąpi jakikolwiek
+      nieobsłużony wyjątek nie wymieniony w&nbsp;specyfikacji
+      wyjątków tej funkcji, pod warunkiem, że na liście
+      specyfikacji znajduje się właśnie
+<!--O--><span class='klasa'>bad_exception<!--C--></span>.
+      Pozwala to obsługiwać nieoczekiwane wyjątki o&nbsp;nieznanym
+      zawczasu typie bez przerywania programu.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='klasa'>ios::failure<!--C--></span>
+ (nagłówek
+<!--O--><span class='plik'>ios<!--C--></span>)
+      &mdash;&nbsp;
+      <A NAME="27710"></A><A NAME="27711"></A>
+      Zgłaszany jest, jeśli stan strumienia zmienił się
+      w&nbsp;niepożądany sposób. Definicję tego niepożądanego
+      stanu należy określić wywołując przedtem na rzecz obiektu
+      strumienia metodę
+<!--O--><span class='funkcja'>exceptions<!--C--></span>.
+      <A NAME="27713"></A><A NAME="27714"></A>
+
+<P></P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2778"
+  HREF="node138.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2782"
+  HREF="node132.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2788"
+  HREF="node140.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2784"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2786"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2779"
+  HREF="node138.html">22.6 Ponawianie wyjątku</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2783"
+  HREF="node132.html">22. Wyjątki</A>
+<B>Dalej:</B> <A NAME="tex2html2789"
+  HREF="node140.html">23. Moduły i&nbsp;przestrzenie nazw</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

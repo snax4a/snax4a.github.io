@@ -1,0 +1,2415 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>9.2 Przegląd operatorów</TITLE>
+<META NAME="description" CONTENT="9.2 Przegląd operatorów">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="previous" HREF="node54.html">
+<LINK REL="up" HREF="node53.html">
+<LINK REL="next" HREF="node56.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1482"
+  HREF="node54.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1486"
+  HREF="node53.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1492"
+  HREF="node56.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1488"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1490"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1483"
+  HREF="node54.html">9.1 Priorytety i&nbsp;wiązanie</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1487"
+  HREF="node53.html">9. Operatory</A>
+<B>Dalej:</B> <A NAME="tex2html1493"
+  HREF="node56.html">10. Konwersje niejawne, porządek</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Podrozdzia&#322;y</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html1494"
+  HREF="node55.html#SECTION001021000000000000000"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Operatory zasięgu</A>
+<LI><A NAME="tex2html1495"
+  HREF="node55.html#SECTION001022000000000000000"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Grupa operatorów o&nbsp;priorytecie 15</A>
+<LI><A NAME="tex2html1496"
+  HREF="node55.html#SECTION001023000000000000000"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Grupa operatorów o&nbsp;priorytecie 14</A>
+<LI><A NAME="tex2html1497"
+  HREF="node55.html#SECTION001024000000000000000"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN> Grupa operatorów o&nbsp;priorytecie 13</A>
+<LI><A NAME="tex2html1498"
+  HREF="node55.html#SECTION001025000000000000000"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN> Operatory arytmetyczne</A>
+<LI><A NAME="tex2html1499"
+  HREF="node55.html#SECTION001026000000000000000"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN> Operatory relacyjne i&nbsp;porównania</A>
+<LI><A NAME="tex2html1500"
+  HREF="node55.html#SECTION001027000000000000000"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN> Operatory bitowe</A>
+<LI><A NAME="tex2html1501"
+  HREF="node55.html#SECTION001028000000000000000"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">8</SPAN> Operatory logiczne</A>
+<LI><A NAME="tex2html1502"
+  HREF="node55.html#SECTION001029000000000000000"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">9</SPAN> Operatory przypisania</A>
+<LI><A NAME="tex2html1503"
+  HREF="node55.html#SECTION0010210000000000000000"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN> Operator warunkowy</A>
+<LI><A NAME="tex2html1504"
+  HREF="node55.html#SECTION0010211000000000000000"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN> Operator zgłoszenia wyjątku</A>
+<LI><A NAME="tex2html1505"
+  HREF="node55.html#SECTION0010212000000000000000"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">12</SPAN> Operator przecinkowy</A>
+<LI><A NAME="tex2html1506"
+  HREF="node55.html#SECTION0010213000000000000000"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">13</SPAN> Alternatywne nazwy operatorów</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION001020000000000000000"></A><A NAME="operat:przeglad"></A>
+<BR>
+<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN> Przegląd operatorów
+</H1>
+
+<P>
+W tabeli poniżej przedstawiono operatory języka C++.
+W prawej kolumnie użyte są oznaczenia:
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT"><SPAN  CLASS="textsl">klasa</SPAN>: nazwa klasy</TD>
+<TD ALIGN="LEFT"><SPAN  CLASS="textsl">ob</SPAN>: obiekt klasy</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT"><SPAN  CLASS="textsl">sklad</SPAN>: składowa klasy lub przestrzeni nazw</TD>
+<TD ALIGN="LEFT"><SPAN  CLASS="textsl">wsk</SPAN>: wskaźnik</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT"><SPAN  CLASS="textsl">wyr</SPAN>: wyrażenie</TD>
+<TD ALIGN="LEFT"><SPAN  CLASS="textsl">lwar</SPAN>: l-wartość</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT"><SPAN  CLASS="textsl">pnaz</SPAN>: nazwa przestrzeni nazw</TD>
+<TD ALIGN="LEFT"><SPAN  CLASS="textsl">typ</SPAN>: nazwa typu</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT"><SPAN  CLASS="textsl">naz</SPAN>: nazwa</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+Operatory podzielone są na 18 grup &mdash;&nbsp;każda grupa odpowiada
+operatorom o&nbsp;tym samym priorytecie.<A NAME="8868"></A>
+Grupy wymienione są w&nbsp;kolejności od grupy operatorów o&nbsp;priorytecie
+najwyższym, w&nbsp;dół według malejącego priorytetu.
+W&nbsp;pierwszej kolumnie zaznaczona jest kolejność wiązania:
+'R' &ndash;&nbsp;od prawej do lewej, 'L' &ndash;&nbsp;od lewej do prawej.
+
+<P>
+<A NAME="8869"></A>
+<A NAME="8870"></A>
+<A NAME="8871"></A>
+<A NAME="8872"></A>
+<A NAME="8873"></A>
+<A NAME="8874"></A>
+<A NAME="8875"></A>
+<A NAME="8876"></A>
+<A NAME="8877"></A>
+<A NAME="8878"></A>
+<A NAME="8879"></A>
+<A NAME="8880"></A>
+<A NAME="8881"></A>
+<A NAME="8882"></A>
+<A NAME="8883"></A>
+<A NAME="8884"></A>
+<A NAME="8885"></A>
+<A NAME="8886"></A>
+<A NAME="8887"></A>
+<A NAME="8888"></A>
+<A NAME="8889"></A>
+<A NAME="8890"></A>
+<A NAME="8891"></A>
+<A NAME="8892"></A>
+<A NAME="8893"></A>
+<A NAME="8894"></A>
+<A NAME="8895"></A>
+<A NAME="8896"></A>
+<A NAME="8897"></A>
+<A NAME="8898"></A>
+<A NAME="8899"></A>
+<A NAME="8900"></A>
+<A NAME="8901"></A>
+<A NAME="8902"></A>
+<A NAME="8903"></A>
+<A NAME="8904"></A>
+<A NAME="8905"></A>
+<A NAME="8906"></A>
+<A NAME="8907"></A>
+<A NAME="8908"></A>
+<A NAME="8909"></A>
+<A NAME="8910"></A>
+<A NAME="8911"></A>
+<A NAME="8912"></A>
+<DIV ALIGN="CENTER">
+<A NAME="8916"></A>
+<TABLE CELLPADDING=3 BORDER="1">
+<CAPTION><STRONG>Tabela:</STRONG>
+Operatory w&nbsp;języku C++</CAPTION>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER"><SPAN  CLASS="textbf">L/R</SPAN></TD>
+<TD ALIGN="CENTER"><A NAME="tabelaoperatorow"></A>   <SPAN  CLASS="textbf">Funkcja</SPAN></TD>
+<TH ALIGN="CENTER"><SPAN  CLASS="textbf">Użycie</SPAN></TH>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER" COLSPAN=3><SPAN><SPAN  CLASS="textit">Priorytet 16</SPAN></SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">operator zasięgu</TD>
+<TD ALIGN="CENTER">klasa::sklad,pnaz::sklad,::naz</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER" COLSPAN=3><SPAN><SPAN  CLASS="textit">Priorytet 15</SPAN></SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">dostęp do składowej</TD>
+<TD ALIGN="CENTER">ob.sklad,wsk-<SPAN CLASS="MATH">&gt;</SPAN>sklad</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">indeksowanie</TD>
+<TD ALIGN="CENTER">wyr[wyr]</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">wywołanie funkcji</TD>
+<TD ALIGN="CENTER">wyr(lista_wyr)</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">konstruowanie wartości</TD>
+<TD ALIGN="CENTER">typ(lista_wyr),typ{lista_wyr}</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">postdekrementacja,postinkr.</TD>
+<TD ALIGN="CENTER">lwar<SPAN CLASS="MATH">- -</SPAN>,lwar<SPAN CLASS="MATH">+</SPAN><SPAN CLASS="MATH">+</SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER" COLSPAN=3><SPAN><SPAN  CLASS="textit">Priorytet 14</SPAN></SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">rozmiar obiektu</TD>
+<TD ALIGN="CENTER">
+<!--O--><span class='klucz'>sizeof<!--C--></span>
+ wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">rozmiar typu</TD>
+<TD ALIGN="CENTER">
+<!--O--><span class='klucz'>sizeof<!--C--></span>(typ)</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">rozmiar pakietu</TD>
+<TD ALIGN="CENTER">
+<!--O--><span class='klucz'>sizeof...<!--C--></span>(naz)</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">predekrementacja,preinkr.</TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">- -</SPAN>lwart,<SPAN CLASS="MATH">+</SPAN><SPAN CLASS="MATH">+</SPAN>lwart</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">negacja bitowa,logiczn</TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">&#8764;</SPAN>wyr,!wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">minus, plus jednoargumentowy</TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">-</SPAN>wyr,<SPAN CLASS="MATH">+</SPAN>wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">wyłuskanie adresu</TD>
+<TD ALIGN="CENTER">&amp;lwart</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">dereferencja</TD>
+<TD ALIGN="CENTER">*wsk</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">przydział pamięci na obiekt</TD>
+<TD ALIGN="CENTER">
+<!--O--><span class='klucz'>new<!--C--></span>
+ typ</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">przydział pamięci na tablicę</TD>
+<TD ALIGN="CENTER">
+<!--O--><span class='klucz'>new<!--C--></span>
+ typ[wyr]</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">zwolnienie obiektu</TD>
+<TD ALIGN="CENTER">
+<!--O--><span class='klucz'>delete<!--C--></span>
+ wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">zwolnienie tablicy</TD>
+<TD ALIGN="CENTER">
+<!--O--><span class='klucz'>delete<!--C--></span>
+ [] wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">rzutowanie w stylu C</TD>
+<TD ALIGN="CENTER">(typ)wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER" COLSPAN=3><SPAN><SPAN  CLASS="textit">Priorytet 13</SPAN></SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">wskaźnik do składowej</TD>
+<TD ALIGN="CENTER">wsk-<SPAN CLASS="MATH">&gt;</SPAN>*sklad_wsk,ob.*sklad_wsk</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER" COLSPAN=3><SPAN><SPAN  CLASS="textit">Priorytet 12</SPAN></SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">mnożenie,dzielenie</TD>
+<TD ALIGN="CENTER">wyr*wyr,wyr/wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">reszta z&nbsp;dzielenia</TD>
+<TD ALIGN="CENTER">wyr % wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER" COLSPAN=3><SPAN><SPAN  CLASS="textit">Priorytet 11</SPAN></SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">dodawanie,odejmmowanie</TD>
+<TD ALIGN="CENTER">wyr<SPAN CLASS="MATH">+</SPAN>wyr,wyr<SPAN CLASS="MATH">-</SPAN>wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER" COLSPAN=3><SPAN><SPAN  CLASS="textit">Priorytet 10</SPAN></SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">przesunięcie w&nbsp;lewo, prawo</TD>
+<TD ALIGN="CENTER">wyr<SPAN CLASS="MATH">&lt;</SPAN><SPAN CLASS="MATH">&lt;</SPAN>wyr,wyr<SPAN CLASS="MATH">&gt;</SPAN><SPAN CLASS="MATH">&gt;</SPAN>wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER" COLSPAN=3><SPAN><SPAN  CLASS="textit">Priorytet 9</SPAN></SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">mniejsze od</TD>
+<TD ALIGN="CENTER">wyr <SPAN CLASS="MATH">&lt;</SPAN> wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">mniejsze lub równe od</TD>
+<TD ALIGN="CENTER">wyr <SPAN CLASS="MATH">&lt;</SPAN><SPAN CLASS="MATH">=</SPAN> wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">większe od</TD>
+<TD ALIGN="CENTER">wyr <SPAN CLASS="MATH">&gt;</SPAN> wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">większe lub równe  od</TD>
+<TD ALIGN="CENTER">wyr <SPAN CLASS="MATH">&gt;</SPAN><SPAN CLASS="MATH">=</SPAN> wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER" COLSPAN=3><SPAN><SPAN  CLASS="textit">Priorytet 8</SPAN></SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">równe</TD>
+<TD ALIGN="CENTER">wyr == wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">nierówne</TD>
+<TD ALIGN="CENTER">wyr != wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER" COLSPAN=3><SPAN><SPAN  CLASS="textit">Priorytet 7</SPAN></SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">koniunkcja bitowa</TD>
+<TD ALIGN="CENTER">wyr&amp;wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER" COLSPAN=3><SPAN><SPAN  CLASS="textit">Priorytet 6</SPAN></SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">bitowa różnica symetryczna</TD>
+<TD ALIGN="CENTER">wyr&#94;wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER" COLSPAN=3><SPAN><SPAN  CLASS="textit">Priorytet 5</SPAN></SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">alternatywa bitowa</TD>
+<TD ALIGN="CENTER">wyr<SPAN CLASS="MATH">|</SPAN>wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER" COLSPAN=3><SPAN><SPAN  CLASS="textit">Priorytet 4</SPAN></SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">koniunkcja logiczna</TD>
+<TD ALIGN="CENTER">wyr &amp;&amp; wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER" COLSPAN=3><SPAN><SPAN  CLASS="textit">Priorytet 3</SPAN></SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">alternatywa (suma) logiczna</TD>
+<TD ALIGN="CENTER">wyr <!-- MATH
+ $\vert\vert$
+ -->
+<SPAN CLASS="MATH">||</SPAN> wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER" COLSPAN=3><SPAN><SPAN  CLASS="textit">Priorytet 2</SPAN></SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">operator warunkowy</TD>
+<TD ALIGN="CENTER">wyr ? wyr : wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">przypisanie</TD>
+<TD ALIGN="CENTER">lwar = wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">dodawanie z&nbsp;przypisaniem</TD>
+<TD ALIGN="CENTER">lwar <SPAN CLASS="MATH">+</SPAN><SPAN CLASS="MATH">=</SPAN> wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">odejmowanie z&nbsp;przypisaniem</TD>
+<TD ALIGN="CENTER">lwar <SPAN CLASS="MATH">-</SPAN><SPAN CLASS="MATH">=</SPAN> wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">mnożenie z&nbsp;przypisaniem</TD>
+<TD ALIGN="CENTER">lwar <SPAN CLASS="MATH">*</SPAN><SPAN CLASS="MATH">=</SPAN> wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">dzielenie z&nbsp;przypisaniem</TD>
+<TD ALIGN="CENTER">lwar <SPAN CLASS="MATH">/</SPAN><SPAN CLASS="MATH">=</SPAN> wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">reszta z&nbsp;przypisaniem</TD>
+<TD ALIGN="CENTER">lwar %<SPAN CLASS="MATH">=</SPAN> wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">przesunięcie w&nbsp;lewo z&nbsp;przypisaniem</TD>
+<TD ALIGN="CENTER">lwar <SPAN CLASS="MATH">&lt;</SPAN><SPAN CLASS="MATH">&lt;</SPAN><SPAN CLASS="MATH">=</SPAN> wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">przesunięcie w&nbsp;prawo z&nbsp;przypisaniem</TD>
+<TD ALIGN="CENTER">lwar <SPAN CLASS="MATH">&gt;</SPAN><SPAN CLASS="MATH">&gt;</SPAN><SPAN CLASS="MATH">=</SPAN> wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">iloczyn bitowy z&nbsp;przypisaniem</TD>
+<TD ALIGN="CENTER">lwar&amp;<SPAN CLASS="MATH">=</SPAN> wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">alternatywa bitowa z&nbsp;przypisaniem</TD>
+<TD ALIGN="CENTER">lwar <SPAN CLASS="MATH">|</SPAN><SPAN CLASS="MATH">=</SPAN> wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">różnica bitowa z&nbsp;przypisaniem</TD>
+<TD ALIGN="CENTER">lwar &#94;<SPAN CLASS="MATH">=</SPAN> wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="CENTER">zgłoszenie wyjątku</TD>
+<TD ALIGN="CENTER">
+<!--O--><span class='klucz'>throw<!--C--></span>
+ wyr</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER" COLSPAN=3><SPAN><SPAN  CLASS="textit">Priorytet 1</SPAN></SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">L</TD>
+<TD ALIGN="CENTER">operator przecinkowy</TD>
+<TD ALIGN="CENTER">wyr,wyr</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+Operatory
+<!--O--><span class='klucz'>const_cast<!--C--></span>,
+<!--O--><span class='klucz'>static_cast<!--C--></span>,
+<!--O--><span class='klucz'>dynamic_cast<!--C--></span>,
+
+<!--O--><span class='klucz'>reinterpret_cast<!--C--></span>,
+<!--O--><span class='klucz'>typeid<!--C--></span>,
+<!--O--><span class='klucz'>noexcept<!--C--></span>
+ i&nbsp;
+<!--O--><span class='klucz'>alignof<!--C--></span>
+
+nie zostały wymienione, ponieważ ich użycie zawsze jest jednoznaczne.
+
+<P>
+
+<P></P>
+
+<P>
+Dyskusję niektórych z&nbsp;tych operatorów, szczególnie tych związanych
+z&nbsp;klasami, konwersjami, przestrzeniami nazw i&nbsp;obsługą wyjątków,
+odłożymy do następnych rozdziałów.
+
+<P>
+
+<H2><A NAME="SECTION001021000000000000000"></A><A NAME="operat:zasieg"></A>
+<BR>
+<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Operatory zasięgu
+</H2>
+
+<P>
+Operatory te (priorytet 16 w&nbsp;tabeli), zapisywane są za pomocą
+symbolu &bdquo;czterokropka&rdquo; ('
+<FONT COLOR="#000000"><TT>::</TT></FONT>'). Operator zasięgu globalnego
+już znamy (patrz
+rozdział <A HREF="node35.html#zmienne:widzmien">o zasięgu i&nbsp;widoczności deklaracji</A> ).
+Przypomnijmy, że
+<!--O--><span class='zmienna'>::x<!--C--></span>
+ jest nazwą globalnej zmiennej
+
+<!--O--><span class='zmienna'>x<!--C--></span>
+ zadeklarowanej poza wszystkimi funkcjami i&nbsp;klasami. Użycie
+&bdquo;czterokropka&rdquo; jest konieczne tylko wtedy, gdy nazwa (w&nbsp;naszym
+przypadku
+<!--O--><span class='zmienna'>x<!--C--></span>) jest w&nbsp;danym bloku (funkcji) nazwą innej
+zmiennej, lokalnej, która wobec tego przesłoniła zmienną globalną
+o&nbsp;tej samej nazwie.
+
+<P>
+Operatory zasięgu klasy (pozycja pierwsza w&nbsp;tabeli) omówimy w
+  rozdziale o <A HREF="node85.html#chap:klasy">klasach</A> ,
+a&nbsp;przestrzenie nazw
+w&nbsp;rozdziale o <A HREF="node142.html#modul:nmspc">przestrzeniach nazw</A> .
+
+<P>
+
+<H2><A NAME="SECTION001022000000000000000"></A>
+           <A NAME="operat:szesnascie"></A>
+<BR>
+<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Grupa operatorów o&nbsp;priorytecie 15
+</H2>
+
+<P>
+Pierwsze dwa (operator &bdquo;kropka&rdquo; i&nbsp;&bdquo;strzałka&rdquo;, dotyczą struktur
+i&nbsp;klas, poznamy je
+w&nbsp;rozdziale o <A HREF="node83.html#uncs:cstruct">strukturach</A> .
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Operator '
+<FONT COLOR="#000000"><TT>[]</TT></FONT>' (indeksowania)
+<A NAME="9057"></A><A NAME="9058"></A>
+tablicy już znamy
+z&nbsp;rozdziału o <A HREF="node25.html#tabstat:arytm">arytmetyce wskaźników</A> .
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Operator wywołania
+funkcji<A NAME="9065"></A><A NAME="9066"></A>
+oznaczamy nawiasami okrągłymi '
+<FONT COLOR="#000000"><TT>()</TT></FONT>':
+<pre><tt>       <b><font color="#000000">func</font></b><font color="#990000">(</font>k<font color="#990000">,</font> m<font color="#990000">,</font> <font color="#993399">5</font><font color="#990000">)</font>
+</tt></pre>
+Zatem podanie nazwy funkcji z&nbsp;nawiasami okrągłymi
+powoduje wywołanie funkcji (jeśli pojawia się w&nbsp;instrukcji
+wykonywalnej, a&nbsp;nie w&nbsp;definicji lub deklaracji).
+Ale nie zawsze nazwa funkcji występuje
+z&nbsp;nawiasami. Czasem chcemy odnieść się do funkcji jako takiej, jako
+obiektu, a&nbsp;nie powodować jej wywołanie. W takich sytuacjach
+używamy nazwy funkcji bez nawiasów &mdash;&nbsp;ma ona wtedy interpretację
+<SPAN  CLASS="textit">wskaźnika do funkcji</SPAN>. Tego rodzaju wskaźniki omówimy w
+    rozdziale o <A HREF="node71.html#funk:wskazfun">wskaźnikach funkcyjnych</A> .
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Operator konstrukcji wartości (<FONT COLOR="#000000"><TT>Typ(list_expr)</TT></FONT>,
+
+<FONT COLOR="#000000"><TT>Typ{list_expr}</TT></FONT>)
+<A NAME="9082"></A>
+jest nam nieznany. Ponieważ dotyczy klas, omówimy go w
+ rozdziale o <A HREF="node93.html#klasy:tworzob">tworzeniu obiektów</A> .
+Tu tylko wspomnijmy, że w&nbsp;C++ można konstruować obiekty typów
+prostych (<!--O--><span class='typ'>int<!--C--></span>,
+<!--O--><span class='typ'>double<!--C--></span>, ...) tak jakby były one obiektami
+jakiejś klasy. Zatem
+<FONT COLOR="#000000"><TT>int(3)</TT></FONT> kreuje zmienną typu
+<!--O--><span class='typ'>int<!--C--></span>
+
+i&nbsp;inicjuje ją wartością&nbsp;3 &mdash;&nbsp;składnia jest wobec tego taka,
+jak gdybyśmy tworzyli obiekt klasy
+<!--O--><span class='typ'>int<!--C--></span>
+ i&nbsp;wysyłali wartość&nbsp;3
+do konstruktora (tak zwanego konstruktora kopiującego).
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Przyrostkowe operatory zmniejszenia i&nbsp;zwiększenia
+(postdekrementacji i&nbsp;postinkrementacji)
+<A NAME="9095"></A>
+<A NAME="9096"></A>
+zmniejszają (zwiększają) wartość swojego argumentu (który
+wyjątkowo stoi po ich <FONT COLOR="#7b003e"><I>lewej</I></FONT> stronie) o&nbsp;jeden. Czynią to jednak
+<FONT COLOR="#7b003e"><I>po</I></FONT> obliczeniu wartości wyrażenia, w&nbsp;skład którego wchodzą.
+Tak więc po
+<pre><tt>       <font color="#009900">int</font> a <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font>
+       <font color="#009900">int</font> b <font color="#990000">=</font> a<font color="#990000">++;</font>
+</tt></pre>
+wartość
+<!--O--><span class='zmienna'>a<!--C--></span>
+ wynosi&nbsp;2, ale wartość
+<!--O--><span class='zmienna'>b<!--C--></span>
+
+wynosi&nbsp;1, bo w&nbsp;trakcie opracowywania drugiej instrukcji
+<!--O--><span class='zmienna'>a<!--C--></span>
+
+miało wciąż wartość&nbsp;1; zwiększenie
+<!--O--><span class='zmienna'>a<!--C--></span>
+ nastąpi dopiero
+po zakończeniu wykonywania instrukcji przypisania.
+
+<P>
+Argumentem postinkrementacji i&nbsp;postdekrementacji musi zawsze być
+l-wartość; np.
+<pre><tt>       <font color="#990000">(</font>x<font color="#990000">+</font>y<font color="#990000">)++</font>
+</tt></pre>
+nie ma sensu i&nbsp;jest błędne, gdyż wyrażenie
+<FONT COLOR="#000000"><TT>(x+y)</TT></FONT> nie
+jest l-wartością<A NAME="9109"></A> (choć jest p-wartością).
+Tak więc argument operatorów postdekrementacji i&nbsp;postinkrementacji
+musi być l-wartością: ale co z&nbsp;rezultatem działania tego operatora
+na l-wartość? W Javie<A NAME="9110"></A>
+wartości uzyskane za pomocą tych operatorów nigdy same <FONT COLOR="#7b003e"><I>nie</I></FONT>
+są l-wartościami. W C/C++ jest trochę inaczej: dla przyrostkowych
+operatorów zmniejszenia i&nbsp;zwiększenia wynik <FONT COLOR="#7b003e"><I>nie</I></FONT> jest
+l-wartością, ale dla operatorów przedrostkowych wynik <FONT COLOR="#7b003e"><I>jest</I></FONT>
+l-wartością.
+Dlatego
+<pre><tt>       <font color="#009900">int</font> k <font color="#990000">=</font> <font color="#993399">5</font><font color="#990000">;</font>
+       <font color="#009900">int</font> m <font color="#990000">=</font> <font color="#990000">(++</font>k<font color="#990000">)--;</font>
+</tt></pre>
+jest prawidłowe. Wyrażenie w&nbsp;nawiasach jest l-wartością, bo użyty
+został operator preinkrementacji; można było zatem zastosować
+następnie operator postdekrementacji. Wynikiem działania tego z&nbsp;kolei
+operatora nie jest już l-wartość, ale ponieważ użyliśmy jej
+tylko po prawej stronie przypisania, więc wszystko jest w&nbsp;porządku.
+Wartość
+<!--O--><span class='zmienna'>k<!--C--></span>
+ będzie oczywiście wynosić po tym
+przypisaniu&nbsp;5, a&nbsp;wartością zmiennej
+<!--O--><span class='zmienna'>m<!--C--></span>
+ będzie&nbsp;6.
+
+<P>
+Gdybyśmy nie użyli nawiasów
+<pre><tt>       <font color="#009900">int</font> k <font color="#990000">=</font> <font color="#993399">5</font><font color="#990000">;</font>
+       <font color="#009900">int</font> m <font color="#990000">=</font> <font color="#990000">++</font>k<font color="#990000">--;</font> <i><font color="#9A1900">// ZLE !!!</font></i>
+</tt></pre>
+kod byłby błędny: ponieważ priorytet postdekrementacji jest wyższy
+niż preinkrementacji, więc najpierw obliczone byłoby wyrażenie
+
+<FONT COLOR="#000000"><TT>k-</TT></FONT>. Wynik nie byłby l-wartością &mdash;&nbsp;patrz
+rozdział o <A HREF="node38.html#zmienne:lwart">l-wartościach</A>  &mdash;&nbsp;
+więc podziałanie nań operatorem '
+<FONT COLOR="#000000"><TT>++</TT></FONT>' spowodowałoby błąd.
+
+<P>
+Warto pamiętać, że wyrażenie
+<FONT COLOR="#000000"><TT>++w</TT></FONT> <FONT COLOR="#7b003e"><I>nie</I></FONT> jest
+całkowicie równoważne instrukcji
+<FONT COLOR="#000000"><TT>w=w+1</TT></FONT>. Ta druga forma jest
+normalną instrukcją przypisania, a&nbsp;zatem najpierw zostanie obliczona
+wartość wyrażenia po prawej stronie, a&nbsp;potem lokalizacja
+l-wartości po lewej stronie. Zatem jeśli
+<!--O--><span class='zmienna'>w<!--C--></span>
+ jest wyrażeniem
+złożonym (np.&nbsp;zawiera wywołania funkcji), to wyrażenie to będzie
+obliczane dwukrotnie. Natomiast podczas opracowywania wyrażenia
+
+<FONT COLOR="#000000"><TT>++w</TT></FONT>, samo
+<!--O--><span class='zmienna'>w<!--C--></span>
+ będzie obliczane jednokrotnie.
+Rzadko ma to jakieś znaczenie, ale czasem zrozumienie tego może nas
+ustrzec przed trudno wykrywalnymi błędami.
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Operator identyfikacji typu
+
+<!--O--><span class='klucz'>typeid<!--C--></span><A NAME="9140"></A>
+(niewymieniony w&nbsp;tableki)
+pozwala na uzyskanie
+identyfikatora typu podczas kompilacji, a&nbsp;więc statycznie,
+jak również identyfikatora typu obiektu (ogólnie
+p-wartości) w&nbsp;czasie wykonania programu, a&nbsp;więc dynamicznie
+(RTTI;<A NAME="9141"></A> <FONT COLOR="#7b003e"><I>run-time type
+identification</I></FONT>). Ten temat omówimy bardziej szczegółowo w
+rozdziale o <A HREF="node147.html#chap:rtti">RTTI</A> ,
+ale jeden przykład zastosowania tego operatora podany jest poniżej
+w programie <A HREF="#sizes.cpp">
+<!--O--><span class='plik'>sizes.cpp<!--C--></span></A>.
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Operatory <FONT COLOR="#7b003e"><B>konwersji</B></FONT> (<FONT COLOR="#7b003e"><B>rzutowania</B></FONT>),
+równiez niewymienione w&nbsp;tabeli:
+<A NAME="9153"></A>
+<A NAME="9154"></A>
+<A NAME="9155"></A>
+<A NAME="9156"></A>
+
+<!--O--><span class='klucz'>const_cast<!--C--></span>,
+<!--O--><span class='klucz'>static_cast<!--C--></span>,
+<!--O--><span class='klucz'>dynamic_cast<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='klucz'>reinterpret_cast<!--C--></span>,
+pozwalają na konwersję wartości jednego typu
+na wartość innego typu. Ponieważ stosowanie konwersji często,
+choć nie zawsze, świadczy o&nbsp;złej konstrukcji programu i&nbsp;stwarza
+okazję do użycia błędnych lub zależnych od implementacji
+konstrukcji programistycznych, nadano tym operatorom celowo
+tak długą i&nbsp;niewygodną do pisania formę. Konwersje rozpatrzymy
+w&nbsp;rozdziale im <A HREF="node119.html#chap:konw">poświęconym</A> .
+
+<P>
+
+<H2><A NAME="SECTION001023000000000000000"></A>
+              <A NAME="operat:pietnascie"></A>
+<BR>
+<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Grupa operatorów o&nbsp;priorytecie 14
+</H2>
+
+<P>
+Pierwsze trzy z&nbsp;opertatorów tej grupy
+dotyczą pobierania rozmiaru za pomocą operatora
+
+<!--O--><span class='klucz'>sizeof<!--C--></span>.<A NAME="9170"></A><A NAME="9171"></A>
+Reultat jest typu
+<!--O--><span class='typ'>size_t<!--C--></span>
+
+<A NAME="9173"></A> (który jest tożsamy z&nbsp;pewnym typem całkowitym
+bez znaku, np.&nbsp;
+<!--O--><span class='typ'>unsigned long<!--C--></span>). Operator ten jest jednoargumentowy.
+Argumentem może być nazwa typu (w nawiasie okrągłym) lub wyrażenie (nawias
+jest wtedy niekonieczny) albo tak zwany pakiet
+(w&nbsp;ostatnim przypadku operator zapisujemy z&nbsp;trzema kropkami:
+
+<!--O--><span class='klucz'>sizeof...<!--C--></span>).
+Rozpatrzmy przykład ilustrujący również użycie
+operatora
+<!--O--><span class='klucz'>typeid<!--C--></span>:
+<BR><A NAME="sizes.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">55</SPAN>:</SPAN>
+      <A NAME="tex2html59"
+  HREF="source-files/sizes.cpp">
+<!--O--><span class='downl'>sizes.cpp<!--C--></span></A>
+<A NAME="9910"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Operator <SPAN  CLASS="textsl">sizeof</SPAN></SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;typeinfo&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">typedef</font></b> <font color="#009900">int</font> TABINT15<font color="#990000">[</font><font color="#993399">15</font><font color="#990000">];</font>                               <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">     6.  </font>
+ <font SIZE="-2" color="black">     7.  </font><font color="#009900">void</font> <b><font color="#000000">siz</font></b><font color="#990000">(</font><font color="#008080">TABINT15</font> t1<font color="#990000">,</font> TABINT15<font color="#990000">&amp;</font> t2<font color="#990000">)</font> <font color="#FF0000">{</font>                   <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">     8.  </font>   cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"G. t1 w siz: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b> t1 <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>   cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"H. t2 w siz: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b> t2 <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    11.  </font>
+ <font SIZE="-2" color="black">    12.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    13.  </font>   <font color="#008080">TABINT15</font> tab1<font color="#990000">;</font>                                       <span class="ding">&#x278C;</span>
+ <font SIZE="-2" color="black">    14.  </font>   <font color="#009900">int</font>      tab2<font color="#990000">[</font><font color="#993399">15</font><font color="#990000">];</font>                                   <span class="ding">&#x278D;</span>
+ <font SIZE="-2" color="black">    15.  </font>   <font color="#009900">int</font>     <font color="#990000">*</font>tab3 <font color="#990000">=</font> tab2<font color="#990000">;</font>                                <span class="ding">&#x278E;</span>
+ <font SIZE="-2" color="black">    16.  </font>
+ <font SIZE="-2" color="black">    17.  </font>   <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>tab1<font color="#990000">)</font> <font color="#990000">==</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>tab2<font color="#990000">))</font>
+ <font SIZE="-2" color="black">    18.  </font>      cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"A. Typy tab1 i tab2 takie same"</font>     <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font>   <b><font color="#0000FF">else</font></b>
+ <font SIZE="-2" color="black">    20.  </font>      cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"A. Typy tab1 i tab2 nie takie same"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    21.  </font>
+ <font SIZE="-2" color="black">    22.  </font>   <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>tab2<font color="#990000">)</font> <font color="#990000">==</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>tab3<font color="#990000">))</font>
+ <font SIZE="-2" color="black">    23.  </font>      cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"B. Typy tab2 i tab3 takie same"</font>     <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    24.  </font>   <b><font color="#0000FF">else</font></b>
+ <font SIZE="-2" color="black">    25.  </font>      cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"B. Typy tab2 i tab3 nie takie same"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    26.  </font>
+ <font SIZE="-2" color="black">    27.  </font>   cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"C. TABINT15: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>TABINT15<font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font> <span class="ding">&#x278F;</span>
+ <font SIZE="-2" color="black">    28.  </font>   cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"D. tab1    : "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b> tab1      <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font> <span class="ding">&#x2790;</span>
+ <font SIZE="-2" color="black">    29.  </font>   cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"E. tab2    : "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>tab2<font color="#990000">)</font>     <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font> <span class="ding">&#x2791;</span>
+ <font SIZE="-2" color="black">    30.  </font>   cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"F. tab3    : "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b> tab3      <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font> <span class="ding">&#x2792;</span>
+ <font SIZE="-2" color="black">    31.  </font>   <b><font color="#000000">siz</font></b><font color="#990000">(</font>tab2<font color="#990000">,</font> tab2<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    32.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Wynik tego programu
+<PRE>
+    A. Typy tab1 i tab2 takie same
+    B. Typy tab2 i tab3 nie takie same
+    C. TABINT15: 60
+    D. tab1    : 60
+    E. tab2    : 60
+    F. tab3    : 8
+    G. t1 w siz: 8
+    H. t2 w siz: 60
+</PRE>
+ilustruje warte zrozumienia własności C/C++.
+
+<P>
+Na początku dołączamy plik nagłówkowy
+<!--O--><span class='plik'>typeinfo<!--C--></span>,<A NAME="9183"></A>
+aby mieć dostęp do narzędzi związanych z&nbsp;identyfikacją typów
+(patrz rozdział o <A HREF="node147.html#chap:rtti">RTTI</A> ).
+
+<P>
+W linii&nbsp;<span class="ding">&#x278A;</span> wprowadzamy, za pomocą znanej już nam instrukcji
+
+<!--O--><span class='klucz'>typedef<!--C--></span>,<A NAME="9191"></A><A NAME="9192"></A>
+inną nazwę typu &bdquo;piętnastoelementowa
+tablica liczb całkowitych&rdquo; (patrz
+rozdział o&nbsp;instrukcji <A HREF="node32.html#typypoch:typdef">typedef</A> ).
+
+<P>
+Jak widać z&nbsp;linii&nbsp;<span class="ding">&#x278F;</span> i&nbsp;z&nbsp;pierwszej linii
+wydruku, operator
+<!--O--><span class='klucz'>sizeof<!--C--></span>
+ prawidłowo rozpoznał rozmiar
+typu
+<!--O--><span class='typ'>TABINT15<!--C--></span>. Zauważmy też, że nie można tu pominąć
+nawiasów, bo
+<!--O--><span class='typ'>TABINT15<!--C--></span>
+ jest nazwą typu.
+
+<P>
+W liniach&nbsp;<span class="ding">&#x278C;</span> i&nbsp;<span class="ding">&#x278D;</span> definiujemy tablice
+<!--O--><span class='zmienna'>tab1<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='zmienna'>tab2<!--C--></span>
+ na
+dwa sposoby &mdash;&nbsp;za pomocą wprowadzonej nazwy
+<!--O--><span class='typ'>TABINT15<!--C--></span>
+
+i&nbsp;bezpośrednio. Porównując typy tych zmiennych
+widzimy, że rzeczywiście są one takie same (linia 'A' wydruku).
+
+<P>
+W linii&nbsp;<span class="ding">&#x278E;</span> definiujemy zmienną
+<!--O--><span class='zmienna'>tab3<!--C--></span>
+ typu
+<!--O--><span class='typ'>int*<!--C--></span>
+
+i&nbsp;przypisujemy do niej wartość zmiennej
+<!--O--><span class='zmienna'>tab2<!--C--></span>. Przypisanie
+jest prawidłowe, ale nie zapominajmy, że zachodzi przy tym konwersja
+standardowa: typy
+<!--O--><span class='zmienna'>tab2<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>tab3<!--C--></span>
+ nie są takie same,
+co widzimy z&nbsp;linii 'B' wydruku.
+
+<P>
+W liniach&nbsp;<span class="ding">&#x278F;</span>-<span class="ding">&#x2792;</span> drukujemy rozmiary typu
+<!--O--><span class='typ'>TABINT15<!--C--></span>
+ i&nbsp;zmiennych
+
+<!--O--><span class='zmienna'>tab1<!--C--></span>,
+<!--O--><span class='zmienna'>tab2<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>tab3<!--C--></span>.
+Wszystkie rozmiary, za wyjątkiem
+<!--O--><span class='zmienna'>tab3<!--C--></span>, wynoszą&nbsp;60,
+co odpowiada tablicy piętnastu czterobajtowych liczb.
+Natomiast rozmiar
+<!--O--><span class='zmienna'>tab3<!--C--></span>
+ jest&nbsp;8, gdyż jest to zmienna
+typu wskaźnikowego, a&nbsp;nie tablicowego.
+
+<P>
+W ostatniej linii posyłamy <FONT COLOR="#7b003e"><I>tę samą</I></FONT> tablicę
+<!--O--><span class='zmienna'>tab2<!--C--></span>
+
+poprzez dwa argumenty do funkcji
+<!--O--><span class='funkcja'>siz<!--C--></span>. Pierwszy parametr
+funkcji jest typu
+<!--O--><span class='typ'>TABINT15<!--C--></span>, więc wydawałoby się,
+że funkcja &bdquo;wie&rdquo;, że argument będzie tablicą. Drukując jednak
+(linia 'G' wydruku) wewnątrz funkcji rozmiar zmiennej
+<!--O--><span class='zmienna'>t1<!--C--></span>,
+widzimy, że jest to wskaźnik o&nbsp;rozmiarze&nbsp;8 &mdash;&nbsp;jest tak,
+gdyż przy wysyłaniu
+<!--O--><span class='zmienna'>tab2<!--C--></span>
+ do funkcji przez wartość
+i&nbsp;tak zmienna została zrzutowana do typu wskaźnikowego
+(na stosie został położony adres pierwszego elementu tablicy
+i&nbsp;<FONT COLOR="#7b003e"><I>nic więcej</I></FONT>).
+
+<P>
+Drugi parametr funkcji
+<!--O--><span class='funkcja'>siz<!--C--></span>
+ jest zadeklarowany jako
+referencja. Teraz żadnej konwersji nie ma, bo nie jest w&nbsp;ogóle
+tworzona żadna zmienna lokalna, której należałoby przypisać
+wartość argumentu. Wewnątrz funkcji
+<!--O--><span class='zmienna'>t2<!--C--></span>
+ jest teraz inną
+nazwą dokładnie tej samej zmiennej, która w&nbsp;funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>
+
+nazywa się
+<!--O--><span class='zmienna'>tab2<!--C--></span>. Zatem i&nbsp;informacja o&nbsp;typie jest ta sama
+i&nbsp;'
+<FONT COLOR="#000000"><TT>sizeof t2</TT></FONT>' drukuje 60 (linia 'H' wydruku).
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Przedrostkowe operatory zmniejszenia i&nbsp;zwiększenia
+<A NAME="9229"></A>
+<A NAME="9230"></A>
+<A NAME="9231"></A>
+<A NAME="9232"></A>
+(predekrementacji i&nbsp;preinkrementacji) działają podobnie do przyrostkowych
+operatorów zmniejszenia i&nbsp;zwiększenia. Są jednak ważne
+różnice: operatory te zmniejszają (zwiększają) swój argument
+<FONT COLOR="#7b003e"><I>przed</I></FONT> jego użyciem do obliczenia wartości
+wyrażenia, w&nbsp;skład którego wchodzą.
+Tak więc po
+<pre><tt>       <font color="#009900">int</font> a <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font>
+       <font color="#009900">int</font> b <font color="#990000">=</font> <font color="#990000">++</font>a<font color="#990000">;</font>
+</tt></pre>
+wartość
+<!--O--><span class='zmienna'>a<!--C--></span>
+ wynosi&nbsp;2, ale wartość&nbsp;
+<!--O--><span class='zmienna'>b<!--C--></span>
+
+wynosi również 2, bo w&nbsp;trakcie opracowywania drugiej instrukcji
+zmienna
+<!--O--><span class='zmienna'>a<!--C--></span>
+ została zwiększona jeszcze przed wykonaniem
+przypisania. Wynikiem działania operatora preinkrementacji
+lub predekrementacji <FONT COLOR="#7b003e"><I>jest</I></FONT> l-wartość (pamiętamy, że tak
+<FONT COLOR="#7b003e"><I>nie</I></FONT> było dla
+operatorów postinkrementacji lub postdekrementacji) &mdash;&nbsp;
+tak więc wyrażenie
+<FONT COLOR="#000000"><TT>++++a</TT></FONT> byłoby legalne.
+
+<P>
+Operatory negacji:
+bitowej<A NAME="9243"></A>
+i&nbsp;logicznej<A NAME="9244"></A>
+omówimy poniżej razem z&nbsp;innymi operatorami logicznymi i&nbsp;bitowymi.
+
+<P>
+Operator jednoargumentowy '
+<FONT COLOR="#000000"><TT>+</TT></FONT>'
+jest<A NAME="9247"></A><A NAME="9248"></A>
+właściwie operatorem identycznościowym,<A NAME="9249"></A>
+czyli takim, który &bdquo;nic nie robi&rdquo; (ang.&nbsp;<FONT COLOR="#7b003e"><I>no-op</I></FONT>). Istnieje tylko
+dla wygody, aby wyrażenia typu '
+<FONT COLOR="#000000"><TT>k = +5</TT></FONT>' miały sens.
+Operatory wyłuskania adresu i&nbsp;dereferencji (<FONT COLOR="#000000"><TT>&amp;</TT></FONT> i
+<FONT COLOR="#000000"><TT>*</TT></FONT>)
+były już omówione w
+rozdziale na temat <A HREF="node14.html#chap:typydan">typów danych</A> .
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Operatory
+<!--O--><span class='klucz'>new<!--C--></span>
+ i&nbsp;
+<!--O--><span class='klucz'>delete<!--C--></span>
+ służą do
+dynamicznego alokowania i&nbsp;zwalniania pamięci: będą omówione
+w&nbsp;rozdziale o <A HREF="node74.html#chap:pam">zarządzaniu pamięcią</A> .
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Ostatni operator z&nbsp;tej grupy, oznaczany parą nawiasów okrągłych,
+to operator rzutowania.<A NAME="9271"></A>
+Jest on operatorem
+jednoargumentowym: wynikiem działania tego operatora na p-wartość
+pewnego typu jest odpowiadająca tej wartości
+p-wartość innego typu &mdash;&nbsp;tego wymienionego w&nbsp;nawiasie.
+Z operatora tego należy korzystać oględnie;
+w większości przypadków jego zastosowanie świadczy raczej
+o&nbsp;złym stylu programowania. Czasem jest jednak przydatny.
+Na przykład w&nbsp;drugiej instrukcji fragmentu
+<pre><tt>       <font color="#009900">double</font> x <font color="#990000">=</font> <font color="#993399">7</font><font color="#990000">;</font>
+       <font color="#009900">int</font> k <font color="#990000">=</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)</font>x<font color="#990000">;</font>
+</tt></pre>
+rzutowanie wartości zmiennej
+<!--O--><span class='zmienna'>x<!--C--></span>
+ jest wskazane,
+gdyż wartość ta, jako wartość szerszego typu, może być
+wpisana do zmiennej typu węższego, jakim jest typ
+<!--O--><span class='typ'>int<!--C--></span>, tylko ze
+stratą informacji (precyzji). Choć nie jest to błąd, to kompilator
+zwykle wypisuje ostrzeżenia; jeśli zastosujemy jawne rzutowanie,
+ostrzeżeń nie będzie.
+
+<P>
+Rzutowanie zawsze działa na p-wartość i&nbsp;w wyniku
+daje inną p-wartość, ale nigdy l-wartość. W szczególności
+rzutowanie nie zmienia typu żadnej zmiennej &mdash;&nbsp;
+typu istniejącej zmiennej zmienić się nie da!
+
+<P>
+Zamiast operatora rzutowania w&nbsp;C++ zaleca się stosowanie
+bezpieczniejszych operatorów konwersji,<A NAME="9276"></A>
+wymienionych w&nbsp;tabeli w&nbsp;grupie odpowiadjącej priorytetowi&nbsp;16.
+Omówimy je bardziej szczegółowo
+w&nbsp;rozdziale im <A HREF="node119.html#chap:konw">poświęconym</A> .
+
+<P>
+
+<H2><A NAME="SECTION001024000000000000000"></A>
+              <A NAME="operat:czternascie"></A>
+<BR>
+<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN> Grupa operatorów o&nbsp;priorytecie 13
+</H2>
+
+<P>
+Należą do tej grupy dwa operatory wyboru składowej,
+które omówimy w&nbsp;rozdziałach na temat klas w&nbsp;C++
+(rozdział o <A HREF="node102.html#klasyd:wsklas">wskaźnikach na składowe</A> ).
+
+<P>
+
+<H2><A NAME="SECTION001025000000000000000"></A>
+              <A NAME="operat:arytmetyczne"></A>
+<BR>
+<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN> Operatory arytmetyczne
+</H2>
+
+<P>
+Wymienione<A NAME="9293"></A> w&nbsp;tabeli operatory arytmetyczne
+<A NAME="9294"></A>
+mają<A NAME="9295"></A>
+oczywiste<A NAME="9296"></A>
+znaczenie i&nbsp;ich działanie jest niemal takie samo jak
+w&nbsp;większości innych języków. Występują czasem drobne różnice:
+np.&nbsp;w Javie operator reszty<A NAME="9297"></A>
+'<TT>%</TT>' może mieć dowolne agumenty numeryczne, również typu
+
+<!--O--><span class='typ'>double<!--C--></span>.
+W&nbsp;C/C++ operator ten wymaga argumentów typu całkowitego.
+Pewien kłopot mogą sprawiać wyrażenia z&nbsp;wartościami ujemnymi jako
+argumentami. Wiemy, że dzielenie liczb typu całkowitego daje w&nbsp;wyniku
+liczbę całkowitą, czyli ewentualna część ułamkowa jest obcinana.
+Jeśli wynik jest dodatni, to dokładna wartość ilorazu jest obcinana
+w dół, czyli w&nbsp;kierunku zera, natomiast jeśli wynik jest ujemny,
+to obcięcie jest w&nbsp;górę, a&nbsp;więc też w&nbsp;kierunku zera.
+Dla operatora reszty spełniona jest zawsze zasada
+<pre><tt>       a <font color="#990000">=</font>  <font color="#990000">(</font>a<font color="#990000">/</font>b<font color="#990000">)*</font>b <font color="#990000">+</font> a<font color="#990000">%</font>b
+</tt></pre>
+dla
+<!--O--><span class='zmienna'>b<!--C--></span>
+ różnego od zera. Wynika z&nbsp;niej, przy założeniu,
+że obcinanie
+w&nbsp;dzieleniu całkowitoliczbowym jest zawsze w&nbsp;kierunku zera,
+zasada następująca: wartość <code>a%b</code> jest równa co do modułu
+wartości <code>|a|%|b|</code> i&nbsp;ma znak taki, jaki znak ma <code>a</code>
+(kreski oznaczają wartość bezwzględną). Ilustruje to poniższy
+programik:
+<BR><A NAME="mod.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">56</SPAN>:</SPAN>
+      <A NAME="tex2html60"
+  HREF="source-files/mod.cpp">
+<!--O--><span class='downl'>mod.cpp<!--C--></span></A>
+<A NAME="9987"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Operator reszty</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">int</font>    i<font color="#990000">,</font> j<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>
+ <font SIZE="-2" color="black">     7.  </font>    i <font color="#990000">=</font> <font color="#993399">19</font><font color="#990000">;</font> j <font color="#990000">=</font> <font color="#993399">7</font><font color="#990000">;</font> cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" 19 /  7 = "</font> <font color="#990000">&lt;&lt;</font> i<font color="#990000">/</font>j <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>    i <font color="#990000">=-</font><font color="#993399">19</font><font color="#990000">;</font> j <font color="#990000">=</font> <font color="#993399">7</font><font color="#990000">;</font> cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"-19 /  7 = "</font> <font color="#990000">&lt;&lt;</font> i<font color="#990000">/</font>j <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    i <font color="#990000">=</font> <font color="#993399">19</font><font color="#990000">;</font> j <font color="#990000">=-</font><font color="#993399">7</font><font color="#990000">;</font> cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" 19 / -7 = "</font> <font color="#990000">&lt;&lt;</font> i<font color="#990000">/</font>j <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>    i <font color="#990000">=-</font><font color="#993399">19</font><font color="#990000">;</font> j <font color="#990000">=-</font><font color="#993399">7</font><font color="#990000">;</font> cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"-19 / -7 = "</font> <font color="#990000">&lt;&lt;</font> i<font color="#990000">/</font>j <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font>
+ <font SIZE="-2" color="black">    12.  </font>    i <font color="#990000">=</font> <font color="#993399">19</font><font color="#990000">;</font> j <font color="#990000">=</font> <font color="#993399">7</font><font color="#990000">;</font> cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" 19 %  7 = "</font> <font color="#990000">&lt;&lt;</font> i<font color="#990000">%</font>j <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>    i <font color="#990000">=-</font><font color="#993399">19</font><font color="#990000">;</font> j <font color="#990000">=</font> <font color="#993399">7</font><font color="#990000">;</font> cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"-19 %  7 = "</font> <font color="#990000">&lt;&lt;</font> i<font color="#990000">%</font>j <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    14.  </font>    i <font color="#990000">=</font> <font color="#993399">19</font><font color="#990000">;</font> j <font color="#990000">=-</font><font color="#993399">7</font><font color="#990000">;</font> cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" 19 % -7 = "</font> <font color="#990000">&lt;&lt;</font> i<font color="#990000">%</font>j <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>    i <font color="#990000">=-</font><font color="#993399">19</font><font color="#990000">;</font> j <font color="#990000">=-</font><font color="#993399">7</font><font color="#990000">;</font> cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"-19 % -7 = "</font> <font color="#990000">&lt;&lt;</font> i<font color="#990000">%</font>j <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+którego wynikiem jest
+<PRE>
+     19 /  7 = 2
+    -19 /  7 = -2
+     19 / -7 = -2
+    -19 / -7 = 2
+     19 %  7 = 5
+    -19 %  7 = -5
+     19 % -7 = 5
+    -19 % -7 = -5
+</PRE>
+Ta zasada będzie inna, jeśli obcinanie w&nbsp;dzieleniu całkowitoliczbowym
+jest zawsze w&nbsp;dół, a&nbsp;nie w&nbsp;kierunku zera (tak może sie zdarzyć dla starych
+kompilatorów). Dlatego lepiej unikać stosowania operatora reszty
+dla liczb ujemnych.
+
+<P>
+
+<H2><A NAME="SECTION001026000000000000000"></A>
+              <A NAME="operat:relacyjne"></A>
+<BR>
+<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN> Operatory relacyjne i&nbsp;porównania
+</H2>
+
+<P>
+Operatory relacyjne<A NAME="9310"></A>
+('
+<FONT COLOR="#000000"><TT>&lt;</TT></FONT>', '
+<FONT COLOR="#000000"><TT>&lt;=</TT></FONT>', '
+<FONT COLOR="#000000"><TT>&gt;</TT></FONT>',
+'
+<FONT COLOR="#000000"><TT>&gt;=</TT></FONT>')
+i&nbsp;porównania<A NAME="9319"></A>
+('
+<FONT COLOR="#000000"><TT>==</TT></FONT>', '
+<FONT COLOR="#000000"><TT>!=</TT></FONT>')  mają oczywistą
+interpretację. Wyrażenie '
+<!--O--><span class='zmienna'>a<!--C--></span>
+
+<FONT COLOR="#000000"><TT>==</TT></FONT>
+<!--O--><span class='zmienna'>b<!--C--></span>' ma
+wartość logiczną odpowiadającą na pytanie <FONT COLOR="#7b003e"><I>czy wartość</I></FONT>
+
+<!--O--><span class='zmienna'>a<!--C--></span>
+ <FONT COLOR="#7b003e"><I>jest równa wartości</I></FONT>
+<!--O--><span class='zmienna'>b<!--C--></span>. Wyrażenie
+'
+<!--O--><span class='zmienna'>a<!--C--></span>
+
+<FONT COLOR="#000000"><TT>!=</TT></FONT>
+<!--O--><span class='zmienna'>b<!--C--></span>' ma wartość logiczną
+odpowiadającą na pytanie <FONT COLOR="#7b003e"><I>czy wartość</I></FONT>
+<!--O--><span class='zmienna'>a<!--C--></span>
+
+<FONT COLOR="#7b003e"><I>jest różna od wartości</I></FONT>
+<!--O--><span class='zmienna'>b<!--C--></span>.
+Argumentami mogą być dwa skalary,
+czyli p-wartości liczbowe, lub (choć nie zawsze) dwa adresy
+(wartości zmiennych wskaźnikowych lub wynik operacji wyłuskania adresu).
+Jest to nieco inaczej niż w&nbsp;Javie,<A NAME="9340"></A>
+gdzie adresy (czy raczej odniesienia)
+mogły być argumentami wyłącznie operatorów porównania
+('
+<FONT COLOR="#000000"><TT>==</TT></FONT>' i&nbsp;'
+<FONT COLOR="#000000"><TT>!=</TT></FONT>'), ale nie operatorów relacyjnych.
+W C++ można porównywać adresy za pomocą operatorów relacyjnych pod
+warunkiem, że są to adresy elementów tej samej tablicy.
+
+<P>
+Wynikiem operacji jest wartość logiczna
+<!--O--><span class='klucz'>true<!--C--></span>
+
+lub
+<!--O--><span class='klucz'>false<!--C--></span>. Jak mówiliśmy (patrz
+rozdziału o <A HREF="node18.html#typydan:logika">typie logicznym</A> ),
+wartości logiczne reprezentowane są w&nbsp;zasadzie
+przez wartości całkowite: wartość&nbsp;0 jest równoważna
+<!--O--><span class='klucz'>false<!--C--></span>,
+a dowolna wartość niezerowa
+<!--O--><span class='typ'>true<!--C--></span>. Obowiązuje to
+również dla wartości wskaźnikowych: wartość
+pusta (<!--O--><span class='klucz'>nullptr<!--C--></span>) jest interpretowana jako
+<!--O--><span class='klucz'>false<!--C--></span>, a
+każda inna jako
+<!--O--><span class='klucz'>true<!--C--></span>.
+
+<P>
+
+<H2><A NAME="SECTION001027000000000000000"></A>
+              <A NAME="operat:bitowe"></A>
+<BR>
+<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN> Operatory bitowe
+</H2>
+
+<P>
+Operatory bitowe wymienione są w&nbsp;tabeli na pozycjach odpowiadających
+priorytetom 11 (przesunięcia bitowe), 8, 7 i&nbsp;6.
+Argumentami muszą być wartości całkowite, wynik też jest typu całkowitego.
+Obowiązują przy tym normalne reguły konwersji argumentów do typu wspólnego.
+
+<P>
+Operatory bitowe nie &bdquo;interesują&rdquo; się wartościa liczbową
+argumentów, ale ich reprezentacją bitową. Przypomnijmy, że
+zwyczajowo numeruje się bity reprezentujące wartości zmiennych,
+poczynając od zera, od bitu najmniej znaczącego (odpowiadającego
+współczynnikowi przy zerowej potędze dwójki) do bitu najbardziej
+znaczącego. Reprezentując graficznie układ bitów, bit zerowy
+umieszcza się po prawej stronie, a&nbsp;bit najbardziej znaczący po lewej
+(patrz
+rozdział o <A HREF="node16.html#typydan:typycalk">typach całkowitych</A> ).
+
+<P>
+Rozpatrzmy zatem bardziej szczegółowo działanie poszczególnych
+operatorów bitowych na wartości liczbowe. Jeden z&nbsp;nich &mdash;&nbsp;negacja
+bitowa &mdash;&nbsp;jest jednoargumentowy, pozostałe są dwuargumentowe.
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Operator bitowej negacji ('<SPAN CLASS="MATH">&#8764;</SPAN>'),
+<A NAME="9366"></A>
+działając na wartość całkowitą zwraca
+nową wartość, w&nbsp;której wszystkie bity ulegają odwróceniu:
+tam, gdzie w&nbsp;argumencie był
+
+<P>
+<DIV ALIGN="CENTER">
+<IMG
+  WIDTH="253" HEIGHT="86" ALIGN="BOTTOM" BORDER="0"
+ SRC="./negacja.png"
+ ALT="Image negacja">
+
+</DIV>
+bit ustawiony (czyli miał umowną
+wartość 1), w&nbsp;wartości wynikowej będzie on
+nieustawiony (co
+odpowiada umownej wartości 0) &mdash;&nbsp;jak na rysunku, gdzie dla
+uproszczenia zilustrowane jest działanie opertatora negacji
+bitowej dla wartości typu
+<!--O--><span class='typ'>char<!--C--></span>, a&nbsp;więc jednobajtowej
+(ośmiobitowej). Oczywiście negacja jest inwolutywna, czyli dwukrotne
+jej zastosowanie prowadzi do wartości wyjściowej.
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Alternatywa bitowa<A NAME="9369"></A>
+('<SPAN CLASS="MATH">|</SPAN>') jest operatorem dwuargumentowym: dla kolejnych
+pozycji sprawdzane są pojedyncze bity w&nbsp;obu argumentach i&nbsp;obliczana
+ich suma logiczna: w&nbsp;wyniku bit na odpowiadającej pozycji jest
+jedynką (bit ustawiony), jeśli w&nbsp;którymkolwiek argumencie bit
+na tej pozycji był ustawiony, a&nbsp;zero, gdy w&nbsp;obu argumentach na tej
+pozycji również występowało zero (jak na rysunku poniżej).
+<DIV ALIGN="CENTER">
+<IMG
+  WIDTH="273" HEIGHT="136" ALIGN="BOTTOM" BORDER="0"
+ SRC="./alternatywa.png"
+ ALT="Image alternatywa">
+
+</DIV>
+Alternatywa bitowa (tzw.&nbsp;ORowanie) jest często stosowana do
+ustawiania najrozmaitszych opcji. Na przykład w&nbsp;C++, otwarte
+do czytania lub pisania pliki mają szereg trybów, którym odpowiadają
+pewne stałe całkowite, np.&nbsp;
+<!--O--><span class='zmienna'>ios::in<!--C--></span>,
+<!--O--><span class='zmienna'>ios::out<!--C--></span>,
+zdefiniowane w&nbsp;klasie
+<!--O--><span class='klasa'>ios<!--C--></span>
+ (dlatego odwołujemy się do nich
+poprzez operator zakresu klasy &mdash;&nbsp;czterokropek).
+W programie <A HREF="#bits.cpp">
+<!--O--><span class='plik'>bits.cpp<!--C--></span></A> drukujemy reprezentację
+bitową kilku tego rodzaju stałych. Widzimy, że są to pełne potęgi
+dwójki, a&nbsp;więc w&nbsp;ich reprezentacji bitowej występuje tylko jedna
+jedynka na odpowiedniej pozycji &mdash;&nbsp;dla
+<!--O--><span class='zmienna'>ios::out<!--C--></span>
+ na
+pozycji&nbsp;4, dla
+<!--O--><span class='zmienna'>ios::app<!--C--></span>
+ na pozycji&nbsp;0 itd.
+Zatem na przykład stałą określającą tryb
+otwartego pliku jako pliku jednocześnie do pisania i&nbsp;do czytania
+będzie
+<!--O--><span class='zmienna'>ios::in <SPAN CLASS="MATH">|</SPAN> ios::out<!--C--></span>
+ i&nbsp;będzie zawierać
+jedynki na pozycjach 3 i&nbsp;4 (konkretne pozycje mogą
+zależeć od implementacji &mdash;&nbsp;należy zawsze odwoływać się do
+tych stałych poprzez ich nazwy).
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Koniunkcja bitowa<A NAME="9379"></A>
+('&amp;') jest też operatorem dwuargumentowym: dla kolejnych
+pozycji sprawdzane są pojedyncze bity w&nbsp;obu argumentach i&nbsp;obliczany
+ich iloczyn logiczny: w&nbsp;wyniku bit na odpowiadającej pozycji jest
+jedynką (bit ustawiony), jeśli w&nbsp;obu argumentach bit
+na tej pozycji był ustawiony, a&nbsp;zero, gdy w&nbsp;którymkolwiek
+z&nbsp;argumentów na tej pozycji występowało zero (patrz rysunek).
+<DIV ALIGN="CENTER">
+<IMG
+  WIDTH="280" HEIGHT="136" ALIGN="BOTTOM" BORDER="0"
+ SRC="./koniunkcja.png"
+ ALT="Image koniunkcja">
+
+</DIV>
+Koniunkcja bitowa (tzw.&nbsp;ANDowanie) jest często stosowana do
+tzw.&nbsp;maskowania. Wspomnieliśmy, że stała określająca tryb
+pliku ma na pozycji trzeciej (licząc od zera) jedynkę, jeśli
+ustawiony plik został otwarty w&nbsp;trybie
+<!--O--><span class='zmienna'>in<!--C--></span>, a&nbsp;zero,
+jeśli nie (co to dokładnie znaczy, dowiemy się w
+     rozdzialo o <A HREF="node103.html#chap:io">operacjach we/wy</A> ).
+
+<P>
+Jeśli stała określająca tryb nazywa się
+<!--O--><span class='zmienna'>tryb<!--C--></span>, to
+maskowanie jej ze stałą 8 (<SPAN CLASS="MATH">= 2<SUP>3</SUP></SPAN>) odpowie na pytanie, czy bit
+
+<!--O--><span class='zmienna'>in<!--C--></span>
+ jest czy nie jest ustawiony. Reprezentacja 8 składa
+się z&nbsp;samych zer, z&nbsp;wyjątkiem pozycji trzeciej
+(czwarty bit od prawej), na której bit
+jest ustawiony. Zatem obliczając koniunkcję dostaniemy na wszystkich
+innych pozycjach na pewno zero, na pozycji czwartej zaś jedynkę,
+jeśli w&nbsp;
+<!--O--><span class='zmienna'>tryb<!--C--></span>
+ ten bit był ustawiony, a&nbsp;zero, jeśli nie był.
+Zatem wartość wyrażenia
+<!--O--><span class='zmienna'>tryb &amp; 8<!--C--></span>
+ będzie niezerowa
+wtedy i&nbsp;tylko wtedy, jeśli bit
+<!--O--><span class='zmienna'>in<!--C--></span>
+ był w&nbsp;zmiennej
+
+<!--O--><span class='zmienna'>tryb<!--C--></span>
+ ustawiony, niezależnie od stanu innych bitów w&nbsp;tej
+zmiennej.
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Operator <FONT COLOR="#7b003e"><B>bitowej różnicy symetrycznej</B></FONT>
+<A NAME="9395"></A>
+('&#94;') jest też operatorem dwuargumentowym: dla kolejnych
+pozycji sprawdzane są pojedyncze bity w&nbsp;obu argumentach i&nbsp;obliczana
+jest ich różnica symetryczna: wynikowy bit na odpowiadającej pozycji
+jest jedynką (bit ustawiony), jeśli w&nbsp;obu argumentach bity
+na tej pozycji były <FONT COLOR="#7b003e"><I>różne</I></FONT>, a&nbsp;zerem jeśli w&nbsp;obu argumentach
+na tej pozycji występowały bity takie same &mdash;&nbsp;dwa zera albo dwie
+jedynki.
+<DIV ALIGN="CENTER">
+<IMG
+  WIDTH="273" HEIGHT="136" ALIGN="BOTTOM" BORDER="0"
+ SRC="./xor.png"
+ ALT="Image xor">
+
+</DIV>
+Różnica symetryczna (obliczanie jej nazywane bywa XORowaniem) ma
+ciekawą i&nbsp;użyteczną własność,
+wynikającą z&nbsp;natępującej tabelki logicznej dla tego działania:
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">b</TD>
+<TD ALIGN="CENTER">m</TD>
+<TD ALIGN="CENTER">b&#94;m</TD>
+<TD ALIGN="CENTER">(b&#94;m)&#94;m</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">1</TD>
+<TD ALIGN="CENTER">1</TD>
+<TD ALIGN="CENTER">0</TD>
+<TD ALIGN="CENTER">1</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">1</TD>
+<TD ALIGN="CENTER">0</TD>
+<TD ALIGN="CENTER">1</TD>
+<TD ALIGN="CENTER">1</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">0</TD>
+<TD ALIGN="CENTER">1</TD>
+<TD ALIGN="CENTER">1</TD>
+<TD ALIGN="CENTER">0</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">0</TD>
+<TD ALIGN="CENTER">0</TD>
+<TD ALIGN="CENTER">0</TD>
+<TD ALIGN="CENTER">0</TD>
+</TR>
+</TABLE>
+</DIV>
+z której wynika, że <FONT COLOR="#7b003e"><I>dwukrotne</I></FONT> XORowanie dowolnego bitu <SPAN CLASS="MATH"><I>b</I></SPAN> z
+dowolną maską <SPAN CLASS="MATH"><I>m</I></SPAN> przywraca pierwotną wartość tego bitu &mdash;&nbsp;w
+tabeli kolumna pierwsza i&nbsp;ostatnia są takie same. Ta własność
+XORowania jest wykorzystywana między innymi w&nbsp;grafice komputerowej.
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Przesunięcia bitowe<A NAME="9404"></A>
+('<TT>&lt;&lt;</TT>' i&nbsp;'<TT>&gt;&gt;</TT>')
+są operatorami dwuargumentowymi: lewy argument jest tu pewną
+wartością całkowitą
+na bitach której operacja jest przeprowadzana, prawy argument,
+również całkowity, określa wielkość przesunięcia.
+Wyobraźmy sobie, że lewy argument
+<!--O--><span class='zmienna'>w<!--C--></span>
+ ma układ bitów jak
+w górnej części rysunku. Przesunięcie w&nbsp;tej zmiennej bitów
+w lewo o&nbsp;dwa, '<TT>w = w &lt;&lt; 2</TT>', odpowiada przesunięciu
+wszystkich bitów o&nbsp;dwie pozycje w&nbsp;lewo (w kierunku pozycji bardziej
+znaczących). Bity &bdquo;wychodzące&rdquo; z&nbsp;lewej strony są tracone
+bezpowrotnie. Z prawej strony &bdquo;wchodzą&rdquo; bity zerowe. Tak więc
+po wykonaniu tej instrukcji reprezentacja zmiennej
+<!--O--><span class='zmienna'>w<!--C--></span>
+ będzie
+taka jak w&nbsp;środkowej części rysunku. Analogicznie, po przesunięciu
+teraz bitów w&nbsp;prawo o&nbsp;trzy pozycje ('<TT>w = w &gt;&gt; 3</TT>') otrzymamy
+reprezentację zmiennej
+<!--O--><span class='zmienna'>w<!--C--></span>
+ jak w&nbsp;dolnej części rysunku
+(pod pewnymi warunkami &mdash;&nbsp;patrz niżej).
+<DIV ALIGN="CENTER">
+<IMG
+  WIDTH="294" HEIGHT="125" ALIGN="BOTTOM" BORDER="0"
+ SRC="./shifts.png"
+ ALT="Image shifts">
+
+</DIV>
+O ile przesuwanie w&nbsp;lewo jest zawsze dobrze określone według
+wspomnianych zasad, rzecz jest bardziej skomplikowana przy
+przesuwaniu w&nbsp;prawo. Wychodzące z&nbsp;prawej strony bity są tracone,
+tak jak te z&nbsp;lewej strony przy przesuwaniu w&nbsp;lewo. Ale nie jest jasne,
+jakie bity &bdquo;wchodzą&rdquo; z&nbsp;lewej strony przy przesuwaniu w&nbsp;prawo.
+W Javie<A NAME="9413"></A>
+istnieją dwa operatory bitowego przesunięcia w&nbsp;prawo:
+w przypadku operatora '<TT>&gt;&gt;</TT>' z&nbsp;lewej strony &bdquo;wchodzi&rdquo;
+taki bit, jaki był przed przesunięciem na najstarszej pozycji
+(czyli z&nbsp;lewej strony) &mdash;&nbsp;jeśli było to zero, wchodzi zero,
+jeśli jedynka, wchodzi jedynka. Mówimy, że reprodukowany
+jest bit znaku. Taka konwencja powoduje, że dla
+liczb ze znakiem (patrz
+rozdział o <A HREF="node16.html#typydan:typycalk">typach całkowitych</A> )
+przesunięcie w&nbsp;prawo o&nbsp;jedną pozycję odpowiada dla liczb parzystych
+dzieleniu przez dwa, zarówno dla liczb dodatnich,
+jak i&nbsp;ujemnych &mdash;&nbsp;podobnie jak przesuwanie w&nbsp;lewo odpowiada
+mnożeniu przez potęgę dwójki (dla liczb nieparzystych i&nbsp;dla
+przesuwania w&nbsp;prawo jest tu pewna dodatkowa komplikacja, w&nbsp;którą
+nie będziemy się wgłębiać, jest to dobre ćwiczenie sprawdzające
+rozumienie bitowych reprezentacji liczb; ma to związek z&nbsp;konwencją
+obcinania części ułamkowej przy dzieleniu całkowitoliczbowym &mdash;&nbsp;
+w dół czy w&nbsp;kierunku zera?). Inny operator w
+Javie,<A NAME="9421"></A>
+'<TT>&gt;&gt;&gt;</TT>', oznacza przesunięcia w&nbsp;prawo takie, że
+z lewej strony wchodzą zawsze zera.
+
+<P>
+W C/C++ sprawa nie jest taka jasna. Istnieją tu specjalne typy bez
+znaku (<!--O--><span class='klucz'>unsigned<!--C--></span>), za to nie istnieje &bdquo;potrójny&rdquo;
+operator przesunięcia '<TT>&gt;&gt;&gt;</TT>' w&nbsp;prawo.
+
+<P>
+Wobec tego w&nbsp;większości implementacji przyjęto następującą
+konwencję: jeśli typem wartości lewego argumentu jest
+typ <FONT COLOR="#7b003e"><I>bez</I></FONT> znaku (<!--O--><span class='klucz'>unsigned<!--C--></span>), to przy przesuwaniu
+w prawo wchodzą z&nbsp;lewej strony bity zerowe;
+jeśli natomiast typem wartości lewego argumentu jest
+typ <FONT COLOR="#7b003e"><I>ze</I></FONT> znakiem (<!--O--><span class='klucz'>signed<!--C--></span>), to przy przesuwaniu
+w prawo reprodukowany jest z&nbsp;lewej strony bit znaku, czyli skrajny
+lewy bit &mdash;&nbsp;jeśli było to zero, to zero, jeśli była to jedynka,
+to jedynka.
+
+<P>
+Prawy argument operatora przesunięcia, wskazujący na wielkość
+tego przesunieęcia, zawsze powinien być nieujemny i&nbsp;mniejszy
+od rozmiaru w&nbsp;bitach wartości, na której dokonujemy przesunięcia.
+W Javie<A NAME="9431"></A>
+jest dobrze określone przez specyfikację języka, co się dzieje,
+jeśli te warunki nie są spełnione; w&nbsp;C/C++ może to zależeć
+od implementacji i&nbsp;wobec tego lepiej takich konstrukcji unikać.
+
+<P>
+Na zakończenie rozpatrzmy przykład ilustrujący to, o&nbsp;czym
+mówiliśmy na temat operacji bitowych.
+<BR><A NAME="bits.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">57</SPAN>:</SPAN>
+      <A NAME="tex2html61"
+  HREF="source-files/bits.cpp">
+<!--O--><span class='downl'>bits.cpp<!--C--></span></A>
+<A NAME="10122"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Operacje na bitach</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">void</font> <b><font color="#000000">bitsChar</font></b><font color="#990000">(</font><font color="#009900">char</font> k<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">int</font> bits <font color="#990000">=</font> <font color="#993399">8</font><font color="#990000">*</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>k<font color="#990000">);</font>               <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">unsigned</font> <font color="#009900">char</font> mask <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">&lt;&lt;(</font>bits<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">     7.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> bits<font color="#990000">;</font> i<font color="#990000">++)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     8.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font>k <font color="#990000">&amp;</font> mask <font color="#990000">?</font> <font color="#993399">1</font> <font color="#990000">:</font> <font color="#993399">0</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">     9.  </font>        mask <font color="#990000">&gt;&gt;=</font> <font color="#993399">1</font><font color="#990000">;</font>                       <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    10.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    11.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    12.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    13.  </font>
+ <font SIZE="-2" color="black">    14.  </font><font color="#009900">void</font> <b><font color="#000000">bitsShort</font></b><font color="#990000">(</font><font color="#009900">short</font> k<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    15.  </font>    <font color="#009900">int</font> bits <font color="#990000">=</font> <font color="#993399">8</font><font color="#990000">*</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>k<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    16.  </font>    <font color="#009900">unsigned</font> <font color="#009900">short</font> mask <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">&lt;&lt;(</font>bits<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    17.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> bits<font color="#990000">;</font> i<font color="#990000">++)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    18.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font>k <font color="#990000">&amp;</font> mask <font color="#990000">?</font> <font color="#993399">1</font> <font color="#990000">:</font> <font color="#993399">0</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    19.  </font>        mask <font color="#990000">&gt;&gt;=</font> <font color="#993399">1</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    20.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    21.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    22.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    23.  </font>
+ <font SIZE="-2" color="black">    24.  </font><font color="#009900">void</font> <b><font color="#000000">bitsInt</font></b><font color="#990000">(</font><font color="#009900">int</font> k<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    25.  </font>    <font color="#009900">int</font> bits <font color="#990000">=</font> <font color="#993399">8</font><font color="#990000">*</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>k<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    26.  </font>    <font color="#009900">unsigned</font> <font color="#009900">int</font> mask <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">&lt;&lt;(</font>bits<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    27.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> bits<font color="#990000">;</font> i<font color="#990000">++)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    28.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font>k <font color="#990000">&amp;</font> mask <font color="#990000">?</font> <font color="#993399">1</font> <font color="#990000">:</font> <font color="#993399">0</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    29.  </font>        mask <font color="#990000">&gt;&gt;=</font> <font color="#993399">1</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    30.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    31.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    32.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    33.  </font>
+ <font SIZE="-2" color="black">    34.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    35.  </font>    <font color="#009900">short</font> s <font color="#990000">=</font> <font color="#990000">-</font><font color="#993399">1</font><font color="#990000">;</font> <font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">259</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    36.  </font>
+ <font SIZE="-2" color="black">    37.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"char 'a' : "</font><font color="#990000">;</font> <b><font color="#000000">bitsChar</font></b><font color="#990000">(</font><font color="#FF0000">'a'</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    38.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"short -1 : "</font><font color="#990000">;</font> <b><font color="#000000">bitsShort</font></b><font color="#990000">(</font>s<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    39.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"int  259 : "</font><font color="#990000">;</font> <b><font color="#000000">bitsInt</font></b><font color="#990000">(</font>i<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    40.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    41.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"ios::in  : "</font><font color="#990000">;</font> <b><font color="#000000">bitsInt</font></b><font color="#990000">(</font>ios<font color="#990000">::</font>in<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    42.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"ios::out : "</font><font color="#990000">;</font> <b><font color="#000000">bitsInt</font></b><font color="#990000">(</font>ios<font color="#990000">::</font>out<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    43.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"ios::app : "</font><font color="#990000">;</font> <b><font color="#000000">bitsInt</font></b><font color="#990000">(</font>ios<font color="#990000">::</font>app<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    44.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"ios::in | ios::out</font><font color="#CC33CC">\n</font><font color="#FF0000">           "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    45.  </font>    <b><font color="#000000">bitsInt</font></b><font color="#990000">(</font>ios<font color="#990000">::</font>in <font color="#990000">|</font> ios<font color="#990000">::</font>out<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    46.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Na początku tego programu definiujemy trzy niemal identyczne funkcje,
+których zadaniem jest wypisanie bitowej reprezentacji
+argumentu. Funkcje różnią się tylko typem argumentu: może nim
+być
+<!--O--><span class='typ'>char<!--C--></span>,
+<!--O--><span class='typ'>short<!--C--></span>
+ lub
+<!--O--><span class='typ'>int<!--C--></span>.
+W&nbsp;rozdziale o <A HREF="node73.html#funk:szab">szablonach funkcji</A>
+dowiemy się, jak można było uniknąć pisania trzech wersji
+tak podobnych funkcji.
+
+<P>
+Przyjrzyjmy się jednej z&nbsp;tych funkcji, na przykład funkcji
+
+<!--O--><span class='funkcja'>bitsChar<!--C--></span>. W linii&nbsp;<span class="ding">&#x278A;</span> sprawdzamy, jaki jest rozmiar w&nbsp;bitach
+wartości argumentu
+<!--O--><span class='zmienna'>k<!--C--></span>
+ (tu oczywiście wiemy, że będzie to&nbsp;8,
+bo
+<FONT COLOR="#000000"><TT>sizeof(k)</TT></FONT> dla
+<!--O--><span class='zmienna'>k<!--C--></span>
+ typu
+<!--O--><span class='typ'>char<!--C--></span>
+ da jedynkę).
+Następnie tworzymy maskę
+<!--O--><span class='zmienna'>mask<!--C--></span>
+ typu
+<!--O--><span class='typ'>unsigned char<!--C--></span>.
+Chodzi nam o&nbsp;to, aby długość maski była taka jak długość
+
+<!--O--><span class='zmienna'>k<!--C--></span>, ale by była to zmienna na pewno <FONT COLOR="#7b003e"><I>bez</I></FONT> znaku &mdash;&nbsp;w&nbsp;ten
+sposób przy przesuwaniu w&nbsp;prawo będą z&nbsp;lewej strony &bdquo;wchodzić&rdquo;
+zera. Maskę inicjujemy wartością '<TT>1 &lt;&lt; 7</TT>'
+(bo
+<!--O--><span class='zmienna'>bits<!--C--></span>
+ wynosi 8). Reprezentacja jedynki to siedem bitów
+zerowych i&nbsp;jeden, prawy (czyli najmłodszy), bit ustawiony.
+Przesuwając ten układ bitów w&nbsp;lewo otrzymamy liczbę, której
+reprezentacją jest jedynka i&nbsp;siedem zer (jedynka tym razem z&nbsp;lewej
+strony). Robimy to po to, by pętla drukująca, która teraz następuje,
+przebiegała przez kolejne bity liczby
+<!--O--><span class='zmienna'>k<!--C--></span>
+ od lewej do prawej,
+a nie odwrotnie.
+
+<P>
+Następnie w&nbsp;pętli obliczamy koniunkcję bitową
+
+<!--O--><span class='zmienna'>k<!--C--></span>
+ z&nbsp;maską
+<!--O--><span class='zmienna'>mask<!--C--></span>. Ponieważ maska ma tylko jeden bit
+ustawiony, w&nbsp;ten sposób sprawdzamy, czy odpowiedni bit jest też
+ustawiony w&nbsp;
+<!--O--><span class='zmienna'>k<!--C--></span>. Jeśli tak, to wynikiem koniunkcji będzie
+jakaś wartość niezerowa, interpretowana jako
+<!--O--><span class='klucz'>true<!--C--></span>
+ w&nbsp;pierwszym
+argumencie operatora selekcji, a&nbsp;zatem wartością tejże selekcji
+'
+<FONT COLOR="#000000"><TT>(k&amp;mask ? 1 : 0)</TT></FONT>' będzie jedynka, która zostanie
+wypisana na ekranie. Jeśli w&nbsp;
+<!--O--><span class='zmienna'>k<!--C--></span>
+ odpowiedni bit nie jest
+ustawiony, wydrukowane zostanie zero.
+
+<P>
+W linii&nbsp;<span class="ding">&#x278B;</span> przesuwamy bity w&nbsp;masce o&nbsp;jeden w&nbsp;prawo. Ponieważ
+zadbaliśmy, aby maska była typu <FONT COLOR="#7b003e"><I>bez</I></FONT> znaku, z&nbsp;lewej strony będą
+wchodzić same zera. Zatem w&nbsp;kolejnych przebiegach pętli
+maska cały czas będzie zawierać dokładnie jedną jedynkę,
+&bdquo;wędrującą&rdquo; od lewej do prawej. A więc w&nbsp;kolejnych
+przebiegach pętli sprawdzone i&nbsp;wydrukowane będą, w&nbsp;kolejności od
+lewej do prawej, wszystkie bity zmiennej
+<!--O--><span class='zmienna'>k<!--C--></span>.
+
+<P>
+Podobnie działają pozostałe dwie funkcje:
+<!--O--><span class='funkcja'>bitShort<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='funkcja'>bitInt<!--C--></span>
+ &mdash;&nbsp;jedyna różnica to typ argumentu.
+
+<P>
+W programie głównym drukujemy reprezentację bitową kilku
+liczb całkowitych. Wyniki wyglądają następująco:
+<PRE>
+    char 'a' : 01100001
+    short -1 : 1111111111111111
+    int  259 : 00000000000000000000000100000011
+
+    ios::in  : 00000000000000000000000000001000
+    ios::out : 00000000000000000000000000010000
+    ios::app : 00000000000000000000000000000001
+    ios::in | ios::out
+               00000000000000000000000000011000
+</PRE>
+Widać, że (jak o&nbsp;tym mówiliśmy w
+rozdziale o <A HREF="node16.html#typydan:typycalk">typach całkowitych</A> ),
+reprezentacją liczby <SPAN CLASS="MATH">-1</SPAN> są jedynki na wszystkich bitach.
+Znak 'a' odpowiada, jak łatwo policzyć, wartości
+całkowitej <!-- MATH
+ $2^6 + 2^5 + 1 = 64 + 32 + 1 = 97$
+ -->
+<SPAN CLASS="MATH">2<SUP>6</SUP> +2<SUP>5</SUP> + 1 = 64 + 32 + 1 = 97</SPAN>, co rzeczywiście
+jest kodem ASCII litery 'a'.
+
+<P>
+Dalej ilustrujemy to, co mówiliśmy o&nbsp;stałych
+
+<!--O--><span class='zmienna'>ios::in<!--C--></span>,
+<!--O--><span class='zmienna'>ios::out<!--C--></span>
+ itd.
+Widzimy, że są to pełne potęgi
+dwójki, a&nbsp;więc w&nbsp;ich reprezentacji bitowej występuje tylko jedna
+jedynka na odpowiedniej pozycji: w&nbsp;stałej
+<!--O--><span class='zmienna'>ios::trunc<!--C--></span>
+
+na pozycji czwartej (licząc od zera), a&nbsp;w stałej
+<!--O--><span class='zmienna'>ios::out<!--C--></span>
+
+na pozycji pierwszej. Obliczając ich alternatywę (sumę) bitową
+otrzymujemy liczbę, w&nbsp;której reprezentacji bitowej te i&nbsp;tylko te
+dwa bity są ustawione (ostatnia linia wydruku).
+
+<P>
+
+<H2><A NAME="SECTION001028000000000000000"></A>
+              <A NAME="operat:logiczne"></A>
+<BR>
+<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">8</SPAN> Operatory logiczne
+</H2>
+
+<P>
+Argumentami operatorów logicznych
+<A NAME="9482"></A>
+<A NAME="9483"></A>
+<A NAME="9484"></A>
+'
+<FONT COLOR="#000000"><TT>&amp;&amp;</TT></FONT>' (koniunkcja), '<SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="47" ALIGN="MIDDLE" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \Vert$"></SPAN>' (alternatywa)
+i&nbsp;'
+<FONT COLOR="#000000"><TT>!</TT></FONT>' (negacja)
+mogą być zarówno wartości typu
+<!--O--><span class='typ'>bool<!--C--></span>
+ jak i&nbsp;wartości całkowite;
+w&nbsp;tym ostatnim przypadku wartości zostaną zinterpretowane według
+normalnej zasady: 0 <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='klucz'>false<!--C--></span>,
+niezero <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='klucz'>true<!--C--></span>. Obliczona
+wartość jest typu logicznego: alternatywa (suma logiczna) daje wynik
+
+<!--O--><span class='klucz'>true<!--C--></span>
+ wtedy i&nbsp;tylko wtedy gdy choć jeden z&nbsp;argumentów ma
+wartość
+<!--O--><span class='klucz'>true<!--C--></span>, natomiast koniunkcja (iloczyn logiczny)
+ma wartość
+<!--O--><span class='klucz'>true<!--C--></span>
+ tylko jeśli oba argumenty są
+<!--O--><span class='klucz'>true<!--C--></span>.
+
+<P>
+Koniunkcja i&nbsp;alternatywa są skrótowe.
+Oznacza to, że prawy argument nie jest w&nbsp;ogóle obliczany,
+jeśli po obliczeniu lewego wynik jest już przesądzony.
+Tak więc
+
+<UL>
+<LI>dla koniunkcji ('
+<FONT COLOR="#000000"><TT>&amp;&amp;</TT></FONT>') prawy argument nie
+          będzie w&nbsp;ogóle obliczany, jeśli lewy argument okazał
+          się równy
+<!--O--><span class='klucz'>false<!--C--></span>
+ &mdash;&nbsp;całe wyrażenie musi bowiem
+          wtedy mieć wartość
+<!--O--><span class='klucz'>false<!--C--></span>
+ niezależnie od wartości
+          prawego argumentu;
+</LI>
+<LI>dla alternatywy prawy argument nie
+          będzie obliczany, jeśli lewy okazał się
+<!--O--><span class='klucz'>true<!--C--></span>
+
+          &mdash;&nbsp;całe wyrażenie musi bowiem mieć wtedy wartość
+
+<!--O--><span class='klucz'>true<!--C--></span>
+ niezależnie od wartości prawego argumentu.
+</LI>
+</UL>
+
+<P>
+Na przykład, jeśli
+<!--O--><span class='zmienna'>a<!--C--></span>,
+<!--O--><span class='zmienna'>b<!--C--></span>
+ i
+
+<!--O--><span class='zmienna'>r<!--C--></span>
+ są zmiennymi typu całkowitego, to przypisanie
+<pre><tt>       r <font color="#990000">=</font> a <font color="#990000">&amp;&amp;</font> b<font color="#990000">;</font>
+</tt></pre>
+jest równoważne
+<pre><tt>       <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>a <font color="#990000">==</font> <font color="#993399">0</font><font color="#990000">)</font>
+           r <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+       <b><font color="#0000FF">else</font></b>
+       <font color="#FF0000">{</font>
+           <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>b <font color="#990000">==</font> <font color="#993399">0</font><font color="#990000">)</font> r <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+           <b><font color="#0000FF">else</font></b>        r <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font>
+       <font color="#FF0000">}</font>
+</tt></pre>
+a przypisanie
+<pre><tt>       r <font color="#990000">=</font> a <font color="#990000">||</font> b<font color="#990000">;</font>
+</tt></pre>
+jest równoważne
+<pre><tt>       <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>a <font color="#990000">!=</font> <font color="#993399">0</font><font color="#990000">)</font>
+           r <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font>
+       <b><font color="#0000FF">else</font></b>
+       <font color="#FF0000">{</font>
+           <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>b <font color="#990000">!=</font> <font color="#993399">0</font><font color="#990000">)</font> r <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font>
+           <b><font color="#0000FF">else</font></b>        r <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+       <font color="#FF0000">}</font>
+</tt></pre>
+
+<P>
+Rozpatrzmy jeszcze jeden przykład ilustrujący skrótowość
+dwuargumentowych operatorów logicznych:
+<BR><A NAME="skrot.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">58</SPAN>:</SPAN>
+      <A NAME="tex2html62"
+  HREF="source-files/skrot.cpp">
+<!--O--><span class='downl'>skrot.cpp<!--C--></span></A>
+<A NAME="10166"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Skrótowość operatorów koniunkcji i&nbsp;alternatywy</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">bool</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">int</font> k<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    k <font color="#990000">=</font> k <font color="#990000">-</font> <font color="#993399">3</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Fun zwraca "</font> <font color="#990000">&lt;&lt;</font> k <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>    <b><font color="#0000FF">return</font></b> k<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">     9.  </font>
+ <font SIZE="-2" color="black">    10.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    11.  </font>    <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">)</font> <font color="#990000">&amp;&amp;</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#993399">2</font><font color="#990000">)</font> <font color="#990000">&amp;&amp;</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#993399">3</font><font color="#990000">)</font> <font color="#990000">&amp;&amp;</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#993399">4</font><font color="#990000">)</font> <font color="#990000">)</font>      <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">    12.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Koniunkcja true"</font>   <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>    <b><font color="#0000FF">else</font></b>
+ <font SIZE="-2" color="black">    14.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Koniunkcja false"</font>  <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>
+ <font SIZE="-2" color="black">    16.  </font>    <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">)</font> <font color="#990000">||</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#993399">2</font><font color="#990000">)</font> <font color="#990000">||</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#993399">3</font><font color="#990000">)</font> <font color="#990000">||</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#993399">4</font><font color="#990000">)</font> <font color="#990000">)</font>      <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    17.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Alternatywa true"</font>  <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font>    <b><font color="#0000FF">else</font></b>
+ <font SIZE="-2" color="black">    19.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Alternatywa false"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    20.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+W linii&nbsp;<span class="ding">&#x278A;</span> sprawdzany jest warunek w&nbsp;postaci koniunkcji
+wartości logicznych zwracanych przez funkcję
+<!--O--><span class='funkcja'>fun<!--C--></span>
+ (równie
+dobrze mogłyby to być wartości całkowite). Ponieważ
+
+<FONT COLOR="#000000"><TT>fun(3)</TT></FONT> zwraca&nbsp;0 czyli logiczne
+<!--O--><span class='klucz'>false<!--C--></span>, funkcja
+w&nbsp;ogóle nie zostanie już wywołana z&nbsp;argumentem&nbsp;4, bo wynik już jest
+znany: wartością całego wyrażenia w&nbsp;nawiasie musi być
+<!--O--><span class='klucz'>false<!--C--></span>
+
+niezależnie od tego, co zwróciłaby funkcja
+<!--O--><span class='funkcja'>fun<!--C--></span>
+ dla
+argumentu&nbsp;4. Widzimy to z&nbsp;wydruku
+<PRE>
+    Fun zwraca -2
+    Fun zwraca -1
+    Fun zwraca 0
+    Koniunkcja false
+    Fun zwraca -2
+    Alternatywa true
+</PRE>
+Podobnie dla alternatywy w&nbsp;linii&nbsp;<span class="ding">&#x278B;</span>. Już pierwsze wywołanie
+funkcji
+<!--O--><span class='funkcja'>fun<!--C--></span>
+ dało wynik
+<!--O--><span class='klucz'>true<!--C--></span>
+ (odpowiada to
+niezerowej wartości zwracanej, w&nbsp;tym przypadku <SPAN CLASS="MATH">-2</SPAN>). Alternatywa
+jest prawdziwa, gdy choć jeden argument jest
+<!--O--><span class='klucz'>true<!--C--></span>, wobec tego
+po wywołaniu
+<FONT COLOR="#000000"><TT>fun(1)</TT></FONT> wynik całego wyrażenia jest znany
+(<!--O--><span class='klucz'>true<!--C--></span>) i&nbsp;wywołań
+<FONT COLOR="#000000"><TT>fun(2)</TT></FONT>,
+<FONT COLOR="#000000"><TT>fun(3)</TT></FONT>
+i&nbsp;
+<FONT COLOR="#000000"><TT>fun(4)</TT></FONT> nie będzie.
+
+<P>
+
+<H2><A NAME="SECTION001029000000000000000"></A>
+              <A NAME="operat:przypisanie"></A>
+<BR>
+<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">9</SPAN> Operatory przypisania
+</H2>
+
+<P>
+W grupie o priorytecie&nbsp;2 wymienione są
+operatory zwykłego przypisania<A NAME="9540"></A>
+('
+<FONT COLOR="#000000"><TT>=</TT></FONT>') oraz złożone operatory przypisania.
+
+<P>
+Lewa strona przypisania musi być zawsze l-wartością. Tak więc
+<pre><tt>       <font color="#009900">double</font> x<font color="#990000">;</font>
+       x <font color="#990000">+</font> <font color="#993399">2</font> <font color="#990000">=</font> <font color="#993399">7</font><font color="#990000">;</font> <i><font color="#9A1900">// NIE</font></i>
+</tt></pre>
+jest niepoprawne, natomiast
+<pre><tt>       <font color="#009900">double</font> x<font color="#990000">,</font> <font color="#990000">*</font>y <font color="#990000">=</font> <font color="#990000">&amp;</font>x<font color="#990000">;</font>
+       <font color="#990000">*(</font>y <font color="#990000">+</font> <font color="#993399">2</font><font color="#990000">)</font> <font color="#990000">=</font> <font color="#993399">7</font><font color="#990000">;</font>
+</tt></pre>
+byłoby legalne (choć prawdopodobnie bez sensu), bo wyłuskanie
+wartości daje w&nbsp;wyniku l-wartość.
+
+<P>
+Wykonanie przypisania
+polega na obliczeniu wartości prawej strony i&nbsp;umieszczeniu wyniku
+pod adresem l-wartości występującej po stronie lewej. Zauważmy
+asymetrię: prawa strona mówi <FONT COLOR="#7b003e"><I>co</I></FONT> policzyć, lewa <FONT COLOR="#7b003e"><I>gdzie</I></FONT>
+zapisać wynik.
+
+<P>
+Wartością i&nbsp;typem całego wyrażenia przypisania jest wartość i
+typ lewej strony <FONT COLOR="#7b003e"><I>po</I></FONT> wykonaniu przypisania.
+Całe przypisanie <FONT COLOR="#7b003e"><I>jest</I></FONT> l-wartością. Na przykład
+<pre><tt>       <font color="#009900">int</font> m <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">,</font> n <font color="#990000">=</font> <font color="#993399">2</font><font color="#990000">;</font>
+       <font color="#990000">(</font>m<font color="#990000">=</font>n<font color="#990000">)</font> <font color="#990000">=</font> <font color="#993399">6</font><font color="#990000">;</font>
+       cout <font color="#990000">&lt;&lt;</font> m <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font> <font color="#990000">&lt;&lt;</font> n <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+</tt></pre>
+drukuje '6 2'.
+
+<P>
+W programie poniżej
+<BR><A NAME="przypis.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">59</SPAN>:</SPAN>
+      <A NAME="tex2html63"
+  HREF="source-files/przypis.cpp">
+<!--O--><span class='downl'>przypis.cpp<!--C--></span></A>
+<A NAME="10210"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Wykorzystanie wartości przypisania</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font>
+ <font SIZE="-2" color="black">     5.  </font><font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">int</font> k<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font> <font color="#990000">(</font>k <font color="#990000">=</font> cin<font color="#990000">.</font><b><font color="#000000">get</font></b><font color="#990000">())</font> <font color="#990000">!=</font> <font color="#FF0000">'</font><font color="#CC33CC">\n</font><font color="#FF0000">'</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">     8.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Wprowadzono znak '"</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font><font color="#009900">char</font><font color="#990000">)</font>k
+ <font SIZE="-2" color="black">     9.  </font>             <font color="#990000">&lt;&lt;</font> <font color="#FF0000">&rdquo;, o kodzie ASCII "</font> <font color="#990000">&lt;&lt;</font> k <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+w linii&nbsp;7 przypisujemy do
+<!--O--><span class='zmienna'>k<!--C--></span>
+ wartośc znaku &mdash;&nbsp;czyli jego
+kod ASCII &mdash;&nbsp;odczytaną
+z klawiatury za pomocą metody
+<!--O--><span class='funkcja'>get<!--C--></span>
+ wywołanej na rzecz
+obiektu
+<!--O--><span class='zmienna'>cin<!--C--></span>
+ &mdash;&nbsp;patrz
+  rozdział o&nbsp; <A HREF="node107.html#io:czytnieform">operacjach we/wy</A> .
+Całe przypisanie '
+<FONT COLOR="#000000"><TT>(k=cin.get())</TT></FONT>' ma wartość
+<!--O--><span class='zmienna'>k<!--C--></span>
+
+po przypisaniu; tę wartość porównujemy z&nbsp;predefiniowaną stałą
+
+<!--O--><span class='zmienna'>EOF<!--C--></span>, oznaczającą koniec strumienia danych. Zauważmy,
+że nawias wokół tego wyrażenia był konieczny, bowiem
+priorytet porównania,
+<FONT COLOR="#000000"><TT>!=</TT></FONT>, jest wyższy niż
+priorytet operatora przypisania, a&nbsp;nam chodzi o&nbsp;to, aby najpierw
+dokonać przypisania, a&nbsp;dopiero jego wynik porównać z&nbsp;
+<!--O--><span class='zmienna'>EOF<!--C--></span>.
+Przykładowe uruchomienie tego programu daje
+<PRE>
+    cpp&gt; g++ -pedantic-errors -Wall -o przypis przypis.cpp
+    cpp&gt; ./przypis
+    Ala ma...[ENTER]
+    Wprowadzono znak 'A', o kodzie ASCII 65
+    Wprowadzono znak 'l', o kodzie ASCII 108
+    Wprowadzono znak 'a', o kodzie ASCII 97
+    Wprowadzono znak ' ', o kodzie ASCII 32
+    Wprowadzono znak 'm', o kodzie ASCII 109
+    Wprowadzono znak 'a', o kodzie ASCII 97
+    Wprowadzono znak '.', o kodzie ASCII 46
+    Wprowadzono znak '.', o kodzie ASCII 46
+    Wprowadzono znak '.', o kodzie ASCII 46
+    cpp&gt;
+</PRE>
+Dzięki temu, że wartością całego wyrażenia z&nbsp;przypisaniem jest
+wartość lewej strony po jego wykonaniu,
+przypisania można stosować kaskadowo. Tak więc
+<pre><tt>       <font color="#009900">int</font> k <font color="#990000">=</font> <font color="#993399">7</font><font color="#990000">,</font> j<font color="#990000">,</font> m<font color="#990000">;</font>
+       <font color="#009900">int</font> n <font color="#990000">=</font> m <font color="#990000">=</font> j <font color="#990000">=</font> k<font color="#990000">;</font>
+</tt></pre>
+jest prawidłowe: ponieważ wiązanie operatora przypisania
+jest od prawej, wartością wyrażenia '
+<FONT COLOR="#000000"><TT>m=j=k</TT></FONT>',
+równoważnego  '
+<FONT COLOR="#000000"><TT>m=(j=k)</TT></FONT>', jest wartość
+<!--O--><span class='zmienna'>m<!--C--></span>
+
+po przypisaniu (czyli w&nbsp;naszym przypadku 7). Ta wartość zostanie
+użyta do zainicjowania definiowanej zmiennej
+<!--O--><span class='zmienna'>n<!--C--></span>.
+Efektem ubocznym będzie nadanie wartości również zmiennym
+
+<!--O--><span class='zmienna'>m<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>j<!--C--></span>. Zauważmy, że instrukcja byłaby
+błędna, gdyby któraś ze zmiennych
+<!--O--><span class='zmienna'>m<!--C--></span>,
+<!--O--><span class='zmienna'>j<!--C--></span>,
+
+<!--O--><span class='zmienna'>k<!--C--></span>
+ nie była utworzona wcześniej.
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Złożone operatory przypisania<A NAME="9587"></A>
+pozwalają na prostszy zapis niektórych przypisań: tych,
+w których ta sama l-wartość występuje po lewej i&nbsp;prawej stronie
+przypisania. Zamiast instrukcji
+<pre><tt>       a <font color="#990000">=</font> a @ b<font color="#990000">;</font>
+</tt></pre>
+gdzie symbol '&#64;' oznacza któryś z&nbsp;operatorów
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER"><SPAN CLASS="MATH">+</SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">-</SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">*</SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">/</SPAN></TD>
+<TD ALIGN="CENTER">%</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">&#60;&#60;</TD>
+<TD ALIGN="CENTER">&#62;&#62;</TD>
+<TD ALIGN="CENTER">&amp;</TD>
+<TD ALIGN="CENTER">&#94;</TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">|</SPAN></TD>
+</TR>
+</TABLE>
+</DIV>
+można użyć instrukcji
+<pre><tt>       a @<font color="#990000">=</font> b<font color="#990000">;</font>
+</tt></pre>
+Drobna różnica, najczęściej bez znaczenia,
+pomiędzy tymi instrukcjami polega na tym, że w&nbsp;drugiej z&nbsp;nich
+wartość
+<!--O--><span class='zmienna'>a<!--C--></span>
+ jest obliczana jednokrotnie,
+a w&nbsp;pierwszej dwukrotnie. Zwykle druga z&nbsp;tych form,
+'<TT>a &#64;= b</TT>', jest efektywniejsza.
+
+<P>
+Jako przykład zastosowania rozpatrzmy program:
+<BR><A NAME="zloz.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">60</SPAN>:</SPAN>
+      <A NAME="tex2html64"
+  HREF="source-files/zloz.cpp">
+<!--O--><span class='downl'>zloz.cpp<!--C--></span></A>
+<A NAME="10237"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Przypisania złożone</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">void</font> <b><font color="#000000">bitsInt</font></b><font color="#990000">(</font><font color="#009900">int</font> k<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">unsigned</font> <font color="#009900">int</font> mask <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">&lt;&lt;</font><font color="#993399">31</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> <font color="#993399">32</font><font color="#990000">;</font> i<font color="#990000">++,</font> mask <font color="#990000">&gt;&gt;=</font> <font color="#993399">1</font><font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     7.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font>k <font color="#990000">&amp;</font> mask <font color="#990000">?</font> <font color="#993399">1</font> <font color="#990000">:</font> <font color="#993399">0</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">     8.  </font>        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>i<font color="#990000">%</font><font color="#993399">8</font> <font color="#990000">==</font> <font color="#993399">7</font><font color="#990000">)</font> cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    10.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    12.  </font>
+ <font SIZE="-2" color="black">    13.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    14.  </font>    <font color="#009900">unsigned</font> <font color="#009900">int</font> k <font color="#990000">=</font> <font color="#993399">255</font><font color="#990000">&lt;&lt;</font><font color="#993399">24</font> <font color="#990000">|</font> <font color="#993399">153</font><font color="#990000">&lt;&lt;</font><font color="#993399">16</font> <font color="#990000">|</font> <font color="#993399">255</font><font color="#990000">&lt;&lt;</font><font color="#993399">8</font> <font color="#990000">|</font> <font color="#993399">255</font><font color="#990000">;</font> <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">    15.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"k przed: "</font><font color="#990000">;</font> <b><font color="#000000">bitsInt</font></b><font color="#990000">(</font>k<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    16.  </font>    <font color="#990000">(</font>k <font color="#990000">&lt;&lt;=</font> <font color="#993399">8</font><font color="#990000">)</font> <font color="#990000">&gt;&gt;=</font> <font color="#993399">24</font><font color="#990000">;</font>                                  <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    17.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"k    po: "</font><font color="#990000">;</font> <b><font color="#000000">bitsInt</font></b><font color="#990000">(</font>k<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    18.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Funkcja
+<!--O--><span class='funkcja'>bitsInt<!--C--></span>
+ jest tu podobna do tej z&nbsp;programu
+<A HREF="#bits.cpp">
+<!--O--><span class='plik'>bits.cpp<!--C--></span></A> &mdash;&nbsp;tak samo służy do drukowania bitowej
+reprezentacji liczby całkowitej. W tej wersji z&nbsp;góry założyliśmy,
+że typ
+<!--O--><span class='typ'>int<!--C--></span>
+ jest czterobajtowy. Prócz tego przesuwanie
+maski przenieśliśmy do części inkrementującej nagłówka pętli,
+umieszczając tam dwie instrukcje wyrażeniowe oddzielone
+przecinkiem (o operatorze przecinkowym &mdash;&nbsp;
+w jednym z&nbsp;następnych <A HREF="#operat:przecinek">podrozdziałów</A> ).
+Dodaliśmy też drukowanie spacji po każdej grupie ośmiu
+bitów, aby uczynić wydruk bardziej przejrzystym.
+
+<P>
+W linii&nbsp;<span class="ding">&#x278A;</span> konstruujemy liczbę o&nbsp;z góry zadanej reprezenatcji
+bitowej. Wyrażenie '<TT>255 &lt;&lt; 24</TT>' daje liczbę z&nbsp;samymi jedynkami
+w najstarszym bajcie (255 to osiem jedynek, następnie przesunięte
+o 24 pozycje w&nbsp;lewo). Wyrażenie '<TT>153 &lt;&lt; 16</TT>' to układ
+bajtów <TT>10011001</TT> przesunięty w&nbsp;lewo o&nbsp;16 pozycji, czyli
+do bajtu trzeciego od lewej. Z kolei '<TT>255 &lt;&lt; 8</TT>' daje osiem
+jedynek w&nbsp;bajcie drugim, a&nbsp;samo 255 &mdash;&nbsp;osiem jedynek w&nbsp;bajcie
+najmłodszym. Suma (alternatywa) bitowa &bdquo;składa&rdquo; wszystkie te bajty:
+otrzymujemy zatem liczbę o&nbsp;reprezentacji przedstawionej w
+pierwszej linii wydruku:
+<PRE>
+    k przed: 11111111 10011001 11111111 11111111
+    k    po: 00000000 00000000 00000000 10011001
+</PRE>
+Operator przypisania złożonego zastosowaliśmy w&nbsp;linii&nbsp;<span class="ding">&#x278B;</span>.
+Wyrażenie '<TT>(k &lt;&lt;= 8)</TT>' powoduje przesunięcie w&nbsp;zmiennej
+
+<!--O--><span class='zmienna'>k<!--C--></span>
+ wszystkich bitów w&nbsp;lewo o&nbsp;osiem pozycji. Zatem zawartość
+bajtu najstarszego zostaje &bdquo;zgubiona&rdquo;, bajt <TT>10011001</TT>
+przechodzi na jego pozycję, a&nbsp;kolejne dwa, czyli pierwszy i&nbsp;drugi,
+stają się drugim i&nbsp;trzecim (od lewej). Bajt najmłodszy wypełniany
+jest zerami. Wynik całego wyrażenia jest l-wartością, a&nbsp;zatem ma sens
+zastosowanie do niego następnego przypisania złożonego: tym razem
+przesuwamy zawartość zmiennej
+<!--O--><span class='zmienna'>k<!--C--></span>
+ o&nbsp;24 pozycje w&nbsp;prawo.
+Ponieważ zmienna
+<!--O--><span class='zmienna'>k<!--C--></span>
+ jest bez znaku, z&nbsp;lewej strony
+&bdquo;wchodzą&rdquo; same zera, a&nbsp;24 najmłodsze bity &bdquo;wychodzą&rdquo; z&nbsp;prawej
+strony. Układ bitów <TT>10011001</TT> po tej operacji znajduje się
+na pozycji najmłodszego bajtu. W efekcie widzimy, że cała operacja
+daje w&nbsp;efekcie liczbę równą tej, której reprezentacja binarna zawarta
+była w&nbsp;trzecim od lewej bajcie wyjściowej liczby. W podobny sposób
+moglibyśmy &bdquo;wyciąć&rdquo; zawartość pozostałych bajtów. Takie wycinanie
+pojedynczych bajtów stosuje się na przykład przy kodowaniu trzech
+(albo czterech) składowych koloru w&nbsp;jednej liczbie.
+
+<P>
+
+<H2><A NAME="SECTION0010210000000000000000"></A>
+              <A NAME="operat:selekcja"></A>
+<BR>
+<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN> Operator warunkowy
+</H2>
+
+<P>
+Operator warunkowy (selekcji)<A NAME="9626"></A>
+<A NAME="9627"></A>
+jest jedynym operatorem trzyargumentowym. Jego składnia:
+<pre><tt>       b <font color="#990000">?</font> w1 <font color="#990000">:</font> w2
+</tt></pre>
+Najpierw obliczana jest wartość wyrażenia
+<!--O--><span class='zmienna'>b<!--C--></span>
+
+i&nbsp;ewentualnie konwertowana do typu
+<!--O--><span class='typ'>bool<!--C--></span>.
+Jeśli jest to
+<!--O--><span class='klucz'>true<!--C--></span>, obliczane jest wyrażenie
+
+<!--O--><span class='zmienna'>w1<!--C--></span>, a&nbsp;wyrażenie
+<!--O--><span class='zmienna'>w2<!--C--></span>
+ jest ignorowane.
+Wartością całego wyrażenia jest wartość
+<!--O--><span class='zmienna'>w1<!--C--></span>.
+Jeśli jest to
+<!--O--><span class='klucz'>false<!--C--></span>, obliczane jest wyrażenie
+
+<!--O--><span class='zmienna'>w2<!--C--></span>, a&nbsp;wyrażenie
+<!--O--><span class='zmienna'>w1<!--C--></span>
+ jest ignorowane.
+Wartością całego wyrażenia jest wtedy wartość
+<!--O--><span class='zmienna'>w2<!--C--></span>.
+Jeśli zarówno
+<!--O--><span class='zmienna'>w1<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>w2<!--C--></span>
+ są l-wartościami,
+to i&nbsp;wartość operatora warunkowego jest l-wartością.
+
+<P>
+Klasyczny przykład zastosowania operatora selekcji to implementacja
+funkcji
+<!--O--><span class='funkcja'>max<!--C--></span>
+ zwracającej większą z&nbsp;wartości swych
+argumentów:
+<pre><tt>       <font color="#009900">int</font> <b><font color="#000000">maxim</font></b><font color="#990000">(</font><font color="#009900">int</font> a<font color="#990000">,</font> <font color="#009900">int</font> b<font color="#990000">)</font> <font color="#FF0000">{</font>
+           <b><font color="#0000FF">return</font></b> a <font color="#990000">&gt;</font> b <font color="#990000">?</font> a <font color="#990000">:</font> b<font color="#990000">;</font>
+       <font color="#FF0000">}</font>
+</tt></pre>
+
+<P>
+Inny przykład zastosowania operatora selekcji podany zostanie w
+następnym podrozdziale.
+
+<P>
+
+<H2><A NAME="SECTION0010211000000000000000"></A>
+              <A NAME="operat:wyjatek"></A>
+<BR>
+<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN> Operator zgłoszenia wyjątku
+</H2>
+
+<P>
+Jako przedostatni w&nbsp;tabeli występuje
+operator zgłoszenia wyjątku
+<!--O--><span class='klucz'>throw<!--C--></span>: omówimy go
+w&nbsp;rozdziale o <A HREF="node132.html#chap:wyjatki">wyjątkach</A> .
+
+<P>
+
+<H2><A NAME="SECTION0010212000000000000000"></A>
+              <A NAME="operat:przecinek"></A>
+<BR>
+<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">12</SPAN> Operator przecinkowy
+</H2>
+
+<P>
+Operator przecinkowy<A NAME="9656"></A>
+jest dwuargumentowy: po dwóch stronach przecinka dwa wyrażenia
+<pre><tt>       wyr1 <font color="#990000">,</font> wyr2
+</tt></pre>
+Działanie jego polega na:
+
+<UL>
+<LI>obliczeniu wyrażenia
+<!--O--><span class='zmienna'>wyr1<!--C--></span>
+ i&nbsp;zignorowaniu
+          resultatu;
+</LI>
+<LI>obliczeniu wyrażenia
+<!--O--><span class='zmienna'>wyr2<!--C--></span>; jego wartość staje
+          się wartością całego wyrażenia.
+</LI>
+</UL>
+Często operator przecinkowy stosuje się w&nbsp;części inicjalizacyjnej
+lub inkrementującej nagłówka pętli
+<!--O--><span class='klucz'>for<!--C--></span>; przykład to
+linia&nbsp;7 programu <A HREF="#zloz.cpp">
+<!--O--><span class='plik'>zloz.cpp<!--C--></span></A>.
+
+<P>
+Inny, nieco dziwaczny, przykład ilustruje program:
+<BR><A NAME="przec.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">61</SPAN>:</SPAN>
+      <A NAME="tex2html65"
+  HREF="source-files/przec.cpp">
+<!--O--><span class='downl'>przec.cpp<!--C--></span></A>
+<A NAME="10276"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Operator przecinkowy</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">int</font> r <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">int</font> k<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>
+ <font SIZE="-2" color="black">     8.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font>cin <font color="#990000">&gt;&gt;</font> k<font color="#990000">,</font> k<font color="#990000">)</font> <font color="#FF0000">{</font>                            <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">     9.  </font>       r <font color="#990000">+=</font> k <font color="#990000">&gt;</font> <font color="#993399">0</font> <font color="#990000">?</font> <font color="#990000">(</font>cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Dodatnia</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font> <font color="#990000">,</font> <font color="#990000">+</font><font color="#993399">1</font><font color="#990000">)</font>
+ <font SIZE="-2" color="black">    10.  </font>                  <font color="#990000">:</font> <font color="#990000">(</font>cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Ujemna</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font>   <font color="#990000">,</font> <font color="#990000">-</font><font color="#993399">1</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    11.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    12.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Roznica ilosci dodatnich i ujemnych : "</font>
+ <font SIZE="-2" color="black">    13.  </font>         <font color="#990000">&lt;&lt;</font> r <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    14.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Operator przecinkowy jest tu użyty w&nbsp;linii&nbsp;<span class="ding">&#x278A;</span> w&nbsp;warunku
+pętli
+<!--O--><span class='klucz'>while<!--C--></span>. Mamy tu pierwsze wyrażenie,
+'<TT>cin &gt;&gt; k</TT>', wczytujące kolejną daną z&nbsp;klawiatury,
+i&nbsp;drugie, po prostu&nbsp;
+<!--O--><span class='zmienna'>k<!--C--></span>, dzięki któremu pętla
+skończy się, gdy wczytana zostanie liczba&nbsp;0 (gdyż wartością
+całego wyrażenia przecinkowego jest wartość prawego argumentu).
+W&nbsp;pętli do
+<!--O--><span class='zmienna'>r<!--C--></span>
+ dodawana jest (operator złożonego przypisania)
+wartość nieco skomplikowanego wyrażenia. Jest to operator selekcji
+&mdash;&nbsp;patrz
+podrozdział o&nbsp; <A HREF="#operat:selekcja">operatorze selekcji</A>
+&mdash;&nbsp;sprawdzający znak
+<!--O--><span class='zmienna'>k<!--C--></span>; w&nbsp;każdym przypadku rezultat
+będzie znów wartością wyrażenia przecinkowego. Dla
+<!--O--><span class='zmienna'>k<!--C--></span>
+ dodatnich
+będzie to wartość
+<pre><tt>       <font color="#990000">(</font>cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Dodatnia</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font> <font color="#990000">,</font> <font color="#990000">+</font><font color="#993399">1</font><font color="#990000">)</font>
+</tt></pre>
+czyli <SPAN CLASS="MATH">+1</SPAN> z&nbsp;efektem ubocznym polegającym na wypisaniu słowa
+&#34;Dodatnia&#34;. Analogicznie, dla
+<!--O--><span class='zmienna'>k<!--C--></span>
+ ujemnych
+od
+<!--O--><span class='zmienna'>r<!--C--></span>
+ odjęte zostanie&nbsp;1, a&nbsp;jako efekt uboczny wypisane
+będzie słowo &#34;Ujemna&#34;. Po wyjściu z&nbsp;pętli wypisywana
+jest różnica między ilością wczytanych liczb dodatnich
+i ujemnych. Na przykład wynik programu może być następujący:
+<PRE>
+    cpp&gt; przec
+    2
+    Dodatnia
+    6
+    Dodatnia
+    -3
+    Ujemna
+    6
+    Dodatnia
+    -1
+    Ujemna
+    3
+    Dodatnia
+    0
+    Roznica ilosci dodatnich i ujemnych : 2
+    cpp&gt;
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION0010213000000000000000"></A>
+              <A NAME="operat:alteroper"></A>
+<BR>
+<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">13</SPAN> Alternatywne nazwy operatorów
+</H2>
+
+<P>
+Niektóre operatory mają też formę czysto tekstową:
+
+<P>
+<DIV ALIGN="CENTER">
+<A NAME="9692"></A>
+<TABLE CELLPADDING=3 BORDER="1">
+<CAPTION><STRONG>Tabela:</STRONG>
+Alternatywne nazwy operatorów</CAPTION>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">tekstowa</TD>
+<TD ALIGN="CENTER"><A NAME="lalterop"></A>    symboliczna</TD>
+<TD ALIGN="CENTER">tekstowa</TD>
+<TD ALIGN="CENTER">symboliczna</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">and</TD>
+<TD ALIGN="CENTER">&amp;&amp;</TD>
+<TD ALIGN="CENTER">and_eq</TD>
+<TD ALIGN="CENTER">&amp;=</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">bitand</TD>
+<TD ALIGN="CENTER">&amp;</TD>
+<TD ALIGN="CENTER">bitor</TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">|</SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">compl</TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">&#8764;</SPAN></TD>
+<TD ALIGN="CENTER">not</TD>
+<TD ALIGN="CENTER">!</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">not_eq</TD>
+<TD ALIGN="CENTER">!=</TD>
+<TD ALIGN="CENTER">or</TD>
+<TD ALIGN="CENTER">&#124;&#124;</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">or_eq</TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">|</SPAN>=</TD>
+<TD ALIGN="CENTER">xor</TD>
+<TD ALIGN="CENTER">&#94;</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">xor_eq</TD>
+<TD ALIGN="CENTER">&#94;=</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+Forma tekstowa może być zamiennie stosowana z&nbsp;formą wyrażoną
+za pomocą symboli nieliterowych.
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1482"
+  HREF="node54.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1486"
+  HREF="node53.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1492"
+  HREF="node56.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1488"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1490"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1483"
+  HREF="node54.html">9.1 Priorytety i&nbsp;wiązanie</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1487"
+  HREF="node53.html">9. Operatory</A>
+<B>Dalej:</B> <A NAME="tex2html1493"
+  HREF="node56.html">10. Konwersje niejawne, porządek</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

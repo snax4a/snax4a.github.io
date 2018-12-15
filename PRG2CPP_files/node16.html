@@ -1,0 +1,734 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>4.2 Typy całkowite</TITLE>
+<META NAME="description" CONTENT="4.2 Typy całkowite">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node17.html">
+<LINK REL="previous" HREF="node15.html">
+<LINK REL="up" HREF="node14.html">
+<LINK REL="next" HREF="node17.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html881"
+  HREF="node15.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html887"
+  HREF="node14.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html893"
+  HREF="node17.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html889"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html891"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html882"
+  HREF="node15.html">4.1 Wstęp</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html888"
+  HREF="node14.html">4. Podstawowe typy danych</A>
+<B>Dalej:</B> <A NAME="tex2html894"
+  HREF="node17.html">4.3 Typy zmiennopozycyjne</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Podrozdzia&#322;y</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html895"
+  HREF="node16.html#SECTION00521000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Użyteczne aliasy typów całkowitych</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00520000000000000000"></A><A NAME="typydan:typycalk"></A>
+<BR>
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Typy całkowite
+</H1>
+
+<P>
+Wymieńmy standardowe typy całkowite w&nbsp;C/C++. W nawiasach podane są
+typowe długości danych poszczególnych typów w&nbsp;bajtach.
+Typowe, bo standard (w&nbsp;odróżnieniu od standardu Javy)
+<A NAME="2831"></A>
+określa tylko minimalne długości oraz to, że długości
+wymienionych poniżej typów muszą tworzyć ciąg niemalejący.
+Tak więc typy całkowite to:
+
+<!--O--><span class='typ'>char<!--C--></span>
+ (1),<A NAME="2833"></A><A NAME="2834"></A>
+
+<!--O--><span class='typ'>short<!--C--></span>
+ (2),<A NAME="2836"></A><A NAME="2837"></A>
+
+<!--O--><span class='typ'>int<!--C--></span>
+ (4)<A NAME="2839"></A><A NAME="2840"></A>
+
+<!--O--><span class='typ'>long<!--C--></span>
+ (4 lub 8),<A NAME="2842"></A><A NAME="2843"></A>
+i&nbsp;
+<!--O--><span class='typ'>long long<!--C--></span>
+ (8).<A NAME="2845"></A><A NAME="2846"></A>
+Typ
+<!--O--><span class='typ'>short<!--C--></span>
+ można też zapisywać
+jako
+<!--O--><span class='typ'>short int<!--C--></span>,<A NAME="2849"></A><A NAME="2850"></A>
+
+<!--O--><span class='typ'>long<!--C--></span>
+ jako
+<!--O--><span class='typ'>long int<!--C--></span>,<A NAME="2853"></A><A NAME="2854"></A>
+a&nbsp;
+<!--O--><span class='typ'>long long<!--C--></span>
+ jako
+<!--O--><span class='typ'>long long int<!--C--></span>.
+<A NAME="2857"></A><A NAME="2858"></A>
+Nowy standard definiuje również trzy typy <SPAN  CLASS="textit">znakowe</SPAN>:
+
+<!--O--><span class='typ'>wchar_t<!--C--></span>
+ (4),
+<!--O--><span class='typ'>char16_t<!--C--></span>
+ (2),
+i&nbsp;
+<!--O--><span class='typ'>char32_t<!--C--></span>
+ (4); są one traktowane jako oddzielne (bezznakowe)
+typy przeznaczone do reprezentowania znaków Unicode.
+
+<P>
+Wszystkie te typy (z&nbsp;wyjątkiem trzech ostatnich typów znakowych)
+występują w&nbsp;C/C++ w&nbsp;dwu różnych postaciach: mogą być bez znaku
+(<!--O--><span class='typ'>unsigned<!--C--></span>)<A NAME="2864"></A> lub ze
+znakiem
+(<!--O--><span class='typ'>signed<!--C--></span>).<A NAME="2866"></A>
+Nazwa typu bez znaku jest taka sama jak nazwa odpowiadającego typu
+ze znakiem, tylko poprzedzona słowem kluczowym
+<!--O--><span class='klucz'>unsigned<!--C--></span>
+
+(np.&nbsp;
+<!--O--><span class='typ'>unsigned int<!--C--></span>) &mdash;&nbsp;do nazw typów ze znakiem można
+zresztą również dodać jawnie
+<!--O--><span class='klucz'>signed<!--C--></span>, choć nie ma takiej
+potrzeby. Samo słowo
+<!--O--><span class='typ'>unsigned<!--C--></span>
+ może być użyte zamiast
+bardziej dosłownego
+<!--O--><span class='typ'>unsigned int<!--C--></span>.
+
+<P>
+W przypadku typu
+
+<!--O--><span class='typ'>char<!--C--></span><A NAME="2873"></A> w różnych implementacjach bywa
+różnie:
+<!--O--><span class='typ'>char<!--C--></span>
+ może być fizycznie równoważny
+z&nbsp;
+<!--O--><span class='typ'>signed char<!--C--></span>
+ lub
+<!--O--><span class='typ'>unsigned char<!--C--></span>. Tym niemniej wszystkie
+trzy typy są dla kompilatora <FONT COLOR="#7b003e"><I>różne</I></FONT>!
+Jeśli &bdquo;znakowość&rdquo; ma dla nas znaczenie, trzeba jawnie
+deklarować zmienne jako
+<!--O--><span class='typ'>signed char<!--C--></span>
+ lub
+<!--O--><span class='typ'>unsigned char<!--C--></span>.
+
+<P>
+Aby ułatwić internacjonalizację programów, istnieją jeszcze trzy
+dodatkowe typy reprezentujące znaki. Są one zawsze
+<!--O--><span class='klucz'>unsigned<!--C--></span>
+
+&mdash;&nbsp;ich wersje
+<!--O--><span class='klucz'>signed<!--C--></span>
+ nie istnieją.
+Typy te to:
+<BR>
+<!--O--><span class='typ'>wchar_t<!--C--></span><A NAME="2883"></A><A NAME="2884"></A>
+(ang.&nbsp;<FONT COLOR="#7b003e"><I>wide character</I></FONT> &ndash;&nbsp;znak szeroki)
+<A NAME="2886"></A><A NAME="2887"></A>
+&mdash;&nbsp;wystarczający do reprezentowania znaków najszerszego
+zestawu znaków na danej platformie
+<BR>
+<!--O--><span class='typ'>char16_t<!--C--></span><A NAME="2889"></A><A NAME="2890"></A>
+&mdash;&nbsp;dwa bajty interpretowane jako kod Unicode&nbsp;16;
+<BR>
+<!--O--><span class='typ'>char32_t<!--C--></span><A NAME="2892"></A><A NAME="2893"></A>
+&mdash;&nbsp;cztery bajty interpretowane jako kod Unicode&nbsp;32.
+<BR>
+<P>
+Powiedzmy teraz, na czym polega różnica pomiędzy typami
+ze znakiem i&nbsp;bez znaku.
+
+<P>
+W zmiennych
+<SPAN  CLASS="textit">bez znaku</SPAN><A NAME="2895"></A>
+poszczególne bity maszynowej
+reprezentacji liczby interpretowane są jako zera i&nbsp;jedynki
+w&nbsp;normalnym zapisie dwójkowym tej liczby.
+
+<P>
+<DIV ALIGN="CENTER">
+<IMG
+  WIDTH="234" HEIGHT="46" ALIGN="BOTTOM" BORDER="0"
+ SRC="./oktet1.png"
+ ALT="Image oktet1">
+
+</DIV>
+Rozpatrzmy na przykład liczby całkowite typu
+<!--O--><span class='typ'>char<!--C--></span>, które
+w C/C++ są (z&nbsp;definicji) jednobajtowe.
+Zapisane one są na ośmiu bitach, np.&nbsp;jak na rysunku. Kolejne
+cyfry (od prawej do lewej!) interpretowane są jako
+współczynniki przy kolejnych potęgach dwójki, poczynając od
+potęgi zerowej. Tak więc, jeśli zinterpretujemy tę liczbę
+jako
+<!--O--><span class='typ'>unsigned char<!--C--></span>, otrzymamy wartość <!-- MATH
+ $W_{\text{uns}}$
+ -->
+<SPAN CLASS="MATH"><I>W</I><SUB>uns</SUB></SPAN>:
+<!-- MATH
+ \begin{displaymath}
+\htmlimage{}
+    W_{\text{uns}} = \sum_{i=0}^{7} w_i \cdot 2^i
+\end{displaymath}
+ -->
+<P ALIGN="CENTER" CLASS="mathdisplay"><IMG
+ WIDTH="6" HEIGHT="47" BORDER="0"
+ SRC="img6.png"
+ ALT="\begin{displaymath}
+W_{\text{uns}} = \sum_{i=0}^{7} w_i \cdot 2^i
+\end{displaymath}"></P>
+gdzie dla naszej liczby, od prawej do lewej,
+<!-- MATH
+ $w_i = (1,1,0,0,1,0,0,1)$
+ -->
+<SPAN CLASS="MATH"><I>w</I><SUB>i</SUB> = (1, 1, 0, 0, 1, 0, 0, 1)</SPAN>. Zatem w&nbsp;tym konkretnym przypadku<P><!-- MATH
+ \begin{displaymath}
+W_{\text{uns}}
+      = 1\cdot 2^0 + 1\cdot 2^1 + 0\cdot 2^2 + 0\cdot 2^3 +
+        1\cdot 2^4 + 0\cdot 2^5 + 0\cdot 2^6 + 1\cdot 2^7
+      = 147
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<I>W</I><SUB>uns</SUB> = 1&#8901;2<SUP>0</SUP> +1&#8901;2<SUP>1</SUP> +0&#8901;2<SUP>2</SUP> +0&#8901;2<SUP>3</SUP> +1&#8901;2<SUP>4</SUP> +0&#8901;2<SUP>5</SUP> +0&#8901;2<SUP>6</SUP> +1&#8901;2<SUP>7</SUP> = 147
+</DIV><P></P>
+
+<P>
+Zauważmy, że nie ma sposobu, aby zapisać wartość ujemną w&nbsp;zmiennej
+typu
+<!--O--><span class='typ'>unsigned<!--C--></span>.
+
+<P>
+Dla zmiennych
+<SPAN  CLASS="textit">ze znakiem</SPAN><A NAME="2910"></A>
+wyraz przy najwyższej potędze dwójki
+brany jest z&nbsp;minusem; jest to tzw.&nbsp;kod uzupełnień do
+dwóch.<A NAME="2911"></A>
+W naszym przykładzie jest to bit ósmy, czyli na pozycji nr&nbsp;7
+(zapisywany po lewej stronie;
+jak zwykle bowiem liczymy od zera: bit pierwszy, czyli na pozycji
+zerowej, zapisujemy po stronie prawej). Zatem ten sam układ bitów
+ma teraz interpretację
+<!-- MATH
+ \begin{displaymath}
+\htmlimage{}
+    W_{\text{sgn}} = \sum_{i=0}^{6} w_i \cdot 2^i - w_7 \cdot 2^7
+\end{displaymath}
+ -->
+<P ALIGN="CENTER" CLASS="mathdisplay"><IMG
+ WIDTH="176" HEIGHT="96" BORDER="0"
+ SRC="img7.png"
+ ALT="\begin{displaymath}
+W_{\text{sgn}} = \sum_{i=0}^{6} w_i \cdot 2^i - w_7 \cdot 2^7
+\end{displaymath}"></P>
+czyli w&nbsp;naszym przykładzie<P><!-- MATH
+ \begin{displaymath}
+W_{\text{sgn}}
+      = 1\cdot 2^0 + 1\cdot 2^1 + 0\cdot 2^2 + 0\cdot 2^3 +
+        1\cdot 2^4 + 0\cdot 2^5 + 0\cdot 2^6 - 1\cdot 2^7
+      = -109
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<I>W</I><SUB>sgn</SUB> = 1&#8901;2<SUP>0</SUP> +1&#8901;2<SUP>1</SUP> +0&#8901;2<SUP>2</SUP> +0&#8901;2<SUP>3</SUP> +1&#8901;2<SUP>4</SUP> +0&#8901;2<SUP>5</SUP> +0&#8901;2<SUP>6</SUP> -1&#8901;2<SUP>7</SUP> = - 109
+</DIV><P></P>
+
+<P>
+i otrzymujemy teraz wartość ujemną.
+
+<P>
+Widzimy, że dla typu
+<!--O--><span class='typ'>unsigned char<!--C--></span>
+ największą wartość
+otrzymamy dla <SPAN CLASS="MATH"><I>w</I><SUB>i</SUB> = 1</SPAN> dla <!-- MATH
+ $i = 0,\ldots,7$
+ -->
+<SPAN CLASS="MATH"><I>i</I> = 0,&#8230;, 7</SPAN> i&nbsp;będzie ona
+wynosić 255. Najmniejsza możliwa wartość to oczywiście zero.
+
+<P>
+Natomiast dla typu
+
+<!--O--><span class='typ'>signed char<!--C--></span>
+
+największa możliwa wartość zmiennej odpowiada
+<SPAN CLASS="MATH"><I>w</I><SUB>i</SUB> = 1</SPAN> dla <!-- MATH
+ $i = 0,\ldots,6$
+ -->
+<SPAN CLASS="MATH"><I>i</I> = 0,&#8230;, 6</SPAN> i&nbsp;<SPAN CLASS="MATH"><I>w</I><SUB>7</SUB> = 0</SPAN>, gdyż wtedy część
+dodatnia jest największa, a&nbsp;składnika ujemnego nie ma.
+Odpowiada to liczbie
+127 o&nbsp;reprezentacji <SPAN CLASS="MATH">01111111</SPAN>.
+Jeśli jest składnik ujemny, a&nbsp;nie ma części dodatniej, tzn.&nbsp;gdy
+<SPAN CLASS="MATH"><I>w</I><SUB>i</SUB> = 0</SPAN> dla <!-- MATH
+ $i = 0,\ldots,6$
+ -->
+<SPAN CLASS="MATH"><I>i</I> = 0,&#8230;, 6</SPAN> i&nbsp;<SPAN CLASS="MATH"><I>w</I><SUB>7</SUB> = 1</SPAN>, to otrzymamy najmniejszą
+możliwą liczbę w&nbsp;tej reprezentacji. Będzie to w&nbsp;naszym przypadku
+liczba <SPAN CLASS="MATH">-128</SPAN> o&nbsp;reprezentacji <SPAN CLASS="MATH">10000000</SPAN>. Liczba <SPAN CLASS="MATH">-1</SPAN>,
+jak łatwo się przekonać, ma reprezentację <SPAN CLASS="MATH">11111111</SPAN>.
+
+<P>
+Ogólnie, jeśli liczba zapisana jest na <SPAN CLASS="MATH"><I>n</I></SPAN> bitach, to
+dla odpowiedniego typu
+
+<!--O--><span class='typ'>unsigned<!--C--></span><A NAME="2923"></A>
+zakresem wartości będzie
+<!-- MATH
+ $[0, 2^n-1]$
+ -->
+<SPAN CLASS="MATH">[0, 2<SUP>n</SUP> - 1]</SPAN>, natomiast dla typu
+
+<!--O--><span class='typ'>signed<!--C--></span><A NAME="2925"></A>
+będzie to
+<!-- MATH
+ $[-2^{n-1}, 2^{n-1}-1]$
+ -->
+<SPAN CLASS="MATH">[- 2<SUP>n-1</SUP>, 2<SUP>n-1</SUP> - 1]</SPAN>. Zatem dla różnych długości
+danych całkowitych otrzymamy zakresy zamieszczone w&nbsp;tabeli.
+<DIV ALIGN="CENTER">
+<A NAME="2931"></A>
+<TABLE CELLPADDING=3>
+<CAPTION><STRONG>Tabela:</STRONG>
+Zakres wartości dla typów całkowitych</CAPTION>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">Bajtów</TD>
+<TD ALIGN="CENTER"><A NAME="ltypycal"></A> Znak</TD>
+<TD ALIGN="RIGHT">Min</TD>
+<TD ALIGN="RIGHT">Max</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">1</TD>
+<TD ALIGN="CENTER">signed</TD>
+<TD ALIGN="RIGHT">-128</TD>
+<TD ALIGN="RIGHT">127</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">1</TD>
+<TD ALIGN="CENTER">unsigned</TD>
+<TD ALIGN="RIGHT">0</TD>
+<TD ALIGN="RIGHT">255</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">2</TD>
+<TD ALIGN="CENTER">signed</TD>
+<TD ALIGN="RIGHT">-32 768</TD>
+<TD ALIGN="RIGHT">32 767</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">2</TD>
+<TD ALIGN="CENTER">unsigned</TD>
+<TD ALIGN="RIGHT">0</TD>
+<TD ALIGN="RIGHT">65 535</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">4</TD>
+<TD ALIGN="CENTER">signed</TD>
+<TD ALIGN="RIGHT">-2 147 483 648</TD>
+<TD ALIGN="RIGHT">2 147 483 647</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">4</TD>
+<TD ALIGN="CENTER">unsigned</TD>
+<TD ALIGN="RIGHT">0</TD>
+<TD ALIGN="RIGHT">4 294 967 295</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">8</TD>
+<TD ALIGN="CENTER">signed</TD>
+<TD ALIGN="RIGHT">-9 223 372 036 854 775 808</TD>
+<TD ALIGN="RIGHT">9 223 372 036 854 775 807</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">8</TD>
+<TD ALIGN="CENTER">unsigned</TD>
+<TD ALIGN="RIGHT">0</TD>
+<TD ALIGN="RIGHT">18 446 744 073 709 551 615</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+Typ
+<!--O--><span class='typ'>char<!--C--></span><A NAME="2936"></A> (tak jak pozostałe typy znakowe)
+jest, co prawda, typem całkowitym, ale jest traktowany
+inaczej niż typy liczbowe, gdyż w&nbsp;zasadzie służy do reprezentowania
+znaków. Z&nbsp;tego powodu nie powinniśmy, choć jest to formalnie możliwe,
+używać zmiennych znakowych w&nbsp;operacjach arytmetycznych. Wartości liczbowe
+zmiennych tych typów odpowiadają zwykle (choć nie musi tak być) kodom
+ASCII znaków.  Tylko pierwsze 128 znaków ASCII<A NAME="2937"></A>
+(o kodach od&nbsp;0 do 127) ma określone
+znaczenie - interpretacja pozostałych może zależeć od platformy.
+Co gorsza, standard w&nbsp;zasadzie nie wymaga, aby implementacja w&nbsp;ogóle
+korzystała z&nbsp;kodowania ASCII. W&nbsp;szczególności oznacza to, że
+teoretycznie nie ma pewności, iż kolejne litery alfabetu mają
+kolejne kody. Zwykle tak jednak jest, gdyż większość
+istniejących programów opiera się na założeniu, że znaki
+kodowane są według standardu ASCII.
+
+<P>
+Przykłady deklaracji zmiennych różnych typów:
+<BR><A NAME="dekl1.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">13</SPAN>:</SPAN>
+      <A NAME="tex2html15"
+  HREF="source-files/dekl1.cpp">
+<!--O--><span class='downl'>dekl1.cpp<!--C--></span></A>
+<A NAME="3709"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Deklaracje</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">unsigned</font> <font color="#009900">long</font> <font color="#009900">int</font> ul1 <font color="#990000">=</font> 13UL<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">unsigned</font> <font color="#009900">long</font>     ul2 <font color="#990000">=</font> <font color="#993399">0xD</font><font color="#990000">;</font>  <i><font color="#9A1900">// 13 szesnastkowo</font></i>
+ <font SIZE="-2" color="black">     7.  </font>    <font color="#009900">signed</font>   <font color="#009900">short</font>    ss1 <font color="#990000">=</font> <font color="#993399">015</font><font color="#990000">;</font>  <i><font color="#9A1900">// 13 ósemkowo</font></i>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#009900">short</font>             ss2 <font color="#990000">=</font> <font color="#993399">13</font><font color="#990000">;</font>   <i><font color="#9A1900">// 13 dziesiętnie</font></i>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#009900">unsigned</font> <font color="#009900">char</font>     aa1 <font color="#990000">=</font> <font color="#993399">65</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>    <font color="#009900">signed</font>   <font color="#009900">char</font>     aa2 <font color="#990000">=</font> <font color="#FF0000">'A'</font><font color="#990000">;</font>  <i><font color="#9A1900">// ASCII('A') = 65</font></i>
+ <font SIZE="-2" color="black">    11.  </font>    <font color="#009900">int</font>               aa3 <font color="#990000">=</font> <font color="#993399">65</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    12.  </font>    <font color="#009900">int</font>               aa4 <font color="#990000">=</font> <font color="#FF0000">'A'</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>    <font color="#009900">char</font>              aa5 <font color="#990000">=</font> <font color="#FF0000">'</font><font color="#CC33CC">\1</font><font color="#FF0000">01'</font><font color="#990000">;</font>   <i><font color="#9A1900">// 65 ósemkowo</font></i>
+ <font SIZE="-2" color="black">    14.  </font>    <font color="#009900">char</font>              aa6 <font color="#990000">=</font> <font color="#FF0000">'</font><font color="#CC33CC">\x</font><font color="#FF0000">41'</font><font color="#990000">;</font>   <i><font color="#9A1900">// 65 szesnastkowo</font></i>
+ <font SIZE="-2" color="black">    15.  </font>    cout <font color="#990000">&lt;&lt;</font> aa1 <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font> <font color="#990000">&lt;&lt;</font> aa2 <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    16.  </font>         <font color="#990000">&lt;&lt;</font> aa3 <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font> <font color="#990000">&lt;&lt;</font> aa4 <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    17.  </font>         <font color="#990000">&lt;&lt;</font> aa5 <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font> <font color="#990000">&lt;&lt;</font> aa6 <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Program ten drukuje
+<PRE>
+    A A
+    65 65
+    A A
+</PRE>
+Wszystkie zmienne
+<!--O--><span class='zmienna'>aa1<!--C--></span><SPAN CLASS="MATH">&#8230;</SPAN>
+<!--O--><span class='zmienna'>aa4<!--C--></span>
+ mają taką
+samą wartość liczbową: 65 (jest to kod ASCII dużej
+litery '<TT>A</TT>'). Podczas drukowania jednak zmienne typu
+<!--O--><span class='typ'>char<!--C--></span>
+
+są traktowane jako znaki, a&nbsp;więc drukowany jest znak odpowiadający
+kodowi ASCII 65, czyli litera '<TT>A</TT>'; zmienne typu
+<!--O--><span class='typ'>int<!--C--></span>
+
+natomiast są drukowane jako liczby, nawet jeśli były zainicjowane za
+pomocą literału znakowego (jak
+<!--O--><span class='zmienna'>aa4<!--C--></span>).
+
+<P>
+Czasem zachodzi potrzeba wyspecyfikowania precyzyjnie typu literału
+liczbowego. Literał całkowity (np.&nbsp;12345) będzie zinterpretowany
+jako literał typu
+<!--O--><span class='typ'>int<!--C--></span>
+ (czyli
+<!--O--><span class='typ'>signed int<!--C--></span>). Jeśli chcemy
+wymusić zinterpretowanie go jako literału typu bezznakowego,
+dodajemy na końcu literę '<TT>U</TT>' (dużą lub małą), a&nbsp;jeśli ma to być
+literał typu
+<!--O--><span class='typ'>long<!--C--></span>, dodajemy literę '<TT>L</TT>' lub
+'<TT>LL</TT>' dla typu
+<!--O--><span class='typ'>long long<!--C--></span>. Modyfikatory te można
+łączyć w&nbsp;dowolnej kolejności. Tak więc np.&nbsp;'<TT>13UL</TT>' jest
+literałem liczby 13 typu
+<!--O--><span class='typ'>unsigned long<!--C--></span>
+ (zob.&nbsp;zmienna
+<!--O--><span class='zmienna'>ul1<!--C--></span>),
+a&nbsp;'<TT>1LL</TT>' literałem liczby 1&nbsp;typu
+<!--O--><span class='typ'>long long<!--C--></span>.
+
+<P>
+Literały liczbowe (całkowite) można też zapisywać w&nbsp;systemie
+ósemkowym (oktalnym) i&nbsp;szesnastkowym (heksadecymalnym).
+Aby literał był potraktowany
+jako zapis liczby w&nbsp;systemie ósemkowym, poprzedzamy go
+cyfrą 0&nbsp;(zero). Tak np.&nbsp;037 zostanie zinterpretowane jako literał
+typu
+<!--O--><span class='typ'>int<!--C--></span>
+ liczby o&nbsp;wartości dziesiętnej <!-- MATH
+ $3\cdot 8 + 7 = 31$
+ -->
+<SPAN CLASS="MATH">3&#8901;8 + 7 = 31</SPAN>,
+a&nbsp;015 jako <!-- MATH
+ $8 + 5 = 13$
+ -->
+<SPAN CLASS="MATH">8 + 5 = 13</SPAN> (zmienna
+<!--O--><span class='zmienna'>ss1<!--C--></span>). Oczywiście,
+w&nbsp;literałach ósemkowych nie mogą występować cyfry większe od siódemki.
+W&nbsp;szczególności, symbol '<!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>0' oznacza znak o&nbsp;kodzie ASCII zero
+(który nazywany jest znakiem
+<!--O--><span class='zmienna'>NUL<!--C--></span>
+ i&nbsp;odgrywa ważną rolę
+w tak zwanych C-napisach).
+
+<P>
+Literały w&nbsp;układzie szesnastkowym poprzedzamy
+zerem i&nbsp;literą '<TT>X</TT>' (dużą lub małą). A zatem
+0x2D to dziesiętnie <!-- MATH
+ $2\cdot 16 + 13 = 45$
+ -->
+<SPAN CLASS="MATH">2&#8901;16 + 13 = 45</SPAN>, a&nbsp;0xD to dziesiętnie
+13 (zmienna
+<!--O--><span class='zmienna'>ul2<!--C--></span>). W literałach szesnastkowych jako cyfr od
+10 do 15 używamy liter od A do F (dużych lub małych).
+
+<P>
+Literały znakowe można zapisywać jako pojedynczy znak
+ujęty w&nbsp;apostrofy (<FONT COLOR="#7b003e"><I>nie</I></FONT> cudzysłowy!) &mdash;&nbsp;jak w&nbsp;linii definiującej
+
+<!--O--><span class='zmienna'>aa2<!--C--></span>. Kłopot pojawia się, jeśli danego znaku nie da
+się wpisać z&nbsp;klawiatury. Można wtedy zapisać taki literał
+w postaci '&#92;ooo', gdzie <TT>ooo</TT> to co najwyżej trzycyfrowa
+liczba w&nbsp;układzie ósemkowym (w tym przypadku nie musimy pisać
+wiodącego zera; liczba i&nbsp;tak będzie zinterpretowana w&nbsp;układzie
+ósemkowym). Przykładem jest definicja
+<!--O--><span class='zmienna'>aa5<!--C--></span>.
+W linii następnej skorzystaliśmy z&nbsp;jeszcze innej formy
+zapisu znaku: '&#92;Xhh'. Po literze '<TT>X</TT>' (lub '<TT>x</TT>')
+mogą wystąpić dwie cyfry, oznaczone tu przez '<TT>hh</TT>',
+które teraz będą zinterpretowane w&nbsp;układzie szesnastkowym.
+Nie można zapisywać literałów znakowych w&nbsp;tej formie używając
+zapisu dziesiętnego: trzeba zastosować układ ósemkowy lub
+szesnastkowy.
+
+<P>
+Niektóre znaki mają specjalne oznaczenia:
+<DIV ALIGN="CENTER">
+<A NAME="2979"></A>
+<TABLE CELLPADDING=3>
+<CAPTION><STRONG>Tabela 4.2:</STRONG>
+Znaki specjalne w&nbsp;C++</CAPTION>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT"><!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>n&nbsp;&nbsp;&nbsp;&nbsp;nowa linia (LF)</TD>
+<TD ALIGN="LEFT"><A NAME="lspecznak"></A>                <!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>t&nbsp;&nbsp;&nbsp;&nbsp;tabulator poz. (HT)</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT"><!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>v&nbsp;&nbsp;&nbsp;&nbsp;tabulator pion. (VT)</TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>b&nbsp;&nbsp;&nbsp;&nbsp;cofnięcie (BS)</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT"><!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>r&nbsp;&nbsp;&nbsp;&nbsp;powrót karetki (CR)</TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>f&nbsp;&nbsp;&nbsp;&nbsp;nowa strona (FF)</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT"><!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>a&nbsp;&nbsp;&nbsp;&nbsp;sygnał dźwiękowy (BEL)</TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN><!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;ukośnik</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT"><!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>?&nbsp;&nbsp;&nbsp;&nbsp;pytajnik</TD>
+<TD ALIGN="LEFT"><!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>'&nbsp;&nbsp;&nbsp;&nbsp;apostrof</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT"><!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>&#34;&nbsp;&nbsp;&nbsp;&nbsp;cudzysłów</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+W&nbsp;świetle tego, co powiedzieliśmy zrozumiałe jest,
+że na przykład poniższa instrukcja
+<pre><tt>       cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\1</font><font color="#FF0000">01ni</font><font color="#CC33CC">\x</font><font color="#FF0000">61 Ania</font><font color="#CC33CC">\n\x</font><font color="#FF0000">4Fl</font><font color="#CC33CC">\1</font><font color="#FF0000">41 Ola"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+</tt></pre>
+wypisze na ekranie
+<PRE>
+    Ania Ania
+    Ola Ola
+</PRE>
+gdyż np.&nbsp;kod ASCII<A NAME="2987"></A>
+dużej litery A to <SPAN CLASS="MATH">65<SUB>10</SUB></SPAN>=<SPAN CLASS="MATH">101<SUB>8</SUB></SPAN>=<SPAN CLASS="MATH">41<SUB>16</SUB></SPAN>,
+a&nbsp;pojawienie się '&#92;n' w&nbsp;wyświetlanym
+tekście powoduje przejście do nowej linii.
+
+<P>
+
+<H2><A NAME="SECTION00521000000000000000"></A><A NAME="typydan:aliases"></A>
+<BR>
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Użyteczne aliasy typów całkowitych
+</H2>
+
+<P>
+Jak mówiliśmy, rozmiary danych poszczególnych typów nie są
+przez standard ustalone (tak jak są w&nbsp;Javie). Czasem jednak
+chcielibyśmy być pewni, że deklarowana zmienna ma odpowiedni rozmiar.
+Na przykład, jeśli nasza zmienna ma być ze znakiem i&nbsp;móc przyjmować
+wartości większe niż 33 tysiące, to jej wymiar musi być nie mniejszy niż
+4&nbsp;bajty. Na platformie, na której
+<!--O--><span class='typ'>int<!--C--></span>
+ ma 2&nbsp;bajty
+(co jest rzadkie, ale możliwe), nie możemy zatem użyć
+<!--O--><span class='typ'>int<!--C--></span>,
+ale raczej
+<!--O--><span class='typ'>long<!--C--></span>
+ (który musi mieć przynajmniej 4&nbsp;bajty).
+W&nbsp;takich sytuacjach można uniknąć deklarowania typu jawnie;
+możemy posłużyć się aliasami (żargonowo: typedef'ami),
+zdefiniowanymi w&nbsp;nagłówku
+<!--O--><span class='plik'>cstdint<!--C--></span>, nazw istniejących
+typów, które mają żądany wymiar (<!--O--><span class='klucz'>typedef<!--C--></span>
+ omówimy szerzej
+w&nbsp;rozdziale <A HREF="node32.html#typypoch:typdef">o&nbsp;typedef'ach</A> później).
+Na przykład,
+<!--O--><span class='typ'>int32_t<!--C--></span>
+ jest aliasem (inną nazwą) całkowitego
+typu ze znakiem, który, na danej platformie ma rozmiar dokładnie
+32&nbsp;bity (4&nbsp;bajty) &mdash;&nbsp;zazwyczaj będzie to
+<!--O--><span class='typ'>int<!--C--></span>. Liczba w&nbsp;nazwie
+aliasu wskazuje liczbę bitów, nie bajtów. Tak więc, możemy użyć
+
+<!--O--><span class='typ'>int8_t<!--C--></span>,
+<!--O--><span class='typ'>int16_t<!--C--></span>,
+<!--O--><span class='typ'>int32_t<!--C--></span>,
+
+<!--O--><span class='typ'>int64_t<!--C--></span>
+ jako nazwy typu <SPAN  CLASS="textit">ze znakiem</SPAN> o&nbsp;podanym rozmiarze.
+<A NAME="3011"></A><A NAME="3012"></A>
+<A NAME="3013"></A><A NAME="3014"></A>
+<A NAME="3015"></A><A NAME="3016"></A>
+<A NAME="3017"></A><A NAME="3018"></A>
+Podobnie, dodając 'u' na początku nazwy, otrzymujemy aliasy
+nazw typów <SPAN  CLASS="textit">bez znaku</SPAN>:
+
+<!--O--><span class='typ'>uint8_t<!--C--></span>,
+<!--O--><span class='typ'>uint16_t<!--C--></span>,
+<!--O--><span class='typ'>uint32_t<!--C--></span>,
+<!--O--><span class='typ'>uint64_t<!--C--></span>.
+<A NAME="3024"></A><A NAME="3025"></A>
+<A NAME="3026"></A><A NAME="3027"></A>
+<A NAME="3028"></A><A NAME="3029"></A>
+<A NAME="3030"></A><A NAME="3031"></A>
+Wszystkie te nazwy są określone poprzez
+<!--O--><span class='klucz'>typedef<!--C--></span>
+ w&nbsp;przestrzeni
+nazw
+<!--O--><span class='plik'>std<!--C--></span>, więc ich pełne nazwy to
+<!--O--><span class='typ'>std::int32_t<!--C--></span>
+ itd.
+
+<P>
+Nagłówek
+<!--O--><span class='plik'>cstdint<!--C--></span>
+ definiuje również <SPAN  CLASS="textit">makra preprocesora</SPAN>,
+które rozwijają się do minimalnych i&nbsp;maksymalnych
+<SPAN  CLASS="textit">wartości</SPAN> danych dla różnych typów:
+
+<!--O--><span class='typ'>INT32_MIN<!--C--></span>,
+<!--O--><span class='typ'>INT32_MAX<!--C--></span>,
+<!--O--><span class='typ'>UINT32_MAX<!--C--></span>, ect. Nie ma
+makr dla minimalnych wartości typów bez znaku, bo są one zawsze&nbsp;0.
+Ponieważ są to makra, ich nazwy nie mogą być poprzedzane
+przedrostkiem
+<!--O--><span class='plik'>std::<!--C--></span>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html881"
+  HREF="node15.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html887"
+  HREF="node14.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html893"
+  HREF="node17.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html889"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html891"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html882"
+  HREF="node15.html">4.1 Wstęp</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html888"
+  HREF="node14.html">4. Podstawowe typy danych</A>
+<B>Dalej:</B> <A NAME="tex2html894"
+  HREF="node17.html">4.3 Typy zmiennopozycyjne</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

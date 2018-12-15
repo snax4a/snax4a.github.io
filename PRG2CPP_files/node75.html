@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>12.1 Wstęp</TITLE>
+<META NAME="description" CONTENT="12.1 Wstęp">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node76.html">
+<LINK REL="previous" HREF="node74.html">
+<LINK REL="up" HREF="node74.html">
+<LINK REL="next" HREF="node76.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1792"
+  HREF="node74.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1798"
+  HREF="node74.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1804"
+  HREF="node76.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1800"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1802"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1793"
+  HREF="node74.html">12. Zarządzanie pamięcią</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1799"
+  HREF="node74.html">12. Zarządzanie pamięcią</A>
+<B>Dalej:</B> <A NAME="tex2html1805"
+  HREF="node76.html">12.2 Przydzielanie pamięci &mdash;&nbsp;operator</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001310000000000000000"></A><A NAME="pam:wstep"></A>
+<BR>
+<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">1</SPAN> Wstęp
+</H1>
+
+<P>
+W C/C++,<A NAME="14224"></A> tak jak i&nbsp;w wielu innych
+językach, dane mogą być zapisywane w&nbsp;kilku odrębnych obszarach
+pamięci. Szczegóły zależą od implementacji, ale generalnie
+najważniejszymi takimi obszarami są stos i&nbsp;sterta.
+
+<P>
+Na <FONT COLOR="#7b003e"><B>stosie</B></FONT><A NAME="14226"></A> zapisywane są zmienne lokalne
+definiowane w&nbsp;programie (bez użycia operatora
+<!--O--><span class='klucz'>new<!--C--></span>).
+Gdy sterowanie wchodzi do funkcji (lub, ogólniej, bloku)
+zmienne utworzone w&nbsp;tej funkcji są umieszczane na stosie. Po
+wyjściu sterowania z&nbsp;tego bloku, stos jest &bdquo;zwijany&rdquo;:
+<A NAME="14228"></A><A NAME="14229"></A> utworzone
+w&nbsp;nim zmienne są usuwane i&nbsp;stos powraca do stanu sprzed wejścia
+do funkcji/bloku. Zarządzanie stosem to bardzo delikatna sprawa
+i&nbsp;normalnie programista się tym nie zajmuje: &bdquo;ręczna&rdquo; ingerencja
+w&nbsp;strukturę stosu byłaby bardzo niebezpieczna. Nie ma zresztą
+żadnej potrzeby takiej ingerencji.
+
+<P>
+Drugi podstawowy obszar pamięci to <FONT COLOR="#7b003e"><B>sterta</B></FONT><A NAME="14231"></A>
+(ang.&nbsp;<FONT COLOR="#7b003e"><I>heap</I></FONT>) lub, inaczej, obszar pamięci wolnej.
+<A NAME="14233"></A>
+Programista może alokować w&nbsp;tym obszarze miejsce na
+swoje dane, umieszczać je tam, następnie je zmieniać,
+odczytywać&nbsp;itd. W&nbsp;C/C++ dane te będą istnieć do końca działania
+programu i&nbsp;obszar pamięci wolnej, gdzie są zapisane, będzie zatem do
+końca programu oznaczony jako zajęty. Może to prowadzić do
+przepełnienia pamięci i&nbsp;przedwczesnego przerwania programu, albo jego
+znaczego spowolnienia (np.&nbsp;na skutek &bdquo;swapowania&rdquo;).
+
+<P>
+Jak wspomnieliśmy, nie ma w&nbsp;C/C++ automatycznego &bdquo;odśmiecania&rdquo;
+pamięci (choć istnieją implementacje posiadające tę cechę).
+Istnieją za to sposoby pozwalające &bdquo;ręcznie&rdquo; zwalniać zaalokowane
+wcześniej obszary pamięci wolnej (co w&nbsp;Javie
+<A NAME="14234"></A> jest praktycznie niemożliwe, ale
+też i&nbsp;mało potrzebne).
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1792"
+  HREF="node74.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1798"
+  HREF="node74.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1804"
+  HREF="node76.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1800"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1802"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1793"
+  HREF="node74.html">12. Zarządzanie pamięcią</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1799"
+  HREF="node74.html">12. Zarządzanie pamięcią</A>
+<B>Dalej:</B> <A NAME="tex2html1805"
+  HREF="node76.html">12.2 Przydzielanie pamięci &mdash;&nbsp;operator</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

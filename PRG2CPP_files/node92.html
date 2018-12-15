@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>14.7 Destruktory</TITLE>
+<META NAME="description" CONTENT="14.7 Destruktory">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node93.html">
+<LINK REL="previous" HREF="node91.html">
+<LINK REL="up" HREF="node85.html">
+<LINK REL="next" HREF="node93.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2038"
+  HREF="node91.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2044"
+  HREF="node85.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2050"
+  HREF="node93.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2046"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2048"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2039"
+  HREF="node91.html">14.6 Konstruktory</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2045"
+  HREF="node85.html">14. Klasy (I)</A>
+<B>Dalej:</B> <A NAME="tex2html2051"
+  HREF="node93.html">14.8 Tworzenie obiektów</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001570000000000000000"></A><A NAME="klasy:des"></A>
+<BR>
+<SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">7</SPAN> Destruktory
+</H1>
+
+<P>
+Prócz konstruktorów można również zdefiniować w&nbsp;klasie
+<FONT COLOR="#7b003e"><B>destruktor</B></FONT>.<A NAME="16571"></A>
+Tak jak konstruktor jest wywoływany automatycznie podczas tworzenia
+obiektu, tak destruktor wywoływany jest na rzecz obiektu automatycznie
+podczas destrukcji tego obiektu przez system (sam destruktor obiektu
+nie niszczy!). Niszczenie obiektów lokalnych, utworzonych na stosie,
+zachodzi gdy sterowanie wychodzi z&nbsp;bloku, w&nbsp;którym były zdefiniowane.
+Jak wiemy, stos jest wtedy zwijany do stanu, w&nbsp;jakim był przy wejściu
+do danego bloku (funkcji); usunięte zatem zostaną wszystkie zmienne
+utworzone na stosie w&nbsp;tym bloku, wśród nich również zmienne
+obiektowe.
+
+<P>
+Usuwanie obiektów na stosie odbywa się w&nbsp;kolejności odwrotnej do
+ich kreowania &mdash;&nbsp;jako pierwsze zostaną zatem zniszczone te, które
+utworzone były jako ostatnie.
+Tak więc, na przykład, zmienne obiektowe zdefiniowane w&nbsp;funkcji
+
+<!--O--><span class='funkcja'>main<!--C--></span>
+ są niszczone po wyjściu z&nbsp;tej funkcji &mdash;&nbsp;
+wtedy dopiero wywoływane są dla tych obiektów destruktory,
+w&nbsp;kolejności odwrotnej do tej, w&nbsp;jakiej były tworzone.
+Ogólnie, obiekty lokalne (na stosie) są niszczone zaraz po wyjściu
+sterowania z&nbsp;bloku, w&nbsp;którym były utworzone.
+Niszczenie obiektów zdefiniowanych globalnie zachodzi po zakończeniu
+wykonywania funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>
+ i&nbsp;po zniszczeniu wszystkich
+obiektów lokalnych z&nbsp;tej funkcji, tuż przed zakończeniem wykonywania
+całego programu &mdash;&nbsp;przykład podamy w&nbsp;następnym podrozdziale.
+
+<P>
+Inne reguły obowiązują dla obiektów wykreowanych za pomocą
+operatora
+<!--O--><span class='klucz'>new<!--C--></span>
+ na stercie, a&nbsp;więc <FONT COLOR="#7b003e"><I>nie</I></FONT> jako obiekty
+lokalne. Nie są one w&nbsp;ogóle niszczone automatycznie;
+programista musi sam pamiętać, aby wywołać operator
+
+<!--O--><span class='klucz'>delete<!--C--></span>
+ podając jako argument wskaźnik do obiektu na stercie;
+wartością tego wskaźnika musi być dokładnie ten sam adres, który
+został zwrócony przez operator
+<!--O--><span class='klucz'>new<!--C--></span>
+ podczas tworzenia obiektu
+(patrz rozdział o <A HREF="node77.html#pam:delete">zarządzaniu pamięcią</A> ).
+
+<P>
+Destruktora można czasem w&nbsp;ogóle nie definiować. Jeśli go jednak
+definiujemy, to jego nazwą jest nazwa klasy poprzedzona znakiem tyldy:
+
+<!--O--><span class='funkcja'>&#732;Nazwa<!--C--></span>.
+Tak jak dla konstruktorów,
+definiując destruktor nie podaje się żadnego typu zwracanego,
+nawet
+<!--O--><span class='klucz'>void<!--C--></span>. Destruktor <FONT COLOR="#7b003e"><I>musi</I></FONT> być bezparametrowy.
+Wynika z&nbsp;tego, że <FONT COLOR="#7b003e"><I>nie może</I></FONT> być przeciążany. Jest to
+zrozumiałe: destruktor jest wywoływany automatycznie przez system
+podczas usuwania obiektu &mdash;&nbsp;system nie może wiedzieć, jakie
+argumenty chcielibyśmy przekazać...
+
+<P>
+Dla niektórych klas definiowanie destruktorów nie jest potrzebne.
+Zazwyczaj jednak napisanie destruktora jest wskazane lub nawet konieczne
+&mdash;&nbsp;kiedy takie sytuacje występują, omówimy w&nbsp;następnym rozdziale.
+
+<P>
+Destruktor zachowuje się jak zwykła metoda,
+tyle tylko, że jest wywoływany automatycznie podczas usuwania
+obiektu z&nbsp;pamięci. Samo wywołanie destruktora obiektu nie niszczy:
+wykonuje on to i&nbsp;tylko to, co zapisane jest w&nbsp;jego kodzie.
+W szczególności, jeśli chcemy, to możemy jawnie wywołać
+destruktor na rzecz istniejącego obiektu, na przykład
+<pre><tt>       Klasa<font color="#990000">*</font> obiekt <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Klasa</font></b><font color="#990000">();</font>
+       <i><font color="#9A1900">// ...</font></i>
+       obiekt <font color="#990000">-&gt;</font> <font color="#990000">~</font><b><font color="#000000">Klasa</font></b><font color="#990000">();</font>
+</tt></pre>
+Takie wywołanie <FONT COLOR="#7b003e"><I>nie</I></FONT> spowoduje zniszczenia obiektu; treść
+destruktora zostanie po prostu wykonana, tak jakby było to
+wywołanie zwykłej metody klasy
+<!--O--><span class='klasa'>Klasa<!--C--></span>. Zauważmy, że jawne
+wywołanie <SPAN  CLASS="textit">konstruktora</SPAN> na rzecz już istniejącego obiektu
+byłoby błędem.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2038"
+  HREF="node91.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2044"
+  HREF="node85.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2050"
+  HREF="node93.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2046"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2048"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2039"
+  HREF="node91.html">14.6 Konstruktory</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2045"
+  HREF="node85.html">14. Klasy (I)</A>
+<B>Dalej:</B> <A NAME="tex2html2051"
+  HREF="node93.html">14.8 Tworzenie obiektów</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

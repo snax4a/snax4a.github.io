@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>14.5 Statyczne funkcje składowe</TITLE>
+<META NAME="description" CONTENT="14.5 Statyczne funkcje składowe">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node91.html">
+<LINK REL="previous" HREF="node89.html">
+<LINK REL="up" HREF="node85.html">
+<LINK REL="next" HREF="node91.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2010"
+  HREF="node89.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2016"
+  HREF="node85.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2022"
+  HREF="node91.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2018"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2020"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2011"
+  HREF="node89.html">14.4 Metody</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2017"
+  HREF="node85.html">14. Klasy (I)</A>
+<B>Dalej:</B> <A NAME="tex2html2023"
+  HREF="node91.html">14.6 Konstruktory</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001550000000000000000"></A>
+     <A NAME="klasy:funstat"></A>
+<BR>
+<SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">5</SPAN> Statyczne funkcje składowe
+</H1>
+
+<P>
+Funkcje składowe klasy mogą być zadeklarowane jako statyczne.
+Takie<A NAME="16524"></A>
+funkcje można wywołać nawet wtedy, gdy nie istnieje jeszcze
+żaden obiekt klasy. Do ich nazwy z&nbsp;zewnątrz klasy odwołujemy się
+poprzez nazwę klasy za pomocą operatora
+zasięgu,<A NAME="16525"></A>
+czyli &bdquo;czterokropka&rdquo; ('
+<FONT COLOR="#000000"><TT>::</TT></FONT>'), albo za pomocą operatora
+wyboru składowej (kropka) &mdash;&nbsp;nie ma wtedy znaczenia,
+jakiego obiektu tej klasy użyjemy. Ponieważ funkcja statyczna
+<FONT COLOR="#7b003e"><I>nie</I></FONT> jest wywoływana na rzecz obiektu, ale jak funkcja globalna,
+nie można w&nbsp;niej odwoływać się do
+<!--O--><span class='klucz'>this<!--C--></span>
+ ani do
+żadnych składowych niestatycznych &mdash;&nbsp;te bowiem istnieją tylko
+wewnątrz konkretnych obiektów i&nbsp;w każdym z&nbsp;nich mogą
+być różne. Można natomiast w&nbsp;funkcjach statycznych klasy odwoływać
+się do składowych statycznych tej klasy: innych funkcji
+statycznych i&nbsp;zmiennych klasowych (określanych przez statyczne
+pola klasy).
+
+<P>
+Funkcje statyczne klasy od funkcji zadeklarowanych w&nbsp;zasięgu globalnym
+różni to, że należą do zakresu (przestrzeni nazw) klasy.
+Mają zatem bezpośredni dostęp do nazw z&nbsp;zakresu tej klasy (również
+prywatnych).
+
+<P>
+Na przykład program <A HREF="node87.html#acc.cpp">
+<!--O--><span class='plik'>acc.cpp<!--C--></span></A> może być przepisany
+w następujący sposób, tym razem z&nbsp;funkcją obliczającą iloczyn
+skalarny jako funkcją statyczną:
+<BR><A NAME="memstat.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">106</SPAN>:</SPAN>
+      <A NAME="tex2html113"
+  HREF="source-files/memstat.cpp">
+<!--O--><span class='downl'>memstat.cpp<!--C--></span></A>
+<A NAME="17029"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Składowe funkcje statyczne</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Vector</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">double</font> x<font color="#990000">,</font> y<font color="#990000">,</font> z<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">     7.  </font>    <font color="#009900">void</font> <b><font color="#000000">set</font></b><font color="#990000">(</font><font color="#009900">double</font> xx <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">,</font> <font color="#009900">double</font> yy <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">,</font> <font color="#009900">double</font> zz <font color="#990000">=</font><font color="#993399">0</font><font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     8.  </font>        x <font color="#990000">=</font> xx<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>        y <font color="#990000">=</font> yy<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>        z <font color="#990000">=</font> zz<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    12.  </font>    <b><font color="#0000FF">static</font></b> <font color="#009900">double</font> <b><font color="#000000">dot_product</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> Vector<font color="#990000">&amp;</font> w1<font color="#990000">,</font>
+ <font SIZE="-2" color="black">    13.  </font>                              <b><font color="#0000FF">const</font></b> Vector<font color="#990000">&amp;</font> w2<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    14.  </font>        <b><font color="#0000FF">return</font></b> w1<font color="#990000">.</font>x <font color="#990000">*</font> w2<font color="#990000">.</font>x <font color="#990000">+</font> w1<font color="#990000">.</font>y <font color="#990000">*</font> w2<font color="#990000">.</font>y <font color="#990000">+</font> w1<font color="#990000">.</font>z <font color="#990000">*</font> w2<font color="#990000">.</font>z<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    16.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font>
+ <font SIZE="-2" color="black">    18.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    19.  </font>    <font color="#008080">Vector</font> w1<font color="#990000">,</font> w2<font color="#990000">,</font> ww<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    20.  </font>    w1<font color="#990000">.</font><b><font color="#000000">set</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">,</font> <font color="#993399">1</font><font color="#990000">,</font> <font color="#993399">2</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    21.  </font>    w2<font color="#990000">.</font><b><font color="#000000">set</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">,-</font><font color="#993399">1</font><font color="#990000">,</font> <font color="#993399">2</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    22.  </font>
+ <font SIZE="-2" color="black">    23.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"w1*w2 = "</font>
+ <font SIZE="-2" color="black">    24.  </font>         <font color="#990000">&lt;&lt;</font> Vector<font color="#990000">::</font><b><font color="#000000">dot_product</font></b><font color="#990000">(</font>w1<font color="#990000">,</font> w2<font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>  <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">    25.  </font>
+ <font SIZE="-2" color="black">    26.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"w1*w2 = "</font>
+ <font SIZE="-2" color="black">    27.  </font>         <font color="#990000">&lt;&lt;</font> ww<font color="#990000">.</font><b><font color="#000000">dot_product</font></b><font color="#990000">(</font>w1<font color="#990000">,</font> w2<font color="#990000">)</font>      <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>  <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    28.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Zauważmy wywołanie z&nbsp;linii&nbsp;<span class="ding">&#x278A;</span> poprzez kwalifikację nazwą klasy
+i&nbsp;wywołanie z&nbsp;linii&nbsp;<span class="ding">&#x278B;</span>, gdzie funkcja jest wywoływana formalnie
+na rzecz obiektu
+<!--O--><span class='zmienna'>ww<!--C--></span>, choć w&nbsp;rzeczywistości żadna
+informacja o&nbsp;tym obiekcie nie zostanie do funkcji przekazana (nie
+był on nawet sensownie zainicjowany!). Obiekt
+<!--O--><span class='zmienna'>ww<!--C--></span>
+
+został użyty wyłącznie do tego, aby określić klasę w&nbsp;której
+zasięgu określona jest nazwa funkcji; równie dobrze
+mogliśmy tu użyć dowolnego innego obiektu klasy
+<!--O--><span class='klasa'>Vector<!--C--></span>.
+Cała informacja o&nbsp;wektorach które mają być pomnożone jest
+przekazywana przez argumenty.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2010"
+  HREF="node89.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2016"
+  HREF="node85.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2022"
+  HREF="node91.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2018"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2020"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2011"
+  HREF="node89.html">14.4 Metody</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2017"
+  HREF="node85.html">14. Klasy (I)</A>
+<B>Dalej:</B> <A NAME="tex2html2023"
+  HREF="node91.html">14.6 Konstruktory</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

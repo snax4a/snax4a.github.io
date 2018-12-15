@@ -1,0 +1,230 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>8.10 Instrukcje zaniechania i&nbsp;kontunuacji</TITLE>
+<META NAME="description" CONTENT="8.10 Instrukcje zaniechania i&nbsp;kontunuacji">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node50.html">
+<LINK REL="previous" HREF="node48.html">
+<LINK REL="up" HREF="node39.html">
+<LINK REL="next" HREF="node50.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1385"
+  HREF="node48.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1391"
+  HREF="node39.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1397"
+  HREF="node50.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1393"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1395"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1386"
+  HREF="node48.html">8.9 Instrukcje iteracyjne (pętle)</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1392"
+  HREF="node39.html">8. Instrukcje</A>
+<B>Dalej:</B> <A NAME="tex2html1398"
+  HREF="node50.html">8.11 Instrukcje skoku</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION009100000000000000000"></A>
+            <A NAME="instr:zaniech"></A>
+<BR>
+<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">10</SPAN> Instrukcje zaniechania i&nbsp;kontunuacji
+</H1>
+
+<P>
+Wewnątrz pętli (<!--O--><span class='klucz'>for<!--C--></span>,
+<!--O--><span class='klucz'>do...while<!--C--></span>
+ i&nbsp;
+<!--O--><span class='klucz'>while<!--C--></span>)
+można użyć tzw. instrukcji kontynuacji
+<!--O--><span class='klucz'>continue<!--C--></span>.
+<A NAME="8167"></A>
+Oznacza ona zaniechanie wykonywania
+bieżącego obrotu najbardziej wewnętrznej pętli obejmującej
+tę instrukcję i&nbsp;przejście do jej następnego obrotu.
+W&nbsp;przypadku pętli
+<!--O--><span class='klucz'>for<!--C--></span>
+ następną wykonywaną instrukcją
+będą zatem instrukcje wymienione w&nbsp;części inkrementującej,
+jeśli nie były pominięte.
+Innymi słowy, wszystkie instrukcje występujące w&nbsp;pętli po
+instrukcji
+<!--O--><span class='klucz'>continue<!--C--></span>
+ traktowane są jak jedna instrukcja pusta.
+
+<P>
+W następującym programie funkcja
+<!--O--><span class='funkcja'>sumaDod<!--C--></span>
+ przegląda
+tablicę liczb i&nbsp;oblicza sumę (która wynosi 17) wszystkich elementów
+dodatnich &mdash;&nbsp;elementy ujemne są pomijane dzięki instrukcji
+
+<!--O--><span class='klucz'>continue<!--C--></span>
+ z&nbsp;linii&nbsp;<span class="ding">&#x278A;</span>:
+<BR><A NAME="sumadod.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">52</SPAN>:</SPAN>
+      <A NAME="tex2html55"
+  HREF="source-files/sumadod.cpp">
+<!--O--><span class='downl'>sumadod.cpp<!--C--></span></A>
+<A NAME="8495"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Instrukcja kontynuowania</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">int</font> <b><font color="#000000">sumaDod</font></b><font color="#990000">(</font><font color="#009900">int</font> <font color="#990000">*</font>tab<font color="#990000">,</font> <font color="#009900">int</font> size<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">int</font> suma <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> size<font color="#990000">;</font> i<font color="#990000">++)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     7.  </font>        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> tab<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">&lt;=</font> <font color="#993399">0</font> <font color="#990000">)</font> <b><font color="#0000FF">continue</font></b><font color="#990000">;</font>   <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">     8.  </font>        suma <font color="#990000">+=</font> tab<font color="#990000">[</font>i<font color="#990000">];</font>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    10.  </font>    <b><font color="#0000FF">return</font></b> suma<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    12.  </font>
+ <font SIZE="-2" color="black">    13.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    14.  </font>    <font color="#009900">int</font> tab<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">{</font> <font color="#993399">1</font><font color="#990000">,</font> <font color="#990000">-</font><font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">5</font><font color="#990000">,</font> <font color="#990000">-</font><font color="#993399">7</font><font color="#990000">,</font> <font color="#993399">2</font><font color="#990000">,</font> <font color="#993399">0</font><font color="#990000">,</font> <font color="#993399">9</font> <font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>    <font color="#009900">int</font> suma <font color="#990000">=</font> <b><font color="#000000">sumaDod</font></b><font color="#990000">(</font>tab<font color="#990000">,</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>tab<font color="#990000">)/</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>tab<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">]));</font>
+ <font SIZE="-2" color="black">    16.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Suma: "</font> <font color="#990000">&lt;&lt;</font> suma <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Instrukcja zaniechania
+<!--O--><span class='klucz'>break<!--C--></span>
+ przerywa wykonywanie najbardziej
+wewnętrznej pętli obejmującej tę instrukcję.
+Modyfikując poprzedni program, można następująco obliczyć
+sumę wszystkich elementów tablicy aż do napotkania elementu
+niedodatniego &mdash;&nbsp;po napotkaniu takiego elementu pętla jest
+przerywana i&nbsp;wszystkie następne elementy, i&nbsp;dodatnie i&nbsp;ujemne, są
+ignorowane (wynikiem jest 16):
+<BR><A NAME="sumaazdo.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">53</SPAN>:</SPAN>
+      <A NAME="tex2html56"
+  HREF="source-files/sumaazdo.cpp">
+<!--O--><span class='downl'>sumaazdo.cpp<!--C--></span></A>
+<A NAME="8504"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Instrukcja zaniechania</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">int</font> <b><font color="#000000">sumaazdo</font></b><font color="#990000">(</font><font color="#009900">int</font> <font color="#990000">*</font>tab<font color="#990000">,</font> <font color="#009900">int</font> size<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">int</font> suma <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> size<font color="#990000">;</font> i<font color="#990000">++)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     7.  </font>        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> tab<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">&lt;=</font> <font color="#993399">0</font> <font color="#990000">)</font> <b><font color="#0000FF">break</font></b><font color="#990000">;</font>      <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">     8.  </font>        suma <font color="#990000">+=</font> tab<font color="#990000">[</font>i<font color="#990000">];</font>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    10.  </font>    <b><font color="#0000FF">return</font></b> suma<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    12.  </font>
+ <font SIZE="-2" color="black">    13.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    14.  </font>    <font color="#009900">int</font> tab<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">{</font> <font color="#993399">1</font><font color="#990000">,</font> <font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">5</font><font color="#990000">,</font> <font color="#993399">7</font><font color="#990000">,</font> <font color="#993399">0</font><font color="#990000">,</font> <font color="#993399">4</font><font color="#990000">,</font> <font color="#993399">9</font> <font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>    <font color="#009900">int</font> suma <font color="#990000">=</font> <b><font color="#000000">sumaazdo</font></b><font color="#990000">(</font>tab<font color="#990000">,</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>tab<font color="#990000">)/</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>tab<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">]));</font>
+ <font SIZE="-2" color="black">    16.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Suma: "</font> <font color="#990000">&lt;&lt;</font> suma <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+W linii&nbsp;<span class="ding">&#x278A;</span> pętla jest przerywana, jeśli napotkany został element
+zerowy lub ujemny.
+
+<P>
+Instrukcja
+<!--O--><span class='klucz'>break<!--C--></span>
+ powoduje też zakończenie wykonywania
+instrukcji
+<!--O--><span class='klucz'>switch<!--C--></span>, o&nbsp;czym wspomnieliśmy przy
+okazji omawiania tej instrukcji
+(rozdz.&nbsp;w rozdziale o&nbsp;instrukcji <A HREF="node47.html#instr:decyz">switch</A> ).
+Instrukcja
+<!--O--><span class='klucz'>continue<!--C--></span>
+ oczywiście nie miałaby dla instrukcji wyboru
+sensu, gdyż nie jest ona w&nbsp;ogóle instrukcją iteracyjną wykonywaną
+cyklicznie (pętlą).
+
+<P>
+Uwaga dla znających Javę:<A NAME="8188"></A>
+w&nbsp;tym języku obie instrukcje &mdash;&nbsp;
+<!--O--><span class='klucz'>break<!--C--></span>
+ i&nbsp;
+<!--O--><span class='klucz'>continue<!--C--></span>
+
+&mdash;&nbsp;mają formę &bdquo;z etykietą&rdquo;. Takiej formy w&nbsp;C/C++ <FONT COLOR="#7b003e"><I>nie ma</I></FONT>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1385"
+  HREF="node48.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1391"
+  HREF="node39.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1397"
+  HREF="node50.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1393"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1395"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1386"
+  HREF="node48.html">8.9 Instrukcje iteracyjne (pętle)</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1392"
+  HREF="node39.html">8. Instrukcje</A>
+<B>Dalej:</B> <A NAME="tex2html1398"
+  HREF="node50.html">8.11 Instrukcje skoku</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,519 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>7.5 L-wartości</TITLE>
+<META NAME="description" CONTENT="7.5 L-wartości">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="previous" HREF="node37.html">
+<LINK REL="up" HREF="node33.html">
+<LINK REL="next" HREF="node39.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1212"
+  HREF="node37.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1216"
+  HREF="node33.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1222"
+  HREF="node39.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1218"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1220"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1213"
+  HREF="node37.html">7.4 Modyfikatory typów</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1217"
+  HREF="node33.html">7. Zmienne</A>
+<B>Dalej:</B> <A NAME="tex2html1223"
+  HREF="node39.html">8. Instrukcje</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00850000000000000000"></A><A NAME="zmienne:lwart"></A>
+<BR>
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN> L-wartości
+</H1>
+
+<P>
+Każda dana w&nbsp;programie musi oczywiście być gdzieś w&nbsp;pamięci
+komputera zapisana. Nie musi to jednak być segment pamięci
+przeznaczony na dane o&nbsp;dostępnych programowo adresach: mogą to być
+rejestry procesora lub specjalne obszary pamięci, gdzie tymczasowe
+zmienne<A NAME="6789"></A> są dynamicznie tworzone i&nbsp;usuwane.
+
+<P>
+Na przykład w&nbsp;takim fragmencie
+<pre><tt>       <font color="#009900">int</font> x<font color="#990000">,</font> y <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font>
+       <i><font color="#9A1900">// ...</font></i>
+       x <font color="#990000">=</font> y <font color="#990000">+</font> <font color="#993399">1</font><font color="#990000">;</font>
+</tt></pre>
+wynik dodawania '
+<FONT COLOR="#000000"><TT>y+1</TT></FONT>', o&nbsp;wartości&nbsp;2, niewątpliwie
+musi być gdzieś zapisany: pewnie ta wartość zostanie wpisana do
+zmiennej
+<!--O--><span class='zmienna'>x<!--C--></span>
+ po obliczeniu bezpośrednio z&nbsp;rejestru procesora.
+Tak czy owak, nie mamy na to ani szczególnego wpływu, ani dostępu
+do tej danej &mdash;&nbsp;możemy ją tylko natychmiast po obliczeniu
+gdzieś zapisać lub użyć do innych operacji.
+Co ważniejsze, po wykonaniu przypisania ta obliczona wartość
+najprawdopodobniej zostanie za chwilę zamazana, bo była tymczasowa
+i&nbsp;służyła wyłącznie do tego, aby można było przekopiować ją do zmiennej
+
+<!--O--><span class='zmienna'>x<!--C--></span>. Zauważmy, że tego typu wartości mogą się pojawiać
+tylko jako wartości wyrażenia po <FONT COLOR="#7b003e"><I>prawej</I></FONT> stronie przypisania.
+
+<P>
+Pamiętamy, że
+
+<P>
+
+<P>
+
+<div class='wazne'>
+w&nbsp;instrukcji przypisania prawa strona przypisania mówi co
+    policzyć, lewa zaś &mdash;&nbsp;gdzie zapisać wynik.
+
+
+</div>
+
+<P>
+Zatem po lewej stronie przypisania mogą pojawiać się tylko
+wyrażenia identyfikujące dane o&nbsp;dostępnym adresie: ich
+dotychczasowa wartość nie ma znaczenia, bo właśnie w
+wyniku przypisania zostanie za chwilę zmieniona!
+
+<P>
+Prowadzi nas to do pojęcia
+<FONT COLOR="#7b003e"><B>l-wartości</B></FONT><A NAME="6799"></A>
+(ang.&nbsp;<FONT COLOR="#7b003e"><I>lvalue, l-value</I></FONT>, od <FONT COLOR="#7b003e"><I>left</I></FONT>: lewy)
+i&nbsp;<FONT COLOR="#7b003e"><B>p-wartości</B></FONT><A NAME="6803"></A>
+(ang.&nbsp;<FONT COLOR="#7b003e"><I>rvalue, r-value</I></FONT>, od <FONT COLOR="#7b003e"><I>right</I></FONT>: prawy).
+
+<P>
+
+<P>
+
+<div class='wazne'>
+L-wartość to wyrażenie identyfikujące daną o określonym typie,
+    która ma określony, dostępny w&nbsp;programie adres w&nbsp;pamięci.
+
+
+</div>
+
+<P>
+Zatem np.&nbsp;nazwa zmiennej ustalonej (<!--O--><span class='klucz'>const<!--C--></span>) jest l-wartością,
+choć niemodyfikowalną. Identyfikator &bdquo;zwykłej&rdquo;, nieustalonej
+zmiennej jest l-wartością modyfikowalną. Generalnie zatem, jeśli
+wyrażenie występuje po lewej stronie przypisania, to musi być
+l-wartością; stwierdzenie odwrotne nie jest prawdziwe.
+
+<P>
+
+<P>
+
+<div class='wazne'>
+P-wartość to wyrażenie, które ma określoną wartość.
+
+
+</div>
+
+<P>
+Zauważmy, że l-wartość jest też p-wartością, choć odwrotnie nie
+musi to być prawda: p-wartości stanowią znacznie szerszą klasę
+wyrażeń. Na przykład takie wyrażenie jak '
+<FONT COLOR="#000000"><TT>x+2</TT></FONT>' ma
+wartość, więc jest p-wartością (jeśli
+<!--O--><span class='zmienna'>x<!--C--></span>
+ jest zdefiniowane);
+wyrażenie to jednak nie jest l-wartością z powodów, o&nbsp;których mówiliśmy.
+
+<P>
+Wymieńmy zatem wyrażenia, które mogą być l-wartościami (znaczenie
+niektórych wyjaśnimy w&nbsp;następnych rozdziałach):
+
+<UL>
+<LI>Identyfikator zmiennej, również kwalifikowany
+          operatorem zakresu, np.
+<!--O--><span class='zmienna'>::x<!--C--></span>.
+</LI>
+<LI>Rezultat funkcji o&nbsp;referencyjnym typie
+          zwracanym.
+</LI>
+<LI>Wyrażenie składające się z&nbsp;przypisania (jako całość);
+          np.&nbsp;
+<FONT COLOR="#000000"><TT>a=c+b</TT></FONT> ma wartość
+<!--O--><span class='zmienna'>a<!--C--></span>
+ <FONT COLOR="#7b003e"><I>po</I></FONT>
+          przypisaniu i&nbsp;adres
+<!--O--><span class='zmienna'>&amp;a<!--C--></span>.
+</LI>
+<LI>Wyrażenie z&nbsp;operatorem <FONT COLOR="#7b003e"><I>przedrostkowego</I></FONT> zwiększenia
+          lub zmniejszenia (ale <FONT COLOR="#7b003e"><I>nie</I></FONT> przyrostkowego); zatem
+
+<FONT COLOR="#000000"><TT>++k</TT></FONT> jest, a&nbsp;
+<FONT COLOR="#000000"><TT>k++</TT></FONT> <FONT COLOR="#7b003e"><I>nie jest</I></FONT> l-wartością).
+</LI>
+<LI>Wyłuskanie elemenu tablicy, np.&nbsp;
+<FONT COLOR="#000000"><TT>p[k]</TT></FONT>.
+</LI>
+<LI>Wyrażenie z&nbsp;wyłuskaniem wartości (dereferencji)
+          <A NAME="6828"></A>,
+          na przykład
+<FONT COLOR="#000000"><TT>*p</TT></FONT>.
+</LI>
+<LI>Wybór składowej niefunkcyjnej klasy lub obiektu,
+          na przykład
+<FONT COLOR="#000000"><TT>obiekt.skladowa</TT></FONT> lub
+<FONT COLOR="#000000"><TT>wsk-&gt;skladowa</TT></FONT>).
+</LI>
+<LI>Rezultat operatora warunkowego, jeśli drugi i&nbsp;trzeci argument
+          są l-wartościami; na przykład wyrażenie
+<FONT COLOR="#000000"><TT>a&gt;0?++i:++j</TT></FONT> jest,
+          natomiast
+<FONT COLOR="#000000"><TT>a&gt;0?i++:j++</TT></FONT> nie jest l-wartością.
+</LI>
+<LI>Wynik konwersji do typu referencyjnego, np.&nbsp;
+<FONT COLOR="#000000"><TT>(int&amp;)k</TT></FONT>.
+</LI>
+<LI>Wynik operatora, jeśli prawy argument tego
+          operatora jest l-wartością.
+</LI>
+</UL>
+
+<P>
+Na przykład w&nbsp;ostatniej linii
+<pre><tt>       <font color="#009900">int</font> x <font color="#990000">=</font> <font color="#993399">2</font><font color="#990000">,</font> y <font color="#990000">=</font> x <font color="#990000">+</font> <font color="#993399">1</font><font color="#990000">;</font>
+       <i><font color="#9A1900">// ...</font></i>
+       <font color="#009900">int</font> j <font color="#990000">=</font> x <font color="#990000">=</font> y<font color="#990000">;</font>
+</tt></pre>
+wyrażenie
+<FONT COLOR="#000000"><TT>x=y</TT></FONT> jest l-wartością (i p-wartością) o&nbsp;wartości
+równej wartości
+<!--O--><span class='zmienna'>x<!--C--></span>
+ po przypisaniu. Skoro jest
+l-wartością, to może też wystąpić po lewej stronie przypisania:
+<pre><tt>       <font color="#990000">(</font>x<font color="#990000">=</font>y<font color="#990000">-</font><font color="#993399">2</font><font color="#990000">)</font> <font color="#990000">=</font> <font color="#993399">5</font><font color="#990000">;</font>
+</tt></pre>
+Wyrażenie
+<FONT COLOR="#000000"><TT>(x=y-2)</TT></FONT> ma wartość
+<!--O--><span class='zmienna'>x<!--C--></span>
+ po
+przypisaniu
+(czyli 1) i&nbsp;adres tejże zmiennej
+<!--O--><span class='zmienna'>x<!--C--></span>
+ &mdash;&nbsp;zatem przypisanie
+wartości&nbsp;5 nastąpi właśnie do zmiennej
+<!--O--><span class='zmienna'>x<!--C--></span>
+ (wartość&nbsp;1
+zostanie zamazana).
+
+<P>
+Po następującej instrukcji natomiast
+<pre><tt>       <font color="#009900">int</font> <font color="#990000">*</font>p <font color="#990000">=</font> <font color="#990000">&amp;(</font> x<font color="#990000">&gt;</font>y <font color="#990000">?</font> x <font color="#990000">:</font> y<font color="#990000">);</font>
+</tt></pre>
+wskaźnik
+<!--O--><span class='zmienna'>p<!--C--></span>
+ będzie zawierał adres większej ze
+zmiennych
+<!--O--><span class='zmienna'>x<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>y<!--C--></span>.
+Inne przykłady:
+<BR><A NAME="lval.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">44</SPAN>:</SPAN>
+      <A NAME="tex2html47"
+  HREF="source-files/lval.cpp">
+<!--O--><span class='downl'>lval.cpp<!--C--></span></A>
+<A NAME="7329"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">L-wartości</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">int</font><font color="#990000">&amp;</font> <b><font color="#000000">razydwa</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">&amp;</font> m<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <b><font color="#0000FF">static</font></b> <font color="#009900">int</font> licz<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" W funkcji: licz = "</font> <font color="#990000">&lt;&lt;</font> licz <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>    m <font color="#990000">*=</font> <font color="#993399">2</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>    <b><font color="#0000FF">return</font></b> licz<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    10.  </font>
+ <font SIZE="-2" color="black">    11.  </font><font color="#009900">void</font> <b><font color="#000000">printTab</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">int</font> <font color="#990000">*</font>tab<font color="#990000">,</font> <font color="#009900">int</font> size<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    12.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"[ "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> size<font color="#990000">;</font> i<font color="#990000">++)</font>
+ <font SIZE="-2" color="black">    14.  </font>        cout <font color="#990000">&lt;&lt;</font> tab<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"]"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    17.  </font>
+ <font SIZE="-2" color="black">    18.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    19.  </font>    <font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">,</font> j <font color="#990000">=</font> <font color="#993399">2</font><font color="#990000">,</font> k <font color="#990000">=</font> <font color="#993399">3</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    20.  </font>
+ <font SIZE="-2" color="black">    21.  </font>    <i><font color="#9A1900">// przypisanie jako l-nazwa</font></i>
+ <font SIZE="-2" color="black">    22.  </font>    <font color="#990000">(</font>i<font color="#990000">=</font>j<font color="#990000">)</font> <font color="#990000">=</font> k<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    23.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" A: i = "</font> <font color="#990000">&lt;&lt;</font> i <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" j = "</font> <font color="#990000">&lt;&lt;</font> j
+ <font SIZE="-2" color="black">    24.  </font>         <font color="#990000">&lt;&lt;</font>    <font color="#FF0000">" k = "</font> <font color="#990000">&lt;&lt;</font> k <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>           <i><font color="#9A1900">// 3,2,3</font></i>
+ <font SIZE="-2" color="black">    25.  </font>
+ <font SIZE="-2" color="black">    26.  </font>    <font color="#009900">int</font> tab<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">{</font><font color="#993399">1</font><font color="#990000">,</font><font color="#993399">2</font><font color="#990000">,</font><font color="#993399">3</font><font color="#990000">,</font><font color="#993399">4</font><font color="#FF0000">}</font><font color="#990000">,</font> <font color="#990000">*</font>p <font color="#990000">=</font> tab<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    27.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" B: przed "</font><font color="#990000">;</font> <b><font color="#000000">printTab</font></b><font color="#990000">(</font>tab<font color="#990000">,</font><font color="#993399">4</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    28.  </font>    <font color="#990000">*++++++</font>p <font color="#990000">=</font> <font color="#993399">8</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    29.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" B:    po "</font><font color="#990000">;</font> <b><font color="#000000">printTab</font></b><font color="#990000">(</font>tab<font color="#990000">,</font><font color="#993399">4</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    30.  </font>
+ <font SIZE="-2" color="black">    31.  </font>    <i><font color="#9A1900">// teraz p wskazuje na ostatni element!</font></i>
+ <font SIZE="-2" color="black">    32.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" C: ++*----p = "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">++*----</font>p <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font> <i><font color="#9A1900">// 3</font></i>
+ <font SIZE="-2" color="black">    33.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" C:   tab "</font><font color="#990000">;</font> <b><font color="#000000">printTab</font></b><font color="#990000">(</font>tab<font color="#990000">,</font><font color="#993399">4</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    34.  </font>
+ <font SIZE="-2" color="black">    35.  </font>    <i><font color="#9A1900">// konwersja jako l-nazwa</font></i>
+ <font SIZE="-2" color="black">    36.  </font>    <font color="#009900">int</font> m <font color="#990000">=</font> <font color="#993399">7</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    37.  </font>    <b><font color="#000000">razydwa</font></b><font color="#990000">(</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">&amp;)</font>m<font color="#990000">=</font><font color="#993399">8</font> <font color="#990000">)++;</font>  <i><font color="#9A1900">// konwersja niepotrzebna!</font></i>
+ <font SIZE="-2" color="black">    38.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"D1: m = "</font> <font color="#990000">&lt;&lt;</font> m <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    39.  </font>    <b><font color="#000000">razydwa</font></b><font color="#990000">(</font>m<font color="#990000">)++;</font>
+ <font SIZE="-2" color="black">    40.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"D2: m = "</font> <font color="#990000">&lt;&lt;</font> m <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    41.  </font>    <font color="#009900">int</font> n <font color="#990000">=</font> <b><font color="#000000">razydwa</font></b><font color="#990000">(</font>m<font color="#990000">)</font> <font color="#990000">=</font> <font color="#993399">10</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    42.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"D3: m = "</font> <font color="#990000">&lt;&lt;</font> m <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    43.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"D4: n = "</font> <font color="#990000">&lt;&lt;</font> n <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    44.  </font>
+ <font SIZE="-2" color="black">    45.  </font>    <i><font color="#9A1900">// operator przecinkowy</font></i>
+ <font SIZE="-2" color="black">    46.  </font>    k <font color="#990000">=</font> <font color="#990000">(</font>i<font color="#990000">=</font><font color="#993399">1</font><font color="#990000">,</font> j<font color="#990000">=</font><font color="#993399">2</font><font color="#990000">)</font> <font color="#990000">+</font> <font color="#993399">1</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    47.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" E: i = "</font> <font color="#990000">&lt;&lt;</font> i <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" j = "</font> <font color="#990000">&lt;&lt;</font> j
+ <font SIZE="-2" color="black">    48.  </font>         <font color="#990000">&lt;&lt;</font>    <font color="#FF0000">" k = "</font> <font color="#990000">&lt;&lt;</font> k <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>          <i><font color="#9A1900">// 1,2,3</font></i>
+ <font SIZE="-2" color="black">    49.  </font>
+ <font SIZE="-2" color="black">    50.  </font>    <i><font color="#9A1900">// selektor jako l-nazwa</font></i>
+ <font SIZE="-2" color="black">    51.  </font>    <font color="#990000">(</font>k <font color="#990000">&gt;</font> <font color="#993399">2</font> <font color="#990000">?</font> i <font color="#990000">:</font> j<font color="#990000">)</font> <font color="#990000">=</font> <font color="#993399">5</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    52.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" F: i = "</font> <font color="#990000">&lt;&lt;</font> i <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" j = "</font> <font color="#990000">&lt;&lt;</font> j
+ <font SIZE="-2" color="black">    53.  </font>         <font color="#990000">&lt;&lt;</font>    <font color="#FF0000">" k = "</font> <font color="#990000">&lt;&lt;</font> k <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>          <i><font color="#9A1900">// 5,2,3</font></i>
+ <font SIZE="-2" color="black">    54.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Wynik tego programu to:
+<PRE>
+     A: i = 3 j = 2 k = 3
+     B: przed [ 1 2 3 4 ]
+     B:    po [ 1 2 3 8 ]
+     C: ++*----p = 3
+     C:   tab [ 1 3 3 8 ]
+     W funkcji: licz = 0
+    D1: m = 16
+     W funkcji: licz = 1
+    D2: m = 32
+     W funkcji: licz = 2
+    D3: m = 64
+    D4: n = 10
+     E: i = 1 j = 2 k = 3
+     F: i = 5 j = 2 k = 3
+</PRE>
+W linii&nbsp;22 przypisanie
+<FONT COLOR="#000000"><TT>(i=j)</TT></FONT> pełni rolę l-wartości.
+Odpowiednim adresem jest adres zmiennej
+<!--O--><span class='zmienna'>i<!--C--></span>, zatem
+to do tej zmiennej przypisana zostanie wartość
+<!--O--><span class='zmienna'>k<!--C--></span>.
+Natomiast wartość zmiennych
+<!--O--><span class='zmienna'>j<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>k<!--C--></span>
+ pozostanie
+niezmieniona. Zauważmy, że jest to co innego niż
+'
+<FONT COLOR="#000000"><TT>i=j=k</TT></FONT>'. Ta instrukcja byłaby równoważna
+'
+<FONT COLOR="#000000"><TT>i=(j=k)</TT></FONT>' i&nbsp;zmieniłaby wartości zarówno
+zmiennej&nbsp;
+<!--O--><span class='zmienna'>i<!--C--></span>
+ jak i&nbsp;zmiennej&nbsp;
+<!--O--><span class='zmienna'>j<!--C--></span>.
+
+<P>
+W linii&nbsp;26 definiujemy tablicę czteroelementową i&nbsp;jej adres
+(wartość zmiennej
+<!--O--><span class='zmienna'>tab<!--C--></span>) przypisujemy do wskaźnika
+
+<!--O--><span class='zmienna'>p<!--C--></span>. Spójrzmy na nieco dziwną konstrukcję
+
+<FONT COLOR="#000000"><TT>*++++++p</TT></FONT> z&nbsp;linii&nbsp;28. Najpierw trzy razy zwiększamy
+wartość
+<!--O--><span class='zmienna'>p<!--C--></span>. Ponieważ zmienna
+<!--O--><span class='zmienna'>p<!--C--></span>
+ jest wskaźnikowa,
+więc jej zwiększenie oznacza to samo co
+
+<FONT COLOR="#000000"><TT>((p+1)+1)+1</TT></FONT> i&nbsp;sprowadza się do zmiany wartości
+
+<!--O--><span class='zmienna'>p<!--C--></span>
+ &mdash;&nbsp;najpierw
+<!--O--><span class='zmienna'>p<!--C--></span>
+ wskazywała na
+<!--O--><span class='zmienna'>tab[0]<!--C--></span>,
+po tej operacji wskazuje na
+<!--O--><span class='zmienna'>tab[3]<!--C--></span>, czyli na ostatni element
+tablicy. Wyłuskanie (dereferencja) tej zmiennej za pomocą operatora
+wyłuskania wartości (gwiazdka) daje nam l-wartość zmiennej
+
+<!--O--><span class='zmienna'>tab[3]<!--C--></span>
+ i&nbsp;to do tej zmiennej przypisujemy wartość&nbsp;8,
+o&nbsp;czym świadczy druga z&nbsp;linii wydruku oznaczonych literą&nbsp;'B'. Efektem
+ubocznym jest fakt, że teraz
+<!--O--><span class='zmienna'>p<!--C--></span>
+ wskazuje na
+<!--O--><span class='zmienna'>tab[3]<!--C--></span>.
+
+<P>
+Podobna konstrukcja użyta została w&nbsp;linii&nbsp;32. Najpierw
+dwa razy zmniejszamy wartość zmiennej
+<!--O--><span class='zmienna'>p<!--C--></span>
+ &mdash;&nbsp;ponieważ
+wskazywała ona na ostatni, czwarty element tablicy
+<!--O--><span class='zmienna'>tab<!--C--></span>, to
+po tej operacji wskazuje na element drugi, czyli na
+<!--O--><span class='zmienna'>tab[1]<!--C--></span>.
+Teraz dokonujemy dereferencji: wyrażenie
+<FONT COLOR="#000000"><TT>*--p</TT></FONT> jest
+zatem nazwą drugiego elementu tablicy. Wartość tego elementu
+(który jest typu
+<!--O--><span class='typ'>int<!--C--></span>, a&nbsp;nie typu wskaźnikowego!)
+zwiększamy o&nbsp;jeden za pomocą operatora zwiększania. Zatem drugi element
+tablicy zwiększy się o&nbsp;jeden, co widać z&nbsp;linii wydruku
+oznaczonych literą 'C'. Efektem ubocznym będzie to, że teraz
+wskaźnik
+<!--O--><span class='zmienna'>p<!--C--></span>
+ wskazuje na ten właśnie, drugi element tablicy.
+
+<P>
+W linii&nbsp;37 w&nbsp;argumencie wywołania funkcji
+<!--O--><span class='funkcja'>razydwa<!--C--></span>
+
+dokonujemy jawnej konwersji wartości przypisania
+<FONT COLOR="#000000"><TT>m=8</TT></FONT>,
+a&nbsp;jest nią l-wartość zmiennej
+<!--O--><span class='zmienna'>m<!--C--></span>, do typu
+<!--O--><span class='typ'>int&amp;<!--C--></span>,
+bo taki jest typ argumentu funkcji. Ta konwersja nie jest tu wymagana,
+gdyż należy do konwersji standardowych wykonywanych w&nbsp;razie potrzeby
+automatycznie przez kompilator.
+
+<P>
+Ponieważ do funkcji posłaliśmy referencję do zmiennej
+
+<!--O--><span class='zmienna'>m<!--C--></span>, operacje, jakie ta funkcja wykonuje na odebranej
+poprzez argument zmiennej, wykonywane są na oryginale: z&nbsp;wydruku
+widzimy, że w&nbsp;funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>
+ wartość
+<!--O--><span class='zmienna'>m<!--C--></span>
+
+zmienia się po każdym wywołaniu funkcji (linie wydruku oznaczone
+literą 'D').
+
+<P>
+Jak widać z&nbsp;definicji funkcji
+<!--O--><span class='funkcja'>razydwa<!--C--></span>, zwraca ona
+referencję do lokalnej zmiennej statycznej
+<!--O--><span class='zmienna'>licz<!--C--></span>.
+Zmienna
+<!--O--><span class='zmienna'>licz<!--C--></span>
+ jest co prawda lokalna, ale <FONT COLOR="#7b003e"><I>istnieje</I></FONT>
+po powrocie z&nbsp;funkcji, ponieważ jest statyczna.
+Zwracana jest referencja do tej właśnie zmiennej, zatem
+
+<FONT COLOR="#000000"><TT>razydwa(m)</TT></FONT> jest inną nazwą zmiennej
+<!--O--><span class='zmienna'>licz<!--C--></span>.
+Dlatego jest l-wartością i&nbsp;w funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>
+ możemy
+zmienić wartość
+<!--O--><span class='zmienna'>licz<!--C--></span>, np.&nbsp;poprzez zastosowanie
+operatora zwiększenia (linie&nbsp;37 i&nbsp;39). Może też pojawić się
+po lewej stronie przypisania, jak w&nbsp;linii&nbsp;41.
+
+<P>
+W linii&nbsp;46 wyrażenie '
+<FONT COLOR="#000000"><TT>(i=1, j=2)</TT></FONT>' jest l-wartością
+zmiennej
+<!--O--><span class='zmienna'>j<!--C--></span>
+ po przypisaniu
+<FONT COLOR="#000000"><TT>j=2</TT></FONT>, zatem do
+jej wartości (równej 2) dodana zostanie jedynka i&nbsp;wynik przypisany do
+
+<!--O--><span class='zmienna'>k<!--C--></span>.
+
+<P>
+W linii&nbsp;51 selektor
+<FONT COLOR="#000000"><TT>(k&gt;2?i:j)</TT></FONT> jest l-wartością,
+bo są l-wartościami dwa ostatnie jego argumenty
+<!--O--><span class='zmienna'>i<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>j<!--C--></span>.
+W&nbsp;naszym przykładzie, ponieważ warunek
+<FONT COLOR="#000000"><TT>k&gt;2</TT></FONT> jest
+spełniony, całe wyrażenie
+<FONT COLOR="#000000"><TT>(k&gt;2?i:j)</TT></FONT> jest
+l-wartością zmiennej
+<!--O--><span class='zmienna'>i<!--C--></span>
+ i&nbsp;to do tej zmiennej nastąpi
+przypisanie wartości&nbsp;5.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1212"
+  HREF="node37.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1216"
+  HREF="node33.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1222"
+  HREF="node39.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1218"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1220"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1213"
+  HREF="node37.html">7.4 Modyfikatory typów</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1217"
+  HREF="node33.html">7. Zmienne</A>
+<B>Dalej:</B> <A NAME="tex2html1223"
+  HREF="node39.html">8. Instrukcje</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

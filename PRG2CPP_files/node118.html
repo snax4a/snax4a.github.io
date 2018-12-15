@@ -1,0 +1,1408 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>18.4 Operatory &bdquo;specjalne&rdquo;</TITLE>
+<META NAME="description" CONTENT="18.4 Operatory &bdquo;specjalne&rdquo;">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="previous" HREF="node117.html">
+<LINK REL="up" HREF="node114.html">
+<LINK REL="next" HREF="node119.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2459"
+  HREF="node117.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2463"
+  HREF="node114.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2469"
+  HREF="node119.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2465"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2467"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2460"
+  HREF="node117.html">18.3 Przeciążenia za pomocą</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2464"
+  HREF="node114.html">18. Przeciążanie operatorów</A>
+<B>Dalej:</B> <A NAME="tex2html2470"
+  HREF="node119.html">19. Jeszcze o&nbsp;konwersjach</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Podrozdzia&#322;y</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html2471"
+  HREF="node118.html#SECTION001941000000000000000"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Operator przypisania</A>
+<LI><A NAME="tex2html2472"
+  HREF="node118.html#SECTION001942000000000000000"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Operator indeksowania</A>
+<LI><A NAME="tex2html2473"
+  HREF="node118.html#SECTION001943000000000000000"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> Operator wywołania</A>
+<LI><A NAME="tex2html2474"
+  HREF="node118.html#SECTION001944000000000000000"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> Operator wyboru składowej przez wskaźnik</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION001940000000000000000"></A>
+        <A NAME="przec:spec"></A>
+<BR>
+<SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">4</SPAN> Operatory &bdquo;specjalne&rdquo;
+</H1>
+
+<P>
+Operatory '
+<FONT COLOR="#000000"><TT>=</TT></FONT>', '
+<FONT COLOR="#000000"><TT>-&gt;</TT></FONT>', '
+<FONT COLOR="#000000"><TT>()</TT></FONT>' i&nbsp;'
+<FONT COLOR="#000000"><TT>[]</TT></FONT>'
+są w&nbsp;pewien sposób specjalne, zatem omówimy je po kolei w&nbsp;osobnych
+podrozdziałach. Wszystkie one mogą być przeciążone wyłącznie
+za pomocą metod &mdash;&nbsp;nigdy za pomocą globalnych funkcji.
+
+<P>
+
+<H2><A NAME="SECTION001941000000000000000"></A>
+           <A NAME="przec:przyp"></A>
+<BR>
+<SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Operator przypisania
+</H2>
+
+<P>
+Operator przypisania '
+<FONT COLOR="#000000"><TT>=</TT></FONT>'
+<A NAME="23370"></A>
+powinien być przeładowany praktycznie zawsze, gdy w&nbsp;klasie występują
+pola wskaźnikowe (należy wtedy prawie zawsze zdefiniować też
+destruktor i&nbsp;konstruktor kopiujący).
+W&nbsp;przeciwnym razie użyty zostanie domyślny, dostarczony przez system
+operator przypisania, który skopiuje pole po polu zawartość obiektu
+z&nbsp;prawej strony przypisania do obiektu stojącego po lewej stronie, co
+prawdopodobnie nie jest tym, o&nbsp;co nam chodzi, jeśli występują
+w&nbsp;naszej
+klasie składowe wskaźnikowe. Wtedy bowiem nie chcemy zwykle kopiować
+wskaźników, ale raczej to, na co one wskazują. To, na co one
+wskazują, choć jest logicznie częścią obiektu, nie należy do niego
+fizycznie: obiekt tylko &bdquo;przechowuje&rdquo; odpowiedni adres &mdash;&nbsp;domyślnie
+tylko ten adres zostanie przekopiowany.
+
+<P>
+
+<P>
+
+<div class='wazne'>
+Żaden domyślny operator przypisania <FONT COLOR="#7b003e"><I>nie</I></FONT> zostanie przez
+    system wygenerowany, jeśli klasa zawiera pola ustalone
+    (<!--O--><span class='klucz'>const<!--C--></span>), referencyjne lub pola będące obiektami klasy,
+    w&nbsp;której operator przypisania jest prywatny, lub, z&nbsp;podobnych
+    powodów, w&nbsp;ogóle go nie ma.
+
+
+</div>
+
+<P>
+W takich przypadkach, nawet jeśli klasa nie zawiera pól
+wskaźnikowych, operator przypisania trzeba przeciążyć (jeśli w
+ogóle zamierzamy korzystać z&nbsp;przypisań obiektów klasy).
+
+<P>
+Zobaczmy, jakiego rodzaju błędy mogą pojawić się, gdy operator
+przypisania nie został przeciążony dla klasy z polem wskaźnikowym:
+<BR><A NAME="ovrlderr.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">147</SPAN>:</SPAN>
+      <A NAME="tex2html155"
+  HREF="source-files/ovrlderr.cpp">
+<!--O--><span class='downl'>ovrlderr.cpp<!--C--></span></A>
+<A NAME="24112"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Brak odpowiedniego operatora przypisania</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cstring&gt;</font>   <i><font color="#9A1900">// strcpy, strlen</font></i>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">A</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">char</font><font color="#990000">*</font> name<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>
+ <font SIZE="-2" color="black">     8.  </font>    <b><font color="#000000">A</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> s<font color="#990000">)</font>
+ <font SIZE="-2" color="black">     9.  </font>        <font color="#990000">:</font> <b><font color="#000000">name</font></b><font color="#990000">(</font><b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><b><font color="#000000">strlen</font></b><font color="#990000">(</font>s<font color="#990000">)+</font><font color="#993399">1</font><font color="#990000">],</font>s<font color="#990000">))</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    10.  </font>        cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"  ctor: "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font><font color="#009900">void</font><font color="#990000">*)</font>name <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    12.  </font>
+ <font SIZE="-2" color="black">    13.  </font>    <b><font color="#000000">A</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> A<font color="#990000">&amp;</font> k<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    14.  </font>        <font color="#990000">:</font> <b><font color="#000000">name</font></b><font color="#990000">(</font><b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><b><font color="#000000">strlen</font></b><font color="#990000">(</font>k<font color="#990000">.</font>name<font color="#990000">)+</font><font color="#993399">1</font><font color="#990000">],</font>k<font color="#990000">.</font>name<font color="#990000">))</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    15.  </font>        cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"cpctor: "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font><font color="#009900">void</font><font color="#990000">*)</font>name <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    17.  </font>
+ <font SIZE="-2" color="black">    18.  </font>    <font color="#990000">~</font><b><font color="#000000">A</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    19.  </font>        cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"  dtor: "</font>  <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font><font color="#009900">void</font><font color="#990000">*)</font>name <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    20.  </font>        <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> name<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    21.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    22.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    23.  </font>
+ <font SIZE="-2" color="black">    24.  </font><font color="#008080">A</font> <b><font color="#000000">ob1</font></b><font color="#990000">(</font><font color="#FF0000">"ob1"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    25.  </font>
+ <font SIZE="-2" color="black">    26.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    27.  </font>    cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"MAIN"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    28.  </font>    <font color="#008080">A</font> <b><font color="#000000">ob2</font></b><font color="#990000">(</font>ob1<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    29.  </font>    <font color="#008080">A</font> ob3 <font color="#990000">=</font> ob2<font color="#990000">;</font> <i><font color="#9A1900">// copy-ctor</font></i>
+ <font SIZE="-2" color="black">    30.  </font>
+ <font SIZE="-2" color="black">    31.  </font>    ob1 <font color="#990000">=</font> ob3<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    32.  </font>
+ <font SIZE="-2" color="black">    33.  </font>    cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"  ob1.name: "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font><font color="#009900">void</font><font color="#990000">*)</font>ob1<font color="#990000">.</font>name <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    34.  </font>    cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"  ob3.name: "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font><font color="#009900">void</font><font color="#990000">*)</font>ob3<font color="#990000">.</font>name <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    35.  </font>
+ <font SIZE="-2" color="black">    36.  </font>    cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"THE END"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    37.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+W liniach&nbsp;8-11 definiujemy konstruktor tworzący obiekt na podstawie
+przesłanego napisu. W prawidłowy sposób dba on, aby tworzony obiekt
+zawierał wskaźnik do specjalnie zaalokowanego obszaru pamięci,
+a&nbsp;napis wskazywany przez adres będący argumentem konstruktora został
+tam przekopiowany. Użyta w&nbsp;linii&nbsp;9 konstrukcja jest podobna do tej,
+jakiej użyliśmy w&nbsp;programie <A HREF="node99.html#osoba3.cpp">
+<!--O--><span class='plik'>osoba3.cpp<!--C--></span></A>.
+Całość tej konstrukcji umieściliśmy w&nbsp;liście inicjalizacyjnej
+(patrz
+rozdział o&nbsp;listach <A HREF="node99.html#klasyd:listin">inicjalizacyjnych</A> ).
+Za pomocą
+<pre><tt>       <b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><b><font color="#000000">strlen</font></b><font color="#990000">(</font>s<font color="#990000">)+</font><font color="#993399">1</font><font color="#990000">]</font>
+</tt></pre>
+alokujemy pamięć o&nbsp;rozmiarze odpowiadającym długości
+napisu
+<!--O--><span class='zmienna'>s<!--C--></span>
+ (plus jeden na znak '<!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>0'). Funkcja
+
+<!--O--><span class='funkcja'>strcpy<!--C--></span>
+ kopiuje napis z&nbsp;
+<!--O--><span class='zmienna'>s<!--C--></span>&nbsp;do
+zaalokowanej pamięci, której adres jest jej pierwszym argumentem,
+i&nbsp;zwraca tenże adres. Ten właśnie adres (zwrócony przez funkcję
+
+<!--O--><span class='funkcja'>strcpy<!--C--></span>) jest użyty do zainicjowania składowej
+
+<!--O--><span class='zmienna'>name<!--C--></span>
+ tworzonego obiektu, zgodnie ze składnią właściwą
+liście inicjalizacyjnej (funkcje takie jak
+<!--O--><span class='funkcja'>strlen<!--C--></span>
+ czy
+
+<!--O--><span class='funkcja'>strcpy<!--C--></span>
+ są dokładniej omówione w
+rozdziale o <A HREF="node112.html#nap:cnap">napisach</A> ).
+
+<P>
+Podobnie jest zbudowany konstruktor kopiujący, zdefiniowany w
+liniach&nbsp;13-16 (patrz
+rozdział konstruktorach <A HREF="node99.html#klasyd:konkop">kopiujących</A> ).
+
+<P>
+W liniach&nbsp;18-21 definiujemy destruktor. Wydaje się, że klasa jest
+kompletna. Jednak uruchamiając program widzimy, że coś jest źle:
+<PRE>
+      ctor: 0x804b008
+    MAIN
+    cpctor: 0x804b018
+    cpctor: 0x804b028
+      ob1.name: 0x804b028
+      ob3.name: 0x804b028
+    THE END
+      dtor: 0x804b028
+      dtor: 0x804b018
+      dtor: 0x804b028
+</PRE>
+Po pierwsze, po wyjścu z&nbsp;funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>
+ wywoływany jest
+trzy razy destruktor; to nas nie dziwi, bo utworzone zostały
+trzy obiekty, ale kłopot w&nbsp;tym, że dwa z&nbsp;nich zwalniają pamięć
+pod tym samym adresem 0x804b028. Natomiast pamięć pod adresem
+0x804b008 która pierwotnie zawierała napis związany z&nbsp;obiektem
+
+<!--O--><span class='zmienna'>ob1<!--C--></span>
+ w&nbsp;ogóle nie została zwolniona!
+
+<P>
+Łatwo widać, dlaczego tak się stało. Podczas przypisywania
+w&nbsp;linii&nbsp;31 zawartość obiektu
+<!--O--><span class='zmienna'>ob3<!--C--></span>
+ została przekopiowana
+do obiektu
+<!--O--><span class='zmienna'>ob1<!--C--></span>. W szczególności została przekopiowana
+wartość składowej
+<!--O--><span class='zmienna'>name<!--C--></span>, czyli adres napisu zaalokowanego
+w&nbsp;konstruktorze kopiującym podczas tworzenia obiektu
+
+<!--O--><span class='zmienna'>ob3<!--C--></span>
+ (linia&nbsp;29). Zatem po tym przypisaniu obiekty
+
+<!--O--><span class='zmienna'>ob1<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>ob3<!--C--></span>
+ są, co prawda, rozłączne, ale
+zawierają ten sam adres napisu w&nbsp;swoich składowych
+
+<!--O--><span class='zmienna'>name<!--C--></span>
+ (jak widać z&nbsp;wydruku, wynosi on tu 0x804b028).
+Co gorsza, adres pierwotnie pamiętany w&nbsp;składowej
+<!--O--><span class='zmienna'>name<!--C--></span>
+
+obiektu
+<!--O--><span class='zmienna'>obj1<!--C--></span>
+ (w&nbsp;tym przykładzie 0x804b008) uległ
+zamazaniu i&nbsp;jest już nie do odzyskania, zatem pamięć wskazywana
+przez ten adres nigdy nie będzie mogła być zwolniona!
+W&nbsp;momencie gdy obiekty są usuwane (w naszym przypadku
+po zakończeniu wykonywania funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>),
+uruchamiany jest destruktor zwalniający pamięć przydzieloną na
+napis wskazywany przez składową
+<!--O--><span class='zmienna'>name<!--C--></span>. Zatem destruktor
+zostanie u nas wywołany dwa razy z&nbsp;tym samym adresem: raz przy
+usuwaniu obiektu
+<!--O--><span class='zmienna'>ob3<!--C--></span>, a&nbsp;potem przy usuwaniu obiektu
+
+<!--O--><span class='zmienna'>ob1<!--C--></span>. Może to spowodować załamanie programu (choć nie
+musi; tak czy owak jest to błąd o&nbsp;nieprzewidywalnych skutkach).
+
+<P>
+A zatem musimy tak przedefiniować operator przypisania, aby uniknąć
+tego rodzaju kłopotów. Zrobić to można wyłącznie za pomocą
+metody, nigdy funkcji globalnej lub statycznej funkcji składowej.
+
+<P>
+Zadaniem przypisania jest sensowne przepisanie zawartości obiektu po
+prawej stronie znaku '
+<FONT COLOR="#000000"><TT>=</TT></FONT>' do obiektu po lewej, którym będzie
+
+<!--O--><span class='zmienna'>*this<!--C--></span>, bo metoda definiująca przypisanie będzie wywołana,
+jak zwykle dla operatorów dwuargumentowych, właśnie na rzecz
+obiektu stojącego po lewej stronie operatora.
+
+<P>
+W ciele metody musimy zwykle zadbać, aby dynamicznie zaalokowane
+obiekty (jak tablice,  czyli również C-napisy), do których
+wskaźniki są składowymi obiektu, zostały we właściwy sposób
+przekopiowane. Ponieważ przypisanie
+<FONT COLOR="#000000"><TT>a=a</TT></FONT> jest zawsze legalne,
+należy przy tym uważać, żeby nie zlikwidować obiektów
+(tablic, napisów) wskazywanych przez składowe wskaźnikowe przed ich
+kopiowaniem. Aby z&nbsp;kolei możliwe było kaskadowe przypisanie (czyli
+
+<FONT COLOR="#000000"><TT>a=b=c</TT></FONT>), operator powinien zwracać referencję do obiektu po
+lewej stronie, czyli tego, na rzecz którego został wywołany
+(<FONT COLOR="#000000"><TT>return *this</TT></FONT>). Argument (czyli obiekt po prawej stronie
+przypisania) jest często przekazywany przez referencję, zwykle
+ustaloną; unika się wtedy niepotrzebnego kopiowania. Zatem dla
+klasy
+<!--O--><span class='klasa'>A<!--C--></span>
+ metoda przeciążająca operator przypisania
+miałaby nagłówek
+<pre><tt>       A<font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">=(</font><b><font color="#0000FF">const</font></b> A<font color="#990000">&amp;);</font>
+</tt></pre>
+Jako przykład rozpatrzmy następujący program:
+<BR><A NAME="ovrldeq.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">148</SPAN>:</SPAN>
+      <A NAME="tex2html156"
+  HREF="source-files/ovrldeq.cpp">
+<!--O--><span class='downl'>ovrldeq.cpp<!--C--></span></A>
+<A NAME="24140"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Przeciążanie operatora przypisania</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cstring&gt;</font>   <i><font color="#9A1900">// strcpy, strlen</font></i>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">A</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">char</font><font color="#990000">*</font> name<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>
+ <font SIZE="-2" color="black">     8.  </font>    <b><font color="#000000">A</font></b><font color="#990000">()</font> <font color="#990000">:</font> <b><font color="#000000">name</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><font color="#993399">1</font><font color="#990000">])</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     9.  </font>        cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"dfctor: "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font><font color="#009900">void</font><font color="#990000">*)</font>name <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>        name<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">]</font> <font color="#990000">=</font> <font color="#FF0000">'</font><font color="#CC33CC">\0</font><font color="#FF0000">'</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    12.  </font>
+ <font SIZE="-2" color="black">    13.  </font>    <b><font color="#000000">A</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> s<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    14.  </font>        <font color="#990000">:</font> <b><font color="#000000">name</font></b><font color="#990000">(</font><b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><b><font color="#000000">strlen</font></b><font color="#990000">(</font>s<font color="#990000">)+</font><font color="#993399">1</font><font color="#990000">],</font>s<font color="#990000">))</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    15.  </font>        cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"  ctor: "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font><font color="#009900">void</font><font color="#990000">*)</font>name <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    17.  </font>
+ <font SIZE="-2" color="black">    18.  </font>    <b><font color="#000000">A</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> A<font color="#990000">&amp;</font> k<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    19.  </font>        <font color="#990000">:</font> <b><font color="#000000">name</font></b><font color="#990000">(</font><b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><b><font color="#000000">strlen</font></b><font color="#990000">(</font>k<font color="#990000">.</font>name<font color="#990000">)+</font><font color="#993399">1</font><font color="#990000">],</font>k<font color="#990000">.</font>name<font color="#990000">))</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    20.  </font>        cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"cpctor: "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font><font color="#009900">void</font><font color="#990000">*)</font>name <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    21.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    22.  </font>
+ <font SIZE="-2" color="black">    23.  </font>    A<font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">=(</font><b><font color="#0000FF">const</font></b> A<font color="#990000">&amp;</font> k<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    24.  </font>
+ <font SIZE="-2" color="black">    25.  </font>        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#0000FF">this</font></b> <font color="#990000">==</font> <font color="#990000">&amp;</font>k<font color="#990000">)</font> <b><font color="#0000FF">return</font></b> <font color="#990000">*</font><b><font color="#0000FF">this</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    26.  </font>
+ <font SIZE="-2" color="black">    27.  </font>        cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"delete: "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font><font color="#009900">void</font><font color="#990000">*)</font>name <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    28.  </font>        <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> name<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    29.  </font>        name <font color="#990000">=</font> <b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><b><font color="#000000">strlen</font></b><font color="#990000">(</font>k<font color="#990000">.</font>name<font color="#990000">)+</font><font color="#993399">1</font><font color="#990000">],</font>k<font color="#990000">.</font>name<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    30.  </font>        cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"   op=: "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font><font color="#009900">void</font><font color="#990000">*)</font>name <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    31.  </font>        <b><font color="#0000FF">return</font></b> <font color="#990000">*</font><b><font color="#0000FF">this</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    32.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    33.  </font>
+ <font SIZE="-2" color="black">    34.  </font>    <font color="#990000">~</font><b><font color="#000000">A</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    35.  </font>        cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"  dtor: "</font>  <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font><font color="#009900">void</font><font color="#990000">*)</font>name <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    36.  </font>        <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> name<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    37.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    38.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    39.  </font>
+ <font SIZE="-2" color="black">    40.  </font><font color="#008080">A</font> <b><font color="#000000">ob1</font></b><font color="#990000">(</font><font color="#FF0000">"ob1"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    41.  </font>
+ <font SIZE="-2" color="black">    42.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    43.  </font>    cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"MAIN"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    44.  </font>    <font color="#008080">A</font> <b><font color="#000000">ob2</font></b><font color="#990000">(</font>ob1<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    45.  </font>    <font color="#008080">A</font> ob3 <font color="#990000">=</font> ob2<font color="#990000">;</font> <i><font color="#9A1900">// copy-ctor</font></i>
+ <font SIZE="-2" color="black">    46.  </font>
+ <font SIZE="-2" color="black">    47.  </font>    ob1 <font color="#990000">=</font> ob3<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    48.  </font>
+ <font SIZE="-2" color="black">    49.  </font>    cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"  ob1.name: "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font><font color="#009900">void</font><font color="#990000">*)</font>ob1<font color="#990000">.</font>name <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    50.  </font>    cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"  ob3.name: "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font><font color="#009900">void</font><font color="#990000">*)</font>ob3<font color="#990000">.</font>name <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    51.  </font>
+ <font SIZE="-2" color="black">    52.  </font>    cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"THE END"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    53.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Ta klasa jest w&nbsp;zasadzie taka sama jak ta z&nbsp;poprzedniego programu.
+Dopisaliśmy tu konstruktor bezargumentowy (domyślny), aby klasa
+była bardziej kompletna (linie 8-11). Zauważmy, że nawet alokując
+napis pusty, czyli składający się z&nbsp;jednego znaku (znaku '<!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>0'),
+alokujemy ten jeden bajt w&nbsp;postaci tablicy, a&nbsp;nie pojedynczej zmiennej.
+Przyczyną jest postać destruktora, który używa zawsze formy
+tablicowej (z nawiasami kwadratowymi) do zwalniania pamięci.
+
+<P>
+W liniach&nbsp;23-32 definiujemy metodę przeciążającą operator
+przypisania. Zauważmy konstrukcję tej funkcji, gdyż jest ona typowa:
+
+<UL>
+<LI>typem wartości zwracanej jest referencja do obiektu
+          klasy, dla której definiujemy przeciążenie. Wartością
+          zwracaną powinna być zawsze referencja do tego obiektu,
+          na rzecz którego metoda jest wywołana. Instrukcja powrotu
+          powinna zatem mieć postać
+<FONT COLOR="#000000"><TT>return *this</TT></FONT>
+          (wyrażenie
+<FONT COLOR="#000000"><TT>*this</TT></FONT> jest równoważne nazwie
+          obiektu wskazywanego przez
+<!--O--><span class='klucz'>this<!--C--></span>);
+</LI>
+<LI>zawsze najpierw sprawdzamy (linia&nbsp;25), czy obiekt, na rzecz
+          którego metoda jest wywołana, czyli lewy argument operatora
+          '
+<FONT COLOR="#000000"><TT>=</TT></FONT>', nie jest tym samym obiektem, który wystąpił
+          po prawej stronie przypisania. Robimy to porównując
+          adresy tych obiektów (wartość
+<!--O--><span class='klucz'>this<!--C--></span>
+ jest tu
+          adresem obiektu, na rzecz którego metoda była wywołana).
+          Jeśli adresy te są takie same, czyli przypisanie
+          ma postać '
+<FONT COLOR="#000000"><TT>a=a</TT></FONT>', to zwracamy
+<!--O--><span class='zmienna'>*this<!--C--></span>
+
+          i&nbsp;działanie metody kończy się, bo nie ma nic do zrobienia;
+</LI>
+<LI>mając gwarancję, że nie zachodzi przypadek '
+<FONT COLOR="#000000"><TT>a=a</TT></FONT>',
+          usuwamy napis (tablicę) wskazywany przez składową
+          wskaźnikową (linia&nbsp;28);
+</LI>
+<LI>alokujemy nową pamięć i&nbsp;kopiujemy tam tablicę (napis)
+          z&nbsp;obiektu będącego prawym argumentem przypisania;
+          adres przydzielonego obszaru pamięci zapamiętujemy
+          w&nbsp;składowej wskaźnikowej obiektu, na który następuje
+          przypisanie;
+</LI>
+<LI>zwracamy
+<!--O--><span class='zmienna'>*this<!--C--></span>.
+</LI>
+</UL>
+Program główny nie różni się od poprzedniego. Wynik jest jednak
+nieco inny:
+<PRE>
+      ctor: 0x804b008
+    MAIN
+    cpctor: 0x804b018
+    cpctor: 0x804b028
+    delete: 0x804b008
+       op=: 0x804b008
+      ob1.name: 0x804b008
+      ob3.name: 0x804b028
+    THE END
+      dtor: 0x804b028
+      dtor: 0x804b018
+      dtor: 0x804b008
+</PRE>
+Teraz w czasie przypisania z&nbsp;linii&nbsp;47 ('
+<FONT COLOR="#000000"><TT>ob1=ob3</TT></FONT>')
+najpierw zwolniona została pamięć dotychczas zajmowana przez
+napis związany z obiektem
+<!--O--><span class='zmienna'>ob1<!--C--></span>
+ (pod adresem 0x804b008),
+a&nbsp;następnie został przydzielony nowy obszar pamięci na
+napis. W&nbsp;tym przypadku system zaalokował ten sam obszar, który
+przed chwilą został zwolniony, ale nie jest to istotne &mdash;&nbsp;
+równie dobrze mógł to być obszar pod zupełnie innym
+adresem. Ważne jest, że teraz nie ma żadnych wycieków pamięci &mdash;&nbsp;
+każdy zaalokowany przez
+<!--O--><span class='klucz'>new<!--C--></span>
+ segment pamięci jest zwalniany.
+Nie pojawia się też problem zwalniania pamięci już raz
+zwolnionej &mdash;&nbsp;wszystkie destruktory wywołują
+<!--O--><span class='klucz'>delete<!--C--></span>
+
+z&nbsp;adresami obszarów jeszcze nie zwolnionych.
+
+<P>
+Przypomnijmy tu na marginiesie, że wyrażenie
+<pre><tt>       <font color="#008080">A</font> a <font color="#990000">=</font> b<font color="#990000">;</font>
+</tt></pre>
+nie oznacza przypisania; jest to inna forma deklaracji/definicji nowej
+zmiennej klasy z&nbsp;wywołaniem konstruktora kopiującego,
+a więc równoważna '
+<FONT COLOR="#000000"><TT>A a(b)</TT></FONT>'. Aby operator
+'
+<FONT COLOR="#000000"><TT>=</TT></FONT>' oznaczał przypisanie, po lewej stronie musi stać
+wyrażenie będące l-wartością i&nbsp;oznaczające istniejącą już
+wcześniej zmienną.
+
+<P>
+Inny przykład przeciążenia operatora przypisania
+znajdujemy w&nbsp;poniższym programie:
+<BR><A NAME="op.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">149</SPAN>:</SPAN>
+      <A NAME="tex2html157"
+  HREF="source-files/op.cpp">
+<!--O--><span class='downl'>op.cpp<!--C--></span></A>
+<A NAME="24175"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Klasa tablicowa z przeciążonym
+                 operatorem przypisania</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cstring&gt;</font>   <i><font color="#9A1900">// memcpy</font></i>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Tabint</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>    <b><font color="#0000FF">static</font></b> <font color="#009900">int</font> ID<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>    <font color="#009900">int</font>        id<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#009900">int</font>      size<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#009900">int</font>      <font color="#990000">*</font>tab<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    11.  </font>    <b><font color="#000000">Tabint</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">int</font> <font color="#990000">*</font>t<font color="#990000">,</font> <font color="#009900">int</font> size<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    12.  </font>        <font color="#990000">:</font> <b><font color="#000000">id</font></b><font color="#990000">(++</font>ID<font color="#990000">),</font> <b><font color="#000000">size</font></b><font color="#990000">(</font>size<font color="#990000">),</font>
+ <font SIZE="-2" color="black">    13.  </font>          <b><font color="#000000">tab</font></b><font color="#990000">((</font><font color="#009900">int</font><font color="#990000">*)</font><b><font color="#000000">memcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">[</font>size<font color="#990000">],</font> t<font color="#990000">,</font>
+ <font SIZE="-2" color="black">    14.  </font>                           size<font color="#990000">*</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)))</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    15.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Konstruktor: id = "</font> <font color="#990000">&lt;&lt;</font> id <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    17.  </font>
+ <font SIZE="-2" color="black">    18.  </font>    <b><font color="#000000">Tabint</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> Tabint<font color="#990000">&amp;</font> t<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    19.  </font>        <font color="#990000">:</font> <b><font color="#000000">id</font></b><font color="#990000">(++</font>ID<font color="#990000">),</font> <b><font color="#000000">size</font></b><font color="#990000">(</font>t<font color="#990000">.</font>size<font color="#990000">),</font>
+ <font SIZE="-2" color="black">    20.  </font>          <b><font color="#000000">tab</font></b><font color="#990000">((</font><font color="#009900">int</font><font color="#990000">*)</font><b><font color="#000000">memcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">[</font>size<font color="#990000">],</font> t<font color="#990000">.</font>tab<font color="#990000">,</font>
+ <font SIZE="-2" color="black">    21.  </font>                           size<font color="#990000">*</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)))</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    22.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Konstr. kop: "</font> <font color="#990000">&lt;&lt;</font> t<font color="#990000">.</font>id <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"--&gt;"</font> <font color="#990000">&lt;&lt;</font> id
+ <font SIZE="-2" color="black">    23.  </font>                                                 <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    24.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    25.  </font>
+ <font SIZE="-2" color="black">    26.  </font>    <font color="#990000">~</font><b><font color="#000000">Tabint</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    27.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Usuwamy:    id = "</font> <font color="#990000">&lt;&lt;</font> id <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    28.  </font>        <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> tab<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    29.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    30.  </font>
+ <font SIZE="-2" color="black">    31.  </font>    Tabint<font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">=(</font><b><font color="#0000FF">const</font></b> Tabint<font color="#990000">&amp;</font> t<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    32.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Przypisanie: "</font> <font color="#990000">&lt;&lt;</font> id <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"&lt;--"</font> <font color="#990000">&lt;&lt;</font> t<font color="#990000">.</font>id
+ <font SIZE="-2" color="black">    33.  </font>                                               <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    34.  </font>        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#0000FF">this</font></b> <font color="#990000">!=</font> <font color="#990000">&amp;</font>t<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    35.  </font>            <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> tab<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    36.  </font>            size <font color="#990000">=</font> t<font color="#990000">.</font>size<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    37.  </font>            tab <font color="#990000">=</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">*)</font><b><font color="#000000">memcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">[</font>size<font color="#990000">],</font> t<font color="#990000">.</font>tab<font color="#990000">,</font>
+ <font SIZE="-2" color="black">    38.  </font>                               size<font color="#990000">*</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">));</font>
+ <font SIZE="-2" color="black">    39.  </font>        <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    40.  </font>        <b><font color="#0000FF">return</font></b> <font color="#990000">*</font><b><font color="#0000FF">this</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    41.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    42.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    43.  </font><font color="#009900">int</font> Tabint<font color="#990000">::</font>ID <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    44.  </font>
+ <font SIZE="-2" color="black">    45.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    46.  </font>    <font color="#009900">int</font> tab<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">{</font><font color="#993399">1</font><font color="#990000">,</font><font color="#993399">2</font><font color="#990000">,</font><font color="#993399">3</font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    47.  </font>    <font color="#009900">int</font> size  <font color="#990000">=</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>tab<font color="#990000">)/</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    48.  </font>
+ <font SIZE="-2" color="black">    49.  </font>    Tabint<font color="#990000">*</font> pt1 <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Tabint</font></b><font color="#990000">(</font>tab<font color="#990000">,</font>size<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    50.  </font>    <font color="#008080">Tabint</font>   t2 <font color="#990000">=</font> <font color="#990000">*</font>pt1<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    51.  </font>    <font color="#008080">Tabint</font>   <b><font color="#000000">t3</font></b><font color="#990000">(</font>t2<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    52.  </font>
+ <font SIZE="-2" color="black">    53.  </font>    <font color="#990000">*</font>pt1 <font color="#990000">=</font> t2<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    54.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Zamiast funkcji
+<!--O--><span class='funkcja'>strcpy<!--C--></span>
+ kopiującej C-napisy użyliśmy
+tu funkcji
+<!--O--><span class='funkcja'>memcpy<!--C--></span>
+ o&nbsp;podobnym działaniu. Pozwala ona
+kopiować duże obszary pamięci &bdquo;za jednym zamachem&rdquo;, bez użycia
+pętli kopiującej tablice element po elemencie.
+Z wydruku
+<PRE>
+    Konstruktor: id = 1
+    Konstr. kop: 1--&gt;2
+    Konstr. kop: 2--&gt;3
+    Przypisanie: 1&lt;--2
+    Usuwamy:    id = 3
+    Usuwamy:    id = 2
+</PRE>
+zauważamy, że element pierwszy (utworzony w&nbsp;linii&nbsp;49) nie jest
+usuwany. Dzieje się tak dlatego, że jako jedyny został
+utworzony na stercie (przez operator
+<!--O--><span class='klucz'>new<!--C--></span>) i&nbsp;jawnie nie
+usunięty. Pozostałe obiekty zostały utworzone na stosie, a&nbsp;więc
+będą usunięte automatycznie, co będzie się oczywiście wiązało
+z&nbsp;wywołaniem destruktora.
+
+<P>
+
+<H2><A NAME="SECTION001942000000000000000"></A>
+           <A NAME="przec:ind"></A>
+<BR>
+<SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Operator indeksowania
+</H2>
+
+<P>
+Operator '
+<FONT COLOR="#000000"><TT>[]</TT></FONT>'
+(indeksowania)<A NAME="23478"></A>
+jest dwuargumentowy: w&nbsp;wyrażeniu '
+<FONT COLOR="#000000"><TT>a[i]</TT></FONT>' nazwa
+<!--O--><span class='zmienna'>a<!--C--></span>
+
+jest nazwą pierwszego argumentu, a&nbsp;
+<!--O--><span class='zmienna'>i<!--C--></span>
+ drugiego.
+Funkcja przeciążająca ten operator musi być metodą
+jednoparametrową; będzie wywoływana na rzecz&nbsp;
+<!--O--><span class='zmienna'>a<!--C--></span>,
+które musi zatem być nazwą obiektu klasy, dla której definiujemy
+przeciążenie, natomiast indeks&nbsp;
+<!--O--><span class='zmienna'>i<!--C--></span>
+ będzie przesłany jako
+argument. Argument ten (indeks) <FONT COLOR="#7b003e"><I>nie musi</I></FONT> być typu
+całościowego, choć najczęściej jest.
+
+<P>
+Deklaracja metody przeciążającej operator '
+<FONT COLOR="#000000"><TT>[]</TT></FONT>'
+powinna mieć postać
+<pre><tt>       <font color="#008080">Typ</font> <b><font color="#0000FF">operator</font></b><font color="#990000">[](</font>Typ_arg<font color="#990000">);</font>
+</tt></pre>
+gdzie
+<!--O--><span class='typ'>Typ<!--C--></span>
+ jest typem funkcji (wartości zwracanej),
+a&nbsp;
+<!--O--><span class='typ'>Typ_arg<!--C--></span>
+ jest typem indeksu. Metoda ta będzie wywołana
+na rzecz obiektu
+<!--O--><span class='zmienna'>a<!--C--></span>, gdy pojawi się wyrażenie
+<pre><tt>       a<font color="#990000">[</font>i<font color="#990000">]</font>
+</tt></pre>
+i
+<!--O--><span class='zmienna'>a<!--C--></span>
+ będzie nazwą obiektu klasy, w&nbsp;której dokonaliśmy
+przeciążenia, a&nbsp;typ
+<!--O--><span class='zmienna'>i<!--C--></span>
+ jest zgodny z&nbsp;typem
+
+<!--O--><span class='typ'>Typ_arg<!--C--></span>. Wywołanie to będzie formalnie miało postać
+<pre><tt>       a<font color="#990000">.</font><b><font color="#0000FF">operator</font></b><font color="#990000">[](</font>i<font color="#990000">)</font>
+</tt></pre>
+Funkcja przeciążająca operator '
+<FONT COLOR="#000000"><TT>[]</TT></FONT>' może wykonywać
+dowolne zadanie, ale rozsądne jest, jeśli robi coś pojęciowo
+podobnego do wyłuskania wartości poprzez indeks. Ważne jest wtedy
+takie zdefiniowanie przeładowania, by obiekt zwracany był l-wartością
+(co możemy uzyskać zwracają go przez referencję),
+czyli by było możliwe przypisanie do niego, a zatem aby mógł
+występować również po lewej stronie przypisania &mdash;&nbsp;takie jest
+bowiem normalne zachowanie operatora indeksowania. Zatem oba poniższe
+wyrażenia powinny być poprawne:
+<pre><tt>       x <font color="#990000">=</font> arr<font color="#990000">[</font>i<font color="#990000">];</font>
+       arr<font color="#990000">[</font>j<font color="#990000">]</font> <font color="#990000">=</font> y<font color="#990000">;</font>
+</tt></pre>
+
+<P>
+Prosta klasa
+<!--O--><span class='klasa'>Litera<!--C--></span>
+ z&nbsp;poniższego programu demonstruje
+zarówno przeciążanie operatora indeksowania, jak i&nbsp;przeciążanie
+operatora przypisania, konstruktor kopiujący i&nbsp;destruktor: a&nbsp;więc
+komplet tego co jest wymagane przy istnieniu składowych
+wskaźnikowych.
+<BR><A NAME="litera.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">150</SPAN>:</SPAN>
+      <A NAME="tex2html158"
+  HREF="source-files/litera.cpp">
+<!--O--><span class='downl'>litera.cpp<!--C--></span></A>
+<A NAME="24200"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Przeciążanie operatora indeksowania</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cstring&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Litera</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">char</font><font color="#990000">*</font> napis<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">     8.  </font>    <b><font color="#000000">Litera</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> Litera<font color="#990000">&amp;</font> k<font color="#990000">)</font>
+ <font SIZE="-2" color="black">     9.  </font>        <font color="#990000">:</font> <b><font color="#000000">napis</font></b><font color="#990000">(</font><b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><b><font color="#000000">strlen</font></b><font color="#990000">(</font>k<font color="#990000">.</font>napis<font color="#990000">)+</font><font color="#993399">1</font><font color="#990000">],</font>
+ <font SIZE="-2" color="black">    10.  </font>                       k<font color="#990000">.</font>napis<font color="#990000">))</font>
+ <font SIZE="-2" color="black">    11.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    12.  </font>
+ <font SIZE="-2" color="black">    13.  </font>    <b><font color="#000000">Litera</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> napis<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    14.  </font>        <font color="#990000">:</font> <b><font color="#000000">napis</font></b><font color="#990000">(</font><b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><b><font color="#000000">strlen</font></b><font color="#990000">(</font>napis<font color="#990000">)+</font><font color="#993399">1</font><font color="#990000">],</font>
+ <font SIZE="-2" color="black">    15.  </font>                       napis<font color="#990000">))</font>
+ <font SIZE="-2" color="black">    16.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    17.  </font>
+ <font SIZE="-2" color="black">    18.  </font>    Litera<font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">=(</font><b><font color="#0000FF">const</font></b> Litera<font color="#990000">&amp;);</font>
+ <font SIZE="-2" color="black">    19.  </font>    <font color="#009900">char</font><font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">[](</font><font color="#009900">int</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    20.  </font>
+ <font SIZE="-2" color="black">    21.  </font>    <font color="#990000">~</font><b><font color="#000000">Litera</font></b><font color="#990000">()</font> <font color="#FF0000">{</font> <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> napis<font color="#990000">;</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    22.  </font>
+ <font SIZE="-2" color="black">    23.  </font>    <b><font color="#0000FF">friend</font></b> ostream<font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">&lt;&lt;(</font>ostream<font color="#990000">&amp;,</font><b><font color="#0000FF">const</font></b> Litera<font color="#990000">&amp;);</font>
+ <font SIZE="-2" color="black">    24.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    25.  </font>
+ <font SIZE="-2" color="black">    26.  </font><font color="#009900">char</font><font color="#990000">&amp;</font> Litera<font color="#990000">::</font><b><font color="#0000FF">operator</font></b><font color="#990000">[](</font><font color="#009900">int</font> n<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    27.  </font>    <font color="#009900">int</font> len <font color="#990000">=</font> <b><font color="#000000">strlen</font></b><font color="#990000">(</font>napis<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    28.  </font>    <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> n <font color="#990000">&lt;</font> <font color="#993399">0</font> <font color="#990000">||</font> n <font color="#990000">&gt;=</font> len <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    29.  </font>        <i><font color="#9A1900">// zwracamy odnośnik do NUL jeśli zły indeks</font></i>
+ <font SIZE="-2" color="black">    30.  </font>        <b><font color="#0000FF">return</font></b> napis<font color="#990000">[</font>len<font color="#990000">];</font>
+ <font SIZE="-2" color="black">    31.  </font>    <b><font color="#0000FF">else</font></b>
+ <font SIZE="-2" color="black">    32.  </font>        <b><font color="#0000FF">return</font></b> napis<font color="#990000">[</font>n<font color="#990000">];</font>
+ <font SIZE="-2" color="black">    33.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    34.  </font>
+ <font SIZE="-2" color="black">    35.  </font>Litera<font color="#990000">&amp;</font> Litera<font color="#990000">::</font><b><font color="#0000FF">operator</font></b><font color="#990000">=(</font><b><font color="#0000FF">const</font></b> Litera<font color="#990000">&amp;</font> k<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    36.  </font>    <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#0000FF">this</font></b> <font color="#990000">==</font> <font color="#990000">&amp;</font>k <font color="#990000">)</font> <b><font color="#0000FF">return</font></b> <font color="#990000">*</font><b><font color="#0000FF">this</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    37.  </font>    <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> napis<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    38.  </font>    napis <font color="#990000">=</font> <b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><b><font color="#000000">strlen</font></b><font color="#990000">(</font>k<font color="#990000">.</font>napis<font color="#990000">)+</font><font color="#993399">1</font><font color="#990000">],</font>k<font color="#990000">.</font>napis<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    39.  </font>    <b><font color="#0000FF">return</font></b> <font color="#990000">*</font><b><font color="#0000FF">this</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    40.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    41.  </font>
+ <font SIZE="-2" color="black">    42.  </font>ostream<font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">&lt;&lt;(</font>ostream<font color="#990000">&amp;</font> str<font color="#990000">,</font> <b><font color="#0000FF">const</font></b> Litera<font color="#990000">&amp;</font> k<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    43.  </font>    <b><font color="#0000FF">return</font></b> str <font color="#990000">&lt;&lt;</font> k<font color="#990000">.</font>napis<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    44.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    45.  </font>
+ <font SIZE="-2" color="black">    46.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    47.  </font>    <font color="#008080">Litera</font> <b><font color="#000000">a</font></b><font color="#990000">(</font><font color="#FF0000">"Kasia"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    48.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"a="</font> <font color="#990000">&lt;&lt;</font> a <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    49.  </font>
+ <font SIZE="-2" color="black">    50.  </font>    <font color="#009900">char</font> c <font color="#990000">=</font> a<font color="#990000">[</font><font color="#993399">100</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">    51.  </font>    <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>c <font color="#990000">==</font> <font color="#FF0000">'</font><font color="#CC33CC">\0</font><font color="#FF0000">'</font><font color="#990000">)</font> cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Zly zakres!"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    52.  </font>    <b><font color="#0000FF">else</font></b>           cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"znak: "</font> <font color="#990000">&lt;&lt;</font> c <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    53.  </font>
+ <font SIZE="-2" color="black">    54.  </font>    c <font color="#990000">=</font> a<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">    55.  </font>    <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>c <font color="#990000">==</font> <font color="#FF0000">'</font><font color="#CC33CC">\0</font><font color="#FF0000">'</font><font color="#990000">)</font> cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Zly zakres!"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    56.  </font>    <b><font color="#0000FF">else</font></b>           cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"znak: "</font> <font color="#990000">&lt;&lt;</font> c <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    57.  </font>
+ <font SIZE="-2" color="black">    58.  </font>    a<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">]</font> <font color="#990000">=</font> <font color="#FF0000">'B'</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    59.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"a="</font> <font color="#990000">&lt;&lt;</font> a <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    60.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Jak widać z&nbsp;definicji w&nbsp;liniach&nbsp;26-33, działanie operatora
+indeksowania polega tu na dostarczeniu, przez referencję, znaku
+napisu o&nbsp;odpowiednim indeksie (pozycji). Metoda ta jest
+o&nbsp;tyle sensowna, że sprawdza zakres i&nbsp;w przypadku, gdy indeks jest
+za duży albo za mały, zwraca referencję do znaku '<!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>0', zamiast
+zwracać jakąś przypadkową wartość. Wydruk z&nbsp;tego programu to
+<PRE>
+    a=Kasia
+    Zly zakres!
+    znak: K
+    a=Basia
+</PRE>
+Widzimy, że rzeczywiście indeksowanej nazwy obiektu klasy
+
+<!--O--><span class='klasa'>Litera<!--C--></span>
+ możemy używać tak jak nazwy tablicy: zarówno po
+prawej, jak i&nbsp;po lewej stronie przypisania.
+
+<P>
+Spójrzmy na przykład, w&nbsp;którym indeks nie jest całkowity:
+<BR><A NAME="zakr.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">151</SPAN>:</SPAN>
+      <A NAME="tex2html159"
+  HREF="source-files/zakr.cpp">
+<!--O--><span class='downl'>zakr.cpp<!--C--></span></A>
+<A NAME="24208"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Indeksowanie liczbą rzeczywistą</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Zakresy</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">int</font>    licz<font color="#990000">[</font><font color="#993399">3</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">double</font> min<font color="#990000">,</font> max<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">     8.  </font>    <b><font color="#000000">Zakresy</font></b><font color="#990000">(</font><font color="#009900">double</font> min<font color="#990000">,</font> <font color="#009900">double</font> max<font color="#990000">)</font>
+ <font SIZE="-2" color="black">     9.  </font>        <font color="#990000">:</font> <b><font color="#000000">min</font></b><font color="#990000">(</font>min<font color="#990000">),</font> <b><font color="#000000">max</font></b><font color="#990000">(</font>max<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    10.  </font>        licz<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">]=</font>licz<font color="#990000">[</font><font color="#993399">1</font><font color="#990000">]=</font>licz<font color="#990000">[</font><font color="#993399">2</font><font color="#990000">]=</font><font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    12.  </font>
+ <font SIZE="-2" color="black">    13.  </font>    <font color="#009900">int</font><font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">[](</font><font color="#009900">double</font> x<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    14.  </font>        <font color="#009900">int</font> i<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>
+ <font SIZE="-2" color="black">    16.  </font>        <b><font color="#0000FF">if</font></b>      <font color="#990000">(</font> x <font color="#990000">&gt;</font>  max <font color="#990000">)</font> i <font color="#990000">=</font> <font color="#993399">2</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font>        <b><font color="#0000FF">else</font></b> <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> x <font color="#990000">&gt;=</font> min <font color="#990000">)</font> i <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font>        <b><font color="#0000FF">else</font></b>                 i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font>
+ <font SIZE="-2" color="black">    20.  </font>        <b><font color="#0000FF">return</font></b> licz<font color="#990000">[</font>i<font color="#990000">];</font>
+ <font SIZE="-2" color="black">    21.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    22.  </font>
+ <font SIZE="-2" color="black">    23.  </font>    <b><font color="#0000FF">friend</font></b> ostream<font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">&lt;&lt;(</font>ostream<font color="#990000">&amp;,</font> <b><font color="#0000FF">const</font></b> Zakresy<font color="#990000">&amp;);</font>
+ <font SIZE="-2" color="black">    24.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    25.  </font>
+ <font SIZE="-2" color="black">    26.  </font>ostream<font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">&lt;&lt;(</font>ostream<font color="#990000">&amp;</font> str<font color="#990000">,</font> <b><font color="#0000FF">const</font></b> Zakresy<font color="#990000">&amp;</font> z<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    27.  </font>    <b><font color="#0000FF">return</font></b> str <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Zakres = ["</font> <font color="#990000">&lt;&lt;</font> z<font color="#990000">.</font>min <font color="#990000">&lt;&lt;</font> <font color="#FF0000">", "</font> <font color="#990000">&lt;&lt;</font> z<font color="#990000">.</font>max
+ <font SIZE="-2" color="black">    28.  </font>               <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"]:  "</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Ponizej "</font> <font color="#990000">&lt;&lt;</font> z<font color="#990000">.</font>licz<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">]</font>
+ <font SIZE="-2" color="black">    29.  </font>               <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"; w zakr. "</font> <font color="#990000">&lt;&lt;</font> z<font color="#990000">.</font>licz<font color="#990000">[</font><font color="#993399">1</font><font color="#990000">]</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"; Powyzej "</font>
+ <font SIZE="-2" color="black">    30.  </font>               <font color="#990000">&lt;&lt;</font> z<font color="#990000">.</font>licz<font color="#990000">[</font><font color="#993399">2</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">    31.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    32.  </font>
+ <font SIZE="-2" color="black">    33.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    34.  </font>    <font color="#008080">Zakresy</font> <b><font color="#000000">zakres</font></b><font color="#990000">(</font><font color="#993399">3.0</font><font color="#990000">,</font> <font color="#993399">5.5</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    35.  </font>    <font color="#009900">double</font> x<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    36.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Podaj liczby (zero konczy)"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    37.  </font>
+ <font SIZE="-2" color="black">    38.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font> <font color="#990000">(</font> cin <font color="#990000">&gt;&gt;</font> x<font color="#990000">)</font> <font color="#990000">&amp;&amp;</font> x <font color="#990000">)</font> zakres<font color="#990000">[</font>x<font color="#990000">]++;</font>
+ <font SIZE="-2" color="black">    39.  </font>
+ <font SIZE="-2" color="black">    40.  </font>    cout <font color="#990000">&lt;&lt;</font> zakres <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    41.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"x = 4.7 -&gt; licz = "</font> <font color="#990000">&lt;&lt;</font> zakres<font color="#990000">[</font><font color="#993399">4.7</font><font color="#990000">]</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    42.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Klasa
+<!--O--><span class='klasa'>Zakresy<!--C--></span>
+ definiuje składowe
+<!--O--><span class='zmienna'>min<!--C--></span>,
+
+<!--O--><span class='zmienna'>max<!--C--></span>
+ oraz trzyelementową tablicę liczb całkowitych
+
+<!--O--><span class='zmienna'>licz<!--C--></span>, której zadaniem jest zliczanie &bdquo;danych&rdquo; poniżej
+zakresu <!-- MATH
+ $[\text{min},\text{max}]$
+ -->
+<SPAN CLASS="MATH">[min, max]</SPAN>, wewnątrz tego zakresu oraz
+powyżej tego zakresu. Operator indeksowania jest przeciążony za
+pomocą metody o&nbsp;nazwie
+<!--O--><span class='funkcja'>operator[]<!--C--></span>
+ pobierającej argument
+typu
+<!--O--><span class='typ'>double<!--C--></span>. Działanie jej polega na tym, że
+jeśli
+<!--O--><span class='zmienna'>zakres<!--C--></span>
+ jest obiektem
+klasy
+<!--O--><span class='klasa'>Zakresy<!--C--></span>, to dla
+<!--O--><span class='zmienna'>x<!--C--></span>
+ typu
+<!--O--><span class='typ'>double<!--C--></span>
+
+wyrażenie
+<FONT COLOR="#000000"><TT>zakres[x]</TT></FONT> jest referencją do odpowiedniego
+elementu tablicy
+<!--O--><span class='zmienna'>licz<!--C--></span>
+ będącej składową tego obiektu:
+
+<FONT COLOR="#000000"><TT>licz[0]</TT></FONT>, jeśli wartość
+<!--O--><span class='zmienna'>x<!--C--></span>
+ leży poniżej
+
+<!--O--><span class='zmienna'>min<!--C--></span>,
+<FONT COLOR="#000000"><TT>licz[1]</TT></FONT>, jeśli wartość ta leży
+w&nbsp;zakresie definiowanym przez
+<!--O--><span class='zmienna'>min<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>max<!--C--></span>,
+a&nbsp;
+<FONT COLOR="#000000"><TT>licz[2]</TT></FONT>, jeśli wypada powyżej
+<!--O--><span class='zmienna'>max<!--C--></span>.
+A zatem użyte w&nbsp;linii&nbsp;38 wyrażenie
+
+<FONT COLOR="#000000"><TT>zakres[x]++</TT></FONT> zwiększa odpowiedni element tablicy
+
+<!--O--><span class='zmienna'>licz<!--C--></span>
+ w&nbsp;zależności od wartości
+<!--O--><span class='zmienna'>x<!--C--></span>.
+Natomiast wartość
+<FONT COLOR="#000000"><TT>zakres[4.7]</TT></FONT> w&nbsp;linii&nbsp;41 to wartość
+tego elementu tablicy
+<!--O--><span class='zmienna'>licz<!--C--></span>, którego indeks odpowiada
+podanej wartości (4.7 mieści się w&nbsp;zakresie [3,5.5], wobec tego
+jest to aktualna wartość
+<!--O--><span class='zmienna'>licz[1]<!--C--></span>).
+Wydruk z&nbsp;tego programu
+<PRE>
+    Podaj liczby (zero konczy)
+    6  8.9  1  3.4  5  3.1
+    1    2  3    4  5    6  4.6  2.8  0
+    Zakres = [3, 5.5]:  Ponizej 4; w zakr. 7; Powyzej 3
+    x = 4.7 -&gt; licz = 7
+</PRE>
+potwierdza prawidłowość przeciążenia.
+W linii&nbsp;38 w&nbsp;warunku zakończenia pętli
+<!--O--><span class='klucz'>while<!--C--></span>
+
+użyta została koniunkcja wyrażeń logicznych, dzięki której
+wczytywanie zakończy się zarówno wtedy gdy stan strumienia
+
+<!--O--><span class='zmienna'>cin<!--C--></span>
+ przejdzie w&nbsp;<FONT COLOR="#7b003e"><I>bad</I></FONT> (na skutek błędu lub dojścia
+do końca pliku), jak i&nbsp;wtedy, gdy wczytana zostanie liczba 0 (zero).
+Indeksowanie w tym programie zwraca referencję do składowej prywatnej.
+Nie jest to praktyka godna polecenia: tu została użyta wyłącznie
+w&nbsp;celach dydaktycznych.
+
+<P>
+
+<H2><A NAME="SECTION001943000000000000000"></A>
+           <A NAME="przec:wyw"></A>
+<BR>
+<SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> Operator wywołania
+</H2>
+
+<P>
+Operator wywołania '
+<FONT COLOR="#000000"><TT>()</TT></FONT>'
+<A NAME="23557"></A>
+jest jedynym, który może mieć dowolną liczbę argumentów.
+Przeciążać go można tylko za pomocą metody.
+Metoda ta ma nazwę
+<!--O--><span class='funkcja'>operator()<!--C--></span>
+ &mdash;&nbsp;tu nawiasy są
+częścią nazwy, za którą to nazwą w&nbsp;zwykły sposób
+umieszczamy listę, być może pustą, parametrów ujętą
+w&nbsp;następną parę nawiasów.
+Deklaracja takiej metody ma więc postać
+<pre><tt>       <font color="#008080">Typ</font> <b><font color="#0000FF">operator</font></b><font color="#990000">()(</font>Typ_arg1<font color="#990000">,</font> Typ_arg2<font color="#990000">,</font> Typ_arg3<font color="#990000">);</font>
+</tt></pre>
+przy czym liczba i&nbsp;typ parametrów są dowolne. Wywołanie metody
+będzie miało miejsce po napotkaniu wyrażenia
+<pre><tt>       <b><font color="#000000">obj</font></b><font color="#990000">(</font>a<font color="#990000">,</font>b<font color="#990000">,</font>c<font color="#990000">)</font>
+</tt></pre>
+gdzie
+<!--O--><span class='zmienna'>obj<!--C--></span>
+ jest nazwą pewnego obiektu klasy, w&nbsp;której
+dokonaliśmy przeciążenia, a&nbsp;
+<!--O--><span class='zmienna'>a<!--C--></span>,
+<!--O--><span class='zmienna'>b<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>c<!--C--></span>
+
+są typów zgodnych z&nbsp;typami parametrów metody.
+Wywołanie będzie na rzecz obiektu
+<!--O--><span class='zmienna'>obj<!--C--></span>
+ i&nbsp;będzie
+miało postać
+<pre><tt>       obj<font color="#990000">.</font><b><font color="#0000FF">operator</font></b><font color="#990000">()(</font>a<font color="#990000">,</font>b<font color="#990000">,</font>c<font color="#990000">)</font>
+</tt></pre>
+Zauważmy, że postać wyrażenia
+<FONT COLOR="#000000"><TT>obj(a,b,c)</TT></FONT>
+jest taka sama jak postać normalnego wywołania funkcji,
+z&nbsp;tą tylko różnicą, że
+<!--O--><span class='zmienna'>obj<!--C--></span>
+ jest tu nazwą
+<FONT COLOR="#7b003e"><I>obiektu</I></FONT>, a&nbsp;nie funkcji. Takie obiekty można zatem
+&bdquo;wywoływać&rdquo; jak funkcje &mdash;&nbsp;nazywamy je zatem
+<FONT COLOR="#7b003e"><B>obiektami funkcyjnymi</B></FONT>
+<A NAME="23575"></A> (ang.&nbsp;<FONT COLOR="#7b003e"><I>callable object, functor</I></FONT>) lub
+<FONT COLOR="#7b003e"><B>obiektami wywoływalnymi</B></FONT>.<A NAME="23578"></A>
+Wywołanie nie musi zwracać l-wartości, tak jak nie zwraca l-wartości
+większość &bdquo;normalnych&rdquo; funkcji (zwracających wynik przez
+wartość). Równie dobrze może zwrócić odniesienie (referencję),
+która <FONT COLOR="#7b003e"><I>jest</I></FONT> l-wartością.
+
+<P>
+W poniższym przykładzie dzięki przeciążeniu
+operatora '
+<FONT COLOR="#000000"><TT>()</TT></FONT>' uzyskana została prosta implementacja
+dynamicznie alokowanych tablic trzywymiarowych (dynamicznie,
+a&nbsp;więc których wymiary mogą być ustalone dopiero podczas wykonania).
+W&nbsp;tym przypadku typem zwracanym jest odnośnik (referencja) do liczby
+typu
+<!--O--><span class='typ'>int<!--C--></span>
+ (elementu macierzy) tak, że metoda <FONT COLOR="#7b003e"><I>zwraca</I></FONT>
+l-wartość; wywołanie z&nbsp;trzema argumentami zastępuje potrójne
+indeksowanie tablicy trzywymiarowej.
+<BR><A NAME="arr3dim.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">152</SPAN>:</SPAN>
+      <A NAME="tex2html160"
+  HREF="source-files/arr3dim.cpp">
+<!--O--><span class='downl'>arr3dim.cpp<!--C--></span></A>
+<A NAME="24273"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Przeciążanie operatora wywołania</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cstring&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iomanip&gt;</font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     5.  </font>
+ <font SIZE="-2" color="black">     6.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Arr3D</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     7.  </font>    <font color="#009900">int</font>  dim1<font color="#990000">,</font> dim2<font color="#990000">,</font> dim3<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#009900">int</font><font color="#990000">*</font> arr<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    10.  </font>    <b><font color="#000000">Arr3D</font></b><font color="#990000">()</font> <font color="#990000">:</font> <b><font color="#000000">dim1</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">),</font><b><font color="#000000">dim2</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">),</font><b><font color="#000000">dim3</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">),</font>
+ <font SIZE="-2" color="black">    11.  </font>              <b><font color="#000000">arr</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">[</font><font color="#993399">1</font><font color="#990000">])</font>
+ <font SIZE="-2" color="black">    12.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    13.  </font>
+ <font SIZE="-2" color="black">    14.  </font>    <b><font color="#000000">Arr3D</font></b><font color="#990000">(</font><font color="#009900">int</font> dim1<font color="#990000">,</font> <font color="#009900">int</font> dim2<font color="#990000">,</font> <font color="#009900">int</font> dim3<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    15.  </font>        <font color="#990000">:</font> <b><font color="#000000">dim1</font></b><font color="#990000">(</font>dim1<font color="#990000">),</font> <b><font color="#000000">dim2</font></b><font color="#990000">(</font>dim2<font color="#990000">),</font> <b><font color="#000000">dim3</font></b><font color="#990000">(</font>dim3<font color="#990000">),</font>
+ <font SIZE="-2" color="black">    16.  </font>          <b><font color="#000000">arr</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">[</font>dim1<font color="#990000">*</font>dim2<font color="#990000">*</font>dim3<font color="#990000">])</font>
+ <font SIZE="-2" color="black">    17.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    18.  </font>
+ <font SIZE="-2" color="black">    19.  </font>    <b><font color="#000000">Arr3D</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> Arr3D<font color="#990000">&amp;</font> t<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    20.  </font>        <font color="#990000">:</font> <b><font color="#000000">dim1</font></b><font color="#990000">(</font>t<font color="#990000">.</font>dim1<font color="#990000">),</font> <b><font color="#000000">dim2</font></b><font color="#990000">(</font>t<font color="#990000">.</font>dim2<font color="#990000">),</font> <b><font color="#000000">dim3</font></b><font color="#990000">(</font>t<font color="#990000">.</font>dim3<font color="#990000">),</font>
+ <font SIZE="-2" color="black">    21.  </font>          <b><font color="#000000">arr</font></b><font color="#990000">((</font><font color="#009900">int</font><font color="#990000">*)</font><b><font color="#000000">memcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">[</font>dim1<font color="#990000">*</font>dim2<font color="#990000">*</font>dim3<font color="#990000">],</font>
+ <font SIZE="-2" color="black">    22.  </font>                           t<font color="#990000">.</font>arr<font color="#990000">,</font>
+ <font SIZE="-2" color="black">    23.  </font>                           dim1<font color="#990000">*</font>dim2<font color="#990000">*</font>dim3<font color="#990000">*</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)))</font>
+ <font SIZE="-2" color="black">    24.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    25.  </font>
+ <font SIZE="-2" color="black">    26.  </font>    <font color="#990000">~</font><b><font color="#000000">Arr3D</font></b><font color="#990000">()</font> <font color="#FF0000">{</font> <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> arr<font color="#990000">;</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    27.  </font>
+ <font SIZE="-2" color="black">    28.  </font>    Arr3D<font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">=(</font><b><font color="#0000FF">const</font></b> Arr3D<font color="#990000">&amp;);</font>
+ <font SIZE="-2" color="black">    29.  </font>    <font color="#009900">int</font><font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">()(</font><font color="#009900">int</font><font color="#990000">,</font><font color="#009900">int</font><font color="#990000">,</font><font color="#009900">int</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    30.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    31.  </font>
+ <font SIZE="-2" color="black">    32.  </font><font color="#009900">int</font><font color="#990000">&amp;</font> Arr3D<font color="#990000">::</font><b><font color="#0000FF">operator</font></b><font color="#990000">()(</font><font color="#009900">int</font> n1<font color="#990000">,</font> <font color="#009900">int</font> n2<font color="#990000">,</font> <font color="#009900">int</font> n3<font color="#990000">)</font>  <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    33.  </font>    <b><font color="#0000FF">return</font></b> <font color="#990000">*(</font>arr <font color="#990000">+</font> n1<font color="#990000">*</font>dim2<font color="#990000">*</font>dim3 <font color="#990000">+</font> n2<font color="#990000">*</font>dim3 <font color="#990000">+</font> n3<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    34.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    35.  </font>
+ <font SIZE="-2" color="black">    36.  </font>Arr3D<font color="#990000">&amp;</font> Arr3D<font color="#990000">::</font><b><font color="#0000FF">operator</font></b><font color="#990000">=(</font><b><font color="#0000FF">const</font></b> Arr3D<font color="#990000">&amp;</font> t<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    37.  </font>    <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> <b><font color="#0000FF">this</font></b> <font color="#990000">!=</font> <font color="#990000">&amp;</font>t <font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    38.  </font>        <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> arr<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    39.  </font>        dim1 <font color="#990000">=</font> t<font color="#990000">.</font>dim1<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    40.  </font>        dim2 <font color="#990000">=</font> t<font color="#990000">.</font>dim2<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    41.  </font>        dim3 <font color="#990000">=</font> t<font color="#990000">.</font>dim3<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    42.  </font>        arr  <font color="#990000">=</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">*)</font><b><font color="#000000">memcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">[</font>dim1<font color="#990000">*</font>dim2<font color="#990000">*</font>dim3<font color="#990000">],</font>
+ <font SIZE="-2" color="black">    43.  </font>                            t<font color="#990000">.</font>arr<font color="#990000">,</font>
+ <font SIZE="-2" color="black">    44.  </font>                            dim1<font color="#990000">*</font>dim2<font color="#990000">*</font>dim3<font color="#990000">*</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">));</font>
+ <font SIZE="-2" color="black">    45.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    46.  </font>    <b><font color="#0000FF">return</font></b> <font color="#990000">*</font><b><font color="#0000FF">this</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    47.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    48.  </font>
+ <font SIZE="-2" color="black">    49.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    50.  </font>    <font color="#009900">int</font> dim1 <font color="#990000">=</font> <font color="#993399">1000</font><font color="#990000">,</font> dim2 <font color="#990000">=</font> <font color="#993399">1000</font><font color="#990000">,</font> dim3 <font color="#990000">=</font> <font color="#993399">50</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    51.  </font>
+ <font SIZE="-2" color="black">    52.  </font>    <font color="#008080">Arr3D</font> <b><font color="#000000">T1</font></b><font color="#990000">(</font>dim1<font color="#990000">,</font>dim2<font color="#990000">,</font>dim3<font color="#990000">),</font> T2<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    53.  </font>
+ <font SIZE="-2" color="black">    54.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> dim1<font color="#990000">;</font> i<font color="#990000">++)</font>
+ <font SIZE="-2" color="black">    55.  </font>        <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> j <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> j <font color="#990000">&lt;</font> dim2<font color="#990000">;</font> j<font color="#990000">++)</font>
+ <font SIZE="-2" color="black">    56.  </font>            <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> k <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> k <font color="#990000">&lt;</font> dim3<font color="#990000">;</font> k<font color="#990000">++)</font>
+ <font SIZE="-2" color="black">    57.  </font>                <b><font color="#000000">T1</font></b><font color="#990000">(</font>i<font color="#990000">,</font>j<font color="#990000">,</font>k<font color="#990000">)</font> <font color="#990000">=</font> i<font color="#990000">+</font>j<font color="#990000">+</font>k<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    58.  </font>    T2 <font color="#990000">=</font> T1<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    59.  </font>
+ <font SIZE="-2" color="black">    60.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"T2(999, 999 , 2) = "</font>
+ <font SIZE="-2" color="black">    61.  </font>         <font color="#990000">&lt;&lt;</font> <b><font color="#000000">setw</font></b><font color="#990000">(</font><font color="#993399">4</font><font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> <b><font color="#000000">T2</font></b><font color="#990000">(</font><font color="#993399">999</font><font color="#990000">,</font><font color="#993399">999</font><font color="#990000">,</font><font color="#993399">2</font><font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    62.  </font>
+ <font SIZE="-2" color="black">    63.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"T2(  0,    0, 9) = "</font>
+ <font SIZE="-2" color="black">    64.  </font>         <font color="#990000">&lt;&lt;</font> <b><font color="#000000">setw</font></b><font color="#990000">(</font><font color="#993399">4</font><font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> <b><font color="#000000">T2</font></b><font color="#990000">(</font>  <font color="#993399">0</font><font color="#990000">,</font>  <font color="#993399">0</font><font color="#990000">,</font><font color="#993399">9</font><font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    65.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Zauważmy, że w&nbsp;klasie tej zdefiniowaliśmy konstruktor kopiujący,
+destruktor i&nbsp;przeciążyliśmy operator przypisania: jest
+to konieczne, bo klasa zawiera pole wskaźnikowe.
+Obiekty tej klasy reprezentują tablice trzywymiarowe (o trzech
+indeksach). Tak naprawdę, jak widzimy z&nbsp;definicji klasy,
+tablica
+<!--O--><span class='zmienna'>arr<!--C--></span>
+ jest wskaźnikiem do tablicy jednowymiarowej
+o&nbsp;wymiarze równym iloczynowi wymiarów
+<!--O--><span class='zmienna'>dim1<!--C--></span>,
+<!--O--><span class='zmienna'>dim2<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='zmienna'>dim3<!--C--></span>. Dostęp do tej tablicy z&nbsp;zewnątrz mamy wyłącznie
+za pomocą metody
+<!--O--><span class='funkcja'>operator()<!--C--></span>
+ (linie&nbsp;32-34), a&nbsp;więc za
+pomocą wyrażeń typu
+<FONT COLOR="#000000"><TT>T(i,j,k)</TT></FONT>, gdzie
+<!--O--><span class='zmienna'>T<!--C--></span>
+ jest
+nazwą obiektu klasy
+<!--O--><span class='klasa'>Arr3D<!--C--></span>. Metoda traktuje argumenty jak
+indeksy i&nbsp;wylicza na ich podstawie odpowiadający żądanemu
+elementowi indeks w&nbsp;tablicy jednowymiarowej
+<!--O--><span class='zmienna'>arr<!--C--></span>
+ (jak widać,
+do obliczenia tego indeksu nie jest potrzebny pierwszy wymiar
+
+<!--O--><span class='zmienna'>dim1<!--C--></span>
+ tablicy trzywymiarowej). Ponieważ zwracana jest
+referencja do odpowiedniego elementu tablicy, wyrażenie
+
+<FONT COLOR="#000000"><TT>T(i,j,k)</TT></FONT> wygląda i&nbsp;zachowuje się jak element
+
+<FONT COLOR="#000000"><TT>T[i][j][k]</TT></FONT> &bdquo;normalnej&rdquo; tablicy trzywymiarowej,
+w&nbsp;szczególności <FONT COLOR="#7b003e"><I>jest</I></FONT> l-wartością, a&nbsp;zatem może występować
+również po lewej stronie przypisania, jak w&nbsp;linii&nbsp;57.
+
+<P>
+W programie tworzymy obiekt
+<!--O--><span class='zmienna'>T1<!--C--></span>
+ klasy
+<!--O--><span class='klasa'>Arr3D<!--C--></span>
+
+odpowiadający trzywymiarowej tablicy o&nbsp;wymiarach
+<!-- MATH
+ $1000\times 1000\times 50$
+ -->
+<SPAN CLASS="MATH">1000&#215;1000&#215;50</SPAN> oraz drugi obiekt
+
+<!--O--><span class='zmienna'>T2<!--C--></span>, tworzony za pomocą konstruktora domyślnego, a&nbsp;więc
+o wymiarach <!-- MATH
+ $1\times 1\times 1$
+ -->
+<SPAN CLASS="MATH">1&#215;1&#215;1</SPAN> (linia&nbsp;52).
+Wewnątrz obiektu
+<!--O--><span class='zmienna'>T1<!--C--></span>
+ tablica jest reprezentowana jako
+jednowymiarowa tablica 50 milionów elementów, ale ponieważ jest to
+składowa prywatna, użytkownik klasy nie musi o&nbsp;tym wiedzieć.
+W liniach&nbsp;54-57 zapełniamy tę tablicę &mdash;&nbsp;każdy element jest
+sumą odpowiadających mu indeksów. W linii&nbsp;58 dokonujemy
+przypisania dwóch obiektów klasy
+<!--O--><span class='klasa'>Arr3D<!--C--></span>, aby sprawdzić
+prawidłowość przeciążenia operatora przypisania.
+Następnie drukujemy dwie przykładowe wartości elementów
+<PRE>
+    T2( 999, 999 , 2) = 2000
+    T2(   0,    0, 9) =    9
+</PRE>
+aby przekonać się, że wszystko przebiega poprawnie i&nbsp;wartości
+
+<FONT COLOR="#000000"><TT>T(i,j,k)</TT></FONT> można rzeczywiście traktować jak elementy
+trzywymiarowej tablicy.
+Na marginesie zauważmy, że operowanie na dużych macierzach wymaga
+uwagi i&nbsp;pewnego doświadczenia; na przykład zmieniając
+w&nbsp;liniach&nbsp;54-56 kolejność pętli otrzymalibyśmy równoważny
+program, który jednak na większości maszyn wykonywałby się&nbsp;4-6
+razy wolniej.
+
+<P>
+
+<H2><A NAME="SECTION001944000000000000000"></A>
+           <A NAME="przec:wsk"></A>
+<BR>
+<SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> Operator wyboru składowej przez wskaźnik
+</H2>
+
+<P>
+Operator
+<A NAME="23614"></A>
+wyboru składowej przez wskaźnik ('
+<FONT COLOR="#000000"><TT>-&gt;</TT></FONT>') jest przeciążany
+jako operator <FONT COLOR="#7b003e"><I>jednoargumentowy</I></FONT>: musi być zatem przeciążany
+jako bezparametrowa metoda klasy. Niejawnym argumentem jest więc
+obiekt, którego nazwa pojawia się po <FONT COLOR="#7b003e"><I>lewej</I></FONT> stronie operatora
+&mdash;&nbsp;na rzecz tego właśnie obiektu metoda zostanie wywołana, bez
+przekazywania żadnych jawnych argumentów. Zauważmy, że
+po lewej stronie operatora '
+<FONT COLOR="#000000"><TT>-&gt;</TT></FONT>' stoi w&nbsp;tym przypadku obiekt,
+a&nbsp;nie, jak normalnie, wskaźnik (przypomnijmy, że operator
+bezpośredniego wyboru składowej, operator &bdquo;kropka&rdquo;, w&nbsp;ogóle nie
+może być przeciążany)
+
+<P>
+Wartością zwracaną przez metodę przeciążającą musi być
+wartość wskaźnikowa (adres), która następnie zostanie użyta
+jako lewy operand &bdquo;zwykłego&rdquo; operatora '
+<FONT COLOR="#000000"><TT>-&gt;</TT></FONT>'.
+Oczywiście, możliwa jest też sytuacja, że zwrócony zostanie
+obiekt, dla którego znowu przeciążony jest operator
+<FONT COLOR="#000000"><TT>-&gt;</TT></FONT>, który
+z&nbsp;kolei zwraca wskaźnik (lub znowy taki obiekt...).
+
+<P>
+Tak więc, jeśli
+<!--O--><span class='zmienna'>obj<!--C--></span>
+ jest nazwą obiektu klasy,
+w której przeciążony został operator '
+<FONT COLOR="#000000"><TT>-&gt;</TT></FONT>', to
+wyrażenie
+<pre><tt>       obj<font color="#990000">-&gt;</font>b
+</tt></pre>
+jest równoważne
+<pre><tt>       temp <font color="#990000">=</font> obj<font color="#990000">.</font><b><font color="#0000FF">operator</font></b><font color="#990000">-&gt;(),</font> temp<font color="#990000">-&gt;</font>b
+</tt></pre>
+Innymi słowy:
+
+<UL>
+<LI>wywoływana jest metoda
+<!--O--><span class='funkcja'>operator-<SPAN CLASS="MATH">&gt;</SPAN><!--C--></span>
+ na rzecz
+          obiektu
+<!--O--><span class='zmienna'>obj<!--C--></span>;
+</LI>
+<LI>zwrócony wynik, tu oznaczony przez
+<!--O--><span class='zmienna'>temp<!--C--></span>, musi być
+          typu wskaźnikowego, a&nbsp;więc
+          wartością
+<!--O--><span class='zmienna'>temp<!--C--></span>
+ jest adres pewnego obiektu pewnej
+          klasy (niekoniecznie tej, dla której przeciążyliśmy
+          operator '
+<FONT COLOR="#000000"><TT>-&gt;</TT></FONT>');
+</LI>
+<LI>z&nbsp;obiektu wskazywanego przez
+<!--O--><span class='zmienna'>temp<!--C--></span>
+ wybierana jest
+          składowa o&nbsp;nazwie
+<!--O--><span class='zmienna'>b<!--C--></span>
+ (taka składowa w&nbsp;klasie
+          tego obiektu musi oczywiście istnieć). Wartością
+          całego wyrażenia jest wartość tej składowej.
+</LI>
+</UL>
+
+<P>
+W poniższym przykładzie dla obiektu
+<!--O--><span class='zmienna'>AB<!--C--></span>
+ klasy
+
+<!--O--><span class='klasa'>Segment<!--C--></span>
+ wyrażenie
+<FONT COLOR="#000000"><TT>AB-&gt;x</TT></FONT> zwraca współrzędną
+<SPAN CLASS="MATH"><I>x</I></SPAN>-ową jednego z&nbsp;dwu punktów &mdash;&nbsp;obiektów klasy
+<!--O--><span class='klasa'>Point<!--C--></span>
+ &mdash;&nbsp;
+określających odcinek. Typem zwracanym przez metodę
+
+<!--O--><span class='funkcja'>operator-<SPAN CLASS="MATH">&gt;</SPAN><!--C--></span>
+ w&nbsp;klasie
+<!--O--><span class='klasa'>Segment<!--C--></span>
+ jest <SPAN  CLASS="textit">wskaźnik
+do ustalonego obiektu klasy
+<!--O--><span class='klasa'>Point<!--C--></span></SPAN> (a&nbsp;<FONT COLOR="#7b003e"><I>nie</I></FONT> klasy
+
+<!--O--><span class='klasa'>Segment<!--C--></span>):
+<BR><A NAME="ovrlskl.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">153</SPAN>:</SPAN>
+      <A NAME="tex2html161"
+  HREF="source-files/ovrlskl.cpp">
+<!--O--><span class='downl'>ovrlskl.cpp<!--C--></span></A>
+<A NAME="24334"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Przeciążanie operatora wyboru składowej</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">Point</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">int</font> x<font color="#990000">,</font> y<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>
+ <font SIZE="-2" color="black">     7.  </font>    <b><font color="#000000">Point</font></b><font color="#990000">(</font><font color="#009900">int</font> x <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">,</font> <font color="#009900">int</font> y <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">)</font> <font color="#990000">:</font> <b><font color="#000000">x</font></b><font color="#990000">(</font>x<font color="#990000">),</font> <b><font color="#000000">y</font></b><font color="#990000">(</font>y<font color="#990000">)</font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">     9.  </font>
+ <font SIZE="-2" color="black">    10.  </font>    <font color="#009900">double</font> <b><font color="#000000">r2</font></b><font color="#990000">()</font> <b><font color="#0000FF">const</font></b> <font color="#FF0000">{</font> <b><font color="#0000FF">return</font></b> x<font color="#990000">*</font>x <font color="#990000">+</font> y<font color="#990000">*</font>y<font color="#990000">;</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    11.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    12.  </font>
+ <font SIZE="-2" color="black">    13.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">Segment</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    14.  </font>    <font color="#008080">Point</font> A<font color="#990000">,</font> B<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>
+ <font SIZE="-2" color="black">    16.  </font>    <b><font color="#000000">Segment</font></b><font color="#990000">(</font><font color="#008080">Point</font> A <font color="#990000">=</font> <b><font color="#000000">Point</font></b><font color="#990000">(),</font> <font color="#008080">Point</font> B <font color="#990000">=</font> <b><font color="#000000">Point</font></b><font color="#990000">())</font>
+ <font SIZE="-2" color="black">    17.  </font>        <font color="#990000">:</font> <b><font color="#000000">A</font></b><font color="#990000">(</font>A<font color="#990000">),</font> <b><font color="#000000">B</font></b><font color="#990000">(</font>B<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    18.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    19.  </font>
+ <font SIZE="-2" color="black">    20.  </font>    <b><font color="#0000FF">const</font></b> Point<font color="#990000">*</font> <b><font color="#0000FF">operator</font></b><font color="#990000">-&gt;()</font> <b><font color="#0000FF">const</font></b> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    21.  </font>        <b><font color="#0000FF">return</font></b> <font color="#990000">(</font>A<font color="#990000">.</font><b><font color="#000000">r2</font></b><font color="#990000">()</font> <font color="#990000">&lt;</font> B<font color="#990000">.</font><b><font color="#000000">r2</font></b><font color="#990000">())</font> <font color="#990000">?</font> <font color="#990000">&amp;</font>A <font color="#990000">:</font> <font color="#990000">&amp;</font>B<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    22.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    23.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    24.  </font>
+ <font SIZE="-2" color="black">    25.  </font>ostream<font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">&lt;&lt;(</font>ostream<font color="#990000">&amp;</font> str<font color="#990000">,</font> <b><font color="#0000FF">const</font></b> Point<font color="#990000">&amp;</font> A<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    26.  </font>    <b><font color="#0000FF">return</font></b> str <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"P["</font> <font color="#990000">&lt;&lt;</font> A<font color="#990000">.</font>x <font color="#990000">&lt;&lt;</font> <font color="#FF0000">","</font> <font color="#990000">&lt;&lt;</font> A<font color="#990000">.</font>y <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"]"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    27.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    28.  </font>
+ <font SIZE="-2" color="black">    29.  </font>ostream<font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">&lt;&lt;(</font>ostream<font color="#990000">&amp;</font> str<font color="#990000">,</font> <b><font color="#0000FF">const</font></b> Segment<font color="#990000">&amp;</font> AB<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    30.  </font>    <b><font color="#0000FF">return</font></b> str <font color="#990000">&lt;&lt;</font> AB<font color="#990000">.</font>A <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"--"</font> <font color="#990000">&lt;&lt;</font> AB<font color="#990000">.</font>B<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    31.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    32.  </font>
+ <font SIZE="-2" color="black">    33.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    34.  </font>
+ <font SIZE="-2" color="black">    35.  </font>    <font color="#008080">Point</font>    <b><font color="#000000">A</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">,</font><font color="#993399">0</font><font color="#990000">),</font>  <b><font color="#000000">B</font></b><font color="#990000">(</font><font color="#993399">8</font><font color="#990000">,</font><font color="#993399">6</font><font color="#990000">),</font>  <b><font color="#000000">C</font></b><font color="#990000">(</font><font color="#993399">4</font><font color="#990000">,</font><font color="#993399">3</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    36.  </font>    <font color="#008080">Segment</font> <b><font color="#000000">AB</font></b><font color="#990000">(</font>A<font color="#990000">,</font>B<font color="#990000">),</font> <b><font color="#000000">BC</font></b><font color="#990000">(</font>B<font color="#990000">,</font>C<font color="#990000">),</font> <b><font color="#000000">CA</font></b><font color="#990000">(</font>C<font color="#990000">,</font>A<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    37.  </font>
+ <font SIZE="-2" color="black">    38.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"AB = "</font> <font color="#990000">&lt;&lt;</font> AB <font color="#990000">&lt;&lt;</font> <font color="#FF0000">": AB-&gt;x = "</font>
+ <font SIZE="-2" color="black">    39.  </font>                    <font color="#990000">&lt;&lt;</font> AB<font color="#990000">-&gt;</font>x <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    40.  </font>
+ <font SIZE="-2" color="black">    41.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"BC = "</font> <font color="#990000">&lt;&lt;</font> BC <font color="#990000">&lt;&lt;</font> <font color="#FF0000">": BC-&gt;y = "</font>
+ <font SIZE="-2" color="black">    42.  </font>                    <font color="#990000">&lt;&lt;</font> BC<font color="#990000">-&gt;</font>y <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    43.  </font>
+ <font SIZE="-2" color="black">    44.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"CA = "</font> <font color="#990000">&lt;&lt;</font> CA <font color="#990000">&lt;&lt;</font> <font color="#FF0000">": CA-&gt;x = "</font>
+ <font SIZE="-2" color="black">    45.  </font>                    <font color="#990000">&lt;&lt;</font> CA<font color="#990000">-&gt;</font>x <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    46.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Metoda przeciążająca zwraca wskaźnik do tego z&nbsp;końców odcinka,
+który leży bliżej początku układu współrzędnych (linia&nbsp;21).
+Z obiektu (punktu) wskazywanego przez ten wskaźnik, za pomocą
+&bdquo;zwykłego&rdquo; operatora '
+<FONT COLOR="#000000"><TT>-&gt;</TT></FONT>', wybierana jest
+składowa&nbsp;
+<!--O--><span class='zmienna'>x<!--C--></span>
+ lub&nbsp;
+<!--O--><span class='zmienna'>y<!--C--></span>. Widzimy to w&nbsp;liniach&nbsp;38-45,
+które drukują wynik:
+<PRE>
+    AB = P[1,0]--P[8,6]: AB-&gt;x = 1
+    BC = P[8,6]--P[4,3]: BC-&gt;y = 3
+    CA = P[4,3]--P[1,0]: CA-&gt;x = 1
+</PRE>
+Na przykład
+<!--O--><span class='zmienna'>BC<!--C--></span>
+ w&nbsp;liniach&nbsp;41-42 jest nazwą obiektu klasy
+
+<!--O--><span class='klasa'>Segment<!--C--></span>
+ reprezentującego odcinek o&nbsp;końcach opisywanych przez
+obiekty
+<!--O--><span class='zmienna'>B<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>C<!--C--></span>
+ klasy
+<!--O--><span class='klasa'>Point<!--C--></span>. W klasie
+
+<!--O--><span class='klasa'>Segment<!--C--></span>
+ operator '
+<FONT COLOR="#000000"><TT>-&gt;</TT></FONT>' został przeciążony
+(linie&nbsp;20-22) i&nbsp;zwraca adres jednego z określających ten odcinek
+punktów. To właśnie z&nbsp;tego obiektu klasy
+<!--O--><span class='klasa'>Point<!--C--></span>
+ wybrana
+zostanie składowa
+<!--O--><span class='zmienna'>y<!--C--></span>. Zauważmy, że w klasie
+
+<!--O--><span class='klasa'>Segment<!--C--></span>, której obiektem jest
+<!--O--><span class='zmienna'>BC<!--C--></span>, składowej
+o&nbsp;nazwie
+<!--O--><span class='zmienna'>y<!--C--></span>
+ w&nbsp;ogóle nie ma. Ponadto
+<!--O--><span class='zmienna'>BC<!--C--></span>
+ jest tu
+nazwą obiektu, a&nbsp;nie wskaźnika, więc normalnie trzeba by tu było
+użyć kropki a&nbsp;nie &bdquo;strzałki&rdquo;.
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2459"
+  HREF="node117.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2463"
+  HREF="node114.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2469"
+  HREF="node119.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2465"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2467"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2460"
+  HREF="node117.html">18.3 Przeciążenia za pomocą</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2464"
+  HREF="node114.html">18. Przeciążanie operatorów</A>
+<B>Dalej:</B> <A NAME="tex2html2470"
+  HREF="node119.html">19. Jeszcze o&nbsp;konwersjach</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

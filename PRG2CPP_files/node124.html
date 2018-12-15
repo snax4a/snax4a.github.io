@@ -1,0 +1,555 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>20.2 Konstruktory i&nbsp;destruktory klas pochodnych</TITLE>
+<META NAME="description" CONTENT="20.2 Konstruktory i&nbsp;destruktory klas pochodnych">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node125.html">
+<LINK REL="previous" HREF="node123.html">
+<LINK REL="up" HREF="node122.html">
+<LINK REL="next" HREF="node125.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2564"
+  HREF="node123.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2570"
+  HREF="node122.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2576"
+  HREF="node125.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2572"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2574"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2565"
+  HREF="node123.html">20.1 Podstawy dziedziczenia</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2571"
+  HREF="node122.html">20. Dziedziczenie i polimorfizm</A>
+<B>Dalej:</B> <A NAME="tex2html2577"
+  HREF="node125.html">20.3 Operator przypisania dla</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002120000000000000000"></A>
+         <A NAME="dzie:konst"></A>
+<BR>
+<SPAN CLASS="arabic">20</SPAN>.<SPAN CLASS="arabic">2</SPAN> Konstruktory i&nbsp;destruktory klas pochodnych
+</H1>
+
+<P>
+Jak wspomnieliśmy, konstruktory nie są dziedziczone. Jeśli
+w klasie pochodnej nie zdefiniowaliśmy konstruktora, to zostanie
+użyty konstruktor domyślny. Aby jednak powstał obiekt klasy
+pochodnej, musi być <FONT COLOR="#7b003e"><I>najpierw</I></FONT> utworzony podobiekt klasy
+nadrzędnej wchodzący w&nbsp;jego skład. On również zostanie utworzony
+za pomocą konstruktora domyślnego, który zatem musi istnieć!
+
+<P>
+
+<P>
+
+<div class='wazne'>
+Podobiekt klasy bazowej jest tworzony jeszcze przed
+    wykonaniem konstruktora klasy pochodnej.
+
+
+</div>
+
+<P>
+Co w&nbsp;takim razie zrobić, aby do konstrukcji podobiektu klasy bazowej
+zawartego w&nbsp;tworzonym właśnie obiekcie klasy pochodnej
+użyć konstruktora innego niż domyślny?
+Wówczas musimy w&nbsp;klasie pochodnej zdefiniować konstruktor,
+a&nbsp;wywołanie właściwego konstruktora dla podobiektu klasy bazowej
+<FONT COLOR="#7b003e"><I>musi</I></FONT> nastąpić poprzez listę inicjalizacyjną
+<A NAME="25936"></A> &mdash;&nbsp;wewnątrz konstruktora byłoby już
+za późno
+(patrz
+rozdział o <A HREF="node99.html#klasyd:listin">konstruktorach</A> ).
+Na liście tej umieszczamy jawne wywołanie konstruktora dla podobiektu.
+Tak więc, jeśli klasą bazową jest klasa&nbsp;
+<!--O--><span class='klasa'>A<!--C--></span>
+ i&nbsp;chcemy wywołać
+jej konstruktor, aby &bdquo;zagospodarował&rdquo; podobiekt tej klasy
+dziedziczony w&nbsp;klasie
+<!--O--><span class='klasa'>B<!--C--></span>, to na liście inicjalizacyjnej
+konstruktora klasy pochodnej&nbsp;
+<!--O--><span class='klasa'>B<!--C--></span>
+ umieszczamy wywołanie
+
+<FONT COLOR="#000000"><TT>A(...)</TT></FONT>, gdzie w&nbsp;miejsce kropek wstawiamy oczywiście argumenty
+dla wywoływanego konstruktora. Wywołuje się tylko konstruktory
+<FONT COLOR="#7b003e"><I>bezpośredniej</I></FONT> klasy bazowej (&bdquo;ojca&rdquo;, ale nie &bdquo;dziadka&rdquo;;
+oczywiście konstruktor ojca poprzez swoją listę inicjalizacyjną
+może wywołać konstruktor swojego ojca...).
+
+<P>
+Na przykład w&nbsp;poniższym fragmencie definiujemy klasę bazową
+
+<!--O--><span class='klasa'>Point<!--C--></span>. Nie ma ona w&nbsp;ogóle konstruktora domyślnego.
+<A NAME="pix.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">161</SPAN>:</SPAN>
+      <A NAME="tex2html169"
+  HREF="source-files/pix.cpp">
+<!--O--><span class='downl'>pix.cpp<!--C--></span></A>
+<A NAME="26588"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Wywołanie konstruktora klasy bazowej</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">Point</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     2.  </font>    <font color="#009900">int</font> x<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>    <font color="#009900">int</font> y<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>    <b><font color="#000000">Point</font></b><font color="#990000">(</font><font color="#009900">int</font> x<font color="#990000">,</font> <font color="#009900">int</font> y<font color="#990000">)</font>
+ <font SIZE="-2" color="black">     5.  </font>        <font color="#990000">:</font> <b><font color="#000000">x</font></b><font color="#990000">(</font>x<font color="#990000">),</font> <b><font color="#000000">y</font></b><font color="#990000">(</font>y<font color="#990000">)</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">     7.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>
+ <font SIZE="-2" color="black">     9.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">Pixel</font><font color="#990000">:</font> <b><font color="#0000FF">public</font></b> Point <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    10.  </font>    <font color="#009900">int</font> color<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font>    <b><font color="#000000">Pixel</font></b><font color="#990000">(</font><font color="#009900">int</font> x<font color="#990000">,</font> <font color="#009900">int</font> y<font color="#990000">,</font> <font color="#009900">int</font> color<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    12.  </font>        <font color="#990000">:</font> <b><font color="#000000">Point</font></b><font color="#990000">(</font>x<font color="#990000">,</font>y<font color="#990000">),</font> <b><font color="#000000">color</font></b><font color="#990000">(</font>color<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    13.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    14.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+</tt></pre>
+<hr>
+
+</div>
+
+Klasa
+<!--O--><span class='klasa'>Pixel<!--C--></span>
+ dziedziczy z&nbsp;klasy
+<!--O--><span class='klasa'>Point<!--C--></span>. Ponieważ klasa
+
+<!--O--><span class='klasa'>Point<!--C--></span>
+ nie miała konstruktora domyślnego, w&nbsp;klasie
+
+<!--O--><span class='klasa'>Pixel<!--C--></span>
+ <FONT COLOR="#7b003e"><I>musimy</I></FONT> przynajmniej jeden konstruktor zdefiniować
+i&nbsp;na jego liście inicjalizacyjnej wywołać jawnie konstruktor klasy
+
+<!--O--><span class='klasa'>Point<!--C--></span>
+ z&nbsp;odpowiednimi argumentami, co robimy w&nbsp;linii&nbsp;12
+powyższego fragmentu.
+
+<P>
+Zauważmy, że <FONT COLOR="#7b003e"><I>nie</I></FONT> wolno na liście
+inicjalizacyjnej konstruktora klasy pochodnej wymieniać nazw pól
+z&nbsp;klasy bazowej. W powyższym przykładzie na liście inicjalizacyjnej
+konstruktora klasy
+<!--O--><span class='klasa'>Pixel<!--C--></span>
+ nie można umieścić wyrażenia
+
+<FONT COLOR="#000000"><TT>x(x)</TT></FONT>, bo składowa
+<!--O--><span class='zmienna'>x<!--C--></span>
+ pochodzi z&nbsp;klasy bazowej. Wolno
+natomiast, za pomocą wyrażenia
+<FONT COLOR="#000000"><TT>color(color)</TT></FONT>, zainicjować
+składową
+<!--O--><span class='zmienna'>color<!--C--></span>, bo jest ona zadeklarowana w&nbsp;klasie
+pochodnej
+<!--O--><span class='klasa'>Pixel<!--C--></span>, a&nbsp;nie było jej w&nbsp;klasie bazowej. Składowe
+dziedziczone z&nbsp;klasy bazowej mogą być więc zainicjowane, ale tylko za
+pomocą jawnego wywołania konstruktora klasy bazowej z&nbsp;listy
+inicjalizacyjnej konstruktora klasy pochodnej.
+
+<P>
+Pewien problem powstaje przy definiowaniu konstruktora kopiującego.
+Pisząc konstruktor kopiujący w&nbsp;klasie pochodnej, musimy zastanowić
+się, w&nbsp;jaki sposób skonstruowany będzie podobiekt klasy bazowej
+zawarty w&nbsp;tworzonym obiekcie klasy pochodnej. Jeśli z&nbsp;listy
+inicjalizacyjnej konstruktora kopiującego klasy pochodnej jawnie nie
+wywołamy konstruktora kopiującego klasy bazowej, to do utworzenia
+podobiektu klasy bazowej użyty będzie konstruktor <FONT COLOR="#7b003e"><I>domyślny</I></FONT>
+klasy bazowej (który wobec tego musi istnieć).
+
+<P>
+Jeśli jednak chcemy, aby do utworzenia podobiektu użyty został
+inny niż domyślny konstruktor klasy bazowej, to musimy jawnie go
+wywołać z&nbsp;listy inicjalizacyjnej. Jakiego jednak argumentu użyć
+przy tym wywoływaniu? Odpowiedź jest prosta i&nbsp;wynika z&nbsp;tego, o&nbsp;czym
+mówiliśmy w&nbsp;poprzednim podrozdziale: ponieważ typem parametru
+konstruktora kopiującego klasy bazowej&nbsp;
+<!--O--><span class='klasa'>A<!--C--></span>
+ jest
+<!--O--><span class='typ'>A&amp;<!--C--></span>
+ (lub,
+częściej,
+<!--O--><span class='typ'>const A&amp;<!--C--></span>), więc wystarczy &bdquo;wysłać&rdquo; referencję
+do tego obiektu klasy pochodnej
+<!--O--><span class='klasa'>B<!--C--></span>, który jest argumentem
+wywołania konstruktora z&nbsp;klasy
+<!--O--><span class='klasa'>B<!--C--></span>
+ (czyli jest obiektem-wzorcem).
+Tak jak bowiem mówiliśmy, jeśli typem parametru funkcji jest
+wskaźnik lub referencja do obiektu klasy bazowej, to dopuszczalnym
+argumentem wywołania jest wartość wskaźnikowa lub referencyjna
+odnosząca się do obiektu klasy pochodnej.
+
+<P>
+W poniższym programie, dla uproszczenia, w&nbsp;ogóle nie ma pól
+wskaźnikowych, ale definiujemy konstruktory kopiujące (i domyślne):
+<A NAME="cop.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">162</SPAN>:</SPAN>
+      <A NAME="tex2html170"
+  HREF="source-files/cop.cpp">
+<!--O--><span class='downl'>cop.cpp<!--C--></span></A>
+<A NAME="26614"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Konstruktory kopiujące</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">A</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">int</font> a<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">     7.  </font>    <b><font color="#000000">A</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> A<font color="#990000">&amp;</font> aa<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     8.  </font>        a <font color="#990000">=</font> aa<font color="#990000">.</font>a<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Copy-ctor A, a = "</font> <font color="#990000">&lt;&lt;</font> a <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    11.  </font>
+ <font SIZE="-2" color="black">    12.  </font>    <b><font color="#000000">A</font></b><font color="#990000">(</font><font color="#009900">int</font> aa <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    13.  </font>        a <font color="#990000">=</font> aa<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    14.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Def-ctor  A, a = "</font> <font color="#990000">&lt;&lt;</font> a <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    16.  </font>
+ <font SIZE="-2" color="black">    17.  </font>    <font color="#009900">void</font> <b><font color="#000000">showA</font></b><font color="#990000">()</font> <font color="#FF0000">{</font> cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"a = "</font> <font color="#990000">&lt;&lt;</font> a<font color="#990000">;</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    18.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font>
+ <font SIZE="-2" color="black">    20.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">B</font><font color="#990000">:</font> <b><font color="#0000FF">public</font></b> A <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    21.  </font>    <font color="#009900">int</font> b<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    22.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    23.  </font>    <b><font color="#000000">B</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> B<font color="#990000">&amp;</font> bb<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    24.  </font>        <font color="#990000">:</font> <b><font color="#000000">A</font></b><font color="#990000">(</font>bb<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    25.  </font>    <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    26.  </font>        b <font color="#990000">=</font> bb<font color="#990000">.</font>b<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    27.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Copy-ctor B, b = "</font> <font color="#990000">&lt;&lt;</font> b <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    28.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    29.  </font>
+ <font SIZE="-2" color="black">    30.  </font>    <b><font color="#000000">B</font></b><font color="#990000">(</font><font color="#009900">int</font> bb <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">)</font>
+ <font SIZE="-2" color="black">    31.  </font>        <font color="#990000">:</font> <b><font color="#000000">A</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">)</font>
+ <font SIZE="-2" color="black">    32.  </font>    <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    33.  </font>        b <font color="#990000">=</font> bb<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    34.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Def-ctor  B, b = "</font> <font color="#990000">&lt;&lt;</font> b <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    35.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    36.  </font>
+ <font SIZE="-2" color="black">    37.  </font>    <font color="#009900">void</font> <b><font color="#000000">showB</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    38.  </font>        <b><font color="#000000">showA</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    39.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">", b = "</font> <font color="#990000">&lt;&lt;</font> b <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    40.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    41.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    42.  </font>
+ <font SIZE="-2" color="black">    43.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    44.  </font>    <font color="#008080">B</font> <b><font color="#000000">b1</font></b><font color="#990000">(</font><font color="#993399">2</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    45.  </font>    b1<font color="#990000">.</font><b><font color="#000000">showB</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    46.  </font>
+ <font SIZE="-2" color="black">    47.  </font>    <font color="#008080">B</font> <b><font color="#000000">b2</font></b><font color="#990000">(</font>b1<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    48.  </font>    b2<font color="#990000">.</font><b><font color="#000000">showB</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    49.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+W liniach&nbsp;23-28 definiujemy konstruktor kopiujący dla klasy pochodnej
+
+<!--O--><span class='klasa'>B<!--C--></span>. Na liście inicjalizacyjnej wywołujemy konstruktor
+z&nbsp;klasy
+<!--O--><span class='klasa'>A<!--C--></span>, a&nbsp;jako argumentu używamy obiektu klasy
+<!--O--><span class='klasa'>B<!--C--></span>.
+Ponieważ
+<!--O--><span class='klasa'>B<!--C--></span>
+ jest klasą pochodną, więc takie wywołanie
+&bdquo;pasuje&rdquo; do konstruktora kopiującego klasy
+<!--O--><span class='klasa'>A<!--C--></span>.
+Wynikiem jest
+<PRE>
+    Def-ctor  A, a = 1
+    Def-ctor  B, b = 2
+    a = 1, b = 2
+    Copy-ctor A, a = 1
+    Copy-ctor B, b = 2
+    a = 1, b = 2
+</PRE>
+Jawne wywołanie konstruktora kopiującego z&nbsp;linii&nbsp;24 można
+usunąć. Wtedy, zgodnie z&nbsp;tym co mówiliśmy, do skonstruowania
+podobiektu klasy
+<!--O--><span class='klasa'>A<!--C--></span>
+ zostanie użyty konstruktor domyślny tej
+klasy; po wykomentowaniu linii&nbsp;24 wydruk programu będzie zatem
+<PRE>
+    Def-ctor  A, a = 1
+    Def-ctor  B, b = 2
+    a = 1, b = 2
+    Def-ctor  A, a = 0
+    Copy-ctor B, b = 2
+    a = 0, b = 2
+</PRE>
+Patrząc na ten i&nbsp;poprzedni wydruk, widzimy, że
+
+<P>
+
+<P>
+
+<div class='wazne'>
+Konstruktory wywoływane są w&nbsp;kolejności &bdquo;od góry&rdquo;: najpierw
+    dla podobiektów klas bazowych, potem dla danej klasy.
+    Jeśli klasa dziedziczy z&nbsp;kilku klas, to konstruktory klas bazowych
+    są wywoływane w&nbsp;kolejności ich wystąpienia na liście
+    dziedziczenia.
+
+
+</div>
+
+<P>
+Tak będzie również dla bardziej rozbudowanej hierarchii
+dziedziczenia. Jeśli, na przykład, klasa
+<!--O--><span class='klasa'>C<!--C--></span>
+ dziedziczy z
+
+<!--O--><span class='klasa'>B<!--C--></span>, która z&nbsp;kolei dziedziczy z&nbsp;
+<!--O--><span class='klasa'>A<!--C--></span>, to podczas tworzenia
+obiektu klasy
+<!--O--><span class='klasa'>C<!--C--></span>
+ najpierw zostanie utworzony obiekt
+<!--O--><span class='klasa'>A<!--C--></span>,
+następnie obiekt klasy
+<!--O--><span class='klasa'>B<!--C--></span>
+ zawierający jako podobiekt utworzony
+już obiekt
+<!--O--><span class='klasa'>A<!--C--></span>, a&nbsp;dopiero na końcu obiekt klasy
+<!--O--><span class='klasa'>C<!--C--></span>
+
+zawierający jako podobiekt utworzony obiekt klasy
+<!--O--><span class='klasa'>B<!--C--></span>.
+
+<P>
+Z kolei, w&nbsp;trakcie konstrukcji obiektów poszczególnych klas najpierw
+tworzone są obiekty będące składowymi klasy (przez wywołanie ich
+konstruktorów, jeśli są to składowe obiektowe). Tworzone one są w
+kolejności ich zadeklarowania. Potem dopiero wykonywane jest ciało
+samego konstruktora klasy.
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Jak wspomnieliśmy, destruktory również nie są dziedziczone.
+Jeśli są zdefiniowane, to
+
+<P>
+
+<P>
+
+<div class='wazne'>
+destruktory wywoływane są w&nbsp;kolejności odwrotnej do
+    konstruktorów.
+
+
+</div>
+
+<P>
+A zatem, podczas niszczenia obiektu najpierw wywoływany jest jego
+destruktor (oczywiście, jeśli jest zdefiniowany). Następnie
+usuwane są obiekty będące składowymi tego obiektu nie
+odziedziczonymi z&nbsp;klas bazowych. Jeśli są to składowe obiektowe,
+to oczywiście nastąpi wywołanie dla nich destruktorów, jeśli
+były zdefiniowane. Następnie wywoływany jest destruktor dla
+podobiektu bezpośredniej klasy bazowej, potem usuwane są obiekty
+będące niedziedziczonymi składowymi tego podobiektu i&nbsp;tak dalej.
+Ilustruje to poniższy program:
+<A NAME="condes.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">163</SPAN>:</SPAN>
+      <A NAME="tex2html171"
+  HREF="source-files/condes.cpp">
+<!--O--><span class='downl'>condes.cpp<!--C--></span></A>
+<A NAME="26622"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Kolejność wywoływania konstruktorów i
+                     destruktorów</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">K</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">char</font> k<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    <b><font color="#000000">K</font></b><font color="#990000">(</font><font color="#009900">char</font> kk <font color="#990000">=</font> <font color="#FF0000">'k'</font><font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     7.  </font>        k <font color="#990000">=</font> kk<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Ctor K</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    10.  </font>
+ <font SIZE="-2" color="black">    11.  </font>    <font color="#990000">~</font><b><font color="#000000">K</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    12.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Dtor K</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    14.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>
+ <font SIZE="-2" color="black">    16.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">A</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    17.  </font>    <font color="#009900">char</font> a<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font>    <b><font color="#000000">A</font></b><font color="#990000">(</font><font color="#009900">char</font> aa <font color="#990000">=</font> <font color="#FF0000">'a'</font><font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    19.  </font>        a <font color="#990000">=</font> aa<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    20.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Ctor A</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    21.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    22.  </font>
+ <font SIZE="-2" color="black">    23.  </font>    <font color="#990000">~</font><b><font color="#000000">A</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    24.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Dtor A</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    25.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    26.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    27.  </font>
+ <font SIZE="-2" color="black">    28.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">B</font><font color="#990000">:</font> <b><font color="#0000FF">public</font></b> A <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    29.  </font>    <font color="#009900">char</font> b<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    30.  </font>    <font color="#008080">K</font>    k<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    31.  </font>    <b><font color="#000000">B</font></b><font color="#990000">(</font><font color="#009900">char</font> bb <font color="#990000">=</font> <font color="#FF0000">'b'</font><font color="#990000">)</font> <font color="#990000">:</font> <b><font color="#000000">A</font></b><font color="#990000">(</font>bb<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    32.  </font>        b <font color="#990000">=</font> bb<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    33.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Ctor B</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    34.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    35.  </font>
+ <font SIZE="-2" color="black">    36.  </font>    <font color="#990000">~</font><b><font color="#000000">B</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    37.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Dtor B</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    38.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    39.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    40.  </font>
+ <font SIZE="-2" color="black">    41.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">C</font><font color="#990000">:</font> <b><font color="#0000FF">public</font></b> B <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    42.  </font>    <font color="#009900">char</font> c<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    43.  </font>    <b><font color="#000000">C</font></b><font color="#990000">(</font><font color="#009900">char</font> cc <font color="#990000">=</font> <font color="#FF0000">'c'</font><font color="#990000">)</font> <font color="#990000">:</font> <b><font color="#000000">B</font></b><font color="#990000">(</font>cc<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    44.  </font>        c <font color="#990000">=</font> cc<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    45.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Ctor C</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    46.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    47.  </font>
+ <font SIZE="-2" color="black">    48.  </font>    <font color="#990000">~</font><b><font color="#000000">C</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    49.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Dtor C</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    50.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    51.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    52.  </font>
+ <font SIZE="-2" color="black">    53.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    54.  </font>    <font color="#008080">C</font> c<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    55.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+Mamy tu hierarchię dziedziczenia
+<!--O--><span class='klasa'>A<!--C--></span>
+ <!-- MATH
+ $\leftarrow$
+ -->
+<SPAN CLASS="MATH">&#8592;</SPAN>
+<!--O--><span class='klasa'>B<!--C--></span>
+
+<!-- MATH
+ $\leftarrow$
+ -->
+<SPAN CLASS="MATH">&#8592;</SPAN>
+<!--O--><span class='klasa'>C<!--C--></span>
+ (jak zwykle strzałka wskazuje od klasy pochodnej
+do klasy bazowej). Klasa
+<!--O--><span class='klasa'>B<!--C--></span>
+ ma też pole obiektowe
+typu
+<!--O--><span class='klasa'>K<!--C--></span>. W&nbsp;funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>
+ tworzymy obiekt klasy
+
+<!--O--><span class='klasa'>C<!--C--></span>, który po wyjściu z&nbsp;funkcji jest niszczony. A oto wydruk
+z tego programu:
+<PRE>
+    Ctor A
+    Ctor K
+    Ctor B
+    Ctor C
+    Dtor C
+    Dtor B
+    Dtor K
+    Dtor A
+</PRE>
+Zgodnie z&nbsp;tym co mówiliśmy, najpierw tworzony jest podobiekt
+klasy&nbsp;
+<!--O--><span class='klasa'>A<!--C--></span>, a&nbsp;co za tym idzie wywoływany jest konstruktor tej
+klasy. Następnie tworzony jest obiekt klasy
+<!--O--><span class='klasa'>B<!--C--></span>. Obiekt ten ma
+składową obiektową typu
+<!--O--><span class='klasa'>K<!--C--></span>. Widzimy, że najpierw
+konstruowana jest ta składowa, a&nbsp;co za tym idzie wywoływany jest
+konstruktor klasy
+<!--O--><span class='klasa'>K<!--C--></span>, a&nbsp;dopiero potem wywoływany jest
+konstruktor klasy
+<!--O--><span class='klasa'>B<!--C--></span>. Dopiero na samym końcu wywoływany jest
+konstruktor klasy
+<!--O--><span class='klasa'>C<!--C--></span>.
+
+<P>
+Kolejność wywoływania destruktorów jest dokładnie odwrotna.
+W&nbsp;szczególności podczas niszczenia podobiektu klasy&nbsp;
+<!--O--><span class='klasa'>B<!--C--></span>
+
+najpierw wywoływany jest destruktor tej klasy, a&nbsp;dopiero potem
+niszczona jest jego składowa obiektowa klasy
+<!--O--><span class='klasa'>K<!--C--></span>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2564"
+  HREF="node123.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2570"
+  HREF="node122.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2576"
+  HREF="node125.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2572"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2574"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2565"
+  HREF="node123.html">20.1 Podstawy dziedziczenia</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2571"
+  HREF="node122.html">20. Dziedziczenie i polimorfizm</A>
+<B>Dalej:</B> <A NAME="tex2html2577"
+  HREF="node125.html">20.3 Operator przypisania dla</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

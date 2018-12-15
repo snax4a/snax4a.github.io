@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>14.10 Pola bitowe</TITLE>
+<META NAME="description" CONTENT="14.10 Pola bitowe">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="previous" HREF="node94.html">
+<LINK REL="up" HREF="node85.html">
+<LINK REL="next" HREF="node96.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2080"
+  HREF="node94.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2084"
+  HREF="node85.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2090"
+  HREF="node96.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2086"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2088"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2081"
+  HREF="node94.html">14.9 Tablice obiektów</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2085"
+  HREF="node85.html">14. Klasy (I)</A>
+<B>Dalej:</B> <A NAME="tex2html2091"
+  HREF="node96.html">15. Klasy (II)</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0015100000000000000000"></A><A NAME="klasy:polbit"></A>
+<BR>
+<SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">10</SPAN> Pola bitowe
+</H1>
+
+<P>
+Składowymi klas mogą być też <FONT COLOR="#7b003e"><B>pola bitowe</B></FONT>.
+<A NAME="16747"></A><A NAME="16748"></A>
+Są to składowe klasy o&nbsp;długości wyrażonej w&nbsp;bitach. Ich
+wartościami są liczby całkowite zapisane (w układzie dwójkowym)
+w zadeklarowanej ilości bitów. Oczywiście wynika z&nbsp;tego, że
+zakres tych wartości zależy od zadeklarowanej ilości bitów.
+Na przykład, deklarując pole bitowe bez znaku
+o&nbsp;długości 3, możemy tam zapisywać dane całkowite z&nbsp;zakresu
+<SPAN CLASS="MATH">[0, 7]</SPAN>, bo istnieje osiem zero-jedynkowych kombinacji trzech bitów:
+<PRE>
+     7    6     5     4     3    2     1     0
+    111  110   101   100   011  010   001   000
+</PRE>
+Można deklarować pola bitowe tylko typu
+<!--O--><span class='typ'>int<!--C--></span>: ze znakiem
+(<!--O--><span class='klucz'>signed<!--C--></span>) lub bez znaku(<!--O--><span class='klucz'>unsigned<!--C--></span>) &mdash;&nbsp;podobnie jak dla
+normalnych typów całkowitych. Liczbę bitów przeznaczonych dla danego
+pola deklarujemy po  dwukropku; na przykład po
+<pre><tt>       <b><font color="#0000FF">struct</font></b> <font color="#008080">A</font> <font color="#FF0000">{</font>
+           <font color="#009900">unsigned</font> kolor <font color="#990000">:</font> <font color="#993399">4</font><font color="#990000">;</font>
+           <i><font color="#9A1900">// ...</font></i>
+       <font color="#FF0000">}</font><font color="#990000">;</font>
+</tt></pre>
+w klasie
+<!--O--><span class='klasa'>A<!--C--></span>
+ istnieje składowa
+<!--O--><span class='zmienna'>kolor<!--C--></span>
+ będąca
+polem bitowym bez znaku o&nbsp;długości czterech bitów. Można zatem
+tej składowej przypisywać wartości z&nbsp;zakresu <SPAN CLASS="MATH">[0, 15]</SPAN>.
+Dlaczego nie użyliśmy zwykłego typu
+<!--O--><span class='typ'>int<!--C--></span>
+ bez określania
+ilości bitów?
+Otóż chodzi o&nbsp;to, że jeśli w&nbsp;klasie występuje kilka pól
+bitowych, kompilator zadba o&nbsp;to, aby je wszystkie upakować
+jak najgęściej. Jeśli zatem w&nbsp;klasie mamy pola bitowe o&nbsp;długościach
+4, 7 i&nbsp;3, to, ponieważ jedna liczba typu
+<!--O--><span class='typ'>int<!--C--></span>
+ zajmuje
+32 bity, wszystkie zmieszczą sie w&nbsp;jednym
+<!--O--><span class='typ'>int<!--C--></span>'cie!
+Uzyskujemy zatem oszczędność pamięci i&nbsp;mamy możliwość kodowania
+kilku różnych informacji w&nbsp;pojedynczej fizycznie danej.
+
+<P>
+W poniższym przykładzie definiujemy klasę opisującą
+rodzaj czcionki: w&nbsp;polach bitowych przechowujemy informację o&nbsp;kroju,
+wadze i&nbsp;kolorze czcionki:
+<BR><A NAME="polbit.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">111</SPAN>:</SPAN>
+      <A NAME="tex2html118"
+  HREF="source-files/polbit.cpp">
+<!--O--><span class='downl'>polbit.cpp<!--C--></span></A>
+<A NAME="17232"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Pola bitowe</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Czcionka</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">unsigned</font>  kroj <font color="#990000">:</font> <font color="#993399">3</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">unsigned</font>  waga <font color="#990000">:</font> <font color="#993399">1</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>    <font color="#009900">unsigned</font> kolor <font color="#990000">:</font> <font color="#993399">2</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">     9.  </font>    <b><font color="#0000FF">enum</font></b>  Kroj <font color="#FF0000">{</font> HELVETICA<font color="#990000">,</font> TIMES<font color="#990000">,</font> ARIAL<font color="#990000">,</font>      <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">    10.  </font>                 COURIER<font color="#990000">,</font> BOOKMAN<font color="#990000">,</font> SYMBOL<font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font>    <b><font color="#0000FF">enum</font></b>  Waga <font color="#FF0000">{</font> NORMAL<font color="#990000">,</font> BOLD <font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    12.  </font>    <b><font color="#0000FF">enum</font></b> Kolor <font color="#FF0000">{</font> BLACK<font color="#990000">,</font> RED<font color="#990000">,</font> GREEN<font color="#990000">,</font> BLUE <font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>
+ <font SIZE="-2" color="black">    14.  </font>    <b><font color="#000000">Czcionka</font></b><font color="#990000">(</font><font color="#008080">Kroj</font> kroj<font color="#990000">,</font> <font color="#008080">Waga</font> waga<font color="#990000">,</font> <font color="#008080">Kolor</font> kolor<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    15.  </font>        <b><font color="#0000FF">this</font></b><font color="#990000">-&gt;</font>kroj  <font color="#990000">=</font> kroj<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>        <b><font color="#0000FF">this</font></b><font color="#990000">-&gt;</font>waga  <font color="#990000">=</font> waga<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font>        <b><font color="#0000FF">this</font></b><font color="#990000">-&gt;</font>kolor <font color="#990000">=</font> kolor<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    19.  </font>
+ <font SIZE="-2" color="black">    20.  </font>    <font color="#009900">void</font> <b><font color="#000000">opis</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    21.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Kroj nr "</font> <font color="#990000">&lt;&lt;</font> kroj <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"; Waga nr "</font>
+ <font SIZE="-2" color="black">    22.  </font>             <font color="#990000">&lt;&lt;</font> waga <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"; Kolor nr "</font> <font color="#990000">&lt;&lt;</font> kolor <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    23.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    24.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    25.  </font>
+ <font SIZE="-2" color="black">    26.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    27.  </font>    <font color="#008080">Czcionka</font> <b><font color="#000000">tytul</font></b><font color="#990000">(</font>Czcionka<font color="#990000">::</font>ARIAL<font color="#990000">,</font>  Czcionka<font color="#990000">::</font>BOLD<font color="#990000">,</font>
+ <font SIZE="-2" color="black">    28.  </font>                                     Czcionka<font color="#990000">::</font>RED<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    29.  </font>    <font color="#008080">Czcionka</font> <b><font color="#000000">tekst</font></b><font color="#990000">(</font>Czcionka<font color="#990000">::</font>TIMES<font color="#990000">,</font>  Czcionka<font color="#990000">::</font>NORMAL<font color="#990000">,</font>
+ <font SIZE="-2" color="black">    30.  </font>                                     Czcionka<font color="#990000">::</font>BLACK<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    31.  </font>    <font color="#008080">Czcionka</font> <b><font color="#000000">greka</font></b><font color="#990000">(</font>Czcionka<font color="#990000">::</font>SYMBOL<font color="#990000">,</font> Czcionka<font color="#990000">::</font>BOLD<font color="#990000">,</font>
+ <font SIZE="-2" color="black">    32.  </font>                                     Czcionka<font color="#990000">::</font>BLUE<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    33.  </font>    tytul<font color="#990000">.</font><b><font color="#000000">opis</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    34.  </font>    tekst<font color="#990000">.</font><b><font color="#000000">opis</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    35.  </font>    greka<font color="#990000">.</font><b><font color="#000000">opis</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    36.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Rozmiar obiektu: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>Czcionka<font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    37.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Pole przewidziane dla wyboru kroju ma długość trzech bitów, a&nbsp;więc
+może przyjmować wartości od 0 do 7. Tym wartościom nadaliśmy
+dla wygody nazwy za pomocą wyliczenia
+<!--O--><span class='klasa'>Kroj<!--C--></span>
+ (<span class="ding">&#x278A;</span>).
+W&nbsp;ten sposób użytkownik klasy nie musi pamiętać, jakie
+liczby zostały przypisane poszczególnym krojom &mdash;&nbsp;może się do
+nich odnosić poprzez ich czytelne nazwy. Podobnie postąpiliśmy dla
+wagi (jeden bit, a&nbsp;więc dwie możliwości odpowiadające
+liczbom&nbsp;0 i&nbsp;1) i&nbsp;koloru (dwa bity, a&nbsp;więc cztery możliwości:
+0, 1, 2 i&nbsp;3). Wydruk z&nbsp;tego programu
+<PRE>
+    Kroj nr 2; Waga nr 1; Kolor nr 1
+    Kroj nr 1; Waga nr 0; Kolor nr 0
+    Kroj nr 5; Waga nr 1; Kolor nr 3
+    Rozmiar obiektu: 4
+</PRE>
+przekonuje nas, że rozmiar obiektu wynosi cztery bajty, a&nbsp;więc
+kompilator upakował wszystkie trzy pola w&nbsp;jednym
+<!--O--><span class='typ'>int<!--C--></span>'cie.
+Ponieważ kilka pól bitowych może być upakowanych przez kompilator w
+obszarze jednej liczby całkowitej typu
+<!--O--><span class='typ'>int<!--C--></span>
+ w&nbsp;sposób trudny do
+przewidzenia, nie ma sensu stosowanie do składowych bitowych operatora
+wyłuskania adresu ('
+<FONT COLOR="#000000"><TT>&amp;</TT></FONT>'), a&nbsp;zatem i&nbsp;wskaźników.
+
+<P>
+Pola takie nie mogą być składowymi statycznymi.
+
+<P>
+Biblioteka standardowa C++ dostarcza klasę (a właściwie szablon klasy)
+
+<!--O--><span class='klasa'>bitset<!--C--></span>, która zapewnia funkcjonalność pól bitowych, a&nbsp;zawiera
+wygodny interfejs dla użytkownika i&nbsp;efektywną implementację. Tam, gdzie
+to możliwe, należy zatem korzystać z&nbsp;tej klasy, a&nbsp;nie z&nbsp;pól bitowych.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2080"
+  HREF="node94.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2084"
+  HREF="node85.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2090"
+  HREF="node96.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2086"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2088"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2081"
+  HREF="node94.html">14.9 Tablice obiektów</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2085"
+  HREF="node85.html">14. Klasy (I)</A>
+<B>Dalej:</B> <A NAME="tex2html2091"
+  HREF="node96.html">15. Klasy (II)</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

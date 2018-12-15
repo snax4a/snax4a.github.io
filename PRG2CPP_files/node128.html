@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>20.6 Wirtualne destruktory</TITLE>
+<META NAME="description" CONTENT="20.6 Wirtualne destruktory">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node129.html">
+<LINK REL="previous" HREF="node127.html">
+<LINK REL="up" HREF="node122.html">
+<LINK REL="next" HREF="node129.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2620"
+  HREF="node127.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2626"
+  HREF="node122.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2632"
+  HREF="node129.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2628"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2630"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2621"
+  HREF="node127.html">20.5 Klasy abstrakcyjne</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2627"
+  HREF="node122.html">20. Dziedziczenie i polimorfizm</A>
+<B>Dalej:</B> <A NAME="tex2html2633"
+  HREF="node129.html">20.7 Wielodziedziczenie</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002160000000000000000"></A><A NAME="dzie:wirdes"></A>
+<BR>
+<SPAN CLASS="arabic">20</SPAN>.<SPAN CLASS="arabic">6</SPAN> Wirtualne destruktory
+</H1>
+
+<P>
+Aby zapewnić właściwe usuwanie obiektów, należy deklarować
+destruktor<A NAME="26319"></A><A NAME="26320"></A>
+jako funkcję wirtualną, jeśli tylko mamy zamiar korzystać
+z&nbsp;publicznego dziedziczenia z&nbsp;danej klasy. Wywołując wtedy
+destruktor (poprzez operator
+<!--O--><span class='klucz'>delete<!--C--></span>) obiektu klasy pochodnej
+wskazywanego przez wskaźnik do klasy bazowej, wywołamy naprawdę
+destruktor dla całego obiektu. Dzięki polimorfizmowi wywołany
+będzie bowiem wtedy destruktor z&nbsp;klasy pochodnej, a&nbsp;destruktor
+podobiektu klasy bazowej będzie potem wywołany i&nbsp;tak, według
+normalnych zasad kolejności wywoływania destruktorów. Jak bowiem
+mówiliśmy, przy usuwaniu obiektu klasy pochodnej najpierw wykonywany
+jest destruktor dla części &bdquo;własnej&rdquo;, a&nbsp;potem automatycznie
+wywoływany jest destruktor dla podobiektu klasy bazowej. Gdyby
+destruktor nie był wirtualny, to ponieważ typem statycznym jest
+wskaźnik do obiektu klasy bazowej, wywołany byłby od razu destruktor
+z&nbsp;tej klasy, który jednak nie wie na przykład o&nbsp;istnieniu składowych
+czy zasobów dodanych w&nbsp;klasie pochodnej.
+
+<P>
+W poniższym przykładzie obiekt klasy pochodnej
+<!--O--><span class='klasa'>Pelne<!--C--></span>
+ jest
+wskazywany przez wskaźnik
+<!--O--><span class='zmienna'>osoba<!--C--></span>
+ typu
+<!--O--><span class='typ'>Nazwisko*<!--C--></span>, a
+więc wskaźnik do obiektu klasy bazowej
+<!--O--><span class='klasa'>Nazwisko<!--C--></span>.
+<A NAME="wirdes.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">170</SPAN>:</SPAN>
+      <A NAME="tex2html178"
+  HREF="source-files/wirdes.cpp">
+<!--O--><span class='downl'>wirdes.cpp<!--C--></span></A>
+<A NAME="26836"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Wirtualny destruktor</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Nazwisko</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">char</font><font color="#990000">*</font> nazwis<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">     7.  </font>    <b><font color="#000000">Nazwisko</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> n<font color="#990000">)</font>
+ <font SIZE="-2" color="black">     8.  </font>        <font color="#990000">:</font> <b><font color="#000000">nazwis</font></b><font color="#990000">(</font><b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><b><font color="#000000">strlen</font></b><font color="#990000">(</font>n<font color="#990000">)+</font><font color="#993399">1</font><font color="#990000">],</font> n<font color="#990000">))</font>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    10.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Ctor Nazwisko: "</font> <font color="#990000">&lt;&lt;</font> nazwis <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    12.  </font>
+ <font SIZE="-2" color="black">    13.  </font>    <b><font color="#0000FF">virtual</font></b>
+ <font SIZE="-2" color="black">    14.  </font>    <font color="#990000">~</font><b><font color="#000000">Nazwisko</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    15.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Dtor Nazwisko: "</font> <font color="#990000">&lt;&lt;</font> nazwis <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>        <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> nazwis<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    18.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font>
+ <font SIZE="-2" color="black">    20.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Pelne</font> <font color="#990000">:</font> <b><font color="#0000FF">public</font></b> Nazwisko <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    21.  </font>    <font color="#009900">char</font><font color="#990000">*</font> imie<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    22.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    23.  </font>    <b><font color="#000000">Pelne</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> i<font color="#990000">,</font> <b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> n<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    24.  </font>        <font color="#990000">:</font> <b><font color="#000000">Nazwisko</font></b><font color="#990000">(</font>n<font color="#990000">),</font>
+ <font SIZE="-2" color="black">    25.  </font>          <b><font color="#000000">imie</font></b><font color="#990000">(</font><b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><b><font color="#000000">strlen</font></b><font color="#990000">(</font>i<font color="#990000">)+</font><font color="#993399">1</font><font color="#990000">],</font> i<font color="#990000">))</font>
+ <font SIZE="-2" color="black">    26.  </font>    <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    27.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Ctor Pelne, Imie: "</font> <font color="#990000">&lt;&lt;</font> imie <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    28.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    29.  </font>
+ <font SIZE="-2" color="black">    30.  </font>    <font color="#990000">~</font><b><font color="#000000">Pelne</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    31.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Dtor Pelne, Imie: "</font> <font color="#990000">&lt;&lt;</font> imie <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    32.  </font>        <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> imie<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    33.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    34.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    35.  </font>
+ <font SIZE="-2" color="black">    36.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    37.  </font>    Nazwisko<font color="#990000">*</font> osoba <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Pelne</font></b><font color="#990000">(</font><font color="#FF0000">"Jan"</font><font color="#990000">,</font> <font color="#FF0000">"Malinowski"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    38.  </font>    <b><font color="#0000FF">delete</font></b> osoba<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    39.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+Dzięki wirtualności destruktora, podczas usuwania obiektu (linia&nbsp;38)
+będzie wywołany najpierw destruktor z&nbsp;rzeczywistej klasy
+obiektu, a&nbsp;więc z&nbsp;klasy
+<!--O--><span class='klasa'>Pelne<!--C--></span>. Zwolni on pamięć zajmowaną
+przez imię, a&nbsp;następnie, automatycznie, zadziała destruktor dla
+podobiektu klasy bazowej
+<!--O--><span class='klasa'>Nazwisko<!--C--></span>, który zwolni pamięć
+zajmowaną przez nazwisko:
+<PRE>
+    Ctor Nazwisko: Malinowski
+    Ctor Pelne, Imie: Jan
+    Dtor Pelne, Imie: Jan
+    Dtor Nazwisko: Malinowski
+</PRE>
+Gdyby destruktor w&nbsp;klasie bazowej
+<!--O--><span class='klasa'>Nazwisko<!--C--></span>
+ <FONT COLOR="#7b003e"><I>nie</I></FONT> był
+zadeklarowany jako wirtualny (po wykomentowaniu linii&nbsp;13), to wywołany
+byłby tylko destruktor z&nbsp;klasy określanej przez statyczny typ
+wskaźnika, a&nbsp;więc z&nbsp;klasy
+<!--O--><span class='klasa'>Nazwisko<!--C--></span>:
+<PRE>
+    Ctor Nazwisko: Malinowski
+    Ctor Pelne, Imie: Jan
+    Dtor Nazwisko: Malinowski
+</PRE>
+i,&nbsp;jak widać, imię w&nbsp;ogóle nie zostałoby usunięte!
+
+<P>
+Zauważmy, że mamy tu do czynienia z&nbsp;pewną niekonsekwencją:
+destruktor w&nbsp;klasie pochodnej,
+<!--O--><span class='funkcja'>&#732;Full<!--C--></span>, przesłania
+destruktor z&nbsp;klasy bazowej,
+<!--O--><span class='funkcja'>&#732;Name<!--C--></span>, choć ich nazwy są
+inne. Pod tym względem destruktor jest wyjątkowy: w&nbsp;innych
+przypadkach metoda przesłaniająca musi oczywiście mieć tę samą
+nazwę co metoda przesłaniana.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2620"
+  HREF="node127.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2626"
+  HREF="node122.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2632"
+  HREF="node129.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2628"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2630"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2621"
+  HREF="node127.html">20.5 Klasy abstrakcyjne</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2627"
+  HREF="node122.html">20. Dziedziczenie i polimorfizm</A>
+<B>Dalej:</B> <A NAME="tex2html2633"
+  HREF="node129.html">20.7 Wielodziedziczenie</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

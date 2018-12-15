@@ -1,0 +1,355 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>11.5 Zmienna liczba argumentów</TITLE>
+<META NAME="description" CONTENT="11.5 Zmienna liczba argumentów">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node65.html">
+<LINK REL="previous" HREF="node63.html">
+<LINK REL="up" HREF="node59.html">
+<LINK REL="next" HREF="node65.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1633"
+  HREF="node63.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1639"
+  HREF="node59.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1645"
+  HREF="node65.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1641"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1643"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1634"
+  HREF="node63.html">11.4 Argumenty domyślne</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1640"
+  HREF="node59.html">11. Funkcje</A>
+<B>Dalej:</B> <A NAME="tex2html1646"
+  HREF="node65.html">11.6 Argumenty referencyjne</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001250000000000000000"></A><A NAME="funk:zmienarg"></A>
+<BR>
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">5</SPAN> Zmienna liczba argumentów
+</H1>
+
+<P>
+Zdarzają<A NAME="11639"></A>
+<A NAME="11640"></A>
+się funkcje, które nie mają w&nbsp;naturalny sposób określonej, z&nbsp;góry
+znanej liczby argumentów. Jako przykład możemy wyobrazić sobie
+funkcję wyznaczająca maksimum z&nbsp;dwóch, trzech, czterech... liczb,
+albo drukującą wartości pewnej nieustalonej z&nbsp;góry ilości argumentów.
+W C/C++ istnieje sposób na tworzenie tego rodzaju funkcji, choć jest
+to nieco zawiłe i&nbsp;trudne w&nbsp;użyciu: można zastosować <FONT COLOR="#7b003e"><B>funkcje
+o&nbsp;zmiennej liczbie argumentów</B></FONT> (ang.&nbsp;<FONT COLOR="#7b003e"><I>variable-length argument list</I></FONT>).
+W&nbsp;C++ zwykle lepiej i&nbsp;prościej zastosować opisany dalej mechanizm
+przeciążania funkcji lub narzędzia z&nbsp;nowego standardu (np. tak zwane
+krotki lub listy inicjujące).
+<A NAME="11643"></A>
+<A NAME="11644"></A>
+
+<P>
+Funkcje tego typu deklarujemy ze znakiem wielokropka
+('
+<FONT COLOR="#000000"><TT>...</TT></FONT>') w&nbsp;miejsce parametrów, których liczby nie
+specyfikujemy. Przed wielokropkiem wymienione są
+wszystkie &bdquo;normalne&rdquo;, obowiązkowe parametry.
+Na przykład deklaracja
+<pre><tt>       <font color="#009900">int</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">char</font><font color="#990000">*</font> <font color="#990000">...);</font>
+</tt></pre>
+deklaruje funkcję, którą można wywołać z&nbsp;obowiązkowym
+pierwszym argumentem (typu
+<!--O--><span class='typ'>char*<!--C--></span>) i&nbsp;dowolną liczbą
+dodatkowych argumentów. Tę samą deklarację można też zapisać
+z przecinkiem po ostatnim obowiązkowym argumencie:
+<pre><tt>       <font color="#009900">int</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">char</font><font color="#990000">*,</font> <font color="#990000">...);</font>
+</tt></pre>
+Jak napisać treść funkcji aby prawidłowo odczytać w&nbsp;niej
+wszystkie przekazane argumenty?
+Przede wszystkim należy dołączyć plik nagłówkowy
+
+<!--O--><span class='plik'>cstdarg<!--C--></span>
+  a&nbsp;następnie, wewnątrz funkcji:
+
+<OL>
+<LI>Utworzyć zmienną typu
+<!--O--><span class='typ'>va_list<!--C--></span>. Typ ten jest
+          <A NAME="11655"></A>
+          dostępny po dołączeniu pliku nagłówkowego
+<!--O--><span class='plik'>cstdarg<!--C--></span>
+
+          (nazwa
+<!--O--><span class='typ'>va_list<!--C--></span>
+ pochodzi od <FONT COLOR="#7b003e"><I>variable-arguments
+          list</I></FONT>). Załóżmy, że zmienna ta nazywa się
+<!--O--><span class='zmienna'>ap<!--C--></span>
+
+          (jest to tradycyjna nazwa takiej zmiennej, od
+          <FONT COLOR="#7b003e"><I>argument pointer</I></FONT>).
+</LI>
+<LI>Wywołać (tylko raz) funkcję
+
+<!--O--><span class='funkcja'>va_start<!--C--></span><A NAME="11662"></A>
+          podając jako jej pierwszy
+          argument utworzoną wcześniej zmienną typu
+<!--O--><span class='typ'>va_list<!--C--></span>,
+          a&nbsp;jako drugi argument zmienną odpowiadającą
+          <SPAN  CLASS="textit">ostatniemu</SPAN> parametrowi obowiązkowemu
+          funkcji; w poniższym przykładzie wywołanie ma zatem
+          postać
+<FONT COLOR="#000000"><TT>va_start(ap,typ)</TT></FONT>.
+</LI>
+<LI>Wartości kolejnych argumentów odczytywać
+          wywołując funkcję
+<!--O--><span class='funkcja'>va_arg<!--C--></span>:<A NAME="11668"></A>
+          jej pierwszym
+          argumentem powinna być zmienna
+<!--O--><span class='zmienna'>ap<!--C--></span>, a&nbsp;drugim nazwa
+          typu tego argumentu funkcji który
+          chcemy odczytać. Wynika z&nbsp;tego zatem, że ten typ
+          trzeba znać! Trzeba też wiedzieć, kiedy skończyć
+          wczytywanie argumentów. Najczęściej informacja o
+          liczbie i&nbsp;typie argumentów w&nbsp;aktualnym wywołaniu
+          jest w&nbsp;jakiś sposób przekazywana poprzez
+          pierwsze, obowiązkowe argumenty funkcji.
+</LI>
+<LI>Po zakończeniu wczytywania argumentów wywołać funkcję
+
+<!--O--><span class='funkcja'>va_end<!--C--></span><A NAME="11671"></A> ze zmienną
+
+<!--O--><span class='zmienna'>ap<!--C--></span>
+ jako jedynym argumentem. Funkcja ta porządkuje
+          stos; jeśli jej nie wywołamy, to program może się
+          załamać.
+</LI>
+</OL>
+
+<P>
+Jako przykład rozpatrzmy program:
+<BR><A NAME="varg.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">69</SPAN>:</SPAN>
+      <A NAME="tex2html75"
+  HREF="source-files/varg.cpp">
+<!--O--><span class='downl'>varg.cpp<!--C--></span></A>
+<A NAME="12882"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Funkcje o&nbsp;zmiennej liczbie argumentów</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cstdarg&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><font color="#009900">void</font> <b><font color="#000000">typy</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">char</font> typ<font color="#990000">[]</font> <font color="#990000">...);</font>
+ <font SIZE="-2" color="black">     6.  </font>
+ <font SIZE="-2" color="black">     7.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     8.  </font>    <b><font color="#000000">typy</font></b><font color="#990000">(</font><font color="#FF0000">"SxS"</font><font color="#990000">,</font> <font color="#FF0000">"Jan"</font><font color="#990000">,</font> <font color="#993399">0</font><font color="#990000">,</font> <font color="#FF0000">"Maria"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">     9.  </font>    <b><font color="#000000">typy</font></b><font color="#990000">(</font><font color="#FF0000">"issD"</font><font color="#990000">,</font> <font color="#993399">17</font><font color="#990000">,</font> <font color="#FF0000">"Jan"</font><font color="#990000">,</font> <font color="#FF0000">"Maria"</font><font color="#990000">,</font> <font color="#993399">1</font><font color="#990000">.);</font>
+ <font SIZE="-2" color="black">    10.  </font>    <b><font color="#000000">typy</font></b><font color="#990000">(</font><font color="#FF0000">"iDdsiI"</font><font color="#990000">,</font> <font color="#993399">17</font><font color="#990000">,</font> <font color="#993399">19.5</font><font color="#990000">,</font> <font color="#993399">1.5</font><font color="#990000">,</font> <font color="#FF0000">"OK"</font><font color="#990000">,</font> <font color="#990000">-</font><font color="#993399">1</font><font color="#990000">,</font> <font color="#993399">8</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    11.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    12.  </font>
+ <font SIZE="-2" color="black">    13.  </font><font color="#009900">void</font> <b><font color="#000000">typy</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">char</font> typ<font color="#990000">[]</font> <font color="#990000">...)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    14.  </font>    <font color="#009900">int</font>     i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">,</font> integ<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>    <font color="#009900">char</font>    c<font color="#990000">,</font> <font color="#990000">*</font>strin<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>    <font color="#009900">double</font>  doubl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font>
+ <font SIZE="-2" color="black">    18.  </font>    <font color="#008080">va_list</font> ap<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font>
+ <font SIZE="-2" color="black">    20.  </font>    <b><font color="#000000">va_start</font></b><font color="#990000">(</font>ap<font color="#990000">,</font>typ<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    21.  </font>
+ <font SIZE="-2" color="black">    22.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font> <font color="#990000">(</font>c <font color="#990000">=</font> typ<font color="#990000">[</font>i<font color="#990000">++])</font> <font color="#990000">!=</font> <font color="#FF0000">'</font><font color="#CC33CC">\0</font><font color="#FF0000">'</font><font color="#990000">)</font> <font color="#FF0000">{</font>            <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">    23.  </font>        <b><font color="#0000FF">switch</font></b> <font color="#990000">(</font>c<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    24.  </font>            <b><font color="#0000FF">case</font></b> <font color="#FF0000">'i'</font><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    25.  </font>            <b><font color="#0000FF">case</font></b> <font color="#FF0000">'I'</font><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    26.  </font>                integ <font color="#990000">=</font> <b><font color="#000000">va_arg</font></b><font color="#990000">(</font>ap<font color="#990000">,</font><font color="#009900">int</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    27.  </font>                cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Liczba int   : "</font> <font color="#990000">&lt;&lt;</font> integ <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    28.  </font>                <b><font color="#0000FF">break</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    29.  </font>            <b><font color="#0000FF">case</font></b> <font color="#FF0000">'d'</font><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    30.  </font>            <b><font color="#0000FF">case</font></b> <font color="#FF0000">'D'</font><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    31.  </font>                doubl <font color="#990000">=</font> <b><font color="#000000">va_arg</font></b><font color="#990000">(</font>ap<font color="#990000">,</font><font color="#009900">double</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    32.  </font>                cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Liczba double: "</font> <font color="#990000">&lt;&lt;</font> doubl <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    33.  </font>                <b><font color="#0000FF">break</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    34.  </font>            <b><font color="#0000FF">case</font></b> <font color="#FF0000">'s'</font><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    35.  </font>            <b><font color="#0000FF">case</font></b> <font color="#FF0000">'S'</font><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    36.  </font>                strin <font color="#990000">=</font> <b><font color="#000000">va_arg</font></b><font color="#990000">(</font>ap<font color="#990000">,</font><font color="#009900">char</font><font color="#990000">*);</font>
+ <font SIZE="-2" color="black">    37.  </font>                cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Napis        : "</font> <font color="#990000">&lt;&lt;</font> strin <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    38.  </font>                <b><font color="#0000FF">break</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    39.  </font><b><font color="#008080">            default:</font></b>
+ <font SIZE="-2" color="black">    40.  </font>                cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Nielegalny kod typu!!!!!"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    41.  </font>                <b><font color="#0000FF">goto</font></b> KONIEC<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    42.  </font>        <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    43.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    44.  </font><b><font color="#008080">    KONIEC:</font></b>
+ <font SIZE="-2" color="black">    45.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    46.  </font>
+ <font SIZE="-2" color="black">    47.  </font>    <b><font color="#000000">va_end</font></b><font color="#990000">(</font>ap<font color="#990000">);</font>                                  <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    48.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Pierwszym, obowiązkowym argumentem funkcji
+<!--O--><span class='funkcja'>typy<!--C--></span>
+
+jest napis, czyli tablica znaków, z&nbsp;których ostatni jest znakiem '<!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>0'.
+Kolejne znaki tego napisu określają typy kolejnych argumentów
+wywoływanej funkcji:
+'d' lub 'D' &mdash;&nbsp;typ
+<!--O--><span class='typ'>double<!--C--></span>,
+'i' lub 'I' &mdash;&nbsp;typ
+<!--O--><span class='typ'>int<!--C--></span>,
+'s' lub 'S' &mdash;&nbsp;typ
+<!--O--><span class='typ'>char*<!--C--></span>, czyli wskaźnik do napisu.
+W ciele funkcji, po wykonaniu
+kroków&nbsp;1 i&nbsp;2 z&nbsp;podanego powyżej schematu postępowania,
+odczytujemy w&nbsp;pętli
+<!--O--><span class='klucz'>while<!--C--></span>
+ kolejne argumenty.
+Najpierw (<span class="ding">&#x278A;</span>) z&nbsp;napisu
+<!--O--><span class='zmienna'>typ<!--C--></span>
+ odczytujemy kolejny znak
+(aż będzie nim znak '<!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>0'). Znak ten określa typ kolejnego argumentu
+do wczytania. Znając ten typ, za pomocą instrukcji
+<!--O--><span class='klucz'>switch<!--C--></span>
+
+przechodzimy do wczytywania kolejnego argumentu: wczytujemy go do
+zmiennej roboczej o&nbsp;odpowiednim typie za pomocą wywołania funkcji
+
+<!--O--><span class='funkcja'>va_arg<!--C--></span>
+ (patrz punkt&nbsp;3 schematu). Jeśli odczytany znak
+nie odpowiada żadnemu ze spodziewanych typów, wypisywany jest
+komunikat i&nbsp;za pomocą instrukcji
+<!--O--><span class='klucz'>goto<!--C--></span>
+ przerywane jest
+wykonywanie zarówno bloku
+<!--O--><span class='klucz'>switch<!--C--></span>, jak i&nbsp;pętli
+<!--O--><span class='klucz'>while<!--C--></span>.
+Tym niemniej funkcja
+<!--O--><span class='funkcja'>va_end<!--C--></span>
+ musi nawet wtedy być
+wywołana (<span class="ding">&#x278B;</span>), aby umożliwić &bdquo;posprzątanie&rdquo; stosu i&nbsp;kontynuowanie
+programu. Przykład działania tego programu podany jest poniżej:
+<PRE>
+    Napis        : Jan
+    Nielegalny kod typu!!!
+
+    Liczba int   : 17
+    Napis        : Jan
+    Napis        : Maria
+    Liczba double: 1
+
+    Liczba int   : 17
+    Liczba double: 19.5
+    Liczba double: 1.5
+    Napis        : OK
+    Liczba int   : -1
+    Liczba int   : 8
+</PRE>
+Przy pierwszym wołaniu powstaje błąd, gdyż użyta jest
+w&nbsp;napisie
+<!--O--><span class='zmienna'>typ<!--C--></span>
+ litera 'x', która nie odpowiada żadnemu
+typowi. Funkcja kończy swoje działanie, ale porządkuje stos
+i&nbsp;dalszy przebieg programu może być prawidłowy.
+
+<P>
+Ponieważ w&nbsp;deklaracji i&nbsp;definicji funkcji nie jest określony
+typ parametrów, wyłączona zostaje kontrola zgodności typów dla
+jej wywołań. Aby uprościć stosowanie funkcji o&nbsp;zmiennej liczbie
+parametrów, &bdquo;krótkie&rdquo; wartości całkowite awansowane są do
+typu
+<!--O--><span class='typ'>int<!--C--></span>, a&nbsp;wartości
+<!--O--><span class='typ'>float<!--C--></span>
+ do typu
+<!--O--><span class='typ'>double<!--C--></span>.
+Na przykład w&nbsp;drugim wywołaniu funkcji
+<!--O--><span class='funkcja'>typy<!--C--></span>
+ jednym z&nbsp;argumentówr
+jest '1.'. Gdybyśmy opuścili kropkę dziesiętną, literał
+odpowiadałby wartości całkowitej&nbsp;1 i&nbsp;zostałby przekazany
+jako czterobajtowa wartość typu
+<!--O--><span class='typ'>int<!--C--></span>. Ta zostałaby następnie
+odczytana jako
+<!--O--><span class='typ'>double<!--C--></span>, a&nbsp;więc wartość ośmiobajtowa, co
+doprowadziłoby do trudno wykrywalnego błędu w&nbsp;programie.
+
+<P>
+Stosować funkcje o&nbsp;zmiennej liczbie argumentów należy tylko
+wtedy, gdy naprawdę są potrzebne i&nbsp;robić to trzeba bardzo ostrożnie.
+
+<P>
+W&nbsp;nowym standardzie C++11<A NAME="11698"></A><A NAME="11699"></A>
+istnieją inne, lepsze metody do przekazywania nieokreślonej
+z&nbsp;góry liczby danych do funkcji, o&nbsp;których powiemy w&nbsp;dalszej części.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1633"
+  HREF="node63.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1639"
+  HREF="node59.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1645"
+  HREF="node65.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1641"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1643"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1634"
+  HREF="node63.html">11.4 Argumenty domyślne</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1640"
+  HREF="node59.html">11. Funkcje</A>
+<B>Dalej:</B> <A NAME="tex2html1646"
+  HREF="node65.html">11.6 Argumenty referencyjne</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

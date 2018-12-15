@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>8.4 Instrukcja pusta</TITLE>
+<META NAME="description" CONTENT="8.4 Instrukcja pusta">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node44.html">
+<LINK REL="previous" HREF="node42.html">
+<LINK REL="up" HREF="node39.html">
+<LINK REL="next" HREF="node44.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1297"
+  HREF="node42.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1303"
+  HREF="node39.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1309"
+  HREF="node44.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1305"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1307"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1298"
+  HREF="node42.html">8.3 Deklaracje</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1304"
+  HREF="node39.html">8. Instrukcje</A>
+<B>Dalej:</B> <A NAME="tex2html1310"
+  HREF="node44.html">8.5 Instrukcja grupująca</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00940000000000000000"></A><A NAME="instr:pusta"></A>
+<BR>
+<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">4</SPAN> Instrukcja pusta
+</H1>
+
+<P>
+Instrukcja pusta<A NAME="7820"></A>
+(ang.&nbsp;<FONT COLOR="#7b003e"><I>null statement</I></FONT>)
+składa się z&nbsp;samego znaku średnika.
+Jej wykonanie nie powoduje żadnych skutków, ale czasem bywa potrzebna
+ze względów składniowych. Na przykład w&nbsp;procedurze
+sortowania szybkiego (<FONT COLOR="#7b003e"><I>quick sort</I></FONT>)<A NAME="7823"></A>
+poszukuje się indeksu pierwszego elementu
+tablicy nie mniejszego od pewnej zmiennej
+<!--O--><span class='zmienna'>v<!--C--></span>
+ za
+pomocą pętli
+<pre><tt>       <b><font color="#0000FF">while</font></b> <font color="#990000">(</font>a<font color="#990000">[++</font>i<font color="#990000">]</font> <font color="#990000">&lt;</font> v<font color="#990000">);</font>
+</tt></pre>
+gdzie ciało pętli jest puste. Składnia jednak
+wymaga instrukcji po warunku logicznym w&nbsp;nawiasie okrągłym;
+rolę tej instrukcji pełni więc instrukcja pusta, zaznaczona
+średnikiem. Gdyby jej nie było, instrukcja następująca za
+pętlą zostałaby błędnie potraktowana jako ciało tej pętli!
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1297"
+  HREF="node42.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1303"
+  HREF="node39.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1309"
+  HREF="node44.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1305"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1307"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1298"
+  HREF="node42.html">8.3 Deklaracje</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1304"
+  HREF="node39.html">8. Instrukcje</A>
+<B>Dalej:</B> <A NAME="tex2html1310"
+  HREF="node44.html">8.5 Instrukcja grupująca</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

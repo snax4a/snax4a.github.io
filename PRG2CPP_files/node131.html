@@ -1,0 +1,416 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>21.1 Szablony klas</TITLE>
+<META NAME="description" CONTENT="21.1 Szablony klas">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="previous" HREF="node130.html">
+<LINK REL="up" HREF="node130.html">
+<LINK REL="next" HREF="node132.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2661"
+  HREF="node130.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2665"
+  HREF="node130.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2671"
+  HREF="node132.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2667"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2669"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2662"
+  HREF="node130.html">21. Wzorce</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2666"
+  HREF="node130.html">21. Wzorce</A>
+<B>Dalej:</B> <A NAME="tex2html2672"
+  HREF="node132.html">22. Wyjątki</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002210000000000000000"></A>
+        <A NAME="szab:klas"></A>
+<BR>
+<SPAN CLASS="arabic">21</SPAN>.<SPAN CLASS="arabic">1</SPAN> Szablony klas
+</H1>
+
+<P>
+Na podobnej zasadzie co szablony funkcji można tworzyć szablony
+całych klas,<A NAME="27266"></A><A NAME="27267"></A>
+wraz z&nbsp;konstruktorami, destruktorami, polami i&nbsp;metodami.
+Składnia jest analogiczna:
+<pre><tt>       <b><font color="#0000FF">template</font></b> <font color="#990000">&lt;</font><b><font color="#0000FF">typename</font></b> <font color="#008080">T</font><font color="#990000">,</font> <b><font color="#0000FF">typename</font></b> <font color="#008080">M</font><font color="#990000">&gt;</font>
+       <b><font color="#0000FF">class</font></b> <font color="#008080">Klasa</font> <font color="#FF0000">{</font>
+           <i><font color="#9A1900">// tu uzywamy typow T i M</font></i>
+       <font color="#FF0000">}</font><font color="#990000">;</font>
+</tt></pre>
+definiuje szablon klasy
+<!--O--><span class='klasa'>Klasa<!--C--></span>
+ parametryzowany dwoma
+typami. Jak teraz utworzyć obiekt klasy wygenerowanej z&nbsp;tego wzorca
+dla konkretnych typów? Nie możemy po prostu napisać
+<pre><tt>       <font color="#008080">Klasa</font> x<font color="#990000">;</font>
+</tt></pre>
+bo kompilator nie wiedziałby, jakie typy przypisać parametrom
+
+<!--O--><span class='typ'>T<!--C--></span>
+ i&nbsp;
+<!--O--><span class='typ'>M<!--C--></span>
+ w&nbsp;szablonie. Musimy zatem zażądać jawnie
+utworzenia na podstawie szablonu i&nbsp;skompilowania konkretnej klasy.
+Robimy to, podobnie jak dla funkcji, podając nazwy konkretnych typów
+(klasowych lub wbudowanych) jako argumenty dla wzorca, czyli w&nbsp;nawiasach
+kątowych. O ile dla funkcji mogliśmy tak zrobić, ale często nie
+musieliśmy, bo na podstawie typów argumentów wywołania
+kompilator sam mógł wydedukować potrzebne typy dla parametrów
+szablonu, o&nbsp;tyle dla klas musimy to robić jawnie, na przykład:
+<pre><tt>       <font color="#008080">Klasa&lt;double,int&gt;</font> x<font color="#990000">;</font>
+</tt></pre>
+W ten sposób zażądaliśmy wygenerowania kodu klasy na podstawie
+szablonu
+<!--O--><span class='klasa'>Klasa<!--C--></span>
+ poprzez zamianę wszystkich wystąpień
+parametru&nbsp;
+<!--O--><span class='typ'>T<!--C--></span>
+ na
+<!--O--><span class='typ'>double<!--C--></span>, a&nbsp;wystąpień parametru&nbsp;
+<!--O--><span class='typ'>M<!--C--></span>
+
+na
+<!--O--><span class='typ'>int<!--C--></span>. Utworzona klasa ma nazwę
+
+<!--O--><span class='klasa'>Klasa<SPAN CLASS="MATH">&lt;</SPAN>double,int<SPAN CLASS="MATH">&gt;</SPAN><!--C--></span>. W dalszym ciągu programu możemy tej
+nazwy używać: klasa została już wygenerowana i&nbsp;przy następnych
+pojawieniach się tej nazwy żadna nowa klasa nie będzie już tworzona.
+Jeśli natomiast pojawi się nazwa szablonu, ale z&nbsp;innymi typami
+<pre><tt>       <font color="#008080">Klasa&lt;int,Osoba&gt;</font> z<font color="#990000">;</font>
+</tt></pre>
+to oczywiście utworzona zostanie nowa klasa, nie mająca nic wspólnego
+z&nbsp;poprzednią (prócz tego, że obie zostały wygenerowane z&nbsp;tego
+samego szablonu); jej nazwą będzie
+<!--O--><span class='klasa'>Klasa<SPAN CLASS="MATH">&lt;</SPAN>int,Osoba<SPAN CLASS="MATH">&gt;</SPAN><!--C--></span>.
+
+<P>
+Parametrem wzorca klasy może też być wartość określonego typu.
+Na przykład
+<pre><tt>       <b><font color="#0000FF">template</font></b> <font color="#990000">&lt;</font><b><font color="#0000FF">typename</font></b> <font color="#008080">T</font><font color="#990000">,</font> <font color="#009900">int</font> size<font color="#990000">&gt;</font>
+       <b><font color="#0000FF">class</font></b> <font color="#008080">Klasa</font> <font color="#FF0000">{</font>
+           <i><font color="#9A1900">// w definicji uzywamy typu 'T'</font></i>
+           <i><font color="#9A1900">// i wartosci calkowitej 'size'</font></i>
+       <font color="#FF0000">}</font><font color="#990000">;</font>
+</tt></pre>
+Konkretną wersję takiej klasy otrzymamy na przykład
+definiując obiekt
+<pre><tt>       <font color="#008080">Klasa&lt;Osoba,100&gt;</font> t<font color="#990000">;</font>
+</tt></pre>
+Nazwą tej klasy będzie oczywiście
+<!--O--><span class='klasa'>Klasa<SPAN CLASS="MATH">&lt;</SPAN>Osoba,100<SPAN CLASS="MATH">&gt;</SPAN><!--C--></span>.
+Zwróćmy uwagę, że podając inny argument szablonu (na przykład 150
+zamiast 100), otrzymalibyśmy inną, całkowicie niezależną klasę.
+
+<P>
+Pewien kłopot sprawia czasem definiowanie poza szablonem klasy metod
+w&nbsp;nim zadeklarowanych. Definiując taką metodę trzeba, jak pamiętamy,
+podać jej nazwę kwalifikowaną. Jeśli jest to szablon, to jako nazwę
+kwalifikowaną klasy podajemy nazwę szablonu z&nbsp;nazwami parametrów
+szablonu, już bez słowa kluczowego
+<!--O--><span class='klucz'>class<!--C--></span>
+ lub
+<!--O--><span class='klucz'>typename<!--C--></span>:
+<pre><tt> <font SIZE="-2" color="black">     1.  </font>    <b><font color="#0000FF">template</font></b> <font color="#990000">&lt;</font><b><font color="#0000FF">typename</font></b> <font color="#008080">T</font><font color="#990000">,</font> <font color="#009900">int</font> size<font color="#990000">&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font>    <b><font color="#0000FF">class</font></b> <font color="#008080">Klasa</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     3.  </font>        <font color="#009900">void</font> <b><font color="#000000">metoda1</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     4.  </font>            <i><font color="#9A1900">// definicja metody1</font></i>
+ <font SIZE="-2" color="black">     5.  </font>        <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">     6.  </font>        T<font color="#990000">*</font> <b><font color="#000000">metoda2</font></b><font color="#990000">(</font><font color="#009900">double</font><font color="#990000">);</font> <i><font color="#9A1900">// tylko deklaracja</font></i>
+ <font SIZE="-2" color="black">     7.  </font>
+ <font SIZE="-2" color="black">     8.  </font>        <i><font color="#9A1900">// ...</font></i>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>
+ <font SIZE="-2" color="black">    11.  </font>    <i><font color="#9A1900">//</font></i>
+ <font SIZE="-2" color="black">    12.  </font>    <i><font color="#9A1900">// ...</font></i>
+ <font SIZE="-2" color="black">    13.  </font>    <i><font color="#9A1900">//</font></i>
+ <font SIZE="-2" color="black">    14.  </font>
+ <font SIZE="-2" color="black">    15.  </font>    <i><font color="#9A1900">// definicja metody metoda2</font></i>
+ <font SIZE="-2" color="black">    16.  </font>    <b><font color="#0000FF">template</font></b> <font color="#990000">&lt;</font><b><font color="#0000FF">typename</font></b> <font color="#008080">T</font><font color="#990000">,</font> <font color="#009900">int</font> size<font color="#990000">&gt;</font>
+ <font SIZE="-2" color="black">    17.  </font>    T<font color="#990000">*</font> Klasa<font color="#990000">&lt;</font>T<font color="#990000">,</font>size<font color="#990000">&gt;::</font><b><font color="#000000">metoda2</font></b><font color="#990000">(</font><font color="#009900">double</font> x<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    18.  </font>        <i><font color="#9A1900">// cialo definicji</font></i>
+ <font SIZE="-2" color="black">    19.  </font>    <font color="#FF0000">}</font>
+</tt></pre>
+W&nbsp;tym przykładzie metoda
+<!--O--><span class='funkcja'>metoda1<!--C--></span>
+ jest zdefiniowana
+bezpośrednio wewnątrz szablonu, a&nbsp;metoda
+<!--O--><span class='funkcja'>metoda2<!--C--></span>
+ poza nim.
+W&nbsp;podobny sposób można poza klasą definiować konstruktory
+i&nbsp;destruktory.
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Rozpatrzmy bardziej praktyczny przykład wzorca klasy opisującej
+stos<A NAME="27297"></A> (ang.&nbsp;<FONT COLOR="#7b003e"><I>stack</I></FONT>) implementowany za pomocą tablicy
+(dla zachowania przejrzystości bez obsługi błędów). Musimy zatem
+zaimplementować metody pozwalające na:
+
+<UL>
+<LI>dodanie elementu na wierzchołek (<!--O--><span class='funkcja'>push<!--C--></span>);
+</LI>
+<LI>zdjęcie i&nbsp;zwrócenie elementu z&nbsp;wierzchołka (<!--O--><span class='funkcja'>pop<!--C--></span>);
+</LI>
+<LI>sprawdzanie, czy stos jest pusty (<!--O--><span class='funkcja'>empty<!--C--></span>).
+</LI>
+</UL>
+Konkretyzacje szablonu
+<!--O--><span class='klasa'>Stos<!--C--></span>
+ będą różnić się tylko typem
+elementów kładzionych na stos i&nbsp;wymiarem alokowanej na elementy stosu
+tablicy:
+<A NAME="stos.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">172</SPAN>:</SPAN>
+      <A NAME="tex2html180"
+  HREF="source-files/stos.cpp">
+<!--O--><span class='downl'>stos.cpp<!--C--></span></A>
+<A NAME="27373"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Szablon stosu realizowanego w postaci tablicy</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;string&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;typeinfo&gt;</font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     5.  </font>
+ <font SIZE="-2" color="black">     6.  </font><b><font color="#0000FF">template</font></b> <font color="#990000">&lt;</font><b><font color="#0000FF">typename</font></b> <font color="#008080">Data</font><font color="#990000">,</font> <font color="#009900">int</font> size<font color="#990000">&gt;</font>
+ <font SIZE="-2" color="black">     7.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Stos</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     8.  </font>    Data<font color="#990000">*</font> data<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#009900">int</font>   top<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    11.  </font>    <b><font color="#000000">Stos</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    12.  </font>    <font color="#009900">bool</font> <b><font color="#000000">empty</font></b><font color="#990000">()</font> <b><font color="#0000FF">const</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>    <font color="#009900">void</font> <b><font color="#000000">push</font></b><font color="#990000">(</font>Data<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    14.  </font>    <font color="#008080">Data</font> <b><font color="#000000">pop</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    15.  </font>    <font color="#990000">~</font><b><font color="#000000">Stos</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    16.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font>
+ <font SIZE="-2" color="black">    18.  </font><b><font color="#0000FF">template</font></b> <font color="#990000">&lt;</font><b><font color="#0000FF">typename</font></b> <font color="#008080">Data</font><font color="#990000">,</font> <font color="#009900">int</font> size<font color="#990000">&gt;</font>
+ <font SIZE="-2" color="black">    19.  </font>Stos<font color="#990000">&lt;</font>Data<font color="#990000">,</font>size<font color="#990000">&gt;::</font><b><font color="#000000">Stos</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    20.  </font>    data <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Data<font color="#990000">[</font>size<font color="#990000">];</font>
+ <font SIZE="-2" color="black">    21.  </font>    top <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    22.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    23.  </font>
+ <font SIZE="-2" color="black">    24.  </font><b><font color="#0000FF">template</font></b> <font color="#990000">&lt;</font><b><font color="#0000FF">typename</font></b> <font color="#008080">Data</font><font color="#990000">,</font> <font color="#009900">int</font> size<font color="#990000">&gt;</font>
+ <font SIZE="-2" color="black">    25.  </font><b><font color="#0000FF">inline</font></b> <font color="#009900">bool</font> Stos<font color="#990000">&lt;</font>Data<font color="#990000">,</font>size<font color="#990000">&gt;::</font><b><font color="#000000">empty</font></b><font color="#990000">()</font> <b><font color="#0000FF">const</font></b> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    26.  </font>    <b><font color="#0000FF">return</font></b> top <font color="#990000">==</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    27.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    28.  </font>
+ <font SIZE="-2" color="black">    29.  </font><b><font color="#0000FF">template</font></b> <font color="#990000">&lt;</font><b><font color="#0000FF">typename</font></b> <font color="#008080">Data</font><font color="#990000">,</font> <font color="#009900">int</font> size<font color="#990000">&gt;</font>
+ <font SIZE="-2" color="black">    30.  </font><b><font color="#0000FF">inline</font></b> <font color="#009900">void</font> Stos<font color="#990000">&lt;</font>Data<font color="#990000">,</font>size<font color="#990000">&gt;::</font><b><font color="#000000">push</font></b><font color="#990000">(</font><font color="#008080">Data</font> dat<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    31.  </font>    data<font color="#990000">[</font>top<font color="#990000">++]</font> <font color="#990000">=</font> dat<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    32.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    33.  </font>
+ <font SIZE="-2" color="black">    34.  </font><b><font color="#0000FF">template</font></b> <font color="#990000">&lt;</font><b><font color="#0000FF">typename</font></b> <font color="#008080">Data</font><font color="#990000">,</font> <font color="#009900">int</font> size<font color="#990000">&gt;</font>
+ <font SIZE="-2" color="black">    35.  </font><b><font color="#0000FF">inline</font></b> <font color="#008080">Data</font> Stos<font color="#990000">&lt;</font>Data<font color="#990000">,</font>size<font color="#990000">&gt;::</font><b><font color="#000000">pop</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    36.  </font>    <b><font color="#0000FF">return</font></b> data<font color="#990000">[--</font>top<font color="#990000">];</font>
+ <font SIZE="-2" color="black">    37.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    38.  </font>
+ <font SIZE="-2" color="black">    39.  </font><b><font color="#0000FF">template</font></b> <font color="#990000">&lt;</font><b><font color="#0000FF">typename</font></b> <font color="#008080">Data</font><font color="#990000">,</font> <font color="#009900">int</font> size<font color="#990000">&gt;</font>
+ <font SIZE="-2" color="black">    40.  </font><b><font color="#0000FF">inline</font></b> Stos<font color="#990000">&lt;</font>Data<font color="#990000">,</font>size<font color="#990000">&gt;::~</font><b><font color="#000000">Stos</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    41.  </font>    <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> data<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    42.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    43.  </font>
+ <font SIZE="-2" color="black">    44.  </font>  <i><font color="#9A1900">// szablon funkcji globalnej</font></i>
+ <font SIZE="-2" color="black">    45.  </font><b><font color="#0000FF">template</font></b> <font color="#990000">&lt;</font><b><font color="#0000FF">typename</font></b> <font color="#008080">Data</font><font color="#990000">,</font> <font color="#009900">int</font> size<font color="#990000">&gt;</font>
+ <font SIZE="-2" color="black">    46.  </font><font color="#009900">void</font> <b><font color="#000000">oproznij</font></b><font color="#990000">(</font>Stos<font color="#990000">&lt;</font>Data<font color="#990000">,</font>size<font color="#990000">&gt;*</font> p_stos<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    47.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Stos typu "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>Data<font color="#990000">).</font><b><font color="#000000">name</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">": "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    48.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font> <font color="#990000">!</font> p_stos<font color="#990000">-&gt;</font><b><font color="#000000">empty</font></b><font color="#990000">()</font> <font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    49.  </font>        cout <font color="#990000">&lt;&lt;</font> p_stos<font color="#990000">-&gt;</font><b><font color="#000000">pop</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    50.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    51.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    52.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    53.  </font>
+ <font SIZE="-2" color="black">    54.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    55.  </font>    <font color="#008080">Stos&lt;int,20&gt;</font> stos_i<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    56.  </font>    stos_i<font color="#990000">.</font><b><font color="#000000">push</font></b><font color="#990000">(</font><font color="#993399">11</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    57.  </font>    stos_i<font color="#990000">.</font><b><font color="#000000">push</font></b><font color="#990000">(</font><font color="#993399">36</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    58.  </font>    stos_i<font color="#990000">.</font><b><font color="#000000">push</font></b><font color="#990000">(</font><font color="#993399">49</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    59.  </font>    stos_i<font color="#990000">.</font><b><font color="#000000">push</font></b><font color="#990000">(</font><font color="#993399">92</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    60.  </font>
+ <font SIZE="-2" color="black">    61.  </font>    <font color="#008080">Stos&lt;string,15&gt;</font> stos_s<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    62.  </font>    stos_s<font color="#990000">.</font><b><font color="#000000">push</font></b><font color="#990000">(</font><font color="#FF0000">"Ala"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    63.  </font>    stos_s<font color="#990000">.</font><b><font color="#000000">push</font></b><font color="#990000">(</font><font color="#FF0000">"Ela"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    64.  </font>    stos_s<font color="#990000">.</font><b><font color="#000000">push</font></b><font color="#990000">(</font><font color="#FF0000">"Ola"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    65.  </font>    stos_s<font color="#990000">.</font><b><font color="#000000">push</font></b><font color="#990000">(</font><font color="#FF0000">"Ula"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    66.  </font>
+ <font SIZE="-2" color="black">    67.  </font>    <b><font color="#000000">oproznij</font></b><font color="#990000">(&amp;</font>stos_i<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    68.  </font>    <b><font color="#000000">oproznij</font></b><font color="#990000">(&amp;</font>stos_s<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    69.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+Parametrami szablonu
+<!--O--><span class='klasa'>Stos<!--C--></span>
+ są typ danych
+<!--O--><span class='klasa'>Data<!--C--></span>
+
+i&nbsp;liczba całkowita
+<!--O--><span class='zmienna'>size<!--C--></span>
+ określająca maksymalny wymiar
+stosu. Dla przejrzystości opuściliśmy tu obsługę błędów.
+
+<P>
+Wewnątrz szablonu deklarujemy konstruktor, destruktor i&nbsp;potrzebne
+metody. W&nbsp;przypadku tak prostym można je było zdefiniować
+bezpośrednio wewnątrz szablonu, ale w celach dydaktycznych ich
+definicje następują poza szablonem klasy (linie&nbsp;18-42). Ponieważ
+definicje są poza klasą, a&nbsp;funkcje są bardzo proste, kompilator
+prawdopodobnie będzie umiał je rozwinąć
+(patrz rozdział o <A HREF="node69.html#funk:inlin">funkcjach rozwijanych</A> ).
+Dlatego w&nbsp;definicjach szablonów metod użyliśmy modyfikatora
+
+<!--O--><span class='klucz'>inline<!--C--></span>.
+
+<P>
+Dla stosu zaimplementowanego za pomocą tablicy
+o&nbsp;ustalonym rozmiarze powinniśmy jeszcze pomyśleć o&nbsp;obsłudze
+błędów, jakie mogą pojawić się, gdy próbujemy położyć na
+pełnym już stosie dodatkowy element lub zdjąć element ze stosu
+pustego. Dla zachowania przejrzystości w&nbsp;tym programie tego już nie
+robimy.
+
+<P>
+W liniach&nbsp;44-52 definiujemy wzorzec funkcji globalnych
+
+<!--O--><span class='funkcja'>oproznij<!--C--></span>
+ służących do zdjęcia po kolei wszystkich
+elementów stosu i&nbsp;wydrukowania ich. Parametrem tych funkcji będzie
+wskaźnik do stosu typu określonego przez pewną klasę konkretną
+uzyskaną z&nbsp;szablonu
+<!--O--><span class='klasa'>Stos<!--C--></span>. Funkcja korzysta znów z&nbsp;operatora
+
+<!--O--><span class='klucz'>typeid<!--C--></span><A NAME="27321"></A><A NAME="27322"></A>
+do wyświetlenia nazwy typu argumentu (wyłącznie w&nbsp;celach
+dydaktycznych).
+
+<P>
+W funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>
+ definiujemy dwa stosy: stos
+<!--O--><span class='zmienna'>stos_i<!--C--></span>
+
+liczb całkowitych o&nbsp;maksymalnym rozmiarze&nbsp;20 oraz stos napisów,
+
+<!--O--><span class='zmienna'>stos_s<!--C--></span>, o&nbsp;maksymalnym wymiarze&nbsp;15. Kładziemy na każdy
+z&nbsp;nich po parę elementów, a&nbsp;następnie wywołujemy funkcję
+
+<!--O--><span class='funkcja'>oproznij<!--C--></span>
+ (linie&nbsp;67 i&nbsp;68). Wydruk jest następujący
+<PRE>
+    Stos typu i: 92 49 36 11
+    Stos typu Ss: Ula Ola Ela Ala
+</PRE>
+Wewnętrzne nazwy typów (w naszym przykładzie były to&nbsp;
+<!--O--><span class='typ'>i<!--C--></span>
+ dla
+
+<!--O--><span class='typ'>int<!--C--></span>
+ i&nbsp;
+<!--O--><span class='typ'>Ss<!--C--></span>
+ dla
+<!--O--><span class='klasa'>string<!--C--></span>) jak zwykle mogą zależeć od
+kompilatora.
+
+<P>
+Zauważmy, że wywołując funkcję
+<!--O--><span class='funkcja'>oproznij<!--C--></span>
+ nie podaliśmy
+argumentów szablonu. Równie dobrze moglibyśmy napisać
+<pre><tt>       oproznij<font color="#990000">&lt;</font><font color="#009900">int</font><font color="#990000">,</font><font color="#993399">20</font><font color="#990000">&gt;(&amp;</font>stos_i<font color="#990000">);</font>
+       oproznij<font color="#990000">&lt;</font>string<font color="#990000">,</font><font color="#993399">15</font><font color="#990000">&gt;(&amp;</font>stos_s<font color="#990000">);</font>
+</tt></pre>
+Widzimy jednak, że kompilator nie potrzebował tej podpowiedzi, aby
+ustalić, na podstawie typu argumentu wywołania, odpowiedni typ
+i&nbsp;wymiar potrzebny do konkretyzacji szablonu funkcji
+<!--O--><span class='funkcja'>oproznij<!--C--></span>.
+
+<P>
+Zwróćmy jeszcze uwagę na wspomniany już uprzednio fakt: do definicji
+takiego szablonu klasy jak nasz przykładowy
+<!--O--><span class='klasa'>Stos<!--C--></span>
+ należy nie
+tylko typ danych (u nas
+<!--O--><span class='typ'>Data<!--C--></span>), ale i&nbsp;rozmiar (u nas
+
+<!--O--><span class='zmienna'>size<!--C--></span>). Wobec tego klasy
+<!--O--><span class='klasa'>Stos<SPAN CLASS="MATH">&lt;</SPAN>int,10<SPAN CLASS="MATH">&gt;</SPAN><!--C--></span>
+
+i&nbsp;
+<!--O--><span class='klasa'>Stos<SPAN CLASS="MATH">&lt;</SPAN>int,11<SPAN CLASS="MATH">&gt;</SPAN><!--C--></span>
+ byłyby dwiema zupełnie różnymi klasami,
+definiującymi dwa całkowicie odrębne typy danych.
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2661"
+  HREF="node130.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2665"
+  HREF="node130.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2671"
+  HREF="node132.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2667"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2669"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2662"
+  HREF="node130.html">21. Wzorce</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2666"
+  HREF="node130.html">21. Wzorce</A>
+<B>Dalej:</B> <A NAME="tex2html2672"
+  HREF="node132.html">22. Wyjątki</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

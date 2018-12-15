@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>8.3 Deklaracje</TITLE>
+<META NAME="description" CONTENT="8.3 Deklaracje">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node43.html">
+<LINK REL="previous" HREF="node41.html">
+<LINK REL="up" HREF="node39.html">
+<LINK REL="next" HREF="node43.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1283"
+  HREF="node41.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1289"
+  HREF="node39.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1295"
+  HREF="node43.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1291"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1293"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1284"
+  HREF="node41.html">8.2 Etykiety</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1290"
+  HREF="node39.html">8. Instrukcje</A>
+<B>Dalej:</B> <A NAME="tex2html1296"
+  HREF="node43.html">8.4 Instrukcja pusta</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00930000000000000000"></A><A NAME="instr:dekl"></A>
+<BR>
+<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">3</SPAN> Deklaracje
+</H1>
+
+<P>
+W tym podrozdziale mówimy tylko o&nbsp;deklaracjach zmiennych.
+Deklaracje funkcji omówimy w
+      rozdziale o <A HREF="node61.html#funk:dekl">funkcjach</A> .
+
+<P>
+Celem deklaracji<A NAME="7794"></A> zmiennej jest określenie
+jej typu i&nbsp;atrybutów. Deklaracja najczęściej
+jest też połączona z&nbsp;definicją, tzn.&nbsp;przydzieleniem zmiennej
+miejsca w&nbsp;pamięci operacyjnej. Ogólna postać deklaracji
+jest następująca:
+<pre><tt>       modyfikatory <font color="#008080">Typ</font> lista_ident<font color="#990000">;</font>
+</tt></pre>
+gdzie:
+
+<UL>
+<LI><FONT COLOR="#7b003e"><B>modyfikatory</B></FONT><A NAME="7799"></A>
+         (które są opcjonalne) określają
+          atrybuty deklarowanych zmiennych (np.
+<!--O--><span class='klucz'>const<!--C--></span>,
+
+<!--O--><span class='klucz'>static<!--C--></span>). Modyfikatorów może być kilka lub może nie
+          być ich wcale. Jeśli jest ich kilka, to nie oddziela
+          się ich przecinkami. Omówiliśmy je w&nbsp;rozdziale poprzednim.
+</LI>
+<LI><FONT COLOR="#7b003e"><B>Typ</B></FONT> jest określeniem typu bazowego deklarowanych zmiennych
+          (np.&nbsp;
+<!--O--><span class='typ'>double<!--C--></span>,
+<!--O--><span class='typ'>string<!--C--></span>,
+<!--O--><span class='typ'>unsigned short<!--C--></span>
+
+          itd. &mdash;&nbsp;patrz
+          rozdział na temat <A HREF="node14.html#chap:typydan">typów danych</A> ).
+</LI>
+<LI><FONT COLOR="#7b003e"><B>lista_ident</B></FONT> jest listą, oddzielonych
+          przecinkami, identyfikatorów deklarowanych zmiennych.
+          Po każdym identyfikatorze można umieścić inicjator za
+          pomocą znaku równości i&nbsp;następującego po nim wyrażenia
+          o&nbsp;typie wartości przypisywalnym do typu deklarowanej
+          zmiennej lub za pomocą składni <SPAN  CLASS="textit">brace-init</SPAN>
+          (z&nbsp;nawiasami klamrowymi).
+</LI>
+</UL>
+
+<P>
+Przykłady:
+<pre><tt>       <font color="#009900">double</font> x<font color="#FF0000">{</font><font color="#993399">17.5</font><font color="#FF0000">}</font><font color="#990000">,</font> y<font color="#990000">,</font> z <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font>
+       <b><font color="#0000FF">static</font></b> <b><font color="#0000FF">const</font></b> <font color="#009900">double</font> PI<font color="#FF0000">{</font><font color="#993399">3.14</font><font color="#FF0000">}</font><font color="#990000">;</font>
+       <b><font color="#0000FF">extern</font></b> <font color="#009900">double</font> PIHALF<font color="#990000">;</font>
+       <b><font color="#0000FF">const</font></b> <font color="#009900">double</font> <font color="#990000">*</font> <b><font color="#0000FF">const</font></b> pPi <font color="#990000">=</font> <font color="#990000">&amp;</font>PI<font color="#990000">;</font>
+</tt></pre>
+Trzecia linia to przykład deklaracji bez definicji.
+Oczywiście zmienna
+<!--O--><span class='zmienna'>PIHALF<!--C--></span>
+ musi być zdefiniowana
+w&nbsp;jakimś innym module programu.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1283"
+  HREF="node41.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1289"
+  HREF="node39.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1295"
+  HREF="node43.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1291"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1293"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1284"
+  HREF="node41.html">8.2 Etykiety</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1290"
+  HREF="node39.html">8. Instrukcje</A>
+<B>Dalej:</B> <A NAME="tex2html1296"
+  HREF="node43.html">8.4 Instrukcja pusta</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

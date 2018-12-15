@@ -1,0 +1,310 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>7.1 Słowa kluczowe i&nbsp;nazwy</TITLE>
+<META NAME="description" CONTENT="7.1 Słowa kluczowe i&nbsp;nazwy">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node35.html">
+<LINK REL="previous" HREF="node33.html">
+<LINK REL="up" HREF="node33.html">
+<LINK REL="next" HREF="node35.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1152"
+  HREF="node33.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1158"
+  HREF="node33.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1164"
+  HREF="node35.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1160"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1162"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1153"
+  HREF="node33.html">7. Zmienne</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1159"
+  HREF="node33.html">7. Zmienne</A>
+<B>Dalej:</B> <A NAME="tex2html1165"
+  HREF="node35.html">7.2 Zasięg i&nbsp;widoczność zmiennych</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00810000000000000000"></A><A NAME="zmienne:klucz"></A>
+<BR>
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> Słowa kluczowe i&nbsp;nazwy
+</H1>
+
+<P>
+Nazwy (identyfikatory) są wprowadzane do jednostki kompilacji
+(pliku wraz z&nbsp;innymi plikami włączonymi za pomocą
+<FONT COLOR="#000000"><TT>#include</TT></FONT>)
+poprzez <FONT COLOR="#7b003e"><B>deklaracje</B></FONT>.<A NAME="6462"></A>
+Deklaracja określa własności i&nbsp;sposób
+interpretacji nazwy (zmiennej, funkcji, itd.).
+Zazwyczaj (choć, jak zobaczymy, nie zawsze) deklaracja wiąże się
+z&nbsp;<FONT COLOR="#7b003e"><B>definicją</B></FONT>,<A NAME="6464"></A> czyli z&nbsp;przydziałem pamięci
+na nazwany obiekt. Obowiązuje przy tym <FONT COLOR="#7b003e"><I>&bdquo;zasada jednej
+definicji.&rdquo;</I></FONT> (ang.&nbsp;<FONT COLOR="#7b003e"><I>one definition rule</I></FONT>)
+
+<P>
+
+<div class='wazne'>
+W jednostce kompilacji nie może być więcej niż
+    jednej definicji tej samej zmiennej, funkcji, klasy, wyliczenia
+    lub wzorca.
+
+
+</div>
+
+<P>
+Zasada ta nie dotyczy jednak <SPAN  CLASS="textit">deklaracji</SPAN>, które <FONT COLOR="#7b003e"><I>mogą</I></FONT>
+się powtarzać.
+
+<P>
+Język C++ definiuje pewne <FONT COLOR="#7b003e"><B>słowa kluczowe</B></FONT><A NAME="6471"></A>
+jako identyfikatory zarezerwowane: nie mogą pojawić się w&nbsp;innym znaczeniu
+niż nadane im w&nbsp;standardzie języka. W szczególności, nie mogą być użyte jako
+identyfikatory (nazwy) zmiennych, funkcji, klas czy przestrzeni nazw.
+Poniższa tabela przedstawia wszystkie 92 słowa kluczowe języka C++.
+<DIV ALIGN="CENTER">
+<A NAME="6475"></A>
+<TABLE CELLPADDING=3 BORDER="1">
+<CAPTION><STRONG>Tabela:</STRONG>
+Słowa kluczowe języka C++</CAPTION>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">alignas</TD>
+<TD ALIGN="LEFT"><A NAME="tabelaslklcpp"></A>                     const_cast</TD>
+<TD ALIGN="LEFT">module</TD>
+<TD ALIGN="LEFT">static_cast</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">alignof</TD>
+<TD ALIGN="LEFT">continue</TD>
+<TD ALIGN="LEFT">mutable</TD>
+<TD ALIGN="LEFT">struct</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">and</TD>
+<TD ALIGN="LEFT">decltype</TD>
+<TD ALIGN="LEFT">namespace</TD>
+<TD ALIGN="LEFT">switch</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">and_eq</TD>
+<TD ALIGN="LEFT">default</TD>
+<TD ALIGN="LEFT">new</TD>
+<TD ALIGN="LEFT">synchronized</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">asm</TD>
+<TD ALIGN="LEFT">delete</TD>
+<TD ALIGN="LEFT">noexcept</TD>
+<TD ALIGN="LEFT">template</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">atomic_cancel</TD>
+<TD ALIGN="LEFT">do</TD>
+<TD ALIGN="LEFT">not</TD>
+<TD ALIGN="LEFT">this</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">atomic_commit</TD>
+<TD ALIGN="LEFT">double</TD>
+<TD ALIGN="LEFT">not_eq</TD>
+<TD ALIGN="LEFT">thread_local</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">atomic_noexcept</TD>
+<TD ALIGN="LEFT">dynamic_cast</TD>
+<TD ALIGN="LEFT">nullptr</TD>
+<TD ALIGN="LEFT">trrow</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">auto</TD>
+<TD ALIGN="LEFT">else</TD>
+<TD ALIGN="LEFT">operator</TD>
+<TD ALIGN="LEFT">true</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">bitand</TD>
+<TD ALIGN="LEFT">enum</TD>
+<TD ALIGN="LEFT">or</TD>
+<TD ALIGN="LEFT">try</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">bitor</TD>
+<TD ALIGN="LEFT">explicit</TD>
+<TD ALIGN="LEFT">or_eq</TD>
+<TD ALIGN="LEFT">typedef</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">bool</TD>
+<TD ALIGN="LEFT">export</TD>
+<TD ALIGN="LEFT">private</TD>
+<TD ALIGN="LEFT">typeid</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">break</TD>
+<TD ALIGN="LEFT">extern</TD>
+<TD ALIGN="LEFT">protected</TD>
+<TD ALIGN="LEFT">typename</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">case</TD>
+<TD ALIGN="LEFT">false</TD>
+<TD ALIGN="LEFT">public</TD>
+<TD ALIGN="LEFT">union</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">catch</TD>
+<TD ALIGN="LEFT">float</TD>
+<TD ALIGN="LEFT">register</TD>
+<TD ALIGN="LEFT">unsigned</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">char</TD>
+<TD ALIGN="LEFT">for</TD>
+<TD ALIGN="LEFT">reinterpret_cast</TD>
+<TD ALIGN="LEFT">using</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">char16_t</TD>
+<TD ALIGN="LEFT">friend</TD>
+<TD ALIGN="LEFT">requires</TD>
+<TD ALIGN="LEFT">virtual</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">char32_t</TD>
+<TD ALIGN="LEFT">goto</TD>
+<TD ALIGN="LEFT">return</TD>
+<TD ALIGN="LEFT">void</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">class</TD>
+<TD ALIGN="LEFT">if</TD>
+<TD ALIGN="LEFT">short</TD>
+<TD ALIGN="LEFT">volatile</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">compl</TD>
+<TD ALIGN="LEFT">import</TD>
+<TD ALIGN="LEFT">signed</TD>
+<TD ALIGN="LEFT">wchar_t</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">concept</TD>
+<TD ALIGN="LEFT">inline</TD>
+<TD ALIGN="LEFT">sizeof</TD>
+<TD ALIGN="LEFT">while</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">const</TD>
+<TD ALIGN="LEFT">int</TD>
+<TD ALIGN="LEFT">static</TD>
+<TD ALIGN="LEFT">xor</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">constexpr</TD>
+<TD ALIGN="LEFT">long</TD>
+<TD ALIGN="LEFT">static_assert</TD>
+<TD ALIGN="LEFT">xor_eq</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+Dodatkowo, cztery identyfikatory <FONT COLOR="#7b003e"><I>są</I></FONT> słowami kluczowymi, ale
+tylko, gdy użyte są w&nbsp;specyficznych kontekstach; są to
+<!--O--><span class='klucz'>override<!--C--></span>,
+
+<!--O--><span class='klucz'>final<!--C--></span>,
+<!--O--><span class='klucz'>transaction_safe<!--C--></span>
+ i&nbsp;
+<!--O--><span class='klucz'>transaction_safe_dynamic<!--C--></span>.
+
+<P>
+
+<P></P>
+
+<P>
+Legalne identyfikatory, inne niż podane tu słowa kluczowe, mogą
+w zasadzie zawierać dowolną liczbę znaków alfanumerycznych
+(liter i&nbsp;cyfr) oraz znaki podkreślenia. Formalnie niełacińskie
+znaki Unicode są dozwolone, ale może to powodować
+kłopoty i&nbsp;lepiej ich unikać. Tak jak w&nbsp;innych językach, pierwszy znak
+nazwy nie może być cyfrą.
+Nazwy zawierające gdziekolwiek dwa następujące po sobie znaki
+podkreślenia, albo rozpoczynające się od znaku podkreślenia
+po którym następuje duża litera są zastrzeżone i&nbsp;nie powinny być
+używane. W&nbsp;końcu, nazwy rozpoczynające się od znaku podkreślenia
+po którym nie następuje duża litera mogą być używane tylko
+w&nbsp;zakresie globalnym.
+
+<P>
+
+<P></P>
+
+<P>
+Litery duże i&nbsp;małe <FONT COLOR="#7b003e"><I>są</I></FONT> rozróżnialne; nazwa
+<!--O--><span class='zmienna'>val_X<!--C--></span>
+
+jest inna niż np.&nbsp;nazwa
+<!--O--><span class='zmienna'>val_x<!--C--></span>.
+
+<P>
+Przyjęło się, że nazwy zmiennych piszemy małymi literami,
+nazwy typów wielu programistów rozpoczyna od dużej litery, a&nbsp;nazwy
+stałych zdefiniowanych przez dyrektywę preprocesora
+
+<FONT COLOR="#000000"><TT>#define</TT></FONT> &mdash;&nbsp;samymi dużymi literami.
+
+<P>
+Jeśli nazwa składa się z&nbsp;kilku
+słów, to oddzielamy je znakami podkreślenia
+(<!--O--><span class='zmienna'>numer_klienta<!--C--></span>) lub każde słowo, z&nbsp;wyjątkiem, być
+może, pierwszego, rozpoczynamy od litery dużej
+(<!--O--><span class='zmienna'>nazwaPliku<!--C--></span>) &mdash;&nbsp;jest to tzw.&nbsp;notacja &bdquo;wielbłądzia&rdquo;
+(ang.&nbsp;<FONT COLOR="#7b003e"><I>CamelCase</I></FONT>).<A NAME="6498"></A><A NAME="6499"></A>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1152"
+  HREF="node33.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1158"
+  HREF="node33.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1164"
+  HREF="node35.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1160"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1162"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1153"
+  HREF="node33.html">7. Zmienne</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1159"
+  HREF="node33.html">7. Zmienne</A>
+<B>Dalej:</B> <A NAME="tex2html1165"
+  HREF="node35.html">7.2 Zasięg i&nbsp;widoczność zmiennych</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

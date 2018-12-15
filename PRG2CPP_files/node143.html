@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>24. Biblioteka standardowa</TITLE>
+<META NAME="description" CONTENT="24. Biblioteka standardowa">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node147.html">
+<LINK REL="previous" HREF="node140.html">
+<LINK REL="up" HREF="PRG2CPP.html">
+<LINK REL="next" HREF="node144.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2834"
+  HREF="node142.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2840"
+  HREF="PRG2CPP.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2846"
+  HREF="node144.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2842"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2844"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2835"
+  HREF="node142.html">23.2 Przestrzenie nazw</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2841"
+  HREF="PRG2CPP.html">Programowanie w C++</A>
+<B>Dalej:</B> <A NAME="tex2html2847"
+  HREF="node144.html">24.1 Kolekcje i&nbsp;iteratory</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002500000000000000000"></A>
+        <A NAME="chap:stl"></A>
+<BR>
+<SPAN CLASS="arabic">24</SPAN>. Biblioteka standardowa
+</H1>
+
+<P>
+Jak wszystkie nowoczesne języki programowania, C++ dostarcza, prócz
+narzędzi związanych z&nbsp;samym językiem, bibliotekę gotowych
+funkcji, klas, szablonów itd. Biblioteka podzielona jest na wiele
+części: aby z&nbsp;nich korzystać, w&nbsp;tworzonym programie wystarczy użyć
+odpowiednich dyrektyw
+<FONT COLOR="#000000"><TT>#include</TT></FONT> włączających pliki
+nagłówkowe opisujące funkcjonalność poszczególnych modułów
+biblioteki (na temat plików nagłówkowych patrz
+     rozdział o <A HREF="node141.html#modul:modul">modułach i&nbsp;plikach nagłówkowych</A> ).
+Implementacja funkcji, klas itd. z&nbsp;biblioteki standardowej, w&nbsp;postaci
+plików binarnych, dostarczana jest przez producenta kompilatora C++
+(można również korzystać z&nbsp;innych, niezależnych implementacji,
+zarówno komercyjnych jak&nbsp;i typu <SPAN  CLASS="textit">open source</SPAN>).
+
+<P>
+Biblioteka standardowa nie jest tak bogata jak w&nbsp;innych językach,
+gdyż nie uwzględnia takich zagadnień jak programowanie sieciowe,
+graficzne, wielowątkowe, bazodanowe itd. Skupia się głównie na
+implementacji kolekcji (kontenerów) i&nbsp;algorytmów na tych kolekcjach
+operujących. Ta część biblioteki standardowej nazywana jest, ze
+względów historycznych, standardową biblioteką wzorców
+(szablonów), czyli STL<A NAME="28619"></A> (od ang.&nbsp;<FONT COLOR="#7b003e"><I>Standard Template
+Library</I></FONT>).
+
+<P>
+W odróżnieniu od Javy<A NAME="28621"></A>
+i wielu innych języków, biblioteka standardowa
+C++ dostarcza przede wszystkim <FONT COLOR="#7b003e"><I>szablonów</I></FONT>;<A NAME="28623"></A>
+konkretyzując te szablony użytkownik tworzy klasy i&nbsp;funkcje operujące
+na (prawie) dowolnych typach danych. Ważną rolę pełnią
+w szczególności szablony klas kolekcyjnych, pozwalające tworzyć
+kolekcje obiektów o&nbsp;różnych własnościach i&nbsp;funkcjonalności.
+Warto przy tym przyjąć zasadę, że elementy wstawiane do kolekcji
+są albo typu wbudowanego (w szczególności mogą to być wskaźniki),
+albo typu obiektowego dla którego to typu istnieje konstruktor
+domyślny i&nbsp;prawidłowo odbywa się kopiowanie, przypisywanie
+i&nbsp;porównywanie za pomocą operatora '<SPAN CLASS="MATH">&lt;</SPAN>'. W razie konieczności
+należy więc odpowiednio przeciążyć operatory '<SPAN CLASS="MATH">=</SPAN>' i&nbsp;operator
+'<SPAN CLASS="MATH">&lt;</SPAN>' i&nbsp;zdefiniować prawidłowe konstruktory kopiujące i&nbsp;destruktory.
+Jeśli warunki te nie są spełnione, to mogą, choć nie muszą,
+pojawić się trudne do zidentyfikowania problemy.
+
+<P>
+Oczywiście nie cała biblioteka standardowa ma formę wzorców:
+w&nbsp;poprzednich rozdziałach poznaliśmy, niejako mimochodem, inne
+składniki tej biblioteki, które szablonami nie są, takie jak
+udogodnienia dostarczane przez dołączenie plików nagłówkowych
+
+<!--O--><span class='plik'>cstdlib<!--C--></span>,
+<!--O--><span class='plik'>cstring<!--C--></span>,
+<!--O--><span class='plik'>cmath<!--C--></span>
+ (te akurat składniki
+biblioteki są odziedziczone z&nbsp;C).
+
+<P>
+Rozdział niniejszy należy traktować jako wstęp do opisu biblioteki
+standardowej &mdash;&nbsp;więcej szczegółów można znaleźć w&nbsp;książkach
+cytowanych w&nbsp;spisie <A HREF="node4.html#wprow:literatura">literatury</A> .
+
+<P>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Podrozdzia&#322;y</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html2848"
+  HREF="node144.html"><SPAN CLASS="arabic">24</SPAN>.<SPAN CLASS="arabic">1</SPAN> Kolekcje i&nbsp;iteratory</A>
+<UL>
+<LI><A NAME="tex2html2849"
+  HREF="node144.html#SECTION002511000000000000000"><SPAN CLASS="arabic">24</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Wektory</A>
+<LI><A NAME="tex2html2850"
+  HREF="node144.html#SECTION002512000000000000000"><SPAN CLASS="arabic">24</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Iteratory</A>
+<LI><A NAME="tex2html2851"
+  HREF="node144.html#SECTION002513000000000000000"><SPAN CLASS="arabic">24</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Operacje na kolekcjach</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html2852"
+  HREF="node145.html"><SPAN CLASS="arabic">24</SPAN>.<SPAN CLASS="arabic">2</SPAN> Algorytmy i&nbsp;obiekty funkcyjne</A>
+<UL>
+<LI><A NAME="tex2html2853"
+  HREF="node145.html#SECTION002521000000000000000"><SPAN CLASS="arabic">24</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Algorytmy</A>
+<LI><A NAME="tex2html2854"
+  HREF="node145.html#SECTION002522000000000000000"><SPAN CLASS="arabic">24</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Obiekty funkcyjne</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html2855"
+  HREF="node146.html"><SPAN CLASS="arabic">24</SPAN>.<SPAN CLASS="arabic">3</SPAN> Przykłady</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2834"
+  HREF="node142.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2840"
+  HREF="PRG2CPP.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2846"
+  HREF="node144.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2842"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2844"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2835"
+  HREF="node142.html">23.2 Przestrzenie nazw</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2841"
+  HREF="PRG2CPP.html">Programowanie w C++</A>
+<B>Dalej:</B> <A NAME="tex2html2847"
+  HREF="node144.html">24.1 Kolekcje i&nbsp;iteratory</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

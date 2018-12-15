@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>4. Podstawowe typy danych</TITLE>
+<META NAME="description" CONTENT="4. Podstawowe typy danych">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node22.html">
+<LINK REL="previous" HREF="node10.html">
+<LINK REL="up" HREF="PRG2CPP.html">
+<LINK REL="next" HREF="node15.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html843"
+  HREF="node13.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html849"
+  HREF="PRG2CPP.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html855"
+  HREF="node15.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html851"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html853"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html844"
+  HREF="node13.html">3.3 Predefiniowane nazwy (makra)</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html850"
+  HREF="PRG2CPP.html">Programowanie w C++</A>
+<B>Dalej:</B> <A NAME="tex2html856"
+  HREF="node15.html">4.1 Wstęp</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00500000000000000000"></A><A NAME="chap:typydan"></A>
+<BR>
+<SPAN CLASS="arabic">4</SPAN>. Podstawowe typy danych
+</H1>
+
+<P>
+W rozdziale tym omówimy wbudowane typy danych języka C/C++.
+Jest to zagadnienie fundamentalne w&nbsp;językach programowania,
+ponieważ każde dane muszą mieć zrozumiały dla komputera
+format (liczby, napisy, itd.) w&nbsp;pamięci, aby program mógł
+nimi jakoś manipulować. Jak się przekonamy, na podstawie
+typów już zdefiniowanych, możemy definiować nasze
+własne.
+Typem występującym w&nbsp;C/C++, a&nbsp;sprawiającym największe
+kłopoty początkującym, jest typ wskaźnikowy, a&nbsp;także, w&nbsp;C++,
+referencyjny (odniesieniowy). Ze wskaźnikami w&nbsp;C/C++ wiąże
+się ściśle typ tablicowy, którego dyskusję odłożymy do
+następnego rozdziału. Z&nbsp;kolei zastosowania odniesień dokładniej
+poznamy przy okazji omawiania funkcji i&nbsp;klas.
+
+<P>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Podrozdzia&#322;y</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html857"
+  HREF="node15.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Wstęp</A>
+<LI><A NAME="tex2html858"
+  HREF="node16.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Typy całkowite</A>
+<UL>
+<LI><A NAME="tex2html859"
+  HREF="node16.html#SECTION00521000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Użyteczne aliasy typów całkowitych</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html860"
+  HREF="node17.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> Typy zmiennopozycyjne</A>
+<LI><A NAME="tex2html861"
+  HREF="node18.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> Typ logiczny</A>
+<LI><A NAME="tex2html862"
+  HREF="node19.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">5</SPAN> Typy wyliczeniowe</A>
+<LI><A NAME="tex2html863"
+  HREF="node20.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">6</SPAN> Wskaźniki</A>
+<UL>
+<LI><A NAME="tex2html864"
+  HREF="node20.html#SECTION00561000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> Wskaźniki do zmiennych</A>
+<LI><A NAME="tex2html865"
+  HREF="node20.html#SECTION00562000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN> Wskaźniki generyczne</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html866"
+  HREF="node21.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">7</SPAN> Referencje</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html843"
+  HREF="node13.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html849"
+  HREF="PRG2CPP.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html855"
+  HREF="node15.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html851"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html853"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html844"
+  HREF="node13.html">3.3 Predefiniowane nazwy (makra)</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html850"
+  HREF="PRG2CPP.html">Programowanie w C++</A>
+<B>Dalej:</B> <A NAME="tex2html856"
+  HREF="node15.html">4.1 Wstęp</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

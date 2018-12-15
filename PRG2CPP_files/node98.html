@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>15.2 Metody ulotne</TITLE>
+<META NAME="description" CONTENT="15.2 Metody ulotne">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node99.html">
+<LINK REL="previous" HREF="node97.html">
+<LINK REL="up" HREF="node96.html">
+<LINK REL="next" HREF="node99.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2130"
+  HREF="node97.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2136"
+  HREF="node96.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2142"
+  HREF="node99.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2138"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2140"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2131"
+  HREF="node97.html">15.1 Metody stałe</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2137"
+  HREF="node96.html">15. Klasy (II)</A>
+<B>Dalej:</B> <A NAME="tex2html2143"
+  HREF="node99.html">15.3 Konstruktory - dalsze</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001620000000000000000"></A><A NAME="klasyd:metulot"></A>
+<BR>
+<SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">2</SPAN> Metody ulotne
+</H1>
+
+<P>
+Metody klasy mogą też być zdeklarowane jako metody ulotne
+(ang.&nbsp;<FONT COLOR="#7b003e"><I>volatile</I></FONT>).<A NAME="17677"></A>
+Tak jak metody stałe &bdquo;obiecują&rdquo;, że nie zmienią stanu obiektu,
+na rzecz którego zostały wywołane, tak funkcje ulotne
+obiecują, że przy dostępie do składowych nie będą stosowane
+żadne optymalizacje, polegające na przykład na pamiętaniu
+wartości składowej w&nbsp;pamięci podręcznej
+(ang.&nbsp;<FONT COLOR="#7b003e"><I>cache</I></FONT>) lub rejestrze procesora przed ponownym użyciem.
+Każde odwołanie się do składowej obiektu połączone będzie
+z&nbsp;odczytaniem na nowo jej aktualnej wartości, a&nbsp;modyfikacja wartości
+składowej wykonywana będzie natychmiast, bez ewentualnego buforowania.
+Z&nbsp;takich metod korzysta się rzadko, najczęściej wtedy, gdy stan
+obiektu może być zmieniony przez czynniki zewnętrzne, nieznane
+programowi. Taka <SPAN  CLASS="textit">asynchroniczna</SPAN> zmiana danych może mieć
+miejsce, na przykład, na skutek dołączenia do komputera
+jakichś czujników czy mierników pracujących w&nbsp;trybie <FONT COLOR="#7b003e"><I>on line</I></FONT>
+lub, jeszcze częściej, na skutek uruchomienia funkcji
+obsługi sygnałów czy też na skutek wielowątkowości programu.
+
+<P>
+Składnia definiowania metod ulotnych jest dokładnie taka sama
+jak składnia definiowania i&nbsp;deklarowania metod stałych; należy
+tylko słowo kluczowe
+<!--O--><span class='klucz'>const<!--C--></span>
+ zastąpić słowem kluczowym
+
+<!--O--><span class='klucz'>volatile<!--C--></span>. Metoda może być jednocześnie stała i&nbsp;ulotna.
+
+<P>
+Podobnie jak w&nbsp;przypadku modyfikatora
+<!--O--><span class='klucz'>const<!--C--></span>, modyfikatora
+
+<!--O--><span class='klucz'>volatile<!--C--></span>
+ nie można użyć w&nbsp;odniesieniu do konstruktora.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2130"
+  HREF="node97.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2136"
+  HREF="node96.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2142"
+  HREF="node99.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2138"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2140"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2131"
+  HREF="node97.html">15.1 Metody stałe</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2137"
+  HREF="node96.html">15. Klasy (II)</A>
+<B>Dalej:</B> <A NAME="tex2html2143"
+  HREF="node99.html">15.3 Konstruktory - dalsze</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

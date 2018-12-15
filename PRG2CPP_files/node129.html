@@ -1,0 +1,342 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>20.7 Wielodziedziczenie</TITLE>
+<META NAME="description" CONTENT="20.7 Wielodziedziczenie">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="previous" HREF="node128.html">
+<LINK REL="up" HREF="node122.html">
+<LINK REL="next" HREF="node130.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2634"
+  HREF="node128.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2638"
+  HREF="node122.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2644"
+  HREF="node130.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2640"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2642"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2635"
+  HREF="node128.html">20.6 Wirtualne destruktory</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2639"
+  HREF="node122.html">20. Dziedziczenie i polimorfizm</A>
+<B>Dalej:</B> <A NAME="tex2html2645"
+  HREF="node130.html">21. Wzorce</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002170000000000000000"></A><A NAME="dzie:wielod"></A>
+<BR>
+<SPAN CLASS="arabic">20</SPAN>.<SPAN CLASS="arabic">7</SPAN> Wielodziedziczenie
+</H1>
+
+<P>
+Jak już wspominaliśmy, w&nbsp;C++ klasa może dziedziczyć z&nbsp;wielu klas
+bazowych. Jest to narzędzie pozwalające na tworzenie skomplikowanych
+hierarchii dziedziczenia i&nbsp;daje spore możliwości programistyczne.
+Z drugiej jednak strony, zbytnie skomplikowanie struktury klas
+dziedziczących prowadzi wtedy do trudnego do opanowania i
+modyfikowania kodu. W zasadzie wielodziedziczenia należy zatem
+unikać, jeśli nie jest niezbędne. Poniżej podamy tylko podstawowe
+informacje na temat dziedziczenia wielobazowego &mdash;&nbsp;szczegółów
+należy szukać w&nbsp;bardziej zaawansowanych podręcznikach.
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Definiując klasę dziedziczącą z&nbsp;wielu klas wymieniamy je na liście
+dziedziczenia<A NAME="26342"></A><A NAME="26343"></A>
+po kolei, oddzielając przecinkami. Dla każdej z&nbsp;nich z&nbsp;osobna
+podajemy specyfikator dostępu (<!--O--><span class='klucz'>private<!--C--></span>,
+<!--O--><span class='klucz'>protected<!--C--></span>
+ lub
+
+<!--O--><span class='klucz'>public<!--C--></span>). Opuszczenie tego specyfikatora jest równoważne
+podaniu specyfikatora
+<!--O--><span class='klucz'>private<!--C--></span>
+ dla klas, a&nbsp;
+<!--O--><span class='klucz'>public<!--C--></span>
+
+dla struktur. Wszystkie klasy występujące na liście dziedziczenia
+muszą być kompilatorowi znane, &mdash;&nbsp;nie wystarczy deklaracja
+zapowiadająca.
+
+<P>
+Tak więc
+<pre><tt>       <b><font color="#0000FF">class</font></b> <font color="#008080">C</font> <b><font color="#0000FF">public</font></b> A<font color="#990000">,</font> B <font color="#FF0000">{</font>
+           <i><font color="#9A1900">// ...</font></i>
+       <font color="#FF0000">}</font><font color="#990000">;</font>
+</tt></pre>
+deklaruje klasę
+<!--O--><span class='klasa'>C<!--C--></span>
+ dziedziczącą publicznie z&nbsp;klasy
+<!--O--><span class='klasa'>A<!--C--></span>
+
+oraz prywatnie z&nbsp;klasy&nbsp;
+<!--O--><span class='klasa'>B<!--C--></span>. W zasadzie dopuszczalne jest,
+aby obie klasy bazowe zawierały składniki o&nbsp;tej samej nazwie:
+w&nbsp;klasie pochodnej trzeba się wtedy do takich składników odnosić
+poprzez nazwę kwalifikowaną nazwą klasy (z czterokropkiem).
+Jednak trzeba pamiętać, że użycie kwalifikowanych nazw wyłącza
+polimorfizm.
+
+<P>
+Obiekty klasy pochodnej będą zawierać podobiekty wszystkich
+klas bazowych. Podczas tworzenia obiektów klasy pochodnej można
+więc jawnie wywoływać konstruktory dla dziedziczonych podobiektów;
+w&nbsp;przeciwnym przypadku użyte będą konstrukory domyślne.
+Oczywiście, jak zwykle, konstruktory klas bazowych mogą
+być wywołane tylko poprzez użycie listy inicjalizacyjnej.
+
+<P>
+
+<P>
+<BR>
+
+<P>
+W&nbsp;poniższym przykładzie definiujemy abstrakcyjną klasę
+
+<!--O--><span class='klasa'>DoDruku<!--C--></span>
+ opisującą funkcjonalność &bdquo;bycia drukowalnym&rdquo;.
+Klasa ma jedno pole określające strumień wyjściowy oraz jedną
+czysto wirtualną metodę
+<!--O--><span class='funkcja'>druk<!--C--></span>. Mamy również standardową
+klasę
+<!--O--><span class='klasa'>Osoba<!--C--></span>, dziedziczącą z&nbsp;
+<!--O--><span class='klasa'>DoDruku<!--C--></span>, a&nbsp;co za tym
+idzie definiującą metodę
+<!--O--><span class='funkcja'>druk<!--C--></span>. Zauważmy, że na
+liście inicjalizacyjnej konstruktora tej klasy wywołujemy jawnie
+konstruktor
+<!--O--><span class='klasa'>DoDruku<!--C--></span>
+ (linia&nbsp;21) podając jako argument
+odpowiedni strumień (domyślnie jest to
+<!--O--><span class='zmienna'>cout<!--C--></span>).
+Definiujemy też klasę abstrakcyjną
+<!--O--><span class='klasa'>Figura<!--C--></span>
+ i&nbsp;dwie
+dziedziczące z&nbsp;niej klasy
+<!--O--><span class='klasa'>Kolo<!--C--></span>
+ i&nbsp;
+<!--O--><span class='klasa'>Kwadrat<!--C--></span>. Obie
+implementują metodę
+<!--O--><span class='funkcja'>druk<!--C--></span>, ale tylko
+<!--O--><span class='klasa'>Kolo<!--C--></span>
+
+dziedziczy również z&nbsp;
+<!--O--><span class='klasa'>DoDruku<!--C--></span>, a&nbsp;zatem na liście
+inicjalizacyjnej jej konstruktora pojawiają się jawne wywołania
+dwóch klas bazowych (linia&nbsp;43).
+<A NAME="multbas.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">171</SPAN>:</SPAN>
+      <A NAME="tex2html179"
+  HREF="source-files/multbas.cpp">
+<!--O--><span class='downl'>multbas.cpp<!--C--></span></A>
+<A NAME="26852"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Wielodziedziczenie</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;string&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cmath&gt;</font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     5.  </font>
+ <font SIZE="-2" color="black">     6.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">DoDruku</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     7.  </font><b><font color="#0000FF">protected</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">     8.  </font>    ostream<font color="#990000">&amp;</font> str<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    10.  </font>    <b><font color="#000000">DoDruku</font></b><font color="#990000">(</font>ostream<font color="#990000">&amp;</font> str<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    11.  </font>        <font color="#990000">:</font> <b><font color="#000000">str</font></b><font color="#990000">(</font>str<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    12.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    13.  </font>    <b><font color="#0000FF">virtual</font></b> <font color="#009900">void</font> <b><font color="#000000">druk</font></b><font color="#990000">()</font> <b><font color="#0000FF">const</font></b> <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    14.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>
+ <font SIZE="-2" color="black">    16.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Osoba</font> <font color="#990000">:</font> <b><font color="#0000FF">public</font></b> DoDruku <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    17.  </font>    <font color="#008080">string</font> imie<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font>    <font color="#009900">int</font>    ur<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    20.  </font>    <b><font color="#000000">Osoba</font></b><font color="#990000">(</font><font color="#008080">string</font> i<font color="#990000">,</font> <font color="#009900">int</font> u<font color="#990000">,</font> ostream<font color="#990000">&amp;</font> str <font color="#990000">=</font> cout<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    21.  </font>        <font color="#990000">:</font> <b><font color="#000000">DoDruku</font></b><font color="#990000">(</font>str<font color="#990000">),</font> <b><font color="#000000">imie</font></b><font color="#990000">(</font>i<font color="#990000">),</font> <b><font color="#000000">ur</font></b><font color="#990000">(</font>u<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    22.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    23.  </font>
+ <font SIZE="-2" color="black">    24.  </font>    <font color="#009900">void</font> <b><font color="#000000">druk</font></b><font color="#990000">()</font> <b><font color="#0000FF">const</font></b> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    25.  </font>        str <font color="#990000">&lt;&lt;</font> imie <font color="#990000">+</font> <font color="#FF0000">" ("</font> <font color="#990000">&lt;&lt;</font> ur <font color="#990000">&lt;&lt;</font> <font color="#FF0000">")"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    26.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    27.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    28.  </font>
+ <font SIZE="-2" color="black">    29.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Figura</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    30.  </font><b><font color="#0000FF">protected</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    31.  </font>    <b><font color="#0000FF">static</font></b> <b><font color="#0000FF">const</font></b> <font color="#009900">double</font> PI<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    32.  </font>    <font color="#008080">string</font> name<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    33.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    34.  </font>    <b><font color="#0000FF">virtual</font></b> <font color="#009900">double</font> <b><font color="#000000">getPole</font></b><font color="#990000">()</font> <b><font color="#0000FF">const</font></b> <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    35.  </font>    <b><font color="#000000">Figura</font></b><font color="#990000">(</font><font color="#008080">string</font> name<font color="#990000">)</font> <font color="#990000">:</font> <b><font color="#000000">name</font></b><font color="#990000">(</font>name<font color="#990000">)</font> <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    36.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    37.  </font><b><font color="#0000FF">const</font></b> <font color="#009900">double</font> Figura<font color="#990000">::</font>PI <font color="#990000">=</font> <font color="#993399">4</font><font color="#990000">*</font><b><font color="#000000">atan</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">.);</font>
+ <font SIZE="-2" color="black">    38.  </font>
+ <font SIZE="-2" color="black">    39.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Kolo</font> <font color="#990000">:</font> <b><font color="#0000FF">public</font></b> Figura<font color="#990000">,</font> <b><font color="#0000FF">public</font></b> DoDruku <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    40.  </font>    <font color="#009900">double</font> prom<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    41.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    42.  </font>    <b><font color="#000000">Kolo</font></b><font color="#990000">(</font><font color="#008080">string</font> n<font color="#990000">,</font> <font color="#009900">double</font> r<font color="#990000">,</font> ostream<font color="#990000">&amp;</font> str <font color="#990000">=</font> cout<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    43.  </font>        <font color="#990000">:</font> <b><font color="#000000">Figura</font></b><font color="#990000">(</font>n<font color="#990000">),</font> <b><font color="#000000">DoDruku</font></b><font color="#990000">(</font>str<font color="#990000">),</font> <b><font color="#000000">prom</font></b><font color="#990000">(</font>r<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    44.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    45.  </font>    <font color="#009900">double</font> <b><font color="#000000">getPole</font></b><font color="#990000">()</font> <b><font color="#0000FF">const</font></b> <font color="#FF0000">{</font> <b><font color="#0000FF">return</font></b> PI<font color="#990000">*</font>prom<font color="#990000">*</font>prom<font color="#990000">;</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    46.  </font>    <font color="#009900">void</font>   <b><font color="#000000">druk</font></b><font color="#990000">()</font> <b><font color="#0000FF">const</font></b> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    47.  </font>        str <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"kolo "</font> <font color="#990000">&lt;&lt;</font> name <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" o promieniu "</font>
+ <font SIZE="-2" color="black">    48.  </font>            <font color="#990000">&lt;&lt;</font> prom <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" i polu "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#000000">getPole</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    49.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    50.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    51.  </font>
+ <font SIZE="-2" color="black">    52.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Kwadrat</font> <font color="#990000">:</font> <b><font color="#0000FF">public</font></b> Figura <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    53.  </font>    <font color="#009900">double</font> side<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    54.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    55.  </font>    <b><font color="#000000">Kwadrat</font></b><font color="#990000">(</font><font color="#008080">string</font> n<font color="#990000">,</font> <font color="#009900">double</font> s<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    56.  </font>        <font color="#990000">:</font> <b><font color="#000000">Figura</font></b><font color="#990000">(</font>n<font color="#990000">),</font><b><font color="#000000">side</font></b><font color="#990000">(</font>s<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    57.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    58.  </font>    <font color="#009900">double</font> <b><font color="#000000">getPole</font></b><font color="#990000">()</font> <b><font color="#0000FF">const</font></b> <font color="#FF0000">{</font> <b><font color="#0000FF">return</font></b> side<font color="#990000">*</font>side<font color="#990000">;</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    59.  </font>    <font color="#009900">void</font> <b><font color="#000000">druk</font></b><font color="#990000">()</font> <b><font color="#0000FF">const</font></b> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    60.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"kwadrat "</font> <font color="#990000">&lt;&lt;</font> name <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" o boku "</font>
+ <font SIZE="-2" color="black">    61.  </font>             <font color="#990000">&lt;&lt;</font> side <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" i polu "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#000000">getPole</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    62.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    63.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    64.  </font>
+ <font SIZE="-2" color="black">    65.  </font><font color="#009900">void</font> <b><font color="#000000">drukTable</font></b><font color="#990000">(</font>DoDruku<font color="#990000">*</font> tab<font color="#990000">[],</font> <font color="#009900">int</font> size<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    66.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> size<font color="#990000">;</font> <font color="#990000">++</font>i<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    67.  </font>        tab<font color="#990000">[</font>i<font color="#990000">]-&gt;</font><b><font color="#000000">druk</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    68.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    69.  </font>
+ <font SIZE="-2" color="black">    70.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    71.  </font>    <font color="#008080">Kolo</font>    <b><font color="#000000">ci1</font></b><font color="#990000">(</font><font color="#FF0000">"pierwsze"</font><font color="#990000">,</font><font color="#993399">2</font><font color="#990000">,</font>cout<font color="#990000">),</font>
+ <font SIZE="-2" color="black">    72.  </font>          <font color="#990000">*</font>pci2 <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Kolo</font></b><font color="#990000">(</font><font color="#FF0000">"drugie"</font><font color="#990000">,</font><font color="#993399">3</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    73.  </font>    <font color="#008080">Kwadrat</font> <b><font color="#000000">sq1</font></b><font color="#990000">(</font><font color="#FF0000">"pierwszy"</font><font color="#990000">,</font><font color="#993399">4</font><font color="#990000">),</font>
+ <font SIZE="-2" color="black">    74.  </font>          <font color="#990000">*</font>psq2 <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Kwadrat</font></b><font color="#990000">(</font><font color="#FF0000">"drugi"</font><font color="#990000">,</font><font color="#993399">5</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    75.  </font>    <font color="#008080">Osoba</font>   <b><font color="#000000">ps1</font></b><font color="#990000">(</font><font color="#FF0000">"Jim"</font><font color="#990000">,</font><font color="#993399">1972</font><font color="#990000">),</font>
+ <font SIZE="-2" color="black">    76.  </font>          <font color="#990000">*</font>pps2 <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Osoba</font></b><font color="#990000">(</font><font color="#FF0000">"Tom"</font><font color="#990000">,</font><font color="#993399">1978</font><font color="#990000">,</font>cout<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    77.  </font>
+ <font SIZE="-2" color="black">    78.  </font>    DoDruku<font color="#990000">*</font> tab<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">{</font><font color="#990000">&amp;</font>ci1<font color="#990000">,</font> <font color="#990000">&amp;</font>ps1<font color="#990000">,</font> pci2<font color="#990000">,</font> pps2<font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    79.  </font>
+ <font SIZE="-2" color="black">    80.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"** Drukowanie obiektow typu DoDruku"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    81.  </font>    <b><font color="#000000">drukTable</font></b><font color="#990000">(</font>tab<font color="#990000">,</font><font color="#993399">4</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    82.  </font>
+ <font SIZE="-2" color="black">    83.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"** Drukowanie kwadratow"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    84.  </font>    sq1<font color="#990000">.</font><b><font color="#000000">druk</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    85.  </font>    psq2<font color="#990000">-&gt;</font><b><font color="#000000">druk</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    86.  </font>
+ <font SIZE="-2" color="black">    87.  </font>    <b><font color="#0000FF">delete</font></b> pci2<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    88.  </font>    <b><font color="#0000FF">delete</font></b> psq2<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    89.  </font>    <b><font color="#0000FF">delete</font></b> pps2<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    90.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+W liniach&nbsp;65-68 definiujemy wolną (globalną) funkcję drukującą
+obiekty typu
+<!--O--><span class='klasa'>DoDruku<!--C--></span>. Zauważmy, że w&nbsp;tablicy wskaźników
+przesyłanej do tej funkcji podczas jej wywołania (linia&nbsp;81) mogliśmy
+umieścić adresy obiektów typu
+<!--O--><span class='klasa'>Osoba<!--C--></span>
+ i&nbsp;
+<!--O--><span class='klasa'>Kolo<!--C--></span>, ale nie
+
+<!--O--><span class='klasa'>Kwadrat<!--C--></span>, chociaż ta klasa też definiuje metodę
+
+<!--O--><span class='funkcja'>druk<!--C--></span>. Nie dziedziczy jednak z&nbsp;
+<!--O--><span class='klasa'>DoDruk<!--C--></span>, a&nbsp;więc
+wskaźnik do obiektu tej klasy nie może mieć typu statycznego
+
+<!--O--><span class='typ'>DoDruku*<!--C--></span>. Program drukuje
+<PRE>
+    ** Drukowanie obiektow typu DoDruku
+    kolo pierwsze o promieniu 2 i polu 12.5664
+    Jim (1972)
+    kolo drugie o promieniu 3 i polu 28.2743
+    Tom (1978)
+    ** Drukowanie kwadratow
+    kwadrat pierwszy o boku 4 i polu 16
+    kwadrat drugi o boku 5 i polu 25
+</PRE>
+Charakterystyczna w&nbsp;powyższym przykładzie była klasa abstrakcyjna
+
+<!--O--><span class='klasa'>DoDruku<!--C--></span>. Deklaruje ona jedną czysto wirtualną metodę
+określającą pewną funkcjonalność klas, często zupełnie
+niezwiązanym, z&nbsp;niej dziedziczących: wszystkie na pewno zawierać
+będą metodę
+<!--O--><span class='funkcja'>druk<!--C--></span>
+ pozwalającą na drukowanie informacji
+o&nbsp;obiekcie. Takie proste klasy, zwykle abstrakcyjne, deklarujące
+pewną ogólną funkcjonalność, nazywamy klasami
+<FONT COLOR="#7b003e"><B>domieszkowymi</B></FONT> (ang.&nbsp;<FONT COLOR="#7b003e"><I>mix-in class</I></FONT>);
+<A NAME="26383"></A> odpowiadają one z&nbsp;grubsza interfejsom
+z&nbsp;Javy.<A NAME="26384"></A> O ile skomplikowane
+wielodziedziczenie, ogólnie rzecz biorąc, nie jest zalecane, jeśli
+tylko można go uniknąć, to dodawanie do listy dziedziczenia prostych
+klas domieszkowych jest stosunkowo bezpieczne i&nbsp;często bardzo wygodne.
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2634"
+  HREF="node128.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2638"
+  HREF="node122.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2644"
+  HREF="node130.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2640"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2642"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2635"
+  HREF="node128.html">20.6 Wirtualne destruktory</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2639"
+  HREF="node122.html">20. Dziedziczenie i polimorfizm</A>
+<B>Dalej:</B> <A NAME="tex2html2645"
+  HREF="node130.html">21. Wzorce</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

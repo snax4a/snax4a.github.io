@@ -1,0 +1,566 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>14.8 Tworzenie obiektów</TITLE>
+<META NAME="description" CONTENT="14.8 Tworzenie obiektów">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node94.html">
+<LINK REL="previous" HREF="node92.html">
+<LINK REL="up" HREF="node85.html">
+<LINK REL="next" HREF="node94.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2052"
+  HREF="node92.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2058"
+  HREF="node85.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2064"
+  HREF="node94.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2060"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2062"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2053"
+  HREF="node92.html">14.7 Destruktory</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2059"
+  HREF="node85.html">14. Klasy (I)</A>
+<B>Dalej:</B> <A NAME="tex2html2065"
+  HREF="node94.html">14.9 Tablice obiektów</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001580000000000000000"></A><A NAME="klasy:tworzob"></A>
+<BR>
+<SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">8</SPAN> Tworzenie obiektów
+</H1>
+
+<P>
+Definiując zmienne obiektowe klasy należy określić, jaki konstruktor
+ma być wywołany dla kreowanego obiektu. Robi się to
+zwykle podając w&nbsp;nawiasach argumenty dla konstruktora. Jeśli ma to
+być konstruktor domyślny, czyli bezargumentowy, to nawiasy czasem
+można umieścić, czasem trzeba umieścić, a&nbsp;czasem nie wolno
+umieszczać w&nbsp;definicji!
+
+<P>
+Rozpatrzmy na przykładzie sposoby tworzenia obiektów i&nbsp;kolejność
+wywoływania konstruktorów i&nbsp;destruktorów.
+
+<P>
+W poniższym programie definiujemy klasę
+<!--O--><span class='klasa'>Klasa<!--C--></span>.
+Ma ona konstruktor z&nbsp;jednym parametrem całkowitym (<span class="ding">&#x278B;</span>).
+W takim razie żaden konstruktor bezparametrowy (domyślny) nie jest
+generowany automatycznie. Zatem, jeśli chcemy, żeby taki konstruktor
+istniał, to musimy sami go zdefiniować (<span class="ding">&#x278A;</span>).
+<BR><A NAME="tworzob.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">107</SPAN>:</SPAN>
+      <A NAME="tex2html114"
+  HREF="source-files/tworzob.cpp">
+<!--O--><span class='downl'>tworzob.cpp<!--C--></span></A>
+<A NAME="17108"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Tworzenie obiektów</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Klasa</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <b><font color="#0000FF">static</font></b> <font color="#009900">char</font> ID<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">int</font>          a<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>    <font color="#009900">char</font>        id<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">     9.  </font>    <b><font color="#000000">Klasa</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>                                     <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">    10.  </font>        id <font color="#990000">=</font> ID<font color="#990000">++;</font>
+ <font SIZE="-2" color="black">    11.  </font>        a  <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    12.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Ctor()    "</font> <font color="#990000">&lt;&lt;</font> id <font color="#990000">&lt;&lt;</font> a <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    14.  </font>
+ <font SIZE="-2" color="black">    15.  </font>    <b><font color="#000000">Klasa</font></b><font color="#990000">(</font><font color="#009900">int</font> aa<font color="#990000">)</font> <font color="#FF0000">{</font>                               <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    16.  </font>        id <font color="#990000">=</font> ID<font color="#990000">++;</font>
+ <font SIZE="-2" color="black">    17.  </font>        a  <font color="#990000">=</font> aa<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Ctor(int) "</font> <font color="#990000">&lt;&lt;</font> id <font color="#990000">&lt;&lt;</font> a <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    20.  </font>
+ <font SIZE="-2" color="black">    21.  </font>    <font color="#990000">~</font><b><font color="#000000">Klasa</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>                                    <span class="ding">&#x278C;</span>
+ <font SIZE="-2" color="black">    22.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Dtor      "</font> <font color="#990000">&lt;&lt;</font> id <font color="#990000">&lt;&lt;</font> a <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    23.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    24.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    25.  </font><font color="#009900">char</font> Klasa<font color="#990000">::</font>ID <font color="#990000">=</font> <font color="#FF0000">'A'</font><font color="#990000">;</font>                             <span class="ding">&#x278D;</span>
+ <font SIZE="-2" color="black">    26.  </font>
+ <font SIZE="-2" color="black">    27.  </font><font color="#008080">Klasa</font> k1<font color="#990000">;</font>                          <i><font color="#9A1900">// &lt;- A</font></i>
+ <font SIZE="-2" color="black">    28.  </font><i><font color="#9A1900">//Klasa ka();  // NIE!</font></i>
+ <font SIZE="-2" color="black">    29.  </font>
+ <font SIZE="-2" color="black">    30.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    31.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Wchodzimy do funkcji </font><font color="#CC33CC">\'</font><font color="#FF0000">main</font><font color="#CC33CC">\'</font><font color="#FF0000">"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    32.  </font>
+ <font SIZE="-2" color="black">    33.  </font>    <i><font color="#9A1900">// Klasa kb = Klasa; // NIE!</font></i>
+ <font SIZE="-2" color="black">    34.  </font>    <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    35.  </font>        <font color="#008080">Klasa</font> k3 <font color="#990000">=</font> <b><font color="#000000">Klasa</font></b><font color="#990000">();</font>        <i><font color="#9A1900">// &lt;- C</font></i>
+ <font SIZE="-2" color="black">    36.  </font>        <font color="#008080">Klasa</font> k4 <font color="#990000">=</font> <b><font color="#000000">Klasa</font></b><font color="#990000">(</font><font color="#993399">4</font><font color="#990000">);</font>       <i><font color="#9A1900">// &lt;- D</font></i>
+ <font SIZE="-2" color="black">    37.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    38.  </font>
+ <font SIZE="-2" color="black">    39.  </font>    Klasa<font color="#990000">*</font> pk5 <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Klasa<font color="#990000">;</font>        <i><font color="#9A1900">// &lt;- E</font></i>
+ <font SIZE="-2" color="black">    40.  </font>    Klasa<font color="#990000">*</font> pk6 <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Klasa</font></b><font color="#990000">();</font>      <i><font color="#9A1900">// &lt;- F</font></i>
+ <font SIZE="-2" color="black">    41.  </font>    Klasa<font color="#990000">*</font> pk7 <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Klasa</font></b><font color="#990000">(</font><font color="#993399">7</font><font color="#990000">);</font>     <i><font color="#9A1900">// &lt;- G</font></i>
+ <font SIZE="-2" color="black">    42.  </font>
+ <font SIZE="-2" color="black">    43.  </font>    <b><font color="#0000FF">delete</font></b> pk6<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    44.  </font>    <b><font color="#0000FF">delete</font></b> pk7<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    45.  </font>
+ <font SIZE="-2" color="black">    46.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Wychodzimy z funkcji </font><font color="#CC33CC">\'</font><font color="#FF0000">main</font><font color="#CC33CC">\'</font><font color="#FF0000">"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    47.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    48.  </font>
+ <font SIZE="-2" color="black">    49.  </font><font color="#008080">Klasa</font> <b><font color="#000000">k2</font></b><font color="#990000">(</font><font color="#993399">2</font><font color="#990000">);</font>                       <i><font color="#9A1900">// &lt;- B</font></i>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Pola klasy są typu
+<!--O--><span class='typ'>int<!--C--></span>
+ (składowa
+<!--O--><span class='zmienna'>a<!--C--></span>) i&nbsp;typu
+
+<!--O--><span class='typ'>char<!--C--></span>
+ (składowa
+<!--O--><span class='zmienna'>id<!--C--></span>). Są to pola niestatyczne, a&nbsp;więc
+odpowiednie składowe będą istnieć w&nbsp;każdym obiekcie klasy.
+Prócz tego deklarujemy w&nbsp;klasie pole statyczne, też typu
+<!--O--><span class='typ'>char<!--C--></span>
+
+o&nbsp;nazwie
+<!--O--><span class='zmienna'>ID<!--C--></span>. Zgodnie z&nbsp;tym, co mówiliśmy na temat składowych
+statycznych klasy, deklaracja pola statycznego nie wystarczy: trzeba
+tę zmienną statyczną jeszcze zdefiniować poza klasą
+(czyli spowodować przydzielenie dla niej pamięci).
+Robimy to w&nbsp;linii&nbsp;<span class="ding">&#x278D;</span>.
+
+<P>
+Oba konstruktory zawierają instrukcję
+'
+<FONT COLOR="#000000"><TT>id = ID++;</TT></FONT>', która w&nbsp;składowej
+<!--O--><span class='zmienna'>id<!--C--></span>
+ tworzonego
+obiektu zapamiętuje aktualną wartość zmiennej statycznej
+
+<!--O--><span class='zmienna'>ID<!--C--></span>
+ (istniejącej w&nbsp;jednym egzemplarzu), po czym zwiększa
+tę zmienną o&nbsp;jeden, zmieniając znak
+będący wartością tej zmiennej na następny według kolejności
+kodów ASCII (zmienna była zainicjowana kodem ASCII
+litery&nbsp;'A' w&nbsp;linii&nbsp;<span class="ding">&#x278D;</span>). W ten sposób każdy tworzony obiekt będzie
+miał unikalną składową znakową
+<!--O--><span class='zmienna'>id<!--C--></span>
+ identyfikującą ten
+obiekt. Oba konstruktory i&nbsp;destruktor (<span class="ding">&#x278C;</span>)
+drukują komunikat, pozwalający nam śledzić kolejność, w&nbsp;jakiej
+obiekty są tworzone i&nbsp;usuwane.
+
+<P>
+Zobaczmy najpierw, jak obiekty można tworzyć.
+
+<P>
+W linii&nbsp;A, za pomocą instrukcji '
+<FONT COLOR="#000000"><TT>Klasa k1;</TT></FONT>' tworzymy zmienną
+globalną
+<!--O--><span class='zmienna'>k1<!--C--></span>. Zauważmy, że taka definicja nie różni się
+składniowo niczym od definicji zmiennej typu wbudowanego,
+na przykład '
+<FONT COLOR="#000000"><TT>int k;</TT></FONT>' &mdash;&nbsp;najpierw podajemy nazwę typu,
+w&nbsp;tym przypadku jest to
+<!--O--><span class='klasa'>Klasa<!--C--></span>, a&nbsp;następnie nazwę
+deklarowanej/definiowanej zmiennej. Przy tworzeniu obiektu użyty
+zostanie konstruktor domyślny (bezargumentowy), bo żaden argument nie
+został podany. Przy tej formie definiowania zmiennej obiektowej
+z&nbsp;wykorzystaniem konstruktora domyślnego <FONT COLOR="#7b003e"><I>nie wolno</I></FONT> umieszczać
+nawiasów: wykomentowana następna linia ('
+<FONT COLOR="#000000"><TT>Klasa ka();</TT></FONT>') byłaby
+nielegalna. Jest tak dlatego, że
+byłaby ona niejednoznaczna, nie dałoby się bowiem odróżnić tej
+<FONT COLOR="#7b003e"><I>definicji</I></FONT> zmiennej od <FONT COLOR="#7b003e"><I>deklaracji</I></FONT> funkcji bezparametrowej
+o&nbsp;nazwie
+<!--O--><span class='funkcja'>ka<!--C--></span>
+ i&nbsp;typie zwracanym
+<!--O--><span class='klasa'>Klasa<!--C--></span>
+ (standard mówi,
+że jeśli coś może być zinterpretowane jako deklaracja, to jest
+deklaracją).
+
+<P>
+W ostatniej lini w&nbsp;podobny sposób tworzymy obiekt
+<!--O--><span class='zmienna'>k2<!--C--></span>
+
+za pomocą instrukcji '
+<FONT COLOR="#000000"><TT>Klasa k2(2);</TT></FONT>'. Teraz użyty ma być
+konstruktor jednoparametrowy, zatem argument dla tego konstruktora
+podajemy w&nbsp;nawiasie, tak jakby
+<!--O--><span class='zmienna'>k2<!--C--></span>
+ było nazwą wywoływanej
+funkcji. Obecność nazwy typu po lewej stronie powoduje jednak, że
+niejednoznaczności nie ma &mdash;&nbsp;składnia tej instrukcji nie odpowiada
+żadnej możliwej formie wywołania funkcji. Zauważmy, że
+<!--O--><span class='zmienna'>k2<!--C--></span>
+
+nie jest tu wcale nazwą konstruktora, który przecież nazywa
+się
+<!--O--><span class='funkcja'>Klasa<!--C--></span>, a&nbsp;jest nazwą tworzonego obiektu!
+
+<P>
+W linii&nbsp;C widzimy inną formę definicji obiektu:
+'
+<FONT COLOR="#000000"><TT>Klasa k3 = Klasa();</TT></FONT>'. Teraz to nie nazwa tworzonego obiektu,
+a&nbsp;nazwa typu (klasy) występuje tak, jakby była nazwą wywoływanej
+funkcji. Zauważmy, że
+<!--O--><span class='zmienna'>k3<!--C--></span>
+ jest tu nazwą <FONT COLOR="#7b003e"><I>obiektu</I></FONT>,
+a&nbsp;nie referencji czy wskaźnika do obiektu, jak
+w&nbsp;Javie<A NAME="16633"></A> (w Javie obiekty w&nbsp;ogóle
+nie mają nazw &mdash;&nbsp;nazwy mają tylko odnośniki do
+nich). Ponieważ w&nbsp;nawiasie nie podaliśmy żadnych argumentów,
+użyty będzie konstruktor domyślny. Przy tej formie tworzenia
+obiektów (poprzez nazwę klasy a&nbsp;nie obiektu) z&nbsp;wykorzystaniem
+konstruktora domyślnego <FONT COLOR="#7b003e"><I>trzeba</I></FONT>
+użyć nawiasów &mdash;&nbsp;zatem wykomentowana linia
+'
+<FONT COLOR="#000000"><TT>Klasa kb = Klasa;</TT></FONT>' byłaby
+nielegalna. W linii&nbsp;D podobnie tworzymy obiekt
+<!--O--><span class='zmienna'>k4<!--C--></span>, tym
+razem argument w&nbsp;nawiasie podajemy, więc wywołany zostanie
+konstruktor jednoparametrowy.
+
+<P>
+W liniach&nbsp;E, F i&nbsp;Gtworzymy trzy obiekty klasy
+<!--O--><span class='klasa'>Klasa<!--C--></span>, tym razem
+na stercie, za pomocą operatora
+<!--O--><span class='klucz'>new<!--C--></span>. Ponieważ operator ten
+zwraca adres utworzonego obiektu, więc wpisujemy go do zmiennej typu
+wskaźnikowego
+<!--O--><span class='typ'>Klasa*<!--C--></span>. Nazwy
+<!--O--><span class='zmienna'>pk5<!--C--></span>,
+<!--O--><span class='zmienna'>pk6<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='zmienna'>pk7<!--C--></span>
+ są więc nazwami wskaźników, a&nbsp;nie nazwami
+utworzonych obiektów; same obiekty nazw nie mają. Zauważmy, że
+teraz, tworząc obiekt z&nbsp;wykorzystaniem konstruktora domyślnego
+możemy (linia&nbsp;F), ale nie musimy (linia&nbsp;39), użyć nawiasów.
+
+<P>
+To jeszcze nie wszystkie formy definiowania nowych obiektów!
+Jeśli
+<!--O--><span class='zmienna'>k1<!--C--></span>
+ byłoby nazwą już istniejącego obiektu klasy
+
+<!--O--><span class='klasa'>Klasa<!--C--></span>, to możliwe byłyby też definicje
+<pre><tt>       <font color="#008080">Klasa</font> k8 <font color="#990000">=</font> k1<font color="#990000">;</font>
+       <font color="#008080">Klasa</font> <b><font color="#000000">k9</font></b><font color="#990000">(</font>k1<font color="#990000">);</font>
+</tt></pre>
+Takie formy tworzenia obiektów poznamy przy okazji omawiania
+    konstruktorów <A HREF="node99.html#klasyd:konkop">kopiujących</A> .
+
+<P>
+Podsumowując, obiekty klas można definiować na następujące
+sposoby (zakładamy, że jest zdefiniowany publiczny konstruktor
+domyślny i&nbsp;konstruktor akceptujący jeden argument typu
+<!--O--><span class='typ'>int<!--C--></span>;
+w ostatnich dwóch przypadkach musi istnieć konstruktor kopiujący):
+<PRE>
+    Klasa a;
+    Klasa a(5);
+
+    Klasa a = Klasa();
+    Klasa a = Klasa(5);
+
+    Klasa* pa = new Klasa;
+    Klasa* pa = new Klasa();
+    Klasa* pa = new Klasa(5);
+
+    Klasa b = a;
+    Klasa b(a);
+</PRE>
+
+<P>
+Zwróćmy teraz uwagę na kolejność tworzenia i&nbsp;usuwania obiektów.
+Pomocny będzie tu wydruk programu, w&nbsp;którym każde wywołanie
+konstruktora lub destruktora zostawia &bdquo;ślad&rdquo; (tradycyjnie skrót
+<SPAN  CLASS="textit">ctor</SPAN> oznacza konstruktor, a&nbsp;<SPAN  CLASS="textit">dtor</SPAN> &mdash;&nbsp;destruktor):
+<PRE>
+    Ctor()    A0
+    Ctor(int) B2
+    Wchodzimy do funkcji 'main'
+    Ctor()    C0
+    Ctor(int) D4
+    Dtor      D4
+    Dtor      C0
+    Ctor()    E0
+    Ctor()    F0
+    Ctor(int) G7
+    Dtor      F0
+    Dtor      G7
+    Wychodzimy z funkcji 'main'
+    Dtor      B2
+    Dtor      A0
+</PRE>
+Najpierw tworzone są obiekty globalne, w&nbsp;kolejności ich definicji,
+a&nbsp;zatem obiekt
+<!--O--><span class='zmienna'>k1<!--C--></span>
+ o&nbsp;identyfikatorze
+<!--O--><span class='zmienna'>A<!--C--></span>
+
+i&nbsp;obiekt
+<!--O--><span class='zmienna'>k2<!--C--></span>
+ o&nbsp;identyfikatorze
+<!--O--><span class='zmienna'>B<!--C--></span>
+ i&nbsp;składowej
+
+<!--O--><span class='zmienna'>a<!--C--></span>
+ wynoszącej&nbsp;2. Definicja tego drugiego obiektu występuje
+na samym końcu programu. Leży jednak w&nbsp;zasięgu globalnym
+(poza wszystkimi funkcjami i&nbsp;klasami),
+a&nbsp;zatem obiekt zostanie utworzony jeszcze <FONT COLOR="#7b003e"><I>przed</I></FONT> wejściem do
+funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>. Na wydruku widzimy, że rzeczywiście
+konstruktory obiektów o&nbsp;identyfikatorach
+<!--O--><span class='zmienna'>A<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>B<!--C--></span>
+
+wywołane zostały przed wejściem do
+<!--O--><span class='funkcja'>main<!--C--></span>.
+
+<P>
+Następnie, już wewnątrz funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>, tworzone są zmienne
+
+<!--O--><span class='zmienna'>k3<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>k4<!--C--></span>
+ o&nbsp;identyfikatorach&nbsp;
+<!--O--><span class='zmienna'>C<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='zmienna'>D<!--C--></span>. Zdefiniowane są one lokalnie wewnątrz bloku
+ograniczonego
+nawiasami klamrowymi. Zatem natychmiast po wyjściu
+sterowania z&nbsp;tego bloku są niszczone w&nbsp;kolejności odwrotnej do tej,
+w&nbsp;jakiej zostały utworzone w&nbsp;tym bloku: najpierw więc usuwany jest
+obiekt o&nbsp;identyfikatorze
+<!--O--><span class='zmienna'>D<!--C--></span>, a&nbsp;potem obiekt
+o&nbsp;identyfikatorze&nbsp;
+<!--O--><span class='zmienna'>C<!--C--></span>.
+
+<P>
+Trzy instrukcje następujące za blokiem powodują powstanie obiektów
+o&nbsp;identyfikatorach&nbsp;
+<!--O--><span class='zmienna'>E<!--C--></span>,
+<!--O--><span class='zmienna'>F<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>G<!--C--></span>.
+Dwa z&nbsp;nich natychmiast usuwamy &bdquo;ręcznie&rdquo; za pomocą
+<!--O--><span class='klucz'>delete<!--C--></span>.
+Następnie funkcja
+<!--O--><span class='funkcja'>main<!--C--></span>
+ kończy swoje działanie. Teraz
+dopiero usuwane są obiekty zdefiniowane w&nbsp;zasięgu globalnym
+
+<!--O--><span class='zmienna'>B<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>A<!--C--></span>. Jak widzimy z&nbsp;wydruku, usuwane są
+w&nbsp;kolejności odwrotnej niż ta, w&nbsp;jakiej zostały utworzone.
+
+<P>
+Obiekt wskazywany przez wskaźnik
+<!--O--><span class='zmienna'>pk5<!--C--></span>
+ (o identyfikatorze
+
+<!--O--><span class='zmienna'>E<!--C--></span>) został utworzony na stercie za pomocą operatora
+
+<!--O--><span class='klucz'>new<!--C--></span>. A zatem usunąć go trzeba samemu; ponieważ tego nie
+zrobiliśmy, nie został w&nbsp;ogóle usunięty. Widzimy z&nbsp;wydruku, że
+destruktor dla obiektu o&nbsp;identyfikatorze
+<!--O--><span class='zmienna'>E<!--C--></span>
+ nie został
+wywołany.
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Dla pewnych klas istnieje też możliwość zainicjowania obiektów
+za pomocą listy wartości poszczególnych składowych podanej
+w&nbsp;nawiasach klamrowych, podobnie jak
+to robiliśmy dla <A HREF="node23.html#tabstat:deftab">tablic</A> .
+Z&nbsp;taką możliwością spotkaliśmy się już przy omawianiu
+C-struktur
+(patrz
+rozdział o <A HREF="node83.html#uncs:cstruct">strukturach</A> ).
+Metoda ta, zastępująca wywołanie konstruktora, może być
+jednak stosowana nie tylko dla &bdquo;czystych&rdquo; C-struktur.
+Można jej użyć dla ogólniejszego typu klas, mianowicie dla
+klas będących
+<FONT COLOR="#7b003e"><B>agregatami</B></FONT><A NAME="16702"></A> danych. Są to klasy
+spełniające następujące warunki:
+
+<UL>
+<LI>nie zdefiniowano w&nbsp;nich żadnych konstruktorów;
+</LI>
+<LI>wszystkie składowe są publiczne;
+</LI>
+<LI>nie dziedziczą z&nbsp;żadnej klasy;
+</LI>
+<LI>nie mają metod wirtualnych (co to znaczy, powiemy
+          w&nbsp;jednym z&nbsp;następnych rozdziałów);
+</LI>
+<LI>ich ewentualne składowe obiektowe są obiektami
+          klas, które również są agregatami, a&nbsp;więc spełniają
+          powyższe warunki.
+</LI>
+</UL>
+Na przykład w&nbsp;programie
+<BR><A NAME="aggreg.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">108</SPAN>:</SPAN>
+      <A NAME="tex2html115"
+  HREF="source-files/aggreg.cpp">
+<!--O--><span class='downl'>aggreg.cpp<!--C--></span></A>
+<A NAME="17179"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Agregaty danych</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;string&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">A</font>  <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">     7.  </font>    <font color="#009900">int</font>  ia<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#009900">char</font> ca<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#009900">void</font> <b><font color="#000000">print</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    10.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"A: ia = "</font> <font color="#990000">&lt;&lt;</font> ia <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" ca = "</font> <font color="#990000">&lt;&lt;</font> ca <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    12.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>
+ <font SIZE="-2" color="black">    14.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">B</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    15.  </font>    <font color="#008080">A</font>    obA<font color="#990000">;</font>                              <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">    16.  </font>    <font color="#009900">double</font> x<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font>    <font color="#009900">void</font> <b><font color="#000000">print</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    18.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"B: x = "</font> <font color="#990000">&lt;&lt;</font> x <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font>        obA<font color="#990000">.</font><b><font color="#000000">print</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    20.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    21.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    22.  </font>
+ <font SIZE="-2" color="black">    23.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    24.  </font>    <font color="#008080">B</font> b <font color="#990000">=</font> <font color="#FF0000">{</font> <font color="#FF0000">{</font><font color="#993399">4</font><font color="#990000">,</font><font color="#FF0000">'a'</font><font color="#FF0000">}</font><font color="#990000">,</font> <font color="#993399">7.5</font> <font color="#FF0000">}</font><font color="#990000">;</font>                <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    25.  </font>    b<font color="#990000">.</font><b><font color="#000000">print</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    26.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+obie klasy,
+<!--O--><span class='klasa'>A<!--C--></span>
+ i&nbsp;
+<!--O--><span class='klasa'>B<!--C--></span>, są takimi agregatami.
+W szczególności jest agregatem klasa&nbsp;
+<!--O--><span class='klasa'>B<!--C--></span>, choć zawiera
+pole obiektowe
+<!--O--><span class='zmienna'>obA<!--C--></span>
+ (<span class="ding">&#x278A;</span>). Pole to jest jednak
+typu
+<!--O--><span class='klasa'>A<!--C--></span>, a&nbsp;klasa
+<!--O--><span class='klasa'>A<!--C--></span>
+ jest agregatem.
+W linii&nbsp;<span class="ding">&#x278B;</span> widzimy definicję obiektu klasy
+<!--O--><span class='klasa'>B<!--C--></span>
+ i&nbsp;inicjowanie go
+wartościami podanymi na liście w&nbsp;nawiasach klamrowych.
+Na pierwszej pozycji tej listy, zgodnie z&nbsp;kolejnością pól w&nbsp;klasie
+
+<!--O--><span class='klasa'>B<!--C--></span>, występuje podlista wartości inicjujących obiekt-agregat
+klasy
+<!--O--><span class='klasa'>A<!--C--></span>
+ będący składową tworzonego obiektu
+klasy
+<!--O--><span class='klasa'>B<!--C--></span>. Nawiasy wokół tej podlisty mogą być w&nbsp;pewnych sytuacjach
+opuszczone, ale lepiej je zawsze jawnie pisać. Wydruk z&nbsp;programu to
+<PRE>
+    B: x = 7.5 A: ia = 4 ca = a
+</PRE>
+W ten sposób można tworzyć obiekty-agregaty wyłącznie na
+stosie (czyli bez wywoływania operatora
+<!--O--><span class='klucz'>new<!--C--></span>).
+
+<P>
+Jak widzimy z&nbsp;tego przykładu, agregat może nie być czystą
+C-strukturą; w&nbsp;szczególności może zawierać metody (byle nie
+polimorficzne).
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2052"
+  HREF="node92.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2058"
+  HREF="node85.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2064"
+  HREF="node94.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2060"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2062"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2053"
+  HREF="node92.html">14.7 Destruktory</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2059"
+  HREF="node85.html">14. Klasy (I)</A>
+<B>Dalej:</B> <A NAME="tex2html2065"
+  HREF="node94.html">14.9 Tablice obiektów</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

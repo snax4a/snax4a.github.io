@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>4.4 Typ logiczny</TITLE>
+<META NAME="description" CONTENT="4.4 Typ logiczny">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node19.html">
+<LINK REL="previous" HREF="node17.html">
+<LINK REL="up" HREF="node14.html">
+<LINK REL="next" HREF="node19.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html910"
+  HREF="node17.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html916"
+  HREF="node14.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html922"
+  HREF="node19.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html918"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html920"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html911"
+  HREF="node17.html">4.3 Typy zmiennopozycyjne</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html917"
+  HREF="node14.html">4. Podstawowe typy danych</A>
+<B>Dalej:</B> <A NAME="tex2html923"
+  HREF="node19.html">4.5 Typy wyliczeniowe</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00540000000000000000"></A><A NAME="typydan:logika"></A>
+<BR>
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> Typ logiczny
+</H1>
+
+<P>
+Typ logiczny nazywa się
+<!--O--><span class='typ'>bool<!--C--></span><A NAME="3078"></A><A NAME="3079"></A>
+(a nie, jak w Javie,
+<!--O--><span class='typ'>boolean<!--C--></span>).
+Pamiątką z&nbsp;języka C (albo, sięgając jeszcze głębiej w&nbsp;historię,
+PL/I) jest, że rolę zmiennej typu
+<!--O--><span class='typ'>bool<!--C--></span>
+ może pełnić dowolna
+zmienna typu całkowitego lub wskaźnikowego, przy czym wartość&nbsp;0
+(dla wskaźników
+<!--O--><span class='klucz'>nullptr<!--C--></span>)<A NAME="3083"></A>
+jest równoważna
+<!--O--><span class='klucz'>false<!--C--></span>,<A NAME="3085"></A>
+a&nbsp;<FONT COLOR="#7b003e"><I>dowolna</I></FONT> (niekoniecznie&nbsp;1) wartość niezerowa
+&mdash;&nbsp;
+<!--O--><span class='klucz'>true<!--C--></span>.<A NAME="3088"></A> Tym niemniej, zalecane jest
+deklarowanie zmiennych logicznych jawnie jako typu
+<!--O--><span class='typ'>bool<!--C--></span>.
+
+<P>
+Na przykład wykonanie następującego fragmentu spowoduje, że
+zmienna
+<!--O--><span class='zmienna'>k<!--C--></span>
+ będzie miała wartość równą liczbie niezerowych
+elementów tablicy
+<!--O--><span class='zmienna'>tab<!--C--></span>
+ przed pierwszym elementem
+zerowym (jeśli wiadomo,
+że element zerowy tam w&nbsp;ogóle jest; w&nbsp;przeciwnym przypadku
+wynik byłby nieprzewidywalny, nie ma bowiem w&nbsp;C/C++ automatycznego
+sprawdzania przekroczenia zakresu indeksów tablicy!):
+<pre><tt>       <font color="#009900">int</font> tab<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">{</font> <font color="#993399">2</font><font color="#990000">,</font> <font color="#990000">-</font><font color="#993399">4</font><font color="#990000">,</font> <font color="#990000">-</font><font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">0</font><font color="#990000">,</font> <font color="#993399">3</font> <font color="#FF0000">}</font><font color="#990000">,</font> k <font color="#990000">=</font> <font color="#990000">-</font><font color="#993399">1</font><font color="#990000">;</font>
+       <b><font color="#0000FF">while</font></b> <font color="#990000">(</font> tab<font color="#990000">[++</font>k<font color="#990000">]</font> <font color="#990000">);</font>    <i><font color="#9A1900">// teraz k = 3</font></i>
+</tt></pre>
+Dzieje się tak dlatego, że gdy wartość
+<!--O--><span class='zmienna'>k<!--C--></span>
+ osiągnie 3,
+odpowiedni element tablicy,
+<!--O--><span class='zmienna'>tab[3]<!--C--></span>, będzie miał wartość
+zerową, co zostanie zinterpretowane jako
+<!--O--><span class='klucz'>false<!--C--></span>
+ i&nbsp;zakończy
+wykonywanie pętli
+<!--O--><span class='klucz'>while<!--C--></span>. We wcześniejszych obrotach pętli
+
+<!--O--><span class='zmienna'>tab[i]<!--C--></span>
+ przyjmuje różne wartości, ale wszystkie
+są niezerowe, więc zostaną zinterpretowane jako
+<!--O--><span class='klucz'>true<!--C--></span>.
+W&nbsp;szczególności należy pamiętać, że prawdzie (<!--O--><span class='klucz'>true<!--C--></span>)
+odpowiada dowolna wartość niezerowa, a&nbsp;nie tylko wartość&nbsp;1, jak to
+czasem jest błędnie sugerowane.
+
+<P>
+Do typu
+<!--O--><span class='typ'>bool<!--C--></span>
+ są też konwertowane wskaźniki (o&nbsp;których za chwilę)
+&mdash;&nbsp;wartość pusta (<!--O--><span class='klucz'>nullptr<!--C--></span>
+ jest interpretowana jako
+
+<!--O--><span class='klucz'>false<!--C--></span>, a&nbsp;każda inna jako
+<!--O--><span class='klucz'>true<!--C--></span>.
+
+<P>
+Literałami wartości typu
+<!--O--><span class='typ'>bool<!--C--></span>
+ są oczywiście
+<!--O--><span class='klucz'>false<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='klucz'>true<!--C--></span>
+ &mdash;&nbsp;są to słowa kluczowe języka i&nbsp;nie mogą
+być przedefiniowane.
+
+<P>
+Dodajmy, że w&nbsp;klasycznym C typ
+<!--O--><span class='typ'>bool<!--C--></span>
+ w&nbsp;ogóle nie istnieje &mdash;&nbsp;
+jego rolę pełnią wyłącznie typy całkowite lub wskaźnikowe.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html910"
+  HREF="node17.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html916"
+  HREF="node14.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html922"
+  HREF="node19.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html918"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html920"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html911"
+  HREF="node17.html">4.3 Typy zmiennopozycyjne</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html917"
+  HREF="node14.html">4. Podstawowe typy danych</A>
+<B>Dalej:</B> <A NAME="tex2html923"
+  HREF="node19.html">4.5 Typy wyliczeniowe</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

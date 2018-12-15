@@ -1,0 +1,488 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>13.2 Unie</TITLE>
+<META NAME="description" CONTENT="13.2 Unie">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="previous" HREF="node83.html">
+<LINK REL="up" HREF="node82.html">
+<LINK REL="next" HREF="node85.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1918"
+  HREF="node83.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1922"
+  HREF="node82.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1928"
+  HREF="node85.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1924"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1926"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1919"
+  HREF="node83.html">13.1 C-struktury</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1923"
+  HREF="node82.html">13. C-struktury i&nbsp;unie</A>
+<B>Dalej:</B> <A NAME="tex2html1929"
+  HREF="node85.html">14. Klasy (I)</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001420000000000000000"></A><A NAME="uncs:unie"></A>
+<BR>
+<SPAN CLASS="arabic">13</SPAN>.<SPAN CLASS="arabic">2</SPAN> Unie
+</H1>
+
+<P>
+Innym, rzadziej stosowanym typem złożonym jest unia.<A NAME="15606"></A>
+Unie są nieco podobne do struktur &mdash;&nbsp;różnica między unią
+a&nbsp;strukturą polega na tym, że
+
+<P>
+
+<P>
+
+<div class='wazne'>
+w&nbsp;unii wszystkie składowe obiektu umieszczane są
+    pod tym samym adresem. Zatem w&nbsp;każdej chwili dostępna jest
+    tylko jedna składowa.
+
+
+</div>
+
+<P>
+Zauważmy bowiem, że wpisanie którejś ze składowych zamazuje
+poprzednią, bo była ona umieszczona w&nbsp;dokładnie tym samym
+miejscu w&nbsp;pamięci komputera.
+Wynika z&nbsp;tego, że rozmiar obiektu unii musi być taki, aby
+mieściła się w&nbsp;nim składowa o&nbsp;największym rozmiarze, ale nie
+musi być większy,  choć może &ndash;&nbsp;zależy to od typów i&nbsp;rozmiarów
+poszczególnych składowych i, niestety, od architektury komputera,
+w&nbsp;szczególności od stosowanego
+tzw.&nbsp;wyrównywania<A NAME="15608"></A> (ang.&nbsp;<FONT COLOR="#7b003e"><I>alignment</I></FONT>).
+
+<P>
+W poniższym przykładzie
+<BR><A NAME="un.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">99</SPAN>:</SPAN>
+      <A NAME="tex2html106"
+  HREF="source-files/un.cpp">
+<!--O--><span class='downl'>un.cpp<!--C--></span></A>
+<A NAME="15949"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Unie</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#0000FF">union</font></b> Bag<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     5.  </font>
+ <font SIZE="-2" color="black">     6.  </font><font color="#009900">void</font> <b><font color="#000000">wstaw</font></b><font color="#990000">(</font>Bag<font color="#990000">*,</font><font color="#009900">float</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">     7.  </font><font color="#009900">void</font> <b><font color="#000000">wstaw</font></b><font color="#990000">(</font>Bag<font color="#990000">*,</font><font color="#009900">long</font> <font color="#009900">double</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">     8.  </font><font color="#009900">void</font> <b><font color="#000000">infor</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> Bag<font color="#990000">*);</font>
+ <font SIZE="-2" color="black">     9.  </font>
+ <font SIZE="-2" color="black">    10.  </font><b><font color="#0000FF">union</font></b> Bag <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    11.  </font>    <font color="#009900">float</font>       liczbaF<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    12.  </font>    <font color="#009900">long</font> <font color="#009900">double</font> liczbaLD<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font><font color="#FF0000">}</font> bag <font color="#990000">;</font>
+ <font SIZE="-2" color="black">    14.  </font>
+ <font SIZE="-2" color="black">    15.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    16.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"      sizeof(float)="</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">float</font><font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"sizeof(long double)="</font>
+ <font SIZE="-2" color="black">    18.  </font>         <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">long</font> <font color="#009900">double</font><font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"        sizeof(Bag)="</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>Bag<font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    20.  </font>
+ <font SIZE="-2" color="black">    21.  </font>    <b><font color="#000000">wstaw</font></b><font color="#990000">(&amp;</font>bag<font color="#990000">,</font> <font color="#993399">3</font><font color="#990000">.</font>14F<font color="#990000">);</font>                <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">    22.  </font>    <b><font color="#000000">infor</font></b><font color="#990000">(&amp;</font>bag<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    23.  </font>
+ <font SIZE="-2" color="black">    24.  </font>    <b><font color="#000000">wstaw</font></b><font color="#990000">(&amp;</font>bag<font color="#990000">,</font> <font color="#993399">3.14L</font><font color="#990000">);</font>                <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    25.  </font>    <b><font color="#000000">infor</font></b><font color="#990000">(&amp;</font>bag<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    26.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    27.  </font>
+ <font SIZE="-2" color="black">    28.  </font><font color="#009900">void</font> <b><font color="#000000">wstaw</font></b><font color="#990000">(</font><font color="#008080">Bag</font> <font color="#990000">*</font>w<font color="#990000">,</font> <font color="#009900">float</font> f<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    29.  </font>    w<font color="#990000">-&gt;</font>liczbaF <font color="#990000">=</font> f<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    30.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    31.  </font>
+ <font SIZE="-2" color="black">    32.  </font><font color="#009900">void</font> <b><font color="#000000">wstaw</font></b><font color="#990000">(</font><font color="#008080">Bag</font> <font color="#990000">*</font>w<font color="#990000">,</font> <font color="#009900">long</font> <font color="#009900">double</font> ld<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    33.  </font>    w<font color="#990000">-&gt;</font>liczbaLD <font color="#990000">=</font> ld<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    34.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    35.  </font>
+ <font SIZE="-2" color="black">    36.  </font><font color="#009900">void</font> <b><font color="#000000">infor</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#008080">Bag</font> <font color="#990000">*</font>w<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    37.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">liczbaF : "</font> <font color="#990000">&lt;&lt;</font> w<font color="#990000">-&gt;</font>liczbaF  <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    38.  </font>    cout <font color="#990000">&lt;&lt;</font>   <font color="#FF0000">"liczbaLD: "</font> <font color="#990000">&lt;&lt;</font> w<font color="#990000">-&gt;</font>liczbaLD <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    39.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+unia
+<!--O--><span class='klasa'>Bag<!--C--></span>
+ przechowuje liczbę
+typu
+<!--O--><span class='typ'>float<!--C--></span>
+ (4 bajty) <FONT COLOR="#7b003e"><I>lub</I></FONT> liczbę typu
+
+<!--O--><span class='typ'>long double<!--C--></span>
+ (12 lub 16 bajtów), ale nie obie jednocześnie.
+Każde przypisanie do składowej
+<!--O--><span class='zmienna'>liczbaF<!--C--></span>
+ obiektu zamaże poprzednią
+wartość tej składowej, ale również poprzednią wartość składowej
+
+<!--O--><span class='zmienna'>liczbaLD<!--C--></span>, ponieważ obie te składowe zapisywane są w&nbsp;tym
+samym obszarze pamięci.
+
+<P>
+W linii&nbsp;<span class="ding">&#x278A;</span> wpisujemy wartość 3,14 do składowej
+<!--O--><span class='zmienna'>liczbaF<!--C--></span>
+
+obiektu
+<!--O--><span class='zmienna'>bag<!--C--></span>. Funkcja
+<!--O--><span class='funkcja'>infor<!--C--></span>
+ drukuje
+obie składowe:
+<!--O--><span class='zmienna'>liczbaF<!--C--></span>
+ jest rzeczywiście równa 3,14,
+a wartość składowej
+<!--O--><span class='zmienna'>liczbaLD<!--C--></span>
+ wygląda na przypadkową:
+<PRE>
+          sizeof(float)=4
+    sizeof(long double)=16
+            sizeof(Bag)=16
+
+    liczbaF : 3.14
+    liczbaLD: 3.93143e-4942
+
+    liczbaF : 1.90232e+17
+    liczbaLD: 3.14
+</PRE>
+Następnie w&nbsp;linii&nbsp;<span class="ding">&#x278B;</span> wpisujemy wartość 3,14 do składowej
+
+<!--O--><span class='zmienna'>liczbaLD<!--C--></span>
+ tego samego obiektu
+<!--O--><span class='zmienna'>bag<!--C--></span>.
+Po wydrukowaniu
+
+<!--O--><span class='zmienna'>liczbaLD<!--C--></span>
+ jest 3,14, ale składowa
+<!--O--><span class='zmienna'>liczbaF<!--C--></span>
+
+uległa zamazaniu i&nbsp;teraz ona ma wartość wyglądającą
+na przypadkową (jest to wartość odpowiadająca układowi bitów
+w tym obszarze pamięci zinterpretowanemu jako zapis liczby typu
+
+<!--O--><span class='typ'>float<!--C--></span>).
+
+<P>
+Zwróćmy uwagą na fakt, że funkcja
+<!--O--><span class='funkcja'>wstaw<!--C--></span>
+ jest
+przeciążona i&nbsp;występuje w&nbsp;dwóch wersjach. Właściwa jest wybierana
+przez kompilator na podstawie typu argumentu. Dlatego wywołując tę
+funkcję musieliśmy jawnie ten typ zaznaczyć przez dodanie
+przyrostka 'F' i&nbsp;'L' do literałów liczbowych
+(patrz rozdział <A HREF="node17.html#typydan:zmienno">o typach danych</A> ).
+
+<P>
+W obu wersjach tej
+funkcji pierwszym parametrem jest wskaźnik do obiektu typu
+
+<!--O--><span class='klasa'>Bag<!--C--></span>, tak aby funkcja mogła zmienić wartość tego
+obiektu, a&nbsp;nie tylko jego lokalnej kopii, jak byłoby,
+gdybyśmy przesłali ten obiekt przez wartość. Oczywiście inną
+możliwością było przesłanie tego argumentu przez referencję.
+
+<P>
+Z kolei funkcja
+<!--O--><span class='funkcja'>infor<!--C--></span>
+ korzysta z&nbsp;parametru wskaźnikowego
+raczej ze względu na efektywność niż z&nbsp;konieczności. Ta funkcja
+i&nbsp;tak nie zmienia obiektu, więc mogłaby równie dobrze pracować
+na przekazywanej przez wartość kopii. Ponieważ jednak wybraliśmy
+jako typ parametru typ wskaźnikowy, co daje funkcji dostęp do
+oryginału, zaopatrzyliśmy ten parametr w&nbsp;modyfikator
+<!--O--><span class='klucz'>const<!--C--></span>,
+aby zapewnić, że nawet przypadkowo oryginału w&nbsp;tej funkcji nie
+zmienimy.
+
+<P>
+Na początku programu wypisujemy rozmiar obiektu typu
+
+<!--O--><span class='klasa'>Bag<!--C--></span>: wynosi on dokładnie 16, tyle ile wynosi rozmiar
+dłuższej ze składowych (ale oczywiście mniej niż suma rozmiarów
+składowych).
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Bardziej realistyczny przykład znajdujemy w&nbsp;programie następującym:
+<BR><A NAME="unie.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">100</SPAN>:</SPAN>
+      <A NAME="tex2html107"
+  HREF="source-files/unie.cpp">
+<!--O--><span class='downl'>unie.cpp<!--C--></span></A>
+<A NAME="15965"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Unia anonimowa, kontrola typów</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cassert&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">Bag</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font><b><font color="#0000FF">enum</font></b> Rodzaj <font color="#FF0000">{</font>LICZBA<font color="#990000">,</font> WSKAZNIK<font color="#990000">,</font> ZNAK<font color="#FF0000">}</font><font color="#990000">;</font>      <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">     7.  </font>
+ <font SIZE="-2" color="black">     8.  </font><font color="#009900">void</font> <b><font color="#000000">wstaw</font></b><font color="#990000">(</font>Bag<font color="#990000">*,</font><font color="#009900">double</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">     9.  </font><font color="#009900">void</font> <b><font color="#000000">wstaw</font></b><font color="#990000">(</font>Bag<font color="#990000">*,</font><font color="#009900">int</font><font color="#990000">*);</font>
+ <font SIZE="-2" color="black">    10.  </font><font color="#009900">void</font> <b><font color="#000000">wstaw</font></b><font color="#990000">(</font>Bag<font color="#990000">*,</font><font color="#009900">char</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    11.  </font>
+ <font SIZE="-2" color="black">    12.  </font><font color="#009900">void</font> <b><font color="#000000">daj</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> Bag<font color="#990000">*,</font><font color="#009900">double</font><font color="#990000">&amp;);</font>
+ <font SIZE="-2" color="black">    13.  </font><font color="#009900">void</font> <b><font color="#000000">daj</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> Bag<font color="#990000">*,</font><font color="#009900">int</font><font color="#990000">*&amp;);</font>
+ <font SIZE="-2" color="black">    14.  </font><font color="#009900">void</font> <b><font color="#000000">daj</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> Bag<font color="#990000">*,</font><font color="#009900">char</font><font color="#990000">&amp;);</font>
+ <font SIZE="-2" color="black">    15.  </font>
+ <font SIZE="-2" color="black">    16.  </font><font color="#009900">void</font> <b><font color="#000000">info</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> Bag<font color="#990000">&amp;);</font>
+ <font SIZE="-2" color="black">    17.  </font>
+ <font SIZE="-2" color="black">    18.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">Bag</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    19.  </font>    <font color="#008080">Rodzaj</font> rodzaj<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    20.  </font>    <b><font color="#0000FF">union</font></b> <font color="#FF0000">{</font>                                <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    21.  </font>        <font color="#009900">double</font> dbl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    22.  </font>        <font color="#009900">int</font>   <font color="#990000">*</font>wsk<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    23.  </font>        <font color="#009900">char</font>   znk<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    24.  </font>    <font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    25.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    26.  </font>
+ <font SIZE="-2" color="black">    27.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    28.  </font>    <font color="#008080">Bag</font> bag<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    29.  </font>    <font color="#009900">double</font> x <font color="#990000">=</font> <font color="#993399">3.14</font><font color="#990000">,</font> y<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    30.  </font>    <font color="#009900">int</font>    i <font color="#990000">=</font> <font color="#993399">10</font><font color="#990000">,</font> <font color="#990000">*</font>pi <font color="#990000">=</font> <font color="#990000">&amp;</font>i<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    31.  </font>    <font color="#009900">char</font>   c <font color="#990000">=</font><font color="#FF0000">'a'</font><font color="#990000">,</font> b<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    32.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"sizeof(bag) = "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>bag<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    33.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" bajtow</font><font color="#CC33CC">\n</font><font color="#FF0000">Adresy skladowych:</font><font color="#CC33CC">\n</font><font color="#FF0000"> dbl: "</font>
+ <font SIZE="-2" color="black">    34.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#990000">&amp;</font>bag<font color="#990000">.</font>dbl <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000"> wsk: "</font> <font color="#990000">&lt;&lt;</font>  <font color="#990000">&amp;</font>bag<font color="#990000">.</font>wsk
+ <font SIZE="-2" color="black">    35.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000"> znk: "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font><font color="#009900">void</font><font color="#990000">*)&amp;</font>bag<font color="#990000">.</font>znk <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    36.  </font>
+ <font SIZE="-2" color="black">    37.  </font>    <b><font color="#000000">wstaw</font></b><font color="#990000">(&amp;</font>bag<font color="#990000">,</font>x<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    38.  </font>    <b><font color="#000000">info</font></b><font color="#990000">(</font>bag<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    39.  </font>    <b><font color="#000000">daj</font></b><font color="#990000">(&amp;</font>bag<font color="#990000">,</font>y<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    40.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Z funkcji main - y  = "</font> <font color="#990000">&lt;&lt;</font>    y <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    41.  </font>
+ <font SIZE="-2" color="black">    42.  </font>    <b><font color="#000000">wstaw</font></b><font color="#990000">(&amp;</font>bag<font color="#990000">,&amp;</font>i<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    43.  </font>    <b><font color="#000000">info</font></b><font color="#990000">(</font>bag<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    44.  </font>    <b><font color="#000000">daj</font></b><font color="#990000">(&amp;</font>bag<font color="#990000">,</font>pi<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    45.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Z funkcji main - *pi = "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">*</font>pi <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    46.  </font>
+ <font SIZE="-2" color="black">    47.  </font>    <b><font color="#000000">wstaw</font></b><font color="#990000">(&amp;</font>bag<font color="#990000">,</font>c<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    48.  </font>    <b><font color="#000000">info</font></b><font color="#990000">(</font>bag<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    49.  </font>    <b><font color="#000000">daj</font></b><font color="#990000">(&amp;</font>bag<font color="#990000">,</font>b<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    50.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Z funkcji main - b   = "</font> <font color="#990000">&lt;&lt;</font>   b <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    51.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    52.  </font>
+ <font SIZE="-2" color="black">    53.  </font><font color="#009900">void</font> <b><font color="#000000">wstaw</font></b><font color="#990000">(</font><font color="#008080">Bag</font> <font color="#990000">*</font>w<font color="#990000">,</font> <font color="#009900">double</font> x<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    54.  </font>    w<font color="#990000">-&gt;</font>rodzaj   <font color="#990000">=</font> LICZBA<font color="#990000">;</font>                  <span class="ding">&#x278C;</span>
+ <font SIZE="-2" color="black">    55.  </font>    w<font color="#990000">-&gt;</font>dbl <font color="#990000">=</font> x<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    56.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    57.  </font>
+ <font SIZE="-2" color="black">    58.  </font><font color="#009900">void</font> <b><font color="#000000">wstaw</font></b><font color="#990000">(</font><font color="#008080">Bag</font> <font color="#990000">*</font>w<font color="#990000">,</font> <font color="#009900">int</font> <font color="#990000">*</font>pi<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    59.  </font>    w<font color="#990000">-&gt;</font>rodzaj   <font color="#990000">=</font> WSKAZNIK<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    60.  </font>    w<font color="#990000">-&gt;</font>wsk <font color="#990000">=</font> pi<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    61.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    62.  </font>
+ <font SIZE="-2" color="black">    63.  </font><font color="#009900">void</font> <b><font color="#000000">wstaw</font></b><font color="#990000">(</font><font color="#008080">Bag</font> <font color="#990000">*</font>w<font color="#990000">,</font> <font color="#009900">char</font> c<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    64.  </font>    w<font color="#990000">-&gt;</font>rodzaj   <font color="#990000">=</font> ZNAK<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    65.  </font>    w<font color="#990000">-&gt;</font>znk <font color="#990000">=</font> c<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    66.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    67.  </font>
+ <font SIZE="-2" color="black">    68.  </font><font color="#009900">void</font> <b><font color="#000000">daj</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#008080">Bag</font> <font color="#990000">*</font>w<font color="#990000">,</font> <font color="#009900">double</font><font color="#990000">&amp;</font> x<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    69.  </font>    <b><font color="#000000">assert</font></b><font color="#990000">(</font>w<font color="#990000">-&gt;</font>rodzaj <font color="#990000">==</font> LICZBA<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    70.  </font>    x  <font color="#990000">=</font> w<font color="#990000">-&gt;</font>dbl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    71.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    72.  </font>
+ <font SIZE="-2" color="black">    73.  </font><font color="#009900">void</font> <b><font color="#000000">daj</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#008080">Bag</font> <font color="#990000">*</font>w<font color="#990000">,</font> <font color="#009900">int</font><font color="#990000">*&amp;</font> pi<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    74.  </font>    <b><font color="#000000">assert</font></b><font color="#990000">(</font>w<font color="#990000">-&gt;</font>rodzaj <font color="#990000">==</font> WSKAZNIK<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    75.  </font>    pi <font color="#990000">=</font> w<font color="#990000">-&gt;</font>wsk<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    76.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    77.  </font>
+ <font SIZE="-2" color="black">    78.  </font><font color="#009900">void</font> <b><font color="#000000">daj</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#008080">Bag</font> <font color="#990000">*</font>w<font color="#990000">,</font> <font color="#009900">char</font><font color="#990000">&amp;</font> c<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    79.  </font>    <b><font color="#000000">assert</font></b><font color="#990000">(</font>w<font color="#990000">-&gt;</font>rodzaj <font color="#990000">==</font> ZNAK<font color="#990000">);</font>             <span class="ding">&#x278D;</span>
+ <font SIZE="-2" color="black">    80.  </font>    c  <font color="#990000">=</font> w<font color="#990000">-&gt;</font>znk<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    81.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    82.  </font>
+ <font SIZE="-2" color="black">    83.  </font><font color="#009900">void</font> <b><font color="#000000">info</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#008080">Bag</font> <font color="#990000">&amp;</font>w<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    84.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">Z funkcji info - "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    85.  </font>    <b><font color="#0000FF">switch</font></b> <font color="#990000">(</font>w<font color="#990000">.</font>rodzaj<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    86.  </font>    <b><font color="#0000FF">case</font></b> LICZBA<font color="#990000">:</font>
+ <font SIZE="-2" color="black">    87.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Liczba:   "</font> <font color="#990000">&lt;&lt;</font> w<font color="#990000">.</font>dbl    <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    88.  </font>        <b><font color="#0000FF">break</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    89.  </font>    <b><font color="#0000FF">case</font></b> WSKAZNIK<font color="#990000">:</font>
+ <font SIZE="-2" color="black">    90.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Wskaznik: "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">*(</font>w<font color="#990000">.</font>wsk<font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    91.  </font>        <b><font color="#0000FF">break</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    92.  </font>    <b><font color="#0000FF">case</font></b> ZNAK<font color="#990000">:</font>
+ <font SIZE="-2" color="black">    93.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Znak:     "</font> <font color="#990000">&lt;&lt;</font> w<font color="#990000">.</font>znk    <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    94.  </font>        <b><font color="#0000FF">break</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    95.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    96.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Struktura
+<!--O--><span class='klasa'>Bag<!--C--></span>
+ ma dwa pola: jedno o&nbsp;nazwie
+
+<!--O--><span class='zmienna'>rodzaj<!--C--></span>
+ typu
+<!--O--><span class='klasa'>Rodzaj<!--C--></span>, który to typ jest globalnie
+zdefiniowanym wyliczeniem (<span class="ding">&#x278A;</span>), a&nbsp;drugie, bez nazwy
+(<SPAN  CLASS="textit">sic!</SPAN>), które jest typu unii anonimowej zdefiniowanej lokalnie
+wewnątrz struktury (<span class="ding">&#x278B;</span>).
+Typ ten jest anonimowy; pomiędzy słowem kluczowym
+
+<!--O--><span class='klucz'>union<!--C--></span>
+ a&nbsp;nawiasem klamrowym rozpoczynającym definicję unii
+nie podaliśmy bowiem żadnej nazwy. Po jego zdefiniowaniu, zaraz za
+zamykającym nawiasem klamrowym, <FONT COLOR="#7b003e"><I>nie</I></FONT> zdefiniowaliśmy żadnego obiektu
+tego typu. Otóż w takiej sytuacji ujawnia się mało znana cecha unii
+anonimowych: jeśli zdefiniowana jest unia anonimowa, a&nbsp;<FONT COLOR="#7b003e"><I>nie</I></FONT> została
+zdefiniowana żadna zmienna tego typu (zaraz za definicją a&nbsp;przed kończącym
+średnikiem), to kompilator sam tworzy pojedynczy egzemplarz unii i&nbsp;nazwy
+jego składowych przenosi do zakresu otaczającego. A&nbsp;zatem nazwy
+
+<!--O--><span class='zmienna'>dbl<!--C--></span>,
+<!--O--><span class='zmienna'>wsk<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>znk<!--C--></span>
+ będą widoczne bezpośrednio
+w&nbsp;zakresie struktury
+<!--O--><span class='klasa'>Bag<!--C--></span>!
+
+<P>
+Wyliczenie
+<!--O--><span class='klasa'>Rodzaj<!--C--></span>
+ składa się z&nbsp;trzech wartości:
+
+<!--O--><span class='zmienna'>LICZBA<!--C--></span>,
+<!--O--><span class='zmienna'>WSKAZNIK<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>ZNAK<!--C--></span>. Będziemy ich
+używać do określenia typu danej aktualnie przechowywanej
+w&nbsp;składowej unii. Funkcje
+<!--O--><span class='funkcja'>wstaw<!--C--></span>
+ są
+przeciążone. Każda z&nbsp;nich wywoływana jest dla innego typu danej
+przeznaczonej do wstawienia do składowej unii obiektu
+typu
+<!--O--><span class='klasa'>Bag<!--C--></span>. Kiedy dana jest wstawiana, każda z&nbsp;funkcji dba
+o&nbsp;to, aby w&nbsp;składowej
+<!--O--><span class='zmienna'>rodzaj<!--C--></span>
+ danego obiektu zapisać
+informację o&nbsp;typie wstawianej danej (jak w&nbsp;linii&nbsp;<span class="ding">&#x278C;</span>).
+
+<P>
+Funkcje
+<!--O--><span class='funkcja'>daj<!--C--></span>
+ do pobierania danej z&nbsp;obiektu typu
+<!--O--><span class='klasa'>Bag<!--C--></span>
+
+też są przeciążone ze wzgędu na typ danej. Dane pobieramy
+poprzez drugi argument funkcji przez referencję. W&nbsp;ten sposób
+zabezpieczamy się przed niewskazanymi w&nbsp;tym przypadku konwersjami.
+Za każdym razem, gdy pobieramy dane, typ drugiego argumentu decyduje
+o&nbsp;wyborze funkcji. Każda z&nbsp;funkcji sprawdza za pomocą makra
+
+<!--O--><span class='funkcja'>assert<!--C--></span><A NAME="15666"></A> (np.&nbsp;linia&nbsp;<span class="ding">&#x278D;</span>), czy typ żądanej
+danej jest zgodny z&nbsp;typem danej aktualnie przechowywanej w&nbsp;składowej
+unii. W&nbsp;ten sposób zabezpieczamy się przed błędami podczas sięgania do
+danych zapisanych w&nbsp;obiektach typu
+<!--O--><span class='klasa'>Bag<!--C--></span>.
+<PRE>
+    sizeof(bag) = 16 bajtow
+    Adresy skladowych:
+     dbl: 0x7fff0476ee48
+     wsk: 0x7fff0476ee48
+     znk: 0x7fff0476ee48
+
+    Z funkcji info - Liczba:   3.14
+    Z funkcji main - y  = 3.14
+
+    Z funkcji info - Wskaznik: 10
+    Z funkcji main - *pi = 10
+
+    Z funkcji info - Znak:     a
+    Z funkcji main - b   = a
+</PRE>
+Drukując adresy składowych unii zawartych w&nbsp;obiekcie
+<!--O--><span class='zmienna'>bag<!--C--></span>
+
+na początku programu, przekonujemy się, że rzeczywiście wszystkie one są
+zapisane pod tym samym adresem.
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1918"
+  HREF="node83.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1922"
+  HREF="node82.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1928"
+  HREF="node85.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1924"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1926"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1919"
+  HREF="node83.html">13.1 C-struktury</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1923"
+  HREF="node82.html">13. C-struktury i&nbsp;unie</A>
+<B>Dalej:</B> <A NAME="tex2html1929"
+  HREF="node85.html">14. Klasy (I)</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

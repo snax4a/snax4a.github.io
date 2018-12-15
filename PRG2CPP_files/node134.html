@@ -1,0 +1,325 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>22.2 Wychwytywanie wyjątków</TITLE>
+<META NAME="description" CONTENT="22.2 Wychwytywanie wyjątków">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node135.html">
+<LINK REL="previous" HREF="node133.html">
+<LINK REL="up" HREF="node132.html">
+<LINK REL="next" HREF="node135.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2708"
+  HREF="node133.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2714"
+  HREF="node132.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2720"
+  HREF="node135.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2716"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2718"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2709"
+  HREF="node133.html">22.1 Zgłaszanie wyjątków</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2715"
+  HREF="node132.html">22. Wyjątki</A>
+<B>Dalej:</B> <A NAME="tex2html2721"
+  HREF="node135.html">22.3 Hierarchie wyjątków</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002320000000000000000"></A>
+        <A NAME="wyjatki:wych"></A>
+<BR>
+<SPAN CLASS="arabic">22</SPAN>.<SPAN CLASS="arabic">2</SPAN> Wychwytywanie wyjątków
+</H1>
+
+<P>
+Do definiowania procedur obsługi wyjątków służą tzw. frazy
+
+<!--O--><span class='klucz'>catch<!--C--></span>.<A NAME="27503"></A><A NAME="27504"></A>
+Mają one postać definicji funkcji, której
+parametr jest takiego typu, jakiego typu będzie obsługiwany przez tę
+frazę wyjątek. Każda fraza
+<!--O--><span class='klucz'>catch<!--C--></span>
+ &bdquo;zajmuje się&rdquo; tylko
+wyjątkami określonego przez swój parametr typu. Każda też
+obsługuje wyłącznie wyjątki powstałe podczas wykonywania
+jednej instrukcji złożonej bezpośrednio poprzedzającej tę frazę
+&mdash;&nbsp;ta instrukcja złożona musi być poprzedzona słowem kluczowym
+
+<!--O--><span class='klucz'>try<!--C--></span>:<A NAME="27507"></A>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font>    <b><font color="#0000FF">try</font></b> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     2.  </font>        <i><font color="#9A1900">// sekwencja instrukcji</font></i>
+ <font SIZE="-2" color="black">     3.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">     4.  </font>    <b><font color="#0000FF">catch</font></b><font color="#990000">(</font><font color="#008080">Typ</font> t<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>        <i><font color="#9A1900">// obsluga</font></i>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">     7.  </font>    <i><font color="#9A1900">// ...</font></i>
+</tt></pre>
+W powyższym schematycznym przykładzie wyjątek pewnego typu
+
+<!--O--><span class='typ'>Typ<!--C--></span>
+ może zostać zgłoszony podczas wykonywania instrukcji
+złożonej oznaczonej słowem kluczowym
+<!--O--><span class='klucz'>try<!--C--></span>. Cała instrukcja
+złożona jest, jak zwykle, ujęta w&nbsp;nawiasy klamrowe i&nbsp;może zawierać
+dowolną liczbę instrukcji prostych i&nbsp;złożonych; mogą tam
+w szczególności występować wywołania funkcji. Jeśli wyjątek
+zostanie zgłoszony podczas wykonywania takiej funkcji, a&nbsp;nie został
+w niej obsłużony, to nastąpi powrót z&nbsp;niej i&nbsp;wyjątek będzie dalej
+obsługiwany tak, jakby został wysłany w&nbsp;miejscu, gdzie funkcja
+była wywołana.
+
+<P>
+Jeśli w&nbsp;trakcie wykonywania instrukcji złożonej z&nbsp;linii&nbsp;1-3 wyjątek
+typu
+<!--O--><span class='typ'>Typ<!--C--></span>
+ (lub typu pochodnego od
+<!--O--><span class='typ'>Typ<!--C--></span>) zostanie wysłany,
+to sterowanie przejdzie natychmiast do wykonywania instrukcji zawartych
+we frazie
+<!--O--><span class='klucz'>catch<!--C--></span>. Wewnątrz tej frazy dostępny będzie obiekt
+opisujący wyjątek (ten, który użyty został w&nbsp;odpowiedniej
+instrukcji
+<!--O--><span class='klucz'>throw<!--C--></span>). Składnia frazy
+<!--O--><span class='klucz'>catch<!--C--></span>
+
+przypomina składnię definicji funkcji. Również argument jest
+odbierany podobnie jak dla zwykłych funkcji. W szczególności można,
+i&nbsp;zazwyczaj tak się właśnie robi, odbierać go poprzez referencję.
+Możemy wtedy bowiem korzystać z&nbsp;dobrodziejstw polimorfizmu. Jeśli
+odbieramy ten argument przez wartość, to, jak dla funkcji, otrzymujemy
+<FONT COLOR="#7b003e"><I>kopię</I></FONT> argumentu.
+
+<P>
+Czasem wystarczy nam informacja, że wyjątek danego typu został
+wysłany, a&nbsp;sam jego obiekt nie jest nam do niczego potrzebny i&nbsp;nie jest
+używany wewnątrz frazy
+<!--O--><span class='klucz'>catch<!--C--></span>. Wtedy w&nbsp;nagłówku frazy można
+pozostawić tylko określenie typu, a&nbsp;nazwę parametru pominąć.
+
+<P>
+Jeżeli wewnątrz procedury obsługi zawartej we frazie
+<!--O--><span class='klucz'>catch<!--C--></span>
+
+nie zostanie wysłany nowy wyjątek, nie nastąpi wykonanie instrukcji
+
+<!--O--><span class='klucz'>return<!--C--></span>
+ lub zakończenie programu, to po jej wykonaniu
+sterowanie przejdzie do instrukcji następującej po frazie
+
+<!--O--><span class='klucz'>catch<!--C--></span>
+ (linia&nbsp;7 w&nbsp;naszym przykładzie).
+
+<P>
+Oczywiście do powstania sytuacji wyjątkowej podczas wykonywania
+bloku
+<!--O--><span class='klucz'>try<!--C--></span>
+ nie musi dojść. Jeśli do niej nie dojdzie, to po
+zakończeniu wykonywania tego bloku sterowanie przejdzie <FONT COLOR="#7b003e"><I>za</I></FONT>
+frazę
+<!--O--><span class='klucz'>catch<!--C--></span>
+ (czyli znów do linii&nbsp;7 w&nbsp;naszym przykładzie);
+sama fraza
+<!--O--><span class='klucz'>catch<!--C--></span>
+ zostanie wtedy całkowicie pominięta.
+
+<P>
+Rozpatrzmy następujący program:
+<A NAME="excpt.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">174</SPAN>:</SPAN>
+      <A NAME="tex2html182"
+  HREF="source-files/excpt.cpp">
+<!--O--><span class='downl'>excpt.cpp<!--C--></span></A>
+<A NAME="27771"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Wyjątki jako obiekty klas polimorficznych</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;string&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;sstream&gt;</font>   <i><font color="#9A1900">// ostringstream</font></i>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cmath&gt;</font>     <i><font color="#9A1900">// sqrt, log, atan</font></i>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>
+ <font SIZE="-2" color="black">     7.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">Blad</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     8.  </font>    <b><font color="#0000FF">virtual</font></b> <font color="#008080">string</font> <b><font color="#000000">opis</font></b><font color="#990000">()</font> <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>
+ <font SIZE="-2" color="black">    11.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Ujemna</font> <font color="#990000">:</font> <b><font color="#0000FF">public</font></b> Blad <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    12.  </font>    <font color="#009900">double</font> x<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    14.  </font>    <b><font color="#000000">Ujemna</font></b><font color="#990000">(</font><font color="#009900">double</font> x<font color="#990000">)</font> <font color="#990000">:</font> <b><font color="#000000">x</font></b><font color="#990000">(</font>x<font color="#990000">)</font> <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    15.  </font>    <font color="#008080">string</font> <b><font color="#000000">opis</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    16.  </font>        <font color="#008080">ostringstream</font> strum<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font>        strum <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Ujemny argument: x = "</font> <font color="#990000">&lt;&lt;</font> x<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font>        <b><font color="#0000FF">return</font></b> strum<font color="#990000">.</font><b><font color="#000000">str</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    19.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    20.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    21.  </font>
+ <font SIZE="-2" color="black">    22.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">PozaZakresem</font> <font color="#990000">:</font> <b><font color="#0000FF">public</font></b> Blad <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    23.  </font>    <font color="#009900">double</font> x<font color="#990000">,</font> min<font color="#990000">,</font> max<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    24.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    25.  </font>    <b><font color="#000000">PozaZakresem</font></b><font color="#990000">(</font><font color="#009900">double</font> x<font color="#990000">,</font> <font color="#009900">double</font> mi<font color="#990000">,</font> <font color="#009900">double</font> ma<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    26.  </font>        <font color="#990000">:</font> <b><font color="#000000">x</font></b><font color="#990000">(</font>x<font color="#990000">),</font> <b><font color="#000000">min</font></b><font color="#990000">(</font>mi<font color="#990000">),</font> <b><font color="#000000">max</font></b><font color="#990000">(</font>ma<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    27.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    28.  </font>    <font color="#008080">string</font> <b><font color="#000000">opis</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    29.  </font>        <font color="#008080">ostringstream</font> strum<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    30.  </font>        strum <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Argument x = "</font> <font color="#990000">&lt;&lt;</font> x <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">    "</font>
+ <font SIZE="-2" color="black">    31.  </font>              <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"    poza zakresem ["</font> <font color="#990000">&lt;&lt;</font> min <font color="#990000">&lt;&lt;</font> <font color="#FF0000">","</font>
+ <font SIZE="-2" color="black">    32.  </font>              <font color="#990000">&lt;&lt;</font> max <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"]"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    33.  </font>        <b><font color="#0000FF">return</font></b> strum<font color="#990000">.</font><b><font color="#000000">str</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    34.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    35.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    36.  </font>
+ <font SIZE="-2" color="black">    37.  </font><font color="#009900">double</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">double</font> x<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    38.  </font>    <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>x <font color="#990000">&lt;</font> <font color="#993399">0</font> <font color="#990000">||</font> x <font color="#990000">&gt;</font> <font color="#993399">2</font><font color="#990000">)</font> <b><font color="#0000FF">throw</font></b> <b><font color="#000000">PozaZakresem</font></b><font color="#990000">(</font>x<font color="#990000">,</font><font color="#993399">0</font><font color="#990000">,</font><font color="#993399">3</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    39.  </font>    <b><font color="#0000FF">return</font></b> <b><font color="#000000">sqrt</font></b><font color="#990000">(</font>x<font color="#990000">*(</font><font color="#993399">3</font><font color="#990000">-</font>x<font color="#990000">));</font>
+ <font SIZE="-2" color="black">    40.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    41.  </font>
+ <font SIZE="-2" color="black">    42.  </font><font color="#009900">double</font> <b><font color="#000000">logPI</font></b><font color="#990000">(</font><font color="#009900">double</font> x<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    43.  </font>    <b><font color="#0000FF">static</font></b> <font color="#009900">double</font> LPI <font color="#990000">=</font> <b><font color="#000000">log</font></b><font color="#990000">(</font><font color="#993399">4</font><font color="#990000">*</font><b><font color="#000000">atan</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">.));</font>
+ <font SIZE="-2" color="black">    44.  </font>    <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>x <font color="#990000">&lt;=</font> <font color="#993399">0</font><font color="#990000">)</font> <b><font color="#0000FF">throw</font></b> <b><font color="#000000">Ujemna</font></b><font color="#990000">(</font>x<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    45.  </font>    <b><font color="#0000FF">return</font></b> <b><font color="#000000">log</font></b><font color="#990000">(</font>x<font color="#990000">)/</font>LPI<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    46.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    47.  </font>
+ <font SIZE="-2" color="black">    48.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    49.  </font>    <font color="#009900">double</font> x <font color="#990000">=</font> <font color="#993399">4</font><font color="#990000">*</font><b><font color="#000000">atan</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">.);</font>
+ <font SIZE="-2" color="black">    50.  </font>
+ <font SIZE="-2" color="black">    51.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"x = "</font> <font color="#990000">&lt;&lt;</font> x <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    52.  </font>    <b><font color="#0000FF">try</font></b> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    53.  </font>        <font color="#009900">double</font> z1 <font color="#990000">=</font> <b><font color="#000000">logPI</font></b><font color="#990000">(</font>x<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    54.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"  z1 = "</font> <font color="#990000">&lt;&lt;</font> z1 <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    55.  </font>        <font color="#009900">double</font> z2 <font color="#990000">=</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font>x<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    56.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"  z2 = "</font> <font color="#990000">&lt;&lt;</font> z2 <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    57.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    58.  </font>    <b><font color="#0000FF">catch</font></b><font color="#990000">(</font>Blad<font color="#990000">&amp;</font> blad<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    59.  </font>        cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"  Blad: "</font> <font color="#990000">&lt;&lt;</font> blad<font color="#990000">.</font><b><font color="#000000">opis</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    60.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    61.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+Definiujemy w&nbsp;tym programie klasę abstrakcyjną
+<!--O--><span class='klasa'>Blad<!--C--></span>
+ i&nbsp;dwie
+klasy z&nbsp;niej dziedziczące:
+<!--O--><span class='klasa'>Ujemne<!--C--></span>
+ i&nbsp;
+<!--O--><span class='klasa'>PozaZakresem<!--C--></span>.
+Obie implementują wirtualną funkcję
+<!--O--><span class='funkcja'>opis<!--C--></span>
+ odziedziczoną
+z&nbsp;klasy bazowej.
+
+<P>
+W liniach&nbsp;37-46 definiujemy dwie funkcje globalne. Każda z&nbsp;nich
+może zgłosić wyjątek: funkcja
+<!--O--><span class='funkcja'>fun<!--C--></span>
+ wyjątek klasy
+
+<!--O--><span class='klasa'>PozaZakresem<!--C--></span>
+ jeśli argumentem jest liczbą spoza zakresu
+<SPAN CLASS="MATH">[0, 3]</SPAN>, a&nbsp;funkcja
+<!--O--><span class='funkcja'>logPI<!--C--></span>
+ wyjątek klasy
+<!--O--><span class='klasa'>Ujemne<!--C--></span>
+
+jeśli argument jest ujemny (funkcja oblicza logarytm argumentu przy
+podstawie <SPAN CLASS="MATH"><I>&#960;</I></SPAN>). W funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>
+ wywołujemy w&nbsp;bloku
+
+<!--O--><span class='klucz'>try<!--C--></span>
+ obie te funkcje; ewentualny błąd wychwytuje fraza
+
+<!--O--><span class='klucz'>catch<!--C--></span>
+ zdefiniowana w&nbsp;liniach&nbsp;58-60. Zauważmy, że przechwytuje
+ona wyjątki typu
+<!--O--><span class='klasa'>Blad<!--C--></span>
+ <SPAN  CLASS="textit">przez referencję</SPAN>, a&nbsp;więc
+przechwyci wyjątki wszystkich klas pochodnych od
+<!--O--><span class='klasa'>Blad<!--C--></span>
+
+i&nbsp;będzie mogła korzystać z&nbsp;polimorfizmu. Tutaj tak właśnie jest,
+bo klasy są polimorficzne i&nbsp;funkcja
+<!--O--><span class='funkcja'>opis<!--C--></span>
+ jest wirtualna.
+Wywołanie tej metody w&nbsp;linii&nbsp;59 spowoduje zatem wywołanie tej metody
+z&nbsp;prawdziwej klasy przekazanego poprzez argument obiektu,
+<PRE>
+    x = 3.14159
+      z1 = 1
+      Blad: Argument x = 3.14159
+            poza zakresem [0,3]
+</PRE>
+a więc w&nbsp;naszym przypadku z&nbsp;klasy
+<!--O--><span class='klasa'>PozaZakresem<!--C--></span>, bo wyjątek
+został zgłoszony w&nbsp;funkcji
+<!--O--><span class='funkcja'>fun<!--C--></span>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2708"
+  HREF="node133.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2714"
+  HREF="node132.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2720"
+  HREF="node135.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2716"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2718"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2709"
+  HREF="node133.html">22.1 Zgłaszanie wyjątków</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2715"
+  HREF="node132.html">22. Wyjątki</A>
+<B>Dalej:</B> <A NAME="tex2html2721"
+  HREF="node135.html">22.3 Hierarchie wyjątków</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

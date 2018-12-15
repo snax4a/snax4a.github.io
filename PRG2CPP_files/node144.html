@@ -1,0 +1,977 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>24.1 Kolekcje i&nbsp;iteratory</TITLE>
+<META NAME="description" CONTENT="24.1 Kolekcje i&nbsp;iteratory">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node145.html">
+<LINK REL="previous" HREF="node143.html">
+<LINK REL="up" HREF="node143.html">
+<LINK REL="next" HREF="node145.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2856"
+  HREF="node143.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2862"
+  HREF="node143.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2868"
+  HREF="node145.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2864"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2866"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2857"
+  HREF="node143.html">24. Biblioteka standardowa</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2863"
+  HREF="node143.html">24. Biblioteka standardowa</A>
+<B>Dalej:</B> <A NAME="tex2html2869"
+  HREF="node145.html">24.2 Algorytmy i&nbsp;obiekty funkcyjne</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Podrozdzia&#322;y</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html2870"
+  HREF="node144.html#SECTION002511000000000000000"><SPAN CLASS="arabic">24</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Wektory</A>
+<LI><A NAME="tex2html2871"
+  HREF="node144.html#SECTION002512000000000000000"><SPAN CLASS="arabic">24</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Iteratory</A>
+<LI><A NAME="tex2html2872"
+  HREF="node144.html#SECTION002513000000000000000"><SPAN CLASS="arabic">24</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Operacje na kolekcjach</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION002510000000000000000"></A>
+        <A NAME="stl:kolite"></A>
+<BR>
+<SPAN CLASS="arabic">24</SPAN>.<SPAN CLASS="arabic">1</SPAN> Kolekcje i&nbsp;iteratory
+</H1>
+
+<P>
+Podstawowym udogodnieniem dostarczanym przez bibliotekę standardową
+są <FONT COLOR="#7b003e"><B>kolekcje</B></FONT>.<A NAME="28636"></A> Kolekcja jest strukturą danych
+złożoną z&nbsp;danych pewnego typu i&nbsp;wyposażoną w&nbsp;zestaw operacji, jakie
+na tych danych można wykonywać. Może to być dodawanie elementów,
+ich usuwanie, wyszukiwanie, porównywanie, kopiowanie, porządkowanie
+itd. W&nbsp;bibliotece standardowej zaimplementowano takie podstawowe
+struktury danych, jak listy, stos, kolejki, kopce, tablice asocjacyjne
+(słowniki), zbiory; korzystając z&nbsp;nich użytkownik może łatwo
+i&nbsp;efektywnie tworzyć własne, bardziej złożone struktury, jak
+choćby różnego typu drzewa czy grafy.
+
+<P>
+
+<H2><A NAME="SECTION002511000000000000000"></A>
+        <A NAME="stl:wekt"></A>
+<BR>
+<SPAN CLASS="arabic">24</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Wektory
+</H2>
+
+<P>
+Najprostsza kolekcja opisywana jest szablonem
+<!--O--><span class='klasa'>vector<!--C--></span>
+
+<A NAME="28640"></A><A NAME="28641"></A> dołączanym poprzez włączenie
+nagłówka
+<!--O--><span class='plik'>vector<!--C--></span>. Modelem wektora jest tablica elementów tego
+samego typu, ale o&nbsp;nieokreślonej zawczasu pojemności. Elementy są
+umieszczane w&nbsp;dobrze zdefiniowanym porządku i&nbsp;mamy do nich dostęp
+swobodny, to znaczy znając pozycję (indeks) elementu możemy pobrać
+jego wartość lub go zmienić czy usunąć bez konieczności
+przeglądania wszystkich elementów wektora. Elementy możemy dodawać
+na dowolnej pozycji, choć najefektywniejsze (w stałym, niezależnym
+od rozmiaru wektora, czasie) jest dodawanie na koniec. W miarę jak
+elementów przybywa, wektorowi przydzielana jest automatycznie większa
+pamięć &mdash;&nbsp;programista nie musi się już martwić zarządzaniem
+pamięcią, jej przydzielaniem i&nbsp;zwalnianiem. Ponieważ
+<!--O--><span class='klasa'>vector<!--C--></span>
+
+jest szablonem klasy, a&nbsp;nie klasą, obiekty-wektory możemy tworzyć
+konkretyzując wzorzec dla pewnego typu &mdash;&nbsp;może to być również
+typ wbudowany, jak
+<!--O--><span class='typ'>int<!--C--></span>
+ czy
+<!--O--><span class='typ'>double<!--C--></span>. Domyślny konstruktor
+tworzy wektor pusty (są też inne konstruktory). Do utworzonego
+wektora dodajemy elementy (takiego typu, jak ten dla którego wzorzec
+został skonkretyzowany) za pomocą metody
+<!--O--><span class='funkcja'>push_back<!--C--></span>,
+<A NAME="28647"></A><A NAME="28648"></A> która dodaje <FONT COLOR="#7b003e"><I>kopię</I></FONT>
+obiektu na końcu wektora. Kopię, a&nbsp;zatem trzeba zadbać, aby obiekt
+był dobrze &bdquo;kopiowalny&rdquo;, a&nbsp;więc na przykład miał prawidłowo
+zdefiniowany konstruktor kopiujący.
+
+<P>
+Elementy można pobierać na różne sposoby. Najprościej to zrobić
+za pomocą indeksowania: robimy to dokładnie tak jak dla normalnej
+tablicy (pierwszy element ma, jak zwykle, indeks zero). Taki sposób
+jest bardzo efektywny, ale nie jest sprawdzane, czy użyty indeks jest
+legalny (tak jak nie jest to sprawdzane w&nbsp;przypadku normalnych tablic).
+Jeśli chcemy, aby zostało sprawdzone, czy indeks mieści się
+w&nbsp;dozwolonym zakresie, czyli od zera do liczby o&nbsp;jeden mniejszej niż
+aktualny rozmiar wektora, to można użyć metody
+<!--O--><span class='funkcja'>at<!--C--></span><A NAME="28651"></A>
+<A NAME="28652"></A>podając indeks jako argument. Przy tej metodzie
+dostępu zgłaszany jest wyjątek
+<!--O--><span class='klasa'>out_of_range<!--C--></span>
+
+<A NAME="28654"></A><A NAME="28655"></A> (z nagłówka
+
+<!--O--><span class='plik'>stdexcept<!--C--></span>),<A NAME="28657"></A> gdy indeks jest nielegalny.
+Wyjątek ten możemy obsłużyć:
+<A NAME="at.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">187</SPAN>:</SPAN>
+      <A NAME="tex2html197"
+  HREF="source-files/at.cpp">
+<!--O--><span class='downl'>at.cpp<!--C--></span></A>
+<A NAME="29293"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Wektory</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;vector&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;stdexcept&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;string&gt;</font>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>
+ <font SIZE="-2" color="black">     7.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#008080">vector&lt;string&gt;</font> vs<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>
+ <font SIZE="-2" color="black">    10.  </font>    vs<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><font color="#FF0000">"Ola"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    11.  </font>    vs<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><font color="#FF0000">"Ula"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    12.  </font>    vs<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><font color="#FF0000">"Ela"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    13.  </font>    vs<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><font color="#FF0000">"Ala"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    14.  </font>
+ <font SIZE="-2" color="black">    15.  </font>    <b><font color="#0000FF">try</font></b> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    16.  </font>        <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> <font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> <font color="#993399">5</font> <i><font color="#9A1900">/* BLAD */</font></i><font color="#990000">;</font> i<font color="#990000">++</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    17.  </font>            cout <font color="#990000">&lt;&lt;</font> vs<font color="#990000">.</font><b><font color="#000000">at</font></b><font color="#990000">(</font>i<font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font> <font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font>    <font color="#FF0000">}</font> <b><font color="#0000FF">catch</font></b><font color="#990000">(</font>out_of_range<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    19.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">*** Zly indeks! *** "</font>
+ <font SIZE="-2" color="black">    20.  </font>             <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" wektor ma tylko "</font> <font color="#990000">&lt;&lt;</font> vs<font color="#990000">.</font><b><font color="#000000">size</font></b><font color="#990000">()</font>
+ <font SIZE="-2" color="black">    21.  </font>             <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" elementy!"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    22.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    23.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    24.  </font>
+ <font SIZE="-2" color="black">    25.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Pierwszy element: "</font> <font color="#990000">&lt;&lt;</font> vs<font color="#990000">.</font><b><font color="#000000">front</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    26.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Ostatni  element: "</font> <font color="#990000">&lt;&lt;</font> vs<font color="#990000">.</font><b><font color="#000000">back</font></b><font color="#990000">()</font>  <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    27.  </font>
+ <font SIZE="-2" color="black">    28.  </font>    vs<font color="#990000">.</font><b><font color="#000000">pop_back</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    29.  </font>
+ <font SIZE="-2" color="black">    30.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Po pop_back: "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    31.  </font>    <font color="#009900">int</font> size <font color="#990000">=</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)</font>vs<font color="#990000">.</font><b><font color="#000000">size</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    32.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> <font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> size<font color="#990000">;</font> i<font color="#990000">++)</font>
+ <font SIZE="-2" color="black">    33.  </font>        cout <font color="#990000">&lt;&lt;</font> vs<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font> <font color="#990000">;</font>
+ <font SIZE="-2" color="black">    34.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    35.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+W poniższym programie pętla przebiega&nbsp;5 obrotów, choć w&nbsp;wektorze
+są tylko cztery elementy. Podczas ostatniego obrotu zgłaszany
+jest zatem wyjątek:
+<PRE>
+    Ola Ula Ela Ala
+    *** Zly indeks! ***  wektor ma tylko 4 elementy!
+
+    Pierwszy element: Ola
+    Ostatni  element: Ala
+    Po pop_back: Ola Ula Ela
+</PRE>
+Jak widzimy (linia&nbsp;8), obiekt
+<!--O--><span class='zmienna'>vs<!--C--></span>
+ jest obiektem klasy
+
+<!--O--><span class='klasa'>vector<SPAN CLASS="MATH">&lt;</SPAN>string<SPAN CLASS="MATH">&gt;</SPAN><!--C--></span>
+ powstałej z&nbsp;konkretyzacji szablonu
+
+<!--O--><span class='klasa'>vector<!--C--></span>
+ dla typu
+<!--O--><span class='klasa'>string<!--C--></span>.
+
+<P>
+Kolekcja jest zatem kolekcją
+elementów, z&nbsp;których każdy jest obiektem klasy
+<!--O--><span class='klasa'>string<!--C--></span>.
+Metoda
+<!--O--><span class='funkcja'>size<!--C--></span>,<A NAME="28669"></A><A NAME="28670"></A> użyta
+w&nbsp;linii&nbsp;31 zwraca, jak łatwo się domyślić, rozmiar kolekcji (nie
+tylko wektorów). Typem zwracanym jest pewien typ całowity bez znaku,
+którego aliasem jest nazwa
+<!--O--><span class='typ'>vector::size_type<!--C--></span><A NAME="28672"></A>
+&mdash;&nbsp;dlatego użyliśmy rzutowania &mdash;&nbsp;można tu było użyć
+zwykłego
+<!--O--><span class='typ'>int<!--C--></span>'a, ale narazilibyśmy się na ostrzeżenia
+kompilatora. Metoda
+<!--O--><span class='funkcja'>pop_back<!--C--></span><A NAME="28675"></A>
+<A NAME="28676"></A> (linia&nbsp;28) usuwa ostatni element kolekcji,
+ale go nie zwraca. Metody
+<!--O--><span class='funkcja'>front<!--C--></span><A NAME="28678"></A>
+<A NAME="28679"></A> i&nbsp;
+<!--O--><span class='funkcja'>back<!--C--></span><A NAME="28681"></A><A NAME="28682"></A>
+(linie&nbsp;25 i&nbsp;26) zwracają, przez referencję, pierwszy i&nbsp;ostatni
+element kolekcji bez ich usuwania.
+
+<P>
+
+<H2><A NAME="SECTION002512000000000000000"></A>
+        <A NAME="stl:iter"></A>
+<BR>
+<SPAN CLASS="arabic">24</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Iteratory
+</H2>
+
+<P>
+Podstawowym narzędziem do wykonywania operacji na kolekcjach są
+<FONT COLOR="#7b003e"><B>iteratory</B></FONT>.<A NAME="28686"></A> Pozwalają one poruszać się po
+elementach kolekcji w&nbsp;sposób niezależny od ich rzeczywistego typu.
+Są swego rodzaju uogólnieniem wskaźników. Ich typ jest zdefiniowany
+w&nbsp;definicji wzorca szablonu kolekcji za pomocą instrukcji
+
+<!--O--><span class='klucz'>typedef<!--C--></span>
+ i&nbsp;ma postać
+<!--O--><span class='typ'>kol<SPAN CLASS="MATH">&lt;</SPAN>Typ<SPAN CLASS="MATH">&gt;</SPAN>::iterator<!--C--></span>, gdzie
+
+<!--O--><span class='zmienna'>kol<!--C--></span>
+ jest nazwą szablonu kolekcji, a&nbsp;
+<!--O--><span class='typ'>Typ<!--C--></span>
+ jest typem
+użytym do skonkretyzowania tego szablonu. Użytkownik nie musi
+wiedzieć, jaki naprawdę ten typ jest. Na przykład nazwą (aliasem)
+typu iteratora związanego z&nbsp;wektorem liczb typu
+<!--O--><span class='typ'>int<!--C--></span>
+ jest
+
+<!--O--><span class='typ'>vector<SPAN CLASS="MATH">&lt;</SPAN>int<SPAN CLASS="MATH">&gt;</SPAN>::iterator<!--C--></span>. Kolekcja może być kolekcją
+elementów niemodyfikowalnych; dla każdej kolekcji zatem jest też
+zdefiniowany osobny typ
+<!--O--><span class='typ'>const_iterator<!--C--></span>
+ (na przykład
+
+<!--O--><span class='typ'>vector<SPAN CLASS="MATH">&lt;</SPAN>int<SPAN CLASS="MATH">&gt;</SPAN>::const_iterator<!--C--></span>).
+
+<P>
+Iteratory mają semantykę wskaźników do elementów tablicy, to
+znaczy, jeśli
+<!--O--><span class='zmienna'>it<!--C--></span>
+ jest iteratorem wskazującym na pewien
+element kolekcji, to
+<FONT COLOR="#000000"><TT>*it</TT></FONT> jest l-wartością wskazywanego elementu,
+a
+<FONT COLOR="#000000"><TT>it-&gt;sklad</TT></FONT> jest nazwą składowej
+<!--O--><span class='zmienna'>sklad<!--C--></span>
+
+wskazywanego przez iterator obiektu (jeśli taka składowa istnieje).
+Podobnie, po '
+<FONT COLOR="#000000"><TT>++it</TT></FONT>' iterator
+<!--O--><span class='zmienna'>it<!--C--></span>
+ wskazuje na
+następny element kolekcji.
+
+<P>
+Istnieją w&nbsp;klasach kolekcyjnych dwie ważne bezargumentowe metody
+zwracające iteratory: metoda
+<!--O--><span class='funkcja'>begin<!--C--></span>
+ i&nbsp;
+<!--O--><span class='funkcja'>end<!--C--></span>. Metoda
+
+<!--O--><span class='funkcja'>begin<!--C--></span><A NAME="28707"></A><A NAME="28708"></A> zwraca iterator
+wskazujący na pierwszy element kolekcji. Nieco bardziej skomplikowany
+jest wynik metody
+<!--O--><span class='funkcja'>end<!--C--></span>.<A NAME="28710"></A><A NAME="28711"></A>
+Nie jest to iterator wskazujący na ostatni element kolekcji, jak
+by się mogło wydawać, ale na nieistniejący element &bdquo;tuż za
+ostatnim&rdquo;. Jeśli przebiegamy kolekcję za pomocą iteratora, to
+osiągnięcie przez niego wartości zwracanej przez
+<!--O--><span class='funkcja'>end<!--C--></span>
+
+oznacza, że przebiegliśmy już całą kolekcję.
+Zamiast więc sprawdzać, jak zwykle w&nbsp;pętlach przebiegających
+tablice, czy indeks jest mniejszy od wymiaru tablicy, sprawdzamy,
+czy iterator wciąż <FONT COLOR="#7b003e"><I>nie</I></FONT> jest równy iteratorowi zwracanemu przez
+metodę
+<!--O--><span class='funkcja'>end<!--C--></span>; jeśli jest, to pętlę należy przerwać,
+bo iterator wskazuje na element nieistniejący:
+<A NAME="iter.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">188</SPAN>:</SPAN>
+      <A NAME="tex2html200"
+  HREF="source-files/iter.cpp">
+<!--O--><span class='downl'>iter.cpp<!--C--></span></A>
+<A NAME="29320"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Iteratory</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;vector&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;string&gt;</font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     5.  </font>
+ <font SIZE="-2" color="black">     6.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     7.  </font>    <font color="#008080">vector&lt;string&gt;</font> vs<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>
+ <font SIZE="-2" color="black">     9.  </font>    vs<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><font color="#FF0000">"Ola"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    10.  </font>    vs<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><font color="#FF0000">"Ula"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    11.  </font>    vs<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><font color="#FF0000">"Ela"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    12.  </font>    vs<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><font color="#FF0000">"Ala"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    13.  </font>
+ <font SIZE="-2" color="black">    14.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> vector<font color="#990000">&lt;</font>string<font color="#990000">&gt;::</font><font color="#008080">iterator</font> ite <font color="#990000">=</font> vs<font color="#990000">.</font><b><font color="#000000">begin</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    15.  </font>                                   ite<font color="#990000">!=</font> vs<font color="#990000">.</font><b><font color="#000000">end</font></b><font color="#990000">();</font> <font color="#990000">++</font>ite<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    16.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#990000">*</font>ite <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font>
+ <font SIZE="-2" color="black">    19.  </font>    <i><font color="#9A1900">// albo</font></i>
+ <font SIZE="-2" color="black">    20.  </font>
+ <font SIZE="-2" color="black">    21.  </font>    vector<font color="#990000">&lt;</font>string<font color="#990000">&gt;::</font><font color="#008080">iterator</font> it<font color="#990000">,</font> kon <font color="#990000">=</font> vs<font color="#990000">.</font><b><font color="#000000">end</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    22.  </font>
+ <font SIZE="-2" color="black">    23.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> it <font color="#990000">=</font> vs<font color="#990000">.</font><b><font color="#000000">begin</font></b><font color="#990000">();</font> it <font color="#990000">!=</font> kon<font color="#990000">;</font> <font color="#990000">++</font>it <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    24.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#990000">*</font>it <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    25.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    26.  </font>
+ <font SIZE="-2" color="black">    27.  </font>    <i><font color="#9A1900">// albo</font></i>
+ <font SIZE="-2" color="black">    28.  </font>
+ <font SIZE="-2" color="black">    29.  </font>    <b><font color="#0000FF">typedef</font></b> vector<font color="#990000">&lt;</font>string<font color="#990000">&gt;::</font><font color="#008080">iterator</font> SIT<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    30.  </font>
+ <font SIZE="-2" color="black">    31.  </font>    <font color="#008080">SIT</font> iter<font color="#990000">,</font> koniec <font color="#990000">=</font> vs<font color="#990000">.</font><b><font color="#000000">end</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    32.  </font>
+ <font SIZE="-2" color="black">    33.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> iter <font color="#990000">=</font> vs<font color="#990000">.</font><b><font color="#000000">begin</font></b><font color="#990000">();</font> iter <font color="#990000">!=</font> koniec<font color="#990000">;</font> <font color="#990000">++</font>iter <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    34.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#990000">*</font>iter <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    35.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    36.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+Powyższy program ilustruje sposób konstruowania pętli z&nbsp;użyciem
+iteratorów. Jeśli w&nbsp;programie potrzebujemy wielu zmiennych
+iteratorowych danego typu, to wygodnie jest temu typowi nadać jakąś
+krótszą nazwę za pomocą instrukcji
+<!--O--><span class='klucz'>typedef<!--C--></span>, jak w&nbsp;linii&nbsp;29.
+Tak jak mówiliśmy,
+<FONT COLOR="#000000"><TT>++it</TT></FONT> przesuwa iterator na następną
+pozycję w&nbsp;kolekcji, a&nbsp;
+<FONT COLOR="#000000"><TT>*it</TT></FONT> oznacza element w&nbsp;kolekcji
+wskazywany przez iterator
+<!--O--><span class='zmienna'>it<!--C--></span>.
+
+<P>
+Jeśli kolekcja jest niemodyfikowalna, to nie tylko możemy, ale
+musimy użyć iteratora typu
+<!--O--><span class='typ'>const_iterator<!--C--></span>.
+<A NAME="28725"></A><A NAME="28726"></A> Z taką sytuacją
+spotykamy się bardzo często, gdy przesyłamy kolekcję jako argument
+funkcji, która z&nbsp;założenia nie powinna elementów tej kolekcji
+zmieniać, a&nbsp;wobec tego jej parametr jest typu ustalonego:
+<A NAME="constit.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">189</SPAN>:</SPAN>
+      <A NAME="tex2html201"
+  HREF="source-files/constit.cpp">
+<!--O--><span class='downl'>constit.cpp<!--C--></span></A>
+<A NAME="29334"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Iteratory do obiektów niemodyfikowalnych</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;vector&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">Person</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">char</font> name<font color="#990000">[</font><font color="#993399">20</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">     7.  </font>    <font color="#009900">int</font>  year<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#009900">void</font> <b><font color="#000000">print</font></b><font color="#990000">()</font> <b><font color="#0000FF">const</font></b> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     9.  </font>        cout <font color="#990000">&lt;&lt;</font> name <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"-"</font> <font color="#990000">&lt;&lt;</font> year <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    11.  </font><font color="#FF0000">}</font> john <font color="#990000">=</font> <font color="#FF0000">{</font><font color="#FF0000">"John"</font><font color="#990000">,</font><font color="#993399">25</font><font color="#FF0000">}</font><font color="#990000">,</font> mary <font color="#990000">=</font> <font color="#FF0000">{</font><font color="#FF0000">"Mary"</font><font color="#990000">,</font><font color="#993399">18</font><font color="#FF0000">}</font><font color="#990000">,</font> sue <font color="#990000">=</font> <font color="#FF0000">{</font><font color="#FF0000">"Sue"</font><font color="#990000">,</font><font color="#993399">9</font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    12.  </font>
+ <font SIZE="-2" color="black">    13.  </font>
+ <font SIZE="-2" color="black">    14.  </font><font color="#009900">void</font> <b><font color="#000000">printPerson</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> vector<font color="#990000">&lt;</font><b><font color="#0000FF">const</font></b> Person<font color="#990000">*&gt;&amp;</font> list<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    15.  </font>    <b><font color="#0000FF">typedef</font></b> vector<font color="#990000">&lt;</font><b><font color="#0000FF">const</font></b> Person<font color="#990000">*&gt;::</font><font color="#008080">const_iterator</font> IT<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>    <font color="#008080">IT</font> itend <font color="#990000">=</font> list<font color="#990000">.</font><b><font color="#000000">end</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    17.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> <font color="#008080">IT</font> it <font color="#990000">=</font> list<font color="#990000">.</font><b><font color="#000000">begin</font></b><font color="#990000">();</font> it <font color="#990000">!=</font> itend<font color="#990000">;</font> it<font color="#990000">++</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    18.  </font>        <font color="#990000">(*</font>it<font color="#990000">)-&gt;</font><b><font color="#000000">print</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    19.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    20.  </font>
+ <font SIZE="-2" color="black">    21.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    22.  </font>    <font color="#008080">vector&lt;const Person*&gt;</font> list<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    23.  </font>
+ <font SIZE="-2" color="black">    24.  </font>    list<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(&amp;</font>john<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    25.  </font>    list<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(&amp;</font>mary<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    26.  </font>    list<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(&amp;</font>sue<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    27.  </font>
+ <font SIZE="-2" color="black">    28.  </font>    <b><font color="#000000">printPerson</font></b><font color="#990000">(</font>list<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    29.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+Zauważmy, że słowo kluczowe
+<!--O--><span class='klucz'>const<!--C--></span>
+ pojawia się tu
+kilkakrotnie. W określeniu typu
+<pre><tt>       vector<font color="#990000">&lt;</font><b><font color="#0000FF">const</font></b> Person<font color="#990000">*&gt;</font>
+</tt></pre>
+oznacza, że kolekcja jest wektorem wskaźników do ustalonych
+elementów, a&nbsp;zatem, że poprzez odwołania się do obiektów
+klasy
+<!--O--><span class='klasa'>Person<!--C--></span>
+ wskazywanych przez elementy kolekcji nie można
+zmienić tych <FONT COLOR="#7b003e"><I>obiektów</I></FONT>. Z kolei pierwsze
+
+<!--O--><span class='klucz'>const<!--C--></span>
+ w&nbsp;określeniu typu parametru funkcji
+<!--O--><span class='funkcja'>printPerson<!--C--></span>
+
+oznacza, że jest to kolekcja niemodyfikowalnych elementów, czyli
+niemodyfikowalnych wskaźników, bo taki jest typ tych elementów.
+A&nbsp;zatem wewnątrz funkcji
+<!--O--><span class='funkcja'>printPerson<!--C--></span>
+ nie można zmienić
+ani adresów zapisanych we wskaźnikach będących elementami kolekcji,
+ani obiektów przez te wskaźniki wskazywanych. Ponieważ funkcja,
+poprzez typ zadeklarowanego parametru, &bdquo;obiecała&rdquo;, że nie zmieni
+obiektów wskazywanych, a&nbsp;wywołuje na rzecz tych obiektów metodę
+
+<!--O--><span class='funkcja'>print<!--C--></span>, metoda ta <FONT COLOR="#7b003e"><I>musiała</I></FONT> być zadeklarowana jako
+
+<!--O--><span class='klucz'>const<!--C--></span>. Funkcja &bdquo;obiecała&rdquo; też, że nie zmieni elementów
+kolekcji, czyli wskaźników, zatem użyty iterator <FONT COLOR="#7b003e"><I>musiał</I></FONT> tu
+być typu
+<!--O--><span class='typ'>const_iterator<!--C--></span>.
+
+<P>
+Zauważmy jeszcze, że parametr funkcji
+<!--O--><span class='funkcja'>printPerson<!--C--></span>
+ jest typu
+referencyjnego. Jest to zwykle pożądane przy przesyłaniu do funkcji
+kolekcji &mdash;&nbsp;w&nbsp;przeciwnym przypadku kopiowane byłyby całe kolekcje,
+wraz ze wszystkimi elementami. Tego problemu nie było przy przesyłaniu
+tablic, kiedy tak naprawdę przesyłany był tylko wskaźnik do
+pierwszego elementu.
+
+<P>
+Prócz iteratorów
+<!--O--><span class='typ'>iterator<!--C--></span>
+ i&nbsp;
+<!--O--><span class='typ'>const_iterator<!--C--></span>
+ istnieje typ
+iteratora odwrotnego
+<!--O--><span class='typ'>reverse_iterator<!--C--></span>,<A NAME="28747"></A>
+<A NAME="28748"></A> za pomocą którego można przebiegać
+kolekcje w odwrotnym kierunku; na przykład program
+<A NAME="revit.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">190</SPAN>:</SPAN>
+      <A NAME="tex2html202"
+  HREF="source-files/revit.cpp">
+<!--O--><span class='downl'>revit.cpp<!--C--></span></A>
+<A NAME="29355"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Iteratory odwrotne</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;vector&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;string&gt;</font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     5.  </font>
+ <font SIZE="-2" color="black">     6.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     7.  </font>    <font color="#008080">vector&lt;string&gt;</font> vs<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>
+ <font SIZE="-2" color="black">     9.  </font>    vs<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><font color="#FF0000">"Ola"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    10.  </font>    vs<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><font color="#FF0000">"Ula"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    11.  </font>    vs<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><font color="#FF0000">"Ela"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    12.  </font>    vs<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><font color="#FF0000">"Ala"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    13.  </font>
+ <font SIZE="-2" color="black">    14.  </font>    <b><font color="#0000FF">typedef</font></b> vector<font color="#990000">&lt;</font>string<font color="#990000">&gt;::</font><font color="#008080">iterator</font>         DO_PRZODU<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>    <b><font color="#0000FF">typedef</font></b> vector<font color="#990000">&lt;</font>string<font color="#990000">&gt;::</font><font color="#008080">reverse_iterator</font> DO_TYLU<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>
+ <font SIZE="-2" color="black">    17.  </font>    <font color="#008080">DO_PRZODU</font> piter<font color="#990000">,</font> pkoniec <font color="#990000">=</font> vs<font color="#990000">.</font><b><font color="#000000">end</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    18.  </font>    <font color="#008080">DO_TYLU</font>   titer<font color="#990000">,</font> tkoniec <font color="#990000">=</font> vs<font color="#990000">.</font><b><font color="#000000">rend</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    19.  </font>
+ <font SIZE="-2" color="black">    20.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> piter <font color="#990000">=</font> vs<font color="#990000">.</font><b><font color="#000000">begin</font></b><font color="#990000">();</font> piter <font color="#990000">!=</font> pkoniec<font color="#990000">;</font> piter<font color="#990000">++</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    21.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#990000">*</font>piter <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    22.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    23.  </font>
+ <font SIZE="-2" color="black">    24.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> titer <font color="#990000">=</font> vs<font color="#990000">.</font><b><font color="#000000">rbegin</font></b><font color="#990000">();</font> titer <font color="#990000">!=</font> tkoniec<font color="#990000">;</font> titer<font color="#990000">++</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    25.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#990000">*</font>titer <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    26.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    27.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+drukuje
+<PRE>
+    Ola Ula Ela Ala
+    Ala Ela Ula Ola
+</PRE>
+Istnieje też
+<!--O--><span class='typ'>const_reverse_iterator<!--C--></span>
+
+<A NAME="28755"></A><A NAME="28756"></A>
+do przebiegania kolekcji elementów ustalonych w&nbsp;kierunku od końca do
+początku. Zauważmy, że dla iteratorów odwrotnych metody
+
+<!--O--><span class='funkcja'>begin<!--C--></span>
+ i&nbsp;
+<!--O--><span class='funkcja'>end<!--C--></span>
+ trzeba zastąpić metodami
+
+<!--O--><span class='funkcja'>rbegin<!--C--></span><A NAME="28760"></A><A NAME="28761"></A>
+i&nbsp;
+<!--O--><span class='funkcja'>rend<!--C--></span>.<A NAME="28763"></A><A NAME="28764"></A>
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Ze względu na swoją funkcjonalność iteratory dzielą się na kilka
+kategorii. Z&nbsp;różnymi kolekcjami związane są różne kategorie
+iteratorów.
+<DIV ALIGN="CENTER">
+<A NAME="28768"></A>
+<TABLE CELLPADDING=3>
+<CAPTION><STRONG>Tabela:</STRONG>
+Iteratory związane z&nbsp;kolekcjami</CAPTION>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">Kolekcja</TD>
+<TD ALIGN="LEFT"><A NAME="lcolitera"></A> Iterator</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">
+<!--O--><span class='klasa'>vector<!--C--></span></TD><TD ALIGN="LEFT">dostępu bezpośredniego</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">
+<!--O--><span class='klasa'>list<!--C--></span></TD><TD ALIGN="LEFT">dwustronny</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">
+<!--O--><span class='klasa'>deque<!--C--></span></TD><TD ALIGN="LEFT">dostępu bezpośredniego</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">
+<!--O--><span class='klasa'>map<!--C--></span></TD><TD ALIGN="LEFT">dwustronny</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">
+<!--O--><span class='klasa'>multimap<!--C--></span></TD><TD ALIGN="LEFT">dwustronny</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">
+<!--O--><span class='klasa'>set<!--C--></span></TD><TD ALIGN="LEFT">dwustronny</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">
+<!--O--><span class='klasa'>multiset<!--C--></span></TD><TD ALIGN="LEFT">dwustronny</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">
+<!--O--><span class='klasa'>string<!--C--></span></TD><TD ALIGN="LEFT">dostępu bezpośredniego</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">
+<!--O--><span class='klasa'>array<!--C--></span></TD><TD ALIGN="LEFT">dostępu bezpośredniego</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">
+<!--O--><span class='klasa'>valarray<!--C--></span></TD><TD ALIGN="LEFT">dostępu bezpośredniego</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+Na przykład iterator związany z&nbsp;wektorem (<!--O--><span class='klasa'>vector<!--C--></span>) pozwala nie
+tylko na przesuwanie się w&nbsp;obu kierunkach za pomocą operatorów
+zwiększania i&nbsp;zmniejszania, ale na stosowanie arytmetyki wskaźników,
+to znaczy np. dodanie liczby 3 do takiego iteratora daje iterator
+przesunięty o&nbsp;trzy elementy do przodu względem wyjściowego. Podobnie,
+po
+<pre><tt>       <font color="#008080">vector&lt;string&gt;</font> vs<font color="#990000">;</font>
+       <i><font color="#9A1900">// ...</font></i>
+       vector<font color="#990000">&lt;</font>string<font color="#990000">&gt;::</font><font color="#008080">iterator</font> it <font color="#990000">=</font> vs<font color="#990000">.</font><b><font color="#000000">begin</font></b><font color="#990000">()</font> <font color="#990000">+</font> vs<font color="#990000">.</font><b><font color="#000000">size</font></b><font color="#990000">()/</font><font color="#993399">2</font><font color="#990000">;</font>
+</tt></pre>
+iterator
+<!--O--><span class='zmienna'>it<!--C--></span>
+ wskazuje na środkowy element wektora. Iteratory
+takie można też porównywać za pomocą operatorów relacyjnych (jak
+np. '
+<FONT COLOR="#000000"><TT>&gt;</TT></FONT>') czy odejmować (wynikiem jest liczba elementów
+pomiędzy pozycjami w&nbsp;kolekcji wskazywanymi przez te iteratory).
+Elementy wskazywane takimi iteratorami można odczytywać, jak i&nbsp;na nie
+przypisywać. Tego typu iteratory to
+<FONT COLOR="#7b003e"><B>iteratory o&nbsp;dostępie bezpośrednim</B></FONT>
+<A NAME="28789"></A> (ang.&nbsp;<FONT COLOR="#7b003e"><I>random access
+iterator</I></FONT>). Są one np.&nbsp;związane z&nbsp;wektorami (<!--O--><span class='klasa'>vector<!--C--></span>),
+<A NAME="28792"></A> kolejkami dwustronnymi (<!--O--><span class='klasa'>deque<!--C--></span>)<A NAME="28794"></A>
+<A NAME="28795"></A> i&nbsp;obiektami klasy
+<!--O--><span class='klasa'>string<!--C--></span>,
+<A NAME="28797"></A> które są traktowane jako kolekcje znaków.
+
+<P>
+Drugim typem iteratora jest <FONT COLOR="#7b003e"><B>iterator dwukierunkowy</B></FONT>
+<A NAME="28799"></A> (ang.&nbsp;<FONT COLOR="#7b003e"><I>bidirectional iterator</I></FONT>).
+Pozwala na poruszanie się po kolekcji w&nbsp;obu kierunkach za pomocą
+operatorów zwiększania i&nbsp;zmniejszania ('<SPAN CLASS="MATH">+</SPAN><SPAN CLASS="MATH">+</SPAN>' i&nbsp;'<SPAN CLASS="MATH">- -</SPAN>'), ale nie
+wspiera arytmetyki wskaźników, na przykład dodawania liczb
+całkowitych do iteratora. Takie itertory można porównywać za
+pomocą '
+<FONT COLOR="#000000"><TT>==</TT></FONT>' i&nbsp;'
+<FONT COLOR="#000000"><TT>!=</TT></FONT>', ale nie za pomocą '
+<FONT COLOR="#000000"><TT>&lt;</TT></FONT>'
+i&nbsp;'
+<FONT COLOR="#000000"><TT>&gt;</TT></FONT>'. Są one związane na przykład z&nbsp;kolekcjami
+listowymi (<!--O--><span class='klasa'>list<!--C--></span>, z nagłówka
+<!--O--><span class='plik'>list<!--C--></span>).
+
+<P>
+Jeszcze bardziej ograniczona jest funkcjonalność iteratorów
+<FONT COLOR="#7b003e"><B>jednokierunkowych</B></FONT><A NAME="28813"></A>
+(ang.&nbsp;<FONT COLOR="#7b003e"><I>forward iterator</I></FONT>). Są one podobne do dwukierunkowych,
+ale pozwalają na poruszanie się tylko w&nbsp;jednym kierunku: do przodu.
+
+<P>
+W końcu najbardziej ograniczone są możliwości iteratorów
+<FONT COLOR="#7b003e"><B>wejściowych</B></FONT><A NAME="28816"></A>
+<A NAME="28817"></A> i&nbsp;<FONT COLOR="#7b003e"><B>wyjściowych</B></FONT>
+(ang.&nbsp;<FONT COLOR="#7b003e"><I>input</I></FONT> i&nbsp;<FONT COLOR="#7b003e"><I>output iterator</I></FONT>).<A NAME="28821"></A>
+<A NAME="28822"></A> Pozwalają one tylko na jednokrotny
+przebieg (ang.&nbsp;<FONT COLOR="#7b003e"><I>single pass</I></FONT>) kolekcji w&nbsp;kierunku do przodu.
+Iteratory wejściowe pozwalają tylko na odczyt elementu wskazywanego,
+a&nbsp;wyjściowe tylko na przypisanie im wartości, ale nie odczyt. Takie
+iteratory związane są zwykle ze strumieniami (wejściowymi
+i&nbsp;wyjściowymi).
+<DIV ALIGN="CENTER">
+<A NAME="28827"></A>
+<TABLE CELLPADDING=3>
+<CAPTION><STRONG>Tabela 24.2:</STRONG>
+Operacje iteratorowe</CAPTION>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">Wyj.  <A NAME="literoper"></A></TD>
+<TD ALIGN="LEFT">Wej.</TD>
+<TD ALIGN="LEFT">W przód</TD>
+<TD ALIGN="LEFT">Dwukier.</TD>
+<TD ALIGN="LEFT">Bezpośr.</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">Odczyt</TD>
+<TD ALIGN="LEFT">Nie</TD>
+<TD ALIGN="LEFT">Tak</TD>
+<TD ALIGN="LEFT">Tak</TD>
+<TD ALIGN="LEFT">Tak</TD>
+<TD ALIGN="LEFT">Tak</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">Zapis</TD>
+<TD ALIGN="LEFT">Tak</TD>
+<TD ALIGN="LEFT">Nie</TD>
+<TD ALIGN="LEFT">Tak</TD>
+<TD ALIGN="LEFT">Tak</TD>
+<TD ALIGN="LEFT">Tak</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">Iteracja</TD>
+<TD ALIGN="LEFT"><SPAN CLASS="MATH">+</SPAN><SPAN CLASS="MATH">+</SPAN></TD>
+<TD ALIGN="LEFT"><SPAN CLASS="MATH">+</SPAN><SPAN CLASS="MATH">+</SPAN></TD>
+<TD ALIGN="LEFT"><SPAN CLASS="MATH">+</SPAN><SPAN CLASS="MATH">+</SPAN></TD>
+<TD ALIGN="LEFT"><SPAN CLASS="MATH">+</SPAN><SPAN CLASS="MATH">+</SPAN>, <SPAN CLASS="MATH">- -</SPAN></TD>
+<TD ALIGN="LEFT"><SPAN CLASS="MATH">+</SPAN><SPAN CLASS="MATH">+</SPAN>, <SPAN CLASS="MATH">- -</SPAN>, <SPAN CLASS="MATH">+</SPAN>, <SPAN CLASS="MATH">-</SPAN>, <SPAN CLASS="MATH">+</SPAN><SPAN CLASS="MATH">=</SPAN>, <SPAN CLASS="MATH">-</SPAN><SPAN CLASS="MATH">=</SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="LEFT">Porówn.</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT"><SPAN CLASS="MATH">= =</SPAN>, <SPAN CLASS="MATH">! =</SPAN></TD>
+<TD ALIGN="LEFT"><SPAN CLASS="MATH">= =</SPAN>, <SPAN CLASS="MATH">! =</SPAN></TD>
+<TD ALIGN="LEFT"><SPAN CLASS="MATH">= =</SPAN>, <SPAN CLASS="MATH">! =</SPAN></TD>
+<TD ALIGN="LEFT"><SPAN CLASS="MATH">= =</SPAN>, <SPAN CLASS="MATH">! =</SPAN>, <SPAN CLASS="MATH">&lt;</SPAN>, <SPAN CLASS="MATH">&gt;</SPAN>, <SPAN CLASS="MATH">&lt; =</SPAN>, <SPAN CLASS="MATH">&gt; =</SPAN></TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+Iteratory są podstawowym elementem stosowanym w&nbsp;algorytmach i&nbsp;funkcjach
+operujących na kolekcjach. Pełnią one rolę łącznika między
+algorytmami i&nbsp;funkcjami a&nbsp;strukturami danych, jakimi są kolekcje.
+
+<P>
+
+<H2><A NAME="SECTION002513000000000000000"></A>
+        <A NAME="stl:operkol"></A>
+<BR>
+<SPAN CLASS="arabic">24</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Operacje na kolekcjach
+</H2>
+
+<P>
+Na kolekcjach można wykonywać wiele operacji, choć należy
+pamiętać, że nie każdą z&nbsp;nich można wykonać na każdej
+kolekcji. Związane jest to z&nbsp;kwestią wydajności: niektóre
+kolekcje dopuszczają mniej operacji, ale za to są one wykonywane
+bardzo efektywnie. Na przykład, jak wspominaliśmy, różnica dwóch
+iteratorów odnoszących się do wektora daje liczbę elementów
+pomiędzy nimi &mdash;&nbsp;ponieważ w&nbsp;wektorze elementy są rozmieszczone
+w pamięci jeden przy drugim i&nbsp;rozmiar ich jest znany, jest to operacja
+bardzo szybka, sprowadzająca się do jednego odejmowania i&nbsp;jednego
+dzielenia. Dla listy (<!--O--><span class='klasa'>list<!--C--></span>) nie jest to takie proste, więc
+aby osiągnąć ten sam cel, należy użyć specjalnej funkcji
+
+<!--O--><span class='funkcja'>distance<!--C--></span><A NAME="28837"></A><A NAME="28838"></A>
+o liniowym (a więc proporcjonalnym do rozmiaru listy) czasie
+działania:
+<A NAME="dist.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">191</SPAN>:</SPAN>
+      <A NAME="tex2html203"
+  HREF="source-files/dist.cpp">
+<!--O--><span class='downl'>dist.cpp<!--C--></span></A>
+<A NAME="29423"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Operacje na kolekcjach</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;vector&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;string&gt;</font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;list&gt;</font>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>
+ <font SIZE="-2" color="black">     7.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#008080">vector&lt;string&gt;</font> vec<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>
+ <font SIZE="-2" color="black">    10.  </font><b><font color="#000080">#if</font></b>   <b><font color="#000000">defined</font></b><font color="#990000">(</font>__WIN32<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    11.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Lista slow (^Z konczy): "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    12.  </font><b><font color="#000080">#elif</font></b> <b><font color="#000000">defined</font></b><font color="#990000">(</font>__linux<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    13.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Lista slow (^D konczy): "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    14.  </font><b><font color="#000080">#else</font></b>
+ <font SIZE="-2" color="black">    15.  </font><b><font color="#000080">    #error</font></b> Nieznany system
+ <font SIZE="-2" color="black">    16.  </font><b><font color="#000080">#endif</font></b>
+ <font SIZE="-2" color="black">    17.  </font>
+ <font SIZE="-2" color="black">    18.  </font>    <font color="#008080">string</font> s<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font> cin <font color="#990000">&gt;&gt;</font> s <font color="#990000">)</font> vec<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font>s<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    20.  </font>    cin<font color="#990000">.</font><b><font color="#000000">clear</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    21.  </font>
+ <font SIZE="-2" color="black">    22.  </font>    <font color="#008080">list&lt;string&gt;</font> <b><font color="#000000">lis</font></b><font color="#990000">(</font>vec<font color="#990000">.</font><b><font color="#000000">begin</font></b><font color="#990000">(),</font>vec<font color="#990000">.</font><b><font color="#000000">end</font></b><font color="#990000">());</font>
+ <font SIZE="-2" color="black">    23.  </font>
+ <font SIZE="-2" color="black">    24.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Slowo do znalezienia: "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    25.  </font>    cin  <font color="#990000">&gt;&gt;</font> s<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    26.  </font>
+ <font SIZE="-2" color="black">    27.  </font>    vector<font color="#990000">&lt;</font>string<font color="#990000">&gt;::</font><font color="#008080">iterator</font> sit<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    28.  </font>    list<font color="#990000">&lt;</font>string<font color="#990000">&gt;::</font><font color="#008080">iterator</font>   lit<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    29.  </font>
+ <font SIZE="-2" color="black">    30.  </font>      <i><font color="#9A1900">// wektor</font></i>
+ <font SIZE="-2" color="black">    31.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font>sit <font color="#990000">=</font> vec<font color="#990000">.</font><b><font color="#000000">begin</font></b><font color="#990000">();</font> sit <font color="#990000">!=</font> vec<font color="#990000">.</font><b><font color="#000000">end</font></b><font color="#990000">();</font> <font color="#990000">++</font>sit<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    32.  </font>        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> <font color="#990000">*</font>sit <font color="#990000">==</font> s <font color="#990000">)</font> <b><font color="#0000FF">break</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    33.  </font>    <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> sit <font color="#990000">!=</font> vec<font color="#990000">.</font><b><font color="#000000">end</font></b><font color="#990000">()</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    34.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Slowo "</font> <font color="#990000">&lt;&lt;</font> s <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" na pozycji "</font>
+ <font SIZE="-2" color="black">    35.  </font>             <font color="#990000">&lt;&lt;</font> sit <font color="#990000">-</font> vec<font color="#990000">.</font><b><font color="#000000">begin</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    36.  </font>    <b><font color="#0000FF">else</font></b>
+ <font SIZE="-2" color="black">    37.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Slowo "</font> <font color="#990000">&lt;&lt;</font> s <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" nie wystapilo"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    38.  </font>
+ <font SIZE="-2" color="black">    39.  </font>      <i><font color="#9A1900">// lista</font></i>
+ <font SIZE="-2" color="black">    40.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font>lit <font color="#990000">=</font> lis<font color="#990000">.</font><b><font color="#000000">begin</font></b><font color="#990000">();</font> lit <font color="#990000">!=</font> lis<font color="#990000">.</font><b><font color="#000000">end</font></b><font color="#990000">();</font> <font color="#990000">++</font>lit<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    41.  </font>        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> <font color="#990000">*</font>lit <font color="#990000">==</font> s <font color="#990000">)</font> <b><font color="#0000FF">break</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    42.  </font>    <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> lit <font color="#990000">!=</font> lis<font color="#990000">.</font><b><font color="#000000">end</font></b><font color="#990000">()</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    43.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Slowo "</font> <font color="#990000">&lt;&lt;</font> s <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" na pozycji "</font>
+ <font SIZE="-2" color="black">    44.  </font>             <font color="#990000">&lt;&lt;</font> <b><font color="#000000">distance</font></b><font color="#990000">(</font>lis<font color="#990000">.</font><b><font color="#000000">begin</font></b><font color="#990000">(),</font>lit<font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    45.  </font>    <b><font color="#0000FF">else</font></b>
+ <font SIZE="-2" color="black">    46.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Slowo "</font> <font color="#990000">&lt;&lt;</font> s <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" nie wystapilo"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    47.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+W linii&nbsp;23 zastosowaliśmy konstruktor listy (taki sam istnieje i&nbsp;dla
+pozostałych kolekcji) przyjmujący dwa
+iteratory związane z&nbsp;inną kolekcją, w&nbsp;tym przypadku wektorem.
+Elementy od tego wskazywanego przez pierwszy iterator
+włącznie do wskazywanego przez drugi z&nbsp;iteratorów <FONT COLOR="#7b003e"><I>wyłącznie</I></FONT>
+są kopiowane do nowo tworzonej kolekcji. Tak więc lista w&nbsp;naszym
+przypadku będzie zawierać te same elementy co wektor. Ponieważ
+iterator związany z&nbsp;wektorem należy do kategorii iteratorów
+o&nbsp;dostępie swobodnym, można (linia&nbsp;36) użyć po prostu różnicy
+iteratorów do określenia pozycji &mdash;&nbsp;tu obliczmy ją względem
+pozycji zerowej, zwracanej przez
+<!--O--><span class='funkcja'>begin<!--C--></span>. Dla listy (linia&nbsp;45)
+użyliśmy do tego funkcji
+<!--O--><span class='funkcja'>distance<!--C--></span>, ponieważ iterator
+związany z&nbsp;listami należy do kategorii dwukierunkowych i&nbsp;nie wspiera
+arytmetyki wskaźników. Przykładowy wydruk:
+<PRE>
+    Lista slow (^D konczy): Ala
+    Ela
+    Ola
+    Ula
+    ^D
+    Slowo do znalezienia: Ola
+    Slowo Ola na pozycji 2
+    Slowo Ola na pozycji 2
+</PRE>
+Do przerwania wczytywania danych (linia&nbsp;20) użyty tu został
+znak końca danych, czyli Ctrl-D (pod Windows byłoby to Ctrl-Z).
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Zwykła tablica może być traktowana jak kolekcja. Wskaźniki do
+elementów tablicy pełnią wtedy rolę iteratorów. Na przykład po
+<pre><tt>       <font color="#009900">int</font> arr<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">{</font><font color="#993399">1</font><font color="#990000">,</font><font color="#993399">4</font><font color="#990000">,</font><font color="#993399">6</font><font color="#990000">,</font><font color="#993399">8</font><font color="#990000">,</font><font color="#993399">9</font><font color="#FF0000">}</font><font color="#990000">;</font>
+       <font color="#008080">vector&lt;int&gt;</font> <b><font color="#000000">v</font></b><font color="#990000">(</font>arr<font color="#990000">+</font><font color="#993399">1</font><font color="#990000">,</font>arr<font color="#990000">+</font><font color="#993399">4</font><font color="#990000">);</font>
+</tt></pre>
+wektor&nbsp;
+<!--O--><span class='zmienna'>v<!--C--></span>
+ będzie zawierał liczby 4, 6 i&nbsp;8 bo wskaźnik
+
+<FONT COLOR="#000000"><TT>arr+1</TT></FONT> wskazuje na liczbę&nbsp;4, a&nbsp;wskaźnik
+<FONT COLOR="#000000"><TT>arr+4</TT></FONT> na
+liczbę&nbsp;9, a&nbsp;zgodnie z&nbsp;tym, co mówiliśmy, przedział obejmuje element
+wskazywany przez iterator pierwszy, ale już nie obejmuje elementu
+wskazywanego przez iterator drugi.
+
+<P>
+Jak wspomnieliśmy, kolekcją (znaków) jest obiekt klasy
+
+<!--O--><span class='klasa'>string<!--C--></span>. Kilka przykładów ilustrujących tę cechę
+napisów w&nbsp;stylu C++ podaliśmy już
+w&nbsp;rozdziale o <A HREF="node113.html#nap:cppnap">napisach</A> .
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Inną, często stosowaną operacją jest usuwanie elementów kolekcji.
+Służy do tego metoda
+<!--O--><span class='funkcja'>erase<!--C--></span>.<A NAME="28862"></A>
+<A NAME="28863"></A> Jej argumentem powinien być iterator wskazujący
+na usuwany element albo para iteratorów; w tym drugim przypadku
+usuwane są elementy od wskazywanego pierwszym iteratorem włącznie do
+wskazywanego drugim iteratorem wyłącznie. Na przykład po
+<pre><tt>       <font color="#008080">vector&lt;Person&gt;</font> os<font color="#990000">;</font>
+
+       os<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><b><font color="#000000">Person</font></b><font color="#990000">(</font><font color="#FF0000">"Jenny"</font><font color="#990000">));</font>
+       os<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><b><font color="#000000">Person</font></b><font color="#990000">(</font><font color="#FF0000">"Jill"</font><font color="#990000">));</font>
+       os<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><b><font color="#000000">Person</font></b><font color="#990000">(</font><font color="#FF0000">"Jane"</font><font color="#990000">));</font>
+       os<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><b><font color="#000000">Person</font></b><font color="#990000">(</font><font color="#FF0000">"Janet"</font><font color="#990000">));</font>
+
+       os<font color="#990000">.</font><b><font color="#000000">erase</font></b><font color="#990000">(</font>os<font color="#990000">.</font><b><font color="#000000">begin</font></b><font color="#990000">()+</font><font color="#993399">1</font><font color="#990000">,</font> os<font color="#990000">.</font><b><font color="#000000">end</font></b><font color="#990000">());</font>
+</tt></pre>
+z wektora
+<!--O--><span class='zmienna'>os<!--C--></span>
+ usunięte zostaną wszystkie elementy
+prócz pierwszego. Elementów nie należy usuwać w&nbsp;pętli, bo
+po usunięciu pierwszego z&nbsp;nich stan kolekcji się zmienia &mdash;&nbsp;
+pozostałe elementy zmieniają swoje pozycje, co może doprowadzić do
+chaosu.
+
+<P>
+Podobnie można do kolekcji dodawać nowe elementy za pomocą metody
+
+<!--O--><span class='funkcja'>insert<!--C--></span>.<A NAME="28868"></A><A NAME="28869"></A> Argumentem
+wskazującym, na której pozycji (a ściślej, <FONT COLOR="#7b003e"><I>przed</I></FONT>
+którym elementem) nowe elementy powinny się pojawić, jest
+oczywiście iterator. Z kolei elementy do wstawienia mogą pochodzić
+z&nbsp;innej kolekcji; ich zakres wskazywany jest parą iteratorów:
+<pre><tt>       <font color="#009900">double</font> tab<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">{</font><font color="#993399">2</font><font color="#990000">,</font> <font color="#993399">4</font><font color="#990000">,</font> <font color="#993399">6</font><font color="#990000">,</font> <font color="#993399">7</font><font color="#990000">,</font> <font color="#993399">8</font><font color="#990000">,</font> <font color="#993399">1.5</font><font color="#990000">,</font> <font color="#993399">5</font><font color="#990000">,</font> <font color="#993399">7</font><font color="#FF0000">}</font><font color="#990000">;</font>
+       <font color="#008080">list&lt;double&gt;</font> <b><font color="#000000">lis</font></b><font color="#990000">(</font><font color="#993399">5</font><font color="#990000">);</font>
+       lis<font color="#990000">.</font><b><font color="#000000">insert</font></b><font color="#990000">(</font>lis<font color="#990000">.</font><b><font color="#000000">begin</font></b><font color="#990000">(),</font><font color="#993399">10.5</font><font color="#990000">);</font>
+       lis<font color="#990000">.</font><b><font color="#000000">insert</font></b><font color="#990000">(</font>lis<font color="#990000">.</font><b><font color="#000000">begin</font></b><font color="#990000">(),</font>tab<font color="#990000">+</font><font color="#993399">1</font><font color="#990000">,</font>tab<font color="#990000">+</font><font color="#993399">3</font><font color="#990000">);</font>
+</tt></pre>
+W tym fragmencie zwróćmy uwagę na linię drugą. Tworzymy tu listę
+o pięciu elementach, którym nadawane są wartości domyślne.
+W naszym przypadku elementami były liczby, o&nbsp;wartości domyślnej&nbsp;0,
+ale dla obiektów użyty byłby konstruktor domyślny. Zatem powinien
+on wtedy istnieć! Następnie dodajemy liczbę 10.5 na początek listy.
+Pozostałe&nbsp;5 elementów przesuwa się w&nbsp;prawo: po tej operacji lista
+ma już sześć elementów. W czwartej linii na nowej początkowej
+pozycji (a&nbsp;więc przed wstawione tam przed chwilą 10.5) wstawiamy dwie
+liczby z&nbsp;tablicy
+<!--O--><span class='zmienna'>tab<!--C--></span>: liczby z&nbsp;pozycji&nbsp;1 i&nbsp;2, czyli liczby&nbsp;4
+i&nbsp;6. Zatem teraz lista ma osiem elementów:
+<PRE>
+    4 6 10.5 0 0 0 0 0
+</PRE>
+Dla list (<!--O--><span class='klasa'>list<!--C--></span>,
+<!--O--><span class='klasa'>deque<!--C--></span>, ale nie
+<!--O--><span class='klasa'>vector<!--C--></span>), prócz
+metod operujących na końcu kolekcji, szczególnie efektywnie
+zaimplementowane są metody operujące na jej początku. Analogicznie
+do metod
+<!--O--><span class='funkcja'>push_back<!--C--></span>,
+<!--O--><span class='funkcja'>pop_back<!--C--></span>
+ i&nbsp;
+<!--O--><span class='funkcja'>back<!--C--></span>,
+o&nbsp;których już mówiliśmy, działają metody
+<!--O--><span class='funkcja'>push_front<!--C--></span>,
+<A NAME="28883"></A><A NAME="28884"></A>
+<!--O--><span class='funkcja'>pop_front<!--C--></span>
+
+<A NAME="28886"></A><A NAME="28887"></A> i&nbsp;
+<!--O--><span class='funkcja'>front<!--C--></span>.
+<A NAME="28889"></A><A NAME="28890"></A> W miarę możności należy raczej
+korzystać z&nbsp;funkcji operujących na końcach kolekcji, a&nbsp;nie np.&nbsp;z
+funkcji
+<!--O--><span class='funkcja'>insert<!--C--></span>
+ czy
+<!--O--><span class='funkcja'>erase<!--C--></span>, których implementacja
+jest zwykle wolniejsza.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2856"
+  HREF="node143.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2862"
+  HREF="node143.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2868"
+  HREF="node145.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2864"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2866"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2857"
+  HREF="node143.html">24. Biblioteka standardowa</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2863"
+  HREF="node143.html">24. Biblioteka standardowa</A>
+<B>Dalej:</B> <A NAME="tex2html2869"
+  HREF="node145.html">24.2 Algorytmy i&nbsp;obiekty funkcyjne</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

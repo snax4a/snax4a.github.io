@@ -1,0 +1,354 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>18.1 Wstęp</TITLE>
+<META NAME="description" CONTENT="18.1 Wstęp">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node116.html">
+<LINK REL="previous" HREF="node114.html">
+<LINK REL="up" HREF="node114.html">
+<LINK REL="next" HREF="node116.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2413"
+  HREF="node114.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2419"
+  HREF="node114.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2425"
+  HREF="node116.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2421"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2423"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2414"
+  HREF="node114.html">18. Przeciążanie operatorów</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2420"
+  HREF="node114.html">18. Przeciążanie operatorów</A>
+<B>Dalej:</B> <A NAME="tex2html2426"
+  HREF="node116.html">18.2 Przeciążenia za pomocą</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001910000000000000000"></A><A NAME="przec:wstep"></A>
+<BR>
+<SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">1</SPAN> Wstęp
+</H1>
+
+<P>
+Użycie w&nbsp;tekście programu operatorów (takich jak&nbsp;'
+<FONT COLOR="#000000"><TT>+</TT></FONT>',
+'
+<FONT COLOR="#000000"><TT>-&gt;</TT></FONT>', '
+<FONT COLOR="#000000"><TT>&amp;&amp;</TT></FONT>' itd.) powoduje tak
+naprawdę wywołanie funkcji z&nbsp;argumentami będącymi wartościami
+wyrażeń stojących po obu ich stronach (lub po jednej, dla
+operatorów jednoargumentowych). Tak więc podczas opracowania
+instrukcji
+<pre><tt>       c <font color="#990000">=</font> a <font color="#990000">+</font> b<font color="#990000">;</font>
+</tt></pre>
+wywołana zostanie funkcja mająca na celu dodanie&nbsp;
+<!--O--><span class='zmienna'>a<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='zmienna'>b<!--C--></span>. Jaka to będzie funkcja, zależy od typu
+<!--O--><span class='zmienna'>a<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='zmienna'>b<!--C--></span>; jeśli oba argumenty są typu
+<!--O--><span class='typ'>double<!--C--></span>, to
+wywołana zostanie inna funkcja niż ta służąca do dodania dwóch
+liczb typu
+<!--O--><span class='typ'>int<!--C--></span>. Jeśli&nbsp;
+<!--O--><span class='zmienna'>a<!--C--></span>
+ jest typu
+<!--O--><span class='typ'>int<!--C--></span>,
+a&nbsp;
+<!--O--><span class='zmienna'>b<!--C--></span>
+ typu
+<!--O--><span class='typ'>double<!--C--></span>, to, jak wiemy, najpierw wartość
+zmiennej&nbsp;
+<!--O--><span class='zmienna'>a<!--C--></span>
+ (ale nie sama zmienna!) zostanie skonwertowana do
+typu
+<!--O--><span class='typ'>double<!--C--></span>
+ i&nbsp;następnie zostanie wywołana funkcja dodająca
+wartości typu
+<!--O--><span class='typ'>double<!--C--></span>
+ (i&nbsp;wynik będzie też tego typu).
+Automatyczne konwersje i&nbsp;wybór odpowiedniej funkcji będą
+przebiegać &bdquo;samoczynnie&rdquo; dla typów wbudowanych. Dla argumentów
+będących obiektami klas przez nas samych zdefiniowanych, znaczenie
+tych operatorów jest jednak niezdefiniowane. Zatem, jeśli chcemy
+korzystać z&nbsp;tych operatorów w&nbsp;takim kontekście, musimy je sami
+określić.
+
+<P>
+Możemy to zrobić określając (w specjalny sposób) w&nbsp;definiowanej
+przez nas klasie odpowiednie metody lub definiując przeznaczone do
+tego celu funkcje globalne, najczęściej, choć nie jest to konieczne,
+zaprzyjaźnione z&nbsp;naszą klasą.
+
+<P>
+Taką operację nazywamy
+<FONT COLOR="#7b003e"><B>przeciążaniem</B></FONT><A NAME="22953"></A> lub
+<FONT COLOR="#7b003e"><B>przeładowaniem</B></FONT> operatora, w&nbsp;analogi do przeciążania
+funkcji, czyli definiowania kilku funkcji o&nbsp;tej samej nazwie. Tak jak
+dla funkcji, właściwa wersja operatora znajdowana jest przez
+kompilator na podstawie typu argumentów.
+
+<P>
+Operatory, które mogą być przeciążone (przeładowane), to:
+<DIV ALIGN="CENTER">
+<A NAME="22958"></A>
+<TABLE CELLPADDING=3>
+<CAPTION><STRONG>Tabela:</STRONG>
+Operatory które mogą być przeciążone</CAPTION>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER"><SPAN CLASS="MATH">+</SPAN></TD>
+<TD ALIGN="CENTER"><A NAME="przecoper"></A>  <SPAN CLASS="MATH">-</SPAN></TD>
+<TD ALIGN="CENTER">*</TD>
+<TD ALIGN="CENTER">/</TD>
+<TD ALIGN="CENTER">%</TD>
+<TD ALIGN="CENTER">&#94;</TD>
+<TD ALIGN="CENTER">&amp;</TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">|</SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">&#8764;</SPAN></TD>
+<TD ALIGN="CENTER">!</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER"><SPAN CLASS="MATH">=</SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">&lt;</SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">&gt;</SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">+</SPAN><SPAN CLASS="MATH">=</SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">-</SPAN><SPAN CLASS="MATH">=</SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">*</SPAN><SPAN CLASS="MATH">=</SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">/</SPAN><SPAN CLASS="MATH">=</SPAN></TD>
+<TD ALIGN="CENTER">%<SPAN CLASS="MATH">=</SPAN></TD>
+<TD ALIGN="CENTER">&#94;<SPAN CLASS="MATH">=</SPAN></TD>
+<TD ALIGN="CENTER">&amp;<SPAN CLASS="MATH">=</SPAN></TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER"><SPAN CLASS="MATH">|</SPAN><SPAN CLASS="MATH">=</SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="30" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img25.png"
+ ALT="$ \ll$"></SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="30" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img26.png"
+ ALT="$ \gg$"></SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="30" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img27.png"
+ ALT="$ \ll$"></SPAN><SPAN CLASS="MATH">=</SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="30" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img28.png"
+ ALT="$ \gg$"></SPAN><SPAN CLASS="MATH">=</SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">=</SPAN><SPAN CLASS="MATH">=</SPAN></TD>
+<TD ALIGN="CENTER">!<SPAN CLASS="MATH">=</SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">&lt;</SPAN><SPAN CLASS="MATH">=</SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">&gt;</SPAN><SPAN CLASS="MATH">=</SPAN></TD>
+<TD ALIGN="CENTER">&amp;&amp;</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="30" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img29.png"
+ ALT="$ \Vert$"></SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">+</SPAN><SPAN CLASS="MATH">+</SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">- -</SPAN></TD>
+<TD ALIGN="CENTER">,</TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">-</SPAN><SPAN CLASS="MATH">&gt;</SPAN>*</TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">-</SPAN><SPAN CLASS="MATH">&gt;</SPAN></TD>
+<TD ALIGN="CENTER">new</TD>
+<TD ALIGN="CENTER">delete</TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">()</SPAN></TD>
+<TD ALIGN="CENTER"><SPAN CLASS="MATH">[]</SPAN></TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+przy czym operatory '
+<FONT COLOR="#000000"><TT>&amp;</TT></FONT>', '
+<FONT COLOR="#000000"><TT>*</TT></FONT>', '
+<FONT COLOR="#000000"><TT>-</TT></FONT>',
+'
+<FONT COLOR="#000000"><TT>+</TT></FONT>' mogą być przeładowane w&nbsp;obu wersjach: jedno-
+i&nbsp;dwuargumentowej. Jednoargumentowe operatory zwiększenia
+i&nbsp;zmniejszenia,
+'<SPAN CLASS="MATH">+</SPAN><SPAN CLASS="MATH">+</SPAN>' i&nbsp;'<SPAN CLASS="MATH">- -</SPAN>', można przeładowywać z&nbsp;kolei w&nbsp;obu ich odmianach:
+przyrostkowej i&nbsp;przedrostkowej. Operatory
+'
+<FONT COLOR="#000000"><TT>=</TT></FONT>', '
+<FONT COLOR="#000000"><TT>-&gt;</TT></FONT>','
+<FONT COLOR="#000000"><TT>()</TT></FONT>' i&nbsp;'
+<FONT COLOR="#000000"><TT>[]</TT></FONT>'
+są w&nbsp;pewien sposób specjalne i&nbsp;nimi zajmiemy się osobno.
+Przeciążać można też operatory '
+<!--O--><span class='klucz'>new<!--C--></span>' i&nbsp;'
+<!--O--><span class='klucz'>delete<!--C--></span>',
+ale jest to kwestia dość delikatna i&nbsp;często zależna od
+implementacji; nie będziemy się zatem nią zajmować.
+
+<P>
+Nie można natomiast przeciążać operatorów '
+<FONT COLOR="#000000"><TT>.</TT></FONT>',
+'
+<FONT COLOR="#000000"><TT>.*</TT></FONT>', '
+<FONT COLOR="#000000"><TT>::</TT></FONT>', '
+<FONT COLOR="#000000"><TT>?:</TT></FONT>' i&nbsp;
+<!--O--><span class='klucz'>sizeof<!--C--></span>.
+
+<P>
+Niektóre operatory są dostarczane przez system dla (prawie) każdej
+klasy, nawet jeśli sami nie przeciążyliśmy ich w&nbsp;żaden sposób.
+Należą do nich operatory '
+<FONT COLOR="#000000"><TT>&amp;</TT></FONT>' (pobrania adresu),
+'
+<FONT COLOR="#000000"><TT>=</TT></FONT>' (przypisania), '
+<FONT COLOR="#000000"><TT>,</TT></FONT>' (przecinek) oraz
+<!--O--><span class='klucz'>new<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='klucz'>delete<!--C--></span>. Pierwszego lepiej nie przeciążać, ostatnich trzech
+zwykle nie ma potrzeby.
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Jakkolwiek nie przeciążalibyśmy operatorów, ich priorytety i&nbsp;sposób
+wiązania (od lewej do prawej lub od prawej do lewej,
+patrz rozdział o <A HREF="node54.html#operat:prior">operatorach</A> )
+pozostają takie same jak dla standardowych operatorów oznaczonych tym
+samym symbolem. Tak więc w&nbsp;wyrażeniu
+<pre><tt>       a <font color="#990000">=</font> b <font color="#990000">+</font> c <font color="#990000">*</font> d<font color="#990000">;</font>
+</tt></pre>
+operacja przypisana symbolowi '
+<FONT COLOR="#000000"><TT>*</TT></FONT>' zastosowana zostanie przed
+operacją przypisaną symbolowi '
+<FONT COLOR="#000000"><TT>+</TT></FONT>', niezależnie od tego, jak
+zdefiniowane są w&nbsp;tym kontekście te dwie operacje.
+Podobnie, niezależnie od tego, jak przedefiniujemy operator
+przypisania '
+<FONT COLOR="#000000"><TT>=</TT></FONT>', wyrażenie
+<pre><tt>       a <font color="#990000">=</font> b <font color="#990000">=</font> c<font color="#990000">;</font>
+</tt></pre>
+jest równoważne wyrażeniu
+<pre><tt>       a <font color="#990000">=</font> <font color="#990000">(</font> b <font color="#990000">=</font> c <font color="#990000">);</font>
+</tt></pre>
+a nie
+<pre><tt>       <font color="#990000">(</font> a <font color="#990000">=</font> b <font color="#990000">)</font> <font color="#990000">=</font> c<font color="#990000">;</font>
+</tt></pre>
+bo operator przypisania wiąże od prawej.
+
+<P>
+Również liczba argumentów przeciążonego operatora nie jest
+dowolna: istnieje na przykład tylko jedna standardowa wersja operatora
+'%' (reszta z&nbsp;dzielenia), w&nbsp;której operator ten jest dwuargumentowy.
+Nie można zatem przeciążyć tego operatora tak, aby był
+jednoargumentowy. A więc operatory dwuargumentowe w&nbsp;wersji
+przeładowanej muszą być też dwuargumentowe, a&nbsp;jednoargumentowe &mdash;&nbsp;
+jednoargumentowe.
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Przeładowując operatory należy starać się stosować zasadę
+<FONT COLOR="#7b003e"><I>of least astonishment</I></FONT> &mdash;&nbsp;najmniejszego zaskoczenia &mdash;&nbsp;
+tzn.&nbsp;tak przeładowywać operatory, by można było łatwo przewidzieć
+ich zachowanie na podstawie analogii z&nbsp;normalnym znaczeniem danego
+operatora. Na przykład, jeśli przeładowywujemy operator dodawania,
+to zwracany wynik powinien być typu tego samego co argumenty
+i&nbsp;powinien <FONT COLOR="#7b003e"><I>nie</I></FONT> być l-wartością (a zatem na przykład <FONT COLOR="#7b003e"><I>nie</I></FONT>
+powinien zwracać wyniku przez referencję). Dodawanie bowiem nie
+powinno &bdquo;dać się postawić&rdquo; po lewej stronie przypisania.
+
+<P>
+Podobnie, jeśli przeładowaliśmy operator '
+<FONT COLOR="#000000"><TT>+</TT></FONT>', to
+powinniśmy przeciążyć również operator '
+<FONT COLOR="#000000"><TT>+=</TT></FONT>' i&nbsp;pomyśleć,
+czy nie byłoby naturalne przeładować też odejmowanie ('<SPAN CLASS="MATH">-</SPAN>'),
+odejmowanie z&nbsp;przypisaniem ('
+<FONT COLOR="#000000"><TT>-=</TT></FONT>') i/lub operatory
+zmniejszenia i&nbsp;zwiększenia.
+
+<P>
+Z drugiej strony, gdybyśmy definiowali klasę
+<!--O--><span class='klasa'>String<!--C--></span>
+
+naśladującą klasę
+<!--O--><span class='klasa'>String<!--C--></span>
+ lub
+<!--O--><span class='klasa'>StringBuilder<!--C--></span>
+
+z&nbsp;Javy,<A NAME="23031"></A>
+naturalne byłoby zastąpienie funkcji scalającej napisy
+(konkatenacji) przeładowanym operatorem dodawania: w&nbsp;tym przykładzie
+nie byłoby natomiast intuicyjnie oczywistej interpretacji odejmowania
+czy zmniejszania.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2413"
+  HREF="node114.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2419"
+  HREF="node114.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2425"
+  HREF="node116.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2421"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2423"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2414"
+  HREF="node114.html">18. Przeciążanie operatorów</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2420"
+  HREF="node114.html">18. Przeciążanie operatorów</A>
+<B>Dalej:</B> <A NAME="tex2html2426"
+  HREF="node116.html">18.2 Przeciążenia za pomocą</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

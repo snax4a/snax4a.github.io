@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>5.6 Tablice typu std::array</TITLE>
+<META NAME="description" CONTENT="5.6 Tablice typu std::array">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node29.html">
+<LINK REL="previous" HREF="node27.html">
+<LINK REL="up" HREF="node22.html">
+<LINK REL="next" HREF="node29.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1061"
+  HREF="node27.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1067"
+  HREF="node22.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1073"
+  HREF="node29.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1069"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1071"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1062"
+  HREF="node27.html">5.5 Tablice wielowymiarowe</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1068"
+  HREF="node22.html">5. Tablice statyczne i&nbsp;wskaźniki</A>
+<B>Dalej:</B> <A NAME="tex2html1074"
+  HREF="node29.html">5.7 Wektory (std::vector)</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00660000000000000000"></A><A NAME="tabstat:array"></A>
+<BR>
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">6</SPAN> Tablice typu <SPAN  CLASS="textsl">std::array</SPAN>
+</H1>
+
+<P>
+Od wersji standardu C++11 istnieje w&nbsp;bibliotece standardowej
+specjalny typ danych
+<!--O--><span class='klasa'>std::array<!--C--></span>
+ (z&nbsp;nagłówka
+<!--O--><span class='plik'>array<!--C--></span>).
+Właściwie, jak się przekonamy, jest to tzw.&nbsp;szablon klasy.
+Na razie wystarczy nam wiedzieć, że zamiast tworzyć &bdquo;normalne&rdquo;
+tablice w&nbsp;stylu&nbsp;C, możemy tworzyć obiekty klasy
+<!--O--><span class='klasa'>array&lt;Typ,size&gt;<!--C--></span>,
+gdzie
+<!--O--><span class='klasa'>Typ<!--C--></span>
+ jest typem elementów tablicy, a&nbsp;
+<!--O--><span class='zmienna'>size<!--C--></span>
+ jest
+jej wymiarem. W&nbsp;dalszym ciągu podany wymiar musi być stałą kompilacji.
+Zmiennej tego typu można używać tak jak tablicy, poprzez indeksowanie.
+Również inicjowanie wygląda podobnie jak dla zwykłych tablic;
+na przykład
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;array&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     4.  </font>    std<font color="#990000">::</font><font color="#008080">array&lt;double,5&gt;</font> a1<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     5.  </font>    std<font color="#990000">::</font><font color="#008080">array&lt;int,3&gt;</font>    a2<font color="#FF0000">{</font><font color="#993399">1</font><font color="#990000">,</font><font color="#993399">2</font><font color="#990000">,</font><font color="#993399">3</font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> <font color="#993399">5</font><font color="#990000">;</font> <font color="#990000">++</font>i<font color="#990000">)</font> a1<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">=</font> i<font color="#990000">+</font><font color="#993399">0.5</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> <font color="#993399">5</font><font color="#990000">;</font> <font color="#990000">++</font>i<font color="#990000">)</font> std<font color="#990000">::</font>cout <font color="#990000">&lt;&lt;</font> a1<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>    std<font color="#990000">::</font>cout <font color="#990000">&lt;&lt;</font> std<font color="#990000">::</font>endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> <font color="#993399">3</font><font color="#990000">;</font> <font color="#990000">++</font>i<font color="#990000">)</font> std<font color="#990000">::</font>cout <font color="#990000">&lt;&lt;</font> a2<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>    std<font color="#990000">::</font>cout <font color="#990000">&lt;&lt;</font> std<font color="#990000">::</font>endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font><font color="#FF0000">}</font>
+</tt></pre>
+drukuje
+<PRE>
+    0.5 1.5 2.5 3.5 4.5
+    1 2 3
+</PRE>
+Tablice tego typu mają jednak szereg zalet w&nbsp;stosunku do zwykłych tablic.
+Przede wszystkim są obiektami i&nbsp;&bdquo;znają&rdquo; swój wymiar, również wtedy,
+kiedy zostaną wysłane do funkcji jako argument. Można ten wymiar
+uzyskać poprzez wywołanie metody na rzecz takiego obiektu:
+
+<FONT COLOR="#000000"><TT>arr.size()</TT></FONT> (linia&nbsp;<span class="ding">&#x278A;</span> w&nbsp;przykładzie poniżej),
+albo poprzez wywołanie bibliotecznej funkcji:
+
+<FONT COLOR="#000000"><TT>std::size(arr)</TT></FONT> (linia&nbsp;<span class="ding">&#x278C;</span>),
+gdzie
+<!--O--><span class='zmienna'>arr<!--C--></span>
+ jest taką tablicą. Jak widzimy w&nbsp;przykładzie,
+to będzie działać również dla tablicy przesłanej do funkcji
+(w&nbsp;tym przypadku funkcji
+<!--O--><span class='funkcja'>printArray<!--C--></span>).
+Do poszczególnych elementów można się odwoływać poprzez
+indeks, jak to już widzieliśmy, albo poprzez metodę:
+
+<FONT COLOR="#000000"><TT>arr.at()</TT></FONT> (linia&nbsp;<span class="ding">&#x278D;</span>):
+<BR><A NAME="Arrays.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">28</SPAN>:</SPAN>
+      <A NAME="tex2html30"
+  HREF="source-files/Arrays.cpp">
+<!--O--><span class='downl'>Arrays.cpp<!--C--></span></A>
+<A NAME="5657"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Tablice typu <SPAN  CLASS="textsl">std::array</SPAN></SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;array&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cstddef&gt;</font>   <i><font color="#9A1900">// size t</font></i>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;string&gt;</font>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">using</font></b> std<font color="#990000">::</font>array<font color="#990000">;</font> <b><font color="#0000FF">using</font></b> std<font color="#990000">::</font>cout<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>
+ <font SIZE="-2" color="black">     7.  </font><font color="#009900">void</font> <b><font color="#000000">printArray</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> array<font color="#990000">&lt;</font><font color="#009900">int</font><font color="#990000">,</font><font color="#993399">8</font><font color="#990000">&gt;&amp;</font> a<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     8.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Version &lt;int,EIGHT&gt;: "</font>
+ <font SIZE="-2" color="black">     9.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"a.size() = "</font> <font color="#990000">&lt;&lt;</font> a<font color="#990000">.</font><b><font color="#000000">size</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>         <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">    10.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><b><font color="#0000FF">const</font></b> <b><font color="#0000FF">auto</font></b><font color="#990000">&amp;</font> e <font color="#990000">:</font> a<font color="#990000">)</font> cout <font color="#990000">&lt;&lt;</font> e <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>          <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    11.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    12.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    13.  </font>
+ <font SIZE="-2" color="black">    14.  </font><b><font color="#0000FF">template</font></b> <font color="#990000">&lt;</font><b><font color="#0000FF">typename</font></b> <font color="#008080">E</font><font color="#990000">,</font> std<font color="#990000">::</font><font color="#008080">size_t</font> SIZE<font color="#990000">&gt;</font>
+ <font SIZE="-2" color="black">    15.  </font><font color="#009900">void</font> <b><font color="#000000">printArray</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> array<font color="#990000">&lt;</font>E<font color="#990000">,</font>SIZE<font color="#990000">&gt;&amp;</font> a<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    16.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Template version: "</font>
+ <font SIZE="-2" color="black">    17.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"std::size(a) = "</font> <font color="#990000">&lt;&lt;</font> std<font color="#990000">::</font><b><font color="#000000">size</font></b><font color="#990000">(</font>a<font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font> <span class="ding">&#x278C;</span>
+ <font SIZE="-2" color="black">    18.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font>std<font color="#990000">::</font><font color="#008080">size_t</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> a<font color="#990000">.</font><b><font color="#000000">size</font></b><font color="#990000">();</font> <font color="#990000">++</font>i<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    19.  </font>        cout <font color="#990000">&lt;&lt;</font> a<font color="#990000">.</font><b><font color="#000000">at</font></b><font color="#990000">(</font>i<font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>                        <span class="ding">&#x278D;</span>
+ <font SIZE="-2" color="black">    20.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    21.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    22.  </font>
+ <font SIZE="-2" color="black">    23.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    24.  </font>    <font color="#008080">array&lt;int,8&gt;</font> ai<font color="#FF0000">{</font><font color="#993399">1</font><font color="#990000">,</font><font color="#993399">2</font><font color="#990000">,</font><font color="#993399">3</font><font color="#990000">,</font><font color="#993399">4</font><font color="#990000">,</font><font color="#993399">5</font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    25.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><b><font color="#0000FF">auto</font></b><font color="#990000">&amp;</font> e <font color="#990000">:</font> ai<font color="#990000">)</font> <font color="#990000">++</font>e<font color="#990000">;</font>                            <span class="ding">&#x278E;</span>
+ <font SIZE="-2" color="black">    26.  </font>    <b><font color="#000000">printArray</font></b><font color="#990000">(</font>ai<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    27.  </font>
+ <font SIZE="-2" color="black">    28.  </font>    <font color="#008080">array&lt;std::string,5&gt;</font> as<font color="#FF0000">{</font><font color="#FF0000">"K"</font><font color="#990000">,</font><font color="#FF0000">"L"</font><font color="#990000">,</font><font color="#FF0000">"M"</font><font color="#990000">,</font><font color="#FF0000">"D"</font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    29.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><b><font color="#0000FF">auto</font></b><font color="#990000">&amp;</font> e <font color="#990000">:</font> as<font color="#990000">)</font> e <font color="#990000">+=</font> <font color="#FF0000">"!"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    30.  </font>    <b><font color="#000000">printArray</font></b><font color="#990000">(</font>as<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    31.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Przykład ilustruje też kilka elementów, których jeszcze nie znamy.
+Forma pętli (na przykład w&nbsp;liniach&nbsp;<span class="ding">&#x278B;</span> i&nbsp;<span class="ding">&#x278E;</span>) jest charakterystyczna
+dla kolekcji z&nbsp;biblioteki standardowej &mdash;&nbsp;omówimy ją
+      w&nbsp;rozdziale o <A HREF="node48.html#instr:foreach">pętlach</A> .
+Z&nbsp;kolei druga forma funkcji
+<!--O--><span class='funkcja'>printArray<!--C--></span>
+ jest
+tak naprawdę szablonem &mdash;&nbsp;dzięki temu może działać dla tablic
+o&nbsp;różnych typach elementów i&nbsp;o&nbsp;różnych rozmiarach.
+Więcej o&nbsp;tym
+      w&nbsp;rozdziale o <A HREF="node73.html#funk:szab">szablonach</A> .
+
+<P>
+
+<P></P>
+
+<P>
+Program drukuje
+<BR><PRE>
+    Version &lt;int,EIGHT&gt;: a.size() = 8
+    2 3 4 5 6 1 1 1
+    Template version: std::size(a) = 5
+    K! L! M! D! !
+</PRE>
+Może się zdarzyć, że tablicę typu
+<!--O--><span class='klasa'>std::array<!--C--></span>
+ chcemy
+wysłać do funkcji, która oczekuje zwykłej tablicy (czyli
+właściwie wskaźnika). Można to łatwo zrobić poprzez wywołanie
+
+<FONT COLOR="#000000"><TT>arr.data()</TT></FONT>, które zwraca te same dane
+jako wskaźnik do &bdquo;zwykłej&rdquo; C-tablicy.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1061"
+  HREF="node27.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1067"
+  HREF="node22.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1073"
+  HREF="node29.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1069"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1071"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1062"
+  HREF="node27.html">5.5 Tablice wielowymiarowe</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1068"
+  HREF="node22.html">5. Tablice statyczne i&nbsp;wskaźniki</A>
+<B>Dalej:</B> <A NAME="tex2html1074"
+  HREF="node29.html">5.7 Wektory (std::vector)</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

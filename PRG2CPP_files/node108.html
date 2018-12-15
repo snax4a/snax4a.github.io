@@ -1,0 +1,548 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>16.5 Pliki</TITLE>
+<META NAME="description" CONTENT="16.5 Pliki">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node109.html">
+<LINK REL="previous" HREF="node107.html">
+<LINK REL="up" HREF="node103.html">
+<LINK REL="next" HREF="node109.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2293"
+  HREF="node107.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2299"
+  HREF="node103.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2305"
+  HREF="node109.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2301"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2303"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2294"
+  HREF="node107.html">16.4 Zapis i&nbsp;odczyt nieformatowany</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2300"
+  HREF="node103.html">16. Operacje wejścia/wyjścia</A>
+<B>Dalej:</B> <A NAME="tex2html2306"
+  HREF="node109.html">16.6 Obsługa błędów strumieni</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001750000000000000000"></A><A NAME="io:pliki"></A>
+<BR>
+<SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">5</SPAN> Pliki
+</H1>
+
+<P>
+Klasy obsługujące operacje we/wy na plikach to:
+
+<UL>
+<LI>
+<!--O--><span class='klasa'>ofstream<!--C--></span>
+ &mdash;&nbsp;pochodna klasy
+<!--O--><span class='klasa'>ostream<!--C--></span>;
+</LI>
+<LI>
+<!--O--><span class='klasa'>ifstream<!--C--></span>
+ &mdash;&nbsp;pochodna klasy
+<!--O--><span class='klasa'>istream<!--C--></span>;
+</LI>
+<LI>
+<!--O--><span class='klasa'>fstream<!--C--></span>
+  &mdash;&nbsp;pochodna klasy
+<!--O--><span class='klasa'>iostream<!--C--></span>,
+           łącząca funkcjonalność klas wejściowych i&nbsp;wyjściowych.
+</LI>
+</UL><A NAME="19554"></A><A NAME="19555"></A><A NAME="19556"></A>
+Z dziedziczenia wynika, że można stosować te same metody
+(operatory '<TT>&lt;&lt;</TT>' i&nbsp;'<TT>&gt;&gt;</TT>', manipulatory,
+funkcje
+<!--O--><span class='funkcja'>get<!--C--></span>,
+<!--O--><span class='funkcja'>put<!--C--></span>,
+<!--O--><span class='funkcja'>getline<!--C--></span>
+ itd.)
+w&nbsp;odniesieniu do obiektów tych klas. Należy tylko utworzyć
+odpowiedni obiekt, odpowiednik predefiniowanych
+<!--O--><span class='zmienna'>cin<!--C--></span>
+ czy
+
+<!--O--><span class='zmienna'>cout<!--C--></span>.
+
+<P>
+Aby posłużyć się strumieniem plikowym, trzeba stworzyć do niego
+&bdquo;uchwyt&rdquo;, związać go z&nbsp;konkretnym plikiem, otworzyć strumień,
+a po zakończeniu na nim operacji we/wy zamknąć.
+
+<P>
+Tworzenie uchwytu do pliku odbywa się poprzez utworzenie
+(zdefiniowanie) obiektu strumienia i&nbsp;wywołanie funkcji wiążącej
+strumień z&nbsp;konkretnym plikiem i&nbsp;otwierającej go. Na przykład
+następujący fragment
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">    #include</font></b> <font color="#FF0000">&lt;fstream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font>    <i><font color="#9A1900">// ...</font></i>
+ <font SIZE="-2" color="black">     3.  </font>    <font color="#008080">ofstream</font> plik<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>    plik<font color="#990000">.</font><b><font color="#000000">open</font></b><font color="#990000">(</font><font color="#FF0000">"plik.txt"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">     5.  </font>    plik <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"To bedzie w pliku </font><font color="#CC33CC">\"</font><font color="#FF0000">plik.txt</font><font color="#CC33CC">\"</font><font color="#FF0000">"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    plik<font color="#990000">.</font><b><font color="#000000">close</font></b><font color="#990000">();</font>
+</tt></pre>
+tworzy w&nbsp;linii&nbsp;3 obiekt reprezentujący strumień związany z&nbsp;plikiem
+do zapisu (dlatego
+<!--O--><span class='klasa'>ofstream<!--C--></span>
+ &mdash;&nbsp;<FONT COLOR="#7b003e"><I>output file stream</I></FONT>).
+W następnej linii strumień ten jest wiązany z&nbsp;konkretnym plikiem
+i&nbsp;otwierany. W&nbsp;linii&nbsp;5 widzimy, że nazwy
+<!--O--><span class='zmienna'>plik<!--C--></span>
+ możemy teraz
+używać tak samo, jak do tej pory używaliśmy
+<!--O--><span class='zmienna'>cout<!--C--></span>;
+różnica jest tylko w&nbsp;ujściu strumienia &mdash;&nbsp;wtedy był to ekran
+komputera, teraz będzie plik.
+Po zakończeniu pracy z&nbsp;plikiem strumień należy zamknąć
+(linia&nbsp;6). Zauważmy, że strumienie predefiniowane nie musiały być
+jawnie ani otwierane, ani zamykane.
+
+<P>
+Zamiast wywoływania funkcji
+<!--O--><span class='funkcja'>open<!--C--></span>
+ można posłać
+nazwę pliku bezpośrednio do konstruktora obiektu:
+<pre><tt>   <b><font color="#000080">    #include</font></b> <font color="#FF0000">&lt;fstream&gt;</font>
+       <i><font color="#9A1900">// ...</font></i>
+       <font color="#008080">ofstream</font> <b><font color="#000000">plik</font></b><font color="#990000">(</font><font color="#FF0000">"plik.txt"</font><font color="#990000">);</font>
+       plik <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"To bedzie w pliku </font><font color="#CC33CC">\"</font><font color="#FF0000">plik.txt</font><font color="#CC33CC">\"</font><font color="#FF0000">"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+       plik<font color="#990000">.</font><b><font color="#000000">close</font></b><font color="#990000">();</font>
+</tt></pre>
+
+<P>
+Zarówno do funkcji
+<!--O--><span class='funkcja'>open<!--C--></span>, jak i&nbsp;do konstruktora
+można posłać dodatkowy, prócz nazwy pliku, argument.
+Określa on <FONT COLOR="#7b003e"><B>tryb otwarcia</B></FONT><A NAME="19575"></A>
+<A NAME="19576"></A> (ang.&nbsp;<FONT COLOR="#7b003e"><I>opening mode</I></FONT>)) pliku.
+Dla plików do czytania, dla których tworzymy obiekt
+klasy
+<!--O--><span class='klasa'>ifstream<!--C--></span>
+ (<FONT COLOR="#7b003e"><I>input file stream</I></FONT>),
+domyślny tryb to
+<!--O--><span class='zmienna'>ios::in<!--C--></span>
+ (jest to
+statyczna stała odziedziczona z&nbsp;klasy
+<!--O--><span class='klasa'>ios_base<!--C--></span>).
+Dla pliku z&nbsp;uchwytem klasy
+
+<!--O--><span class='klasa'>ofstream<!--C--></span>
+ domyślnie przyjmowane jest
+<!--O--><span class='klasa'>ios::out<!--C--></span>
+ &mdash;&nbsp;
+plik do zapisywania.
+Stałe określające tryb pliku można &bdquo;ORować&rdquo; tak samo, jak
+to robiliśmy dla flag formatowania. Na przykład
+<pre><tt>       <font color="#008080">fstream</font> <b><font color="#000000">strum</font></b><font color="#990000">(</font><font color="#FF0000">"plik.txt"</font><font color="#990000">,</font> ios<font color="#990000">::</font>in <font color="#990000">|</font> ios<font color="#990000">::</font>out<font color="#990000">);</font>
+</tt></pre>
+tworzy obiekt strumienia (klasy
+<!--O--><span class='klasa'>fstream<!--C--></span>)
+w trybie <SPAN  CLASS="textit">do zapisu i&nbsp;odczytu</SPAN>.
+
+<P>
+Dostępne stałe, z&nbsp;których poprzez alternatywę bitową można
+budować wartości określające tryb otwarcia, to:
+
+<UL>
+<LI>
+<!--O--><span class='zmienna'>ios::in<!--C--></span>
+ &mdash;&nbsp;zezwala na odczyt ze strumienia;
+                            <A NAME="19590"></A>
+</LI>
+<LI>
+<!--O--><span class='zmienna'>ios::out<!--C--></span>
+ &mdash;&nbsp;zezwala na zapis do strumienia;
+                            <A NAME="19592"></A>
+</LI>
+<LI>
+<!--O--><span class='zmienna'>ios::trunc<!--C--></span>
+ &mdash;&nbsp;(<FONT COLOR="#7b003e"><I>truncate</I></FONT>) po
+                              utworzeniu usuń dotychczasową
+                              zawartoś";
+                            <A NAME="19595"></A>
+</LI>
+<LI>
+<!--O--><span class='zmienna'>ios::ate<!--C--></span>
+ &mdash;&nbsp;po otwarciu ustaw na końcu pliku
+                             (<FONT COLOR="#7b003e"><I>at end</I></FONT>);
+                            <A NAME="19598"></A>
+</LI>
+<LI>
+<!--O--><span class='zmienna'>ios::app<!--C--></span>
+ &mdash;&nbsp;(<FONT COLOR="#7b003e"><I>append</I></FONT>) przechodź na koniec
+                            strumienia dla każdej operacji
+                            wstawiania (pisania);
+                            <A NAME="19601"></A>
+</LI>
+<LI>
+<!--O--><span class='zmienna'>ios::binary<!--C--></span>
+ &mdash;&nbsp;nie interpretuj w&nbsp;żaden sposób
+          znaków końca linii i&nbsp;powrotu karetki (w Linuksie ta opcja
+          jest zbędna, ale przydaje się w&nbsp;Windows, gdzie koniec
+          linii oznaczany jest za pomocą <FONT COLOR="#7b003e"><I>dwóch</I></FONT> znaków);
+                            <A NAME="19604"></A>
+</LI>
+</UL>
+
+<P>
+Ze strumieniami są związane <FONT COLOR="#7b003e"><B>lokalizatory</B></FONT><A NAME="19607"></A>
+zawierające numer, licząc od zera, bajtu w&nbsp;strumieniu (pliku),
+na który nastąpi następny zapis/odczyt. Ich typem jest
+
+<!--O--><span class='typ'>streampos<!--C--></span>
+ (zwykle tożsamy z&nbsp;
+<!--O--><span class='typ'>long<!--C--></span>). Po otwarciu pliku
+domyślnie lokalizatory ustawiane są na samym jego początku, a&nbsp;więc
+na bajcie numer zero, chyba że plik został otwarty w&nbsp;trybie
+
+<!--O--><span class='zmienna'>ios::ate<!--C--></span>
+ lub
+<!--O--><span class='zmienna'>ios::app<!--C--></span>, gdy plik pozycjonowany
+jest na bajcie &bdquo;pierwszym za ostatnim&rdquo; (numeryczna wartość
+lokalizatora jest wtedy równa długości pliku w&nbsp;bajtach).
+Po każdej operacji czytania/pisania lokalizator przesuwany jest tak,
+aby wskazywał na pierwszy bajt jeszcze nie wczytany/zapisany.
+Nawet jeśli plik jest otwarty zarówno do zapisu jak i&nbsp;odczytu, to pamiętana
+jest tylko jedna pozycja w&nbsp;strumieniu: ta sama do operacji zapisu jak
+i&nbsp;odczytu.
+
+<P>
+Do &bdquo;ręcznego&rdquo; manipulowania lokalizatorami służą metody:
+
+<P>
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>streampos tellg( )<!--C--></span>
+
+      &mdash;&nbsp;<A NAME="19615"></A><A NAME="19616"></A>
+      zwraca aktualną pozycję
+      lokalizatora do odczytu
+     (litera 'g' na końcu nazwy pochodzi
+      od <FONT COLOR="#7b003e"><I>get</I></FONT>). Tryb otwarcia pliku musi
+      zawierać
+<!--O--><span class='zmienna'>ios::in<!--C--></span>.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>streampos tellp( )<!--C--></span>
+
+      &mdash;&nbsp;<A NAME="19622"></A><A NAME="19623"></A>
+      zwraca aktualną pozycję
+      lokalizatora do zapisu
+     (litera 'p' na końcu nazwy pochodzi
+      od <FONT COLOR="#7b003e"><I>put</I></FONT>).
+      Tryb otwarcia pliku musi
+      zawierać
+<!--O--><span class='zmienna'>ios::out<!--C--></span>.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>ostream&amp; seekg(streampos poz)<!--C--></span>
+
+      &mdash;&nbsp;<A NAME="19629"></A><A NAME="19630"></A>
+      przesuwa
+      lokalizator do odczytu na pozycję
+<!--O--><span class='zmienna'>poz<!--C--></span>.
+      Zwraca referencję do strumienia, na rzecz którego została
+      wywołana.
+      Tryb otwarcia pliku musi
+      zawierać
+<!--O--><span class='zmienna'>ios::in<!--C--></span>.
+      Próba sięgnięcia przed
+      początek bądź za koniec pliku powoduje jego przejście do
+      stanu
+<!--O--><span class='zmienna'>bad<!--C--></span>
+ (patrz dalej), co można sprawdzić
+      za pomocą warunku '
+<FONT COLOR="#000000"><TT>if (strum) ...</TT></FONT>'.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>ostream&amp; seekp(streampos poz)<!--C--></span>
+
+      &mdash;&nbsp;<A NAME="19639"></A><A NAME="19640"></A>
+      przesuwa
+      lokalizator do zapisu; poza tym analogiczna do metody
+
+<!--O--><span class='funkcja'>seekg(streampos)<!--C--></span>.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>ostream&amp; seekg(streamoff offset, ios::seek_dir poz)<!--C--></span>
+
+      &mdash;&nbsp;
+      przesuwa
+      lokalizator do odczytu na pozycję
+<!--O--><span class='zmienna'>offset<!--C--></span>
+ bajtów
+      licząc od pozycji
+<!--O--><span class='zmienna'>poz<!--C--></span>. Argument
+<!--O--><span class='zmienna'>offset<!--C--></span>
+
+      może być ujemny. Typy
+
+<!--O--><span class='typ'>streamoff<!--C--></span><A NAME="19649"></A> i&nbsp;
+<!--O--><span class='typ'>ios::seek_dir<!--C--></span>
+
+      <A NAME="19651"></A>
+      są aliasami pewnych typów całościowych.
+      Argument
+<!--O--><span class='zmienna'>poz<!--C--></span>
+ musi być równy jednej ze stałych
+      statycznych z&nbsp;klasy
+<!--O--><span class='klasa'>ios<!--C--></span>:
+<BR>
+<!--O--><span class='zmienna'>ios::beg<!--C--></span>
+ &mdash;&nbsp;licz od początku pliku;
+<BR>
+<!--O--><span class='zmienna'>ios::cur<!--C--></span>
+ &mdash;&nbsp;licz od aktualnej pozycji w&nbsp;pliku;
+<BR>
+<!--O--><span class='zmienna'>ios::end<!--C--></span>
+ &mdash;&nbsp;licz od końca pliku;
+<BR>
+Zwraca referencję do strumienia, na rzecz którego została
+      wywołana. Próba sięgnięcia przed
+      początek bądź za koniec pliku powoduje przejście strumienia
+      do stanu
+<!--O--><span class='zmienna'>bad<!--C--></span>.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>ostream&amp; seekp(streamoff offset, ios::seek_dir poz)<!--C--></span>
+
+      &mdash;&nbsp;
+      przesuwa lokalizator do zapisu; poza tym analogiczna do metody
+
+<!--O--><span class='funkcja'>seekg(streamoff offset, ios::seek_dir poz)<!--C--></span>.
+
+<P></P>
+
+<P>
+Jako przykład rozpatrzmy program
+<A NAME="plikrw.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">129</SPAN>:</SPAN>
+      <A NAME="tex2html136"
+  HREF="source-files/plikrw.cpp">
+<!--O--><span class='downl'>plikrw.cpp<!--C--></span></A>
+<A NAME="20304"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Zapis i&nbsp;odczyt z&nbsp;pliku</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;fstream&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">int</font> tab<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">{</font> <font color="#993399">97</font><font color="#990000">,</font> <font color="#993399">105</font><font color="#990000">,</font> <font color="#993399">115</font><font color="#990000">,</font> <font color="#993399">255</font><font color="#990000">,</font> <font color="#993399">111</font> <font color="#FF0000">}</font><font color="#990000">,</font>k<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#009900">int</font> size <font color="#990000">=</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>tab<font color="#990000">)/</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>tab<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">]);</font>
+ <font SIZE="-2" color="black">     9.  </font>
+ <font SIZE="-2" color="black">    10.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Tablica o  wymiarze: "</font> <font color="#990000">&lt;&lt;</font> size <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> size<font color="#990000">;</font> <font color="#990000">++</font>i<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    12.  </font>        cout <font color="#990000">&lt;&lt;</font> tab<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    14.  </font>
+ <font SIZE="-2" color="black">    15.  </font>    <font color="#008080">ofstream</font> <b><font color="#000000">file_out</font></b><font color="#990000">(</font><font color="#FF0000">"file.dat"</font><font color="#990000">,</font>ios<font color="#990000">::</font>out<font color="#990000">|</font>ios<font color="#990000">::</font>binary<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    16.  </font>    <b><font color="#0000FF">if</font></b> <font color="#990000">(!</font> file_out <font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    17.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Nie mozna otworzyc file_out"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font>        <b><font color="#0000FF">return</font></b> <font color="#990000">-</font><font color="#993399">1</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    20.  </font>
+ <font SIZE="-2" color="black">    21.  </font>    file_out<font color="#990000">.</font><b><font color="#000000">write</font></b><font color="#990000">((</font><font color="#009900">char</font><font color="#990000">*)</font>tab<font color="#990000">,</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>tab<font color="#990000">));</font>
+ <font SIZE="-2" color="black">    22.  </font>    file_out<font color="#990000">.</font><b><font color="#000000">close</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    23.  </font>
+ <font SIZE="-2" color="black">    24.  </font>    <font color="#008080">fstream</font> <b><font color="#000000">file</font></b><font color="#990000">(</font><font color="#FF0000">"file.dat"</font><font color="#990000">,</font>ios<font color="#990000">::</font>in<font color="#990000">|</font>ios<font color="#990000">::</font>out<font color="#990000">|</font>ios<font color="#990000">::</font>binary<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    25.  </font>    <b><font color="#0000FF">if</font></b> <font color="#990000">(!</font> file <font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    26.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Nie mozna otworzyc file"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    27.  </font>        <b><font color="#0000FF">return</font></b> <font color="#990000">-</font><font color="#993399">1</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    28.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    29.  </font>
+ <font SIZE="-2" color="black">    30.  </font>    file<font color="#990000">.</font><b><font color="#000000">seekg</font></b><font color="#990000">(</font><font color="#993399">0</font><font color="#990000">,</font>ios<font color="#990000">::</font>end<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    31.  </font>    <font color="#008080">streamsize</font> len <font color="#990000">=</font> file<font color="#990000">.</font><b><font color="#000000">tellg</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    32.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Plik ma dlugosc "</font> <font color="#990000">&lt;&lt;</font> len <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" bajtow</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    33.  </font>    file<font color="#990000">.</font><b><font color="#000000">seekg</font></b><font color="#990000">(</font><font color="#993399">0</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    34.  </font>
+ <font SIZE="-2" color="black">    35.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Kolejne bajty zawieraja:"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    36.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font> <font color="#990000">(</font>k <font color="#990000">=</font> file<font color="#990000">.</font><b><font color="#000000">get</font></b><font color="#990000">())</font> <font color="#990000">!=</font> EOF <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    37.  </font>        cout <font color="#990000">&lt;&lt;</font> k <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    38.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    39.  </font>
+ <font SIZE="-2" color="black">    40.  </font>    file<font color="#990000">.</font><b><font color="#000000">clear</font></b><font color="#990000">();</font> <i><font color="#9A1900">// &lt;-- KONIECZNE !!!</font></i>
+ <font SIZE="-2" color="black">    41.  </font>
+ <font SIZE="-2" color="black">    42.  </font>    file<font color="#990000">.</font><b><font color="#000000">seekg</font></b><font color="#990000">(</font><font color="#993399">4</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    43.  </font>    file<font color="#990000">.</font><b><font color="#000000">read</font></b><font color="#990000">((</font><font color="#009900">char</font><font color="#990000">*)&amp;</font>k<font color="#990000">,</font><font color="#993399">4</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    44.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Integer od pozycji 4: "</font> <font color="#990000">&lt;&lt;</font> k <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    45.  </font>
+ <font SIZE="-2" color="black">    46.  </font>    file<font color="#990000">.</font><b><font color="#000000">seekp</font></b><font color="#990000">(</font><font color="#993399">12</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    47.  </font>    file<font color="#990000">.</font><b><font color="#000000">write</font></b><font color="#990000">((</font><font color="#009900">char</font><font color="#990000">*)&amp;</font>k<font color="#990000">,</font><font color="#993399">4</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    48.  </font>
+ <font SIZE="-2" color="black">    49.  </font>    file<font color="#990000">.</font><b><font color="#000000">seekg</font></b><font color="#990000">(</font><font color="#993399">0</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    50.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Kolejne bajty pliku teraz zawieraja:"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    51.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font> <font color="#990000">(</font>k <font color="#990000">=</font> file<font color="#990000">.</font><b><font color="#000000">get</font></b><font color="#990000">())</font> <font color="#990000">!=</font> EOF <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    52.  </font>        cout <font color="#990000">&lt;&lt;</font> k <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    53.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    54.  </font>
+ <font SIZE="-2" color="black">    55.  </font>    file<font color="#990000">.</font><b><font color="#000000">close</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    56.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+W linii&nbsp;15 tworzymy i&nbsp;otwieramy strumień zapisujący związany
+z&nbsp;plikiem
+<!--O--><span class='plik'>file.dat<!--C--></span>. Aby uniknąć ewentualnych kłopotów
+w&nbsp;systemie Windows, plik jest otwierany w&nbsp;trybie binarnym.
+
+<P>
+Następnie, w&nbsp;linii&nbsp;21, zapisujemy do tego pliku całą zawartość
+pięcioelementowej tablicy liczb typu
+<!--O--><span class='typ'>int<!--C--></span>. Zapis jest binarny,
+więc zapisanych powinno zostać dokładnie 20 bajtów.
+Po zapisaniu tablicy plik zamykamy, a&nbsp;następnie otwieramy znowu,
+tym razem do czytania i&nbsp;pisania (linia&nbsp;24).
+Pozycjonujemy strumień na końcu pliku i&nbsp;odczytujemy pozycję:
+powinna ona wskazywać na bajt &bdquo;pierwszy za ostatnim&rdquo;,
+a&nbsp;ostatni ma numer&nbsp;19. Zatem powinna to być pozycja numer&nbsp;20, co
+jest równe ilości bajtów w&nbsp;pliku (linie&nbsp;30-32).
+
+<P>
+Przewijamy plik do początku (linia&nbsp;33) i&nbsp;czytamy zawartość
+pliku bajt po bajcie, wypisując wynik na ekranie (linie&nbsp;36-38).
+
+<P>
+Po tej operacji stan strumienia jest
+<!--O--><span class='zmienna'>bad<!--C--></span>, ponieważ
+w pętli próbowaliśmy odczytać bajt po osiągnięciu końca pliku.
+Każda następna operacja wejścia/wyjścia na tym
+strumieniu byłaby zignorowana (choć nie zostałby zgłoszony żaden
+błąd &mdash;&nbsp;musimy to zawsze sami sprawdzać!). Dlatego przed dalszym
+użyciem strumienia musimy go &bdquo;naprawić&rdquo;. Robi się to za pomocą
+metody
+<!--O--><span class='funkcja'>clear<!--C--></span>
+ (linia&nbsp;40), o&nbsp;której jeszcze powiemy za chwilę.
+
+<P>
+Pozycjonujemy teraz plik na bajcie numer&nbsp;4 (czyli piątym,
+a&nbsp;pierwszym należącym do drugiej liczby z&nbsp;zapisanej tablicy).
+Poczynając od tej pozycji czytamy&nbsp;4 bajty i&nbsp;kopiujemy je
+do zmiennej
+<!--O--><span class='zmienna'>k<!--C--></span>
+ typu
+<!--O--><span class='typ'>int<!--C--></span>
+ (linie&nbsp;42-43).
+Po tej operacji wartość&nbsp;
+<!--O--><span class='zmienna'>k<!--C--></span>
+ powinna być zatem równa 105.
+Teraz dokonujemy operacji odwrotnej: pozycjonujemy lokalizator
+do pisania na bajcie numer&nbsp;12 (początek czwartej liczby)
+i&nbsp;zapisujemy tam&nbsp;4 bajty zmiennej
+<!--O--><span class='zmienna'>k<!--C--></span>
+ (linie&nbsp;46-47).
+Tak więc czwarta liczba zapisana w&nbsp;pliku powinna zmienić się
+na&nbsp;105. Tak jest rzeczywiście, o&nbsp;czym przekonuje nas wydruk:
+<PRE>
+    Tablica o  wymiarze: 5
+    97 105 115 255 111
+    Plik ma dlugosc 20 bajtow
+    Kolejne bajty zawieraja:
+    97 0 0 0 105 0 0 0 115 0 0 0 255 0 0 0 111 0 0 0
+    Integer od pozycji 4: 105
+    Kolejne bajty pliku teraz zawieraja:
+    97 0 0 0 105 0 0 0 115 0 0 0 105 0 0 0 111 0 0 0
+</PRE>
+Wydruk zależy tu od architektury komputera; w&nbsp;tym przypadku jest
+to
+<!--O--><span class='zmienna'>little-endian<!--C--></span>.<A NAME="19676"></A>
+Na komputerze
+<!--O--><span class='zmienna'>big-endian<!--C--></span><A NAME="19678"></A>
+pierwsza liczba wydrukowana zostałaby jako '0 0 0 97', a&nbsp;nie tak
+jak w&nbsp;przykładzie '97 0 0 0'.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2293"
+  HREF="node107.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2299"
+  HREF="node103.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2305"
+  HREF="node109.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2301"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2303"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2294"
+  HREF="node107.html">16.4 Zapis i&nbsp;odczyt nieformatowany</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2300"
+  HREF="node103.html">16. Operacje wejścia/wyjścia</A>
+<B>Dalej:</B> <A NAME="tex2html2306"
+  HREF="node109.html">16.6 Obsługa błędów strumieni</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

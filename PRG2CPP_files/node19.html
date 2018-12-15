@@ -1,0 +1,432 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>4.5 Typy wyliczeniowe</TITLE>
+<META NAME="description" CONTENT="4.5 Typy wyliczeniowe">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node20.html">
+<LINK REL="previous" HREF="node18.html">
+<LINK REL="up" HREF="node14.html">
+<LINK REL="next" HREF="node20.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html924"
+  HREF="node18.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html930"
+  HREF="node14.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html936"
+  HREF="node20.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html932"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html934"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html925"
+  HREF="node18.html">4.4 Typ logiczny</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html931"
+  HREF="node14.html">4. Podstawowe typy danych</A>
+<B>Dalej:</B> <A NAME="tex2html937"
+  HREF="node20.html">4.6 Wskaźniki</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00550000000000000000"></A><A NAME="typydan:enumer"></A>
+<BR>
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">5</SPAN> Typy wyliczeniowe
+</H1>
+
+<P>
+Charakterystycznym dla C/C++ typem (a właściwie typami) danych są
+<FONT COLOR="#7b003e"><B>wyliczenia</B></FONT><A NAME="3112"></A><A NAME="3113"></A>
+(zwane też <SPAN  CLASS="textit">enumeracjami</SPAN>, z&nbsp;angielskiego <FONT COLOR="#7b003e"><I>enumeration</I></FONT>).
+
+<P>
+Formalnie
+
+<P>
+
+<P>
+
+<div class='wazne'>
+wyliczenie jest typem zdefiniowanym przez
+    zbiór (zwykle niewielki) nazwanych stałych całkowitych.
+
+
+</div>
+
+<P>
+
+<P>
+Na przykład
+<pre><tt>       <b><font color="#0000FF">enum</font></b> dni <font color="#FF0000">{</font>pon<font color="#990000">,</font> wto<font color="#990000">,</font> sro<font color="#990000">,</font> czw<font color="#990000">,</font> pia<font color="#990000">,</font> sob<font color="#990000">,</font> nie<font color="#FF0000">}</font><font color="#990000">;</font>
+</tt></pre>
+definiuje typ wyliczeniowy o&nbsp;nazwie
+<!--O--><span class='typ'>dni<!--C--></span>. Zmienne tego typu
+będą mogły przybierać dokładnie siedem wartości, wyliczonych
+w nawiasach klamrowych w&nbsp;definicji tego typu (stąd nazwa
+<SPAN  CLASS="textit">wyliczenia</SPAN>, typ <SPAN  CLASS="textit">wyliczeniowy</SPAN>). Pewną analogią
+jest typ
+<!--O--><span class='typ'>bool<!--C--></span>, który ma dwie nazwane wartości &ndash;&nbsp;
+
+<!--O--><span class='klucz'>true<!--C--></span>
+ i&nbsp;
+<!--O--><span class='klucz'>false<!--C--></span>.
+
+<P>
+Definicja typu wyliczeniowego składa się
+ze słowa kluczowego
+<!--O--><span class='klucz'>enum<!--C--></span>,<A NAME="3126"></A>
+nazwy wprowadzanego typu
+oraz ujętej w&nbsp;nawiasy klamrowe listy nazw symbolicznych wartości
+elementów wyliczenia. Symbolom można przypisywać wartości liczbowe
+(patrz niżej), a&nbsp;nazwę typu można opuścić.
+Jeśli opuszczamy nazwę typu, to zwykle
+tworzymy od razu zmienne tego anonimowego typu, bo inaczej byłby on
+bezużyteczny &mdash;&nbsp;utworzenie później takich zmiennych byłoby już
+niemożliwe, bo nie byłoby jak określić ich typu w&nbsp;ich
+deklaracji/definicji. Na przykład po
+<pre><tt>       <b><font color="#0000FF">enum</font></b> <font color="#FF0000">{</font>pik<font color="#990000">,</font> kier<font color="#990000">,</font> karo<font color="#990000">,</font> trefl<font color="#FF0000">}</font> karta1<font color="#990000">,</font> karta2<font color="#990000">;</font>
+       <font color="#990000">...</font>
+       karta1 <font color="#990000">=</font> kier<font color="#990000">;</font>
+       karta2 <font color="#990000">=</font> karta1<font color="#990000">;</font>
+       <font color="#990000">...</font>
+       <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>karta2 <font color="#990000">==</font> trefl<font color="#990000">)</font> <font color="#FF0000">{</font> <font color="#990000">...</font> <font color="#FF0000">}</font>
+</tt></pre>
+mamy dwie zmienne (<!--O--><span class='zmienna'>karta1<!--C--></span>,
+<!--O--><span class='zmienna'>karta2<!--C--></span>)
+anonimowego typu wyliczeniowego opisującego
+kolory kart; żadnej innej zmiennej tego typu nie da się już
+utworzyć, bo typ ten nie ma nazwy.
+Innym zastosowaniem wyliczeń anonimowych jest
+wprowadzenie do programu nazwanych stałych, które mogą na przykład
+służyć do wymiarowania tablic wtedy, gdy definiowanie
+stałych za pomocą słowa kluczowego
+<!--O--><span class='klucz'>const<!--C--></span>
+ byłoby
+niewygodne (np.&nbsp;wewnątrz definicji klas;
+patrz
+ rozdział o <A HREF="node99.html#klasyd:listin">listach inicjalizacyjnych</A> ).
+
+<P>
+Wewnętrznie zmienne typu
+<!--O--><span class='typ'>dni<!--C--></span>
+ będą reprezentowane
+za pomocą kolejnych liczb całkowitych poczynając od zera:
+tak więc symbol
+<!--O--><span class='zmienna'>pon<!--C--></span>
+ odpowiadać będzie liczbie&nbsp;0,
+a&nbsp;np.&nbsp;symbol
+<!--O--><span class='zmienna'>sob<!--C--></span>
+ liczbie 5.
+
+<P>
+Elementom wyliczenia można nadać odpowiadające im wartości
+liczbowe &bdquo;ręcznie&rdquo;,
+<pre><tt>       <b><font color="#0000FF">enum</font></b> dni <font color="#FF0000">{</font>pon<font color="#990000">,</font> wto<font color="#990000">=</font><font color="#993399">0</font><font color="#990000">,</font> sro<font color="#990000">=</font><font color="#993399">0</font><font color="#990000">,</font> czw<font color="#990000">=</font><font color="#993399">0</font><font color="#990000">,</font> pia<font color="#990000">=</font><font color="#993399">0</font><font color="#990000">,</font> sob<font color="#990000">,</font> nie<font color="#FF0000">}</font><font color="#990000">;</font>
+</tt></pre>
+przy czym obowiązują następujące zasady:
+
+<UL>
+<LI>Pierwszy element będzie odpowiadał wartości 0 jeśli
+          nie nadano mu innej wartości poprzez jawne przypisanie w
+          definicji wyliczenia. W&nbsp;powyższym przykładzie
+          symbol
+<!--O--><span class='zmienna'>pon<!--C--></span>
+ odpowiada wartości liczbowej 0.
+</LI>
+<LI>Każdemu innemu elementowi zostanie przypisana wartość
+          o&nbsp;jeden większa od wartości elementu poprzedniego,
+          chyba że poprzez jawne przypisanie w&nbsp;definicji określono
+          inną wartość. Tak więc w&nbsp;naszym przykładzie
+          symbolom od
+<!--O--><span class='zmienna'>wto<!--C--></span>
+ do
+<!--O--><span class='zmienna'>pia<!--C--></span>
+ zostanie również
+          przypisana wartość 0; symbolowi
+<!--O--><span class='zmienna'>sob<!--C--></span>
+ nie została
+          jawnie przypisana żadna wartość, a&nbsp;zatem niejawnie otrzyma
+          on wartość 1 (jako następujący po
+<!--O--><span class='zmienna'>pia<!--C--></span>, którego
+          wartość jest 0). Podobnie,
+<!--O--><span class='zmienna'>nie<!--C--></span>
+ odpowiadać
+          będzie liczbie 2.
+</LI>
+</UL>
+
+<P>
+Przypisane elementom wyliczenia wartości nie tylko <FONT COLOR="#7b003e"><I>nie muszą</I></FONT>
+być różne dla różnych elementów wyliczenia, ale nie muszą też
+być wartościami kolejnymi; mogą występować &bdquo;dziury&rdquo;.
+Na przykład definicja
+<!--O--><span class='typ'>dni<!--C--></span>
+ mogłaby wyglądać tak
+<pre><tt>       <b><font color="#0000FF">enum</font></b> dni <font color="#FF0000">{</font>pon<font color="#990000">,</font> wto<font color="#990000">=</font><font color="#993399">0</font><font color="#990000">,</font> sro<font color="#990000">=</font><font color="#993399">0</font><font color="#990000">,</font> czw<font color="#990000">=</font><font color="#993399">0</font><font color="#990000">,</font> pia<font color="#990000">=</font><font color="#993399">0</font><font color="#990000">,</font> sob<font color="#990000">,</font> nie<font color="#990000">=</font><font color="#993399">3</font><font color="#FF0000">}</font><font color="#990000">;</font>
+</tt></pre>
+Teraz elementowi
+<!--O--><span class='zmienna'>sob<!--C--></span>
+ odpowiada w&nbsp;dalszym ciągu
+wartość&nbsp;1, ale niedzieli (<!--O--><span class='zmienna'>nie<!--C--></span>) odpowiada teraz&nbsp;3;
+wartości&nbsp;2 nie odpowiada zaś teraz żaden element wyliczenia.
+
+<P>
+W nowym standardzie (C++11),<A NAME="3157"></A>
+możemy jawnie określić typ stałych wyliczeniowych (musi to być typ
+całkowitoliczbowy). Robimy to poprzez podanie nazwy typu po nazwie
+wyliczenia i&nbsp;dwukropku:
+<pre><tt>       <b><font color="#0000FF">enum</font></b> kolor <font color="#990000">:</font> <font color="#009900">unsigned</font> <font color="#FF0000">{</font>pik<font color="#990000">,</font> kier<font color="#990000">,</font> karo<font color="#990000">,</font> trefl<font color="#FF0000">}</font><font color="#990000">;</font>
+</tt></pre>
+Według nowego standardu, jeśli nie określimy typu stałych wyliczeniowych,
+to będzie nim
+<!--O--><span class='typ'>int<!--C--></span>
+ (dotychczas nie był on określony).
+
+<P>
+Przyjrzyjmy się następnemu przykładowi.
+Definiujemy w&nbsp;nim (<span class="ding">&#x278A;</span>) wyliczenie
+<!--O--><span class='typ'>dni<!--C--></span>. Definicja ta jest
+globalna, bo jest umieszczona poza wszystkimi funkcjami i&nbsp;klasami
+(klas tu zresztą w&nbsp;ogóle nie ma). Jest to konieczne, by definicja typu
+
+<!--O--><span class='typ'>dni<!--C--></span>
+ była widoczna
+zarówno w&nbsp;funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>, jak i&nbsp;w&nbsp;funkcji
+<!--O--><span class='funkcja'>info<!--C--></span>.
+Następnie definiujemy funkcję
+<!--O--><span class='funkcja'>info<!--C--></span>, której
+parametr jest właśnie typu
+<!--O--><span class='typ'>dni<!--C--></span>.
+W programie głównym
+<!--O--><span class='funkcja'>main<!--C--></span>
+ wywołujemy tę
+funkcję. Jako argument podajemy zmienną o&nbsp;wartości typu
+<!--O--><span class='typ'>dni<!--C--></span>.
+W linii&nbsp;<span class="ding">&#x278E;</span> jest to
+<!--O--><span class='zmienna'>pon<!--C--></span>
+ &mdash;&nbsp;literał jednego z&nbsp;elementów
+wyliczenia
+<!--O--><span class='typ'>dni<!--C--></span>, a&nbsp;w&nbsp;liniach&nbsp;<span class="ding">&#x2790;</span> i&nbsp;<span class="ding">&#x2792;</span> jest to zmienna
+
+<!--O--><span class='zmienna'>dzien<!--C--></span>
+ zadeklarowana jako zmienna typu
+<!--O--><span class='typ'>dni<!--C--></span>.
+Jak widzimy, nazwę
+<!--O--><span class='typ'>dni<!--C--></span>
+ traktujemy tak jak nazwę innych typów
+(np.&nbsp;
+<!--O--><span class='typ'>int<!--C--></span>
+ czy
+<!--O--><span class='typ'>double<!--C--></span>): deklarując zmienną typu
+
+<!--O--><span class='typ'>dni<!--C--></span>
+ (<span class="ding">&#x278F;</span>), podajemy najpierw nazwę typu, potem nazwę
+zmiennej i&nbsp;inicjujemy ją jedną z&nbsp;dozwolonych wartości (w tym
+przypadku wartością
+<!--O--><span class='zmienna'>sob<!--C--></span>). W linii&nbsp;<span class="ding">&#x2791;</span> do tej zmiennej
+przypisujemy inną wartość typu
+<!--O--><span class='typ'>dni<!--C--></span>, a mianowicie
+<!--O--><span class='zmienna'>nie<!--C--></span>.
+<BR><A NAME="enums.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">14</SPAN>:</SPAN>
+      <A NAME="tex2html16"
+  HREF="source-files/enums.cpp">
+<!--O--><span class='downl'>enums.cpp<!--C--></span></A>
+<A NAME="3805"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Wyliczenia.</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;string&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">enum</font></b> dni <font color="#FF0000">{</font>pon<font color="#990000">,</font> wto<font color="#990000">=</font><font color="#993399">0</font><font color="#990000">,</font> sro<font color="#990000">=</font><font color="#993399">0</font><font color="#990000">,</font> czw<font color="#990000">=</font><font color="#993399">0</font><font color="#990000">,</font> pia<font color="#990000">=</font><font color="#993399">0</font><font color="#990000">,</font> sob<font color="#990000">,</font> nie<font color="#FF0000">}</font><font color="#990000">;</font>   <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">     6.  </font>
+ <font SIZE="-2" color="black">     7.  </font><font color="#009900">void</font> <b><font color="#000000">info</font></b><font color="#990000">(</font><font color="#008080">dni</font> day<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     8.  </font>    <b><font color="#0000FF">static</font></b> <font color="#008080">string</font>  typDnia<font color="#990000">[]=</font><font color="#FF0000">{</font><font color="#FF0000">" powszedni"</font><font color="#990000">,</font>             <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">     9.  </font>                              <font color="#FF0000">"   sobotni"</font><font color="#990000">,</font> <font color="#FF0000">"swiateczny"</font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>    <font color="#009900">int</font> stawka <font color="#990000">=</font> <font color="#993399">200</font><font color="#990000">*(</font><font color="#993399">1</font> <font color="#990000">+</font> day<font color="#990000">);</font>                         <span class="ding">&#x278C;</span>
+ <font SIZE="-2" color="black">    11.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Dzien "</font>  <font color="#990000">&lt;&lt;</font> typDnia<font color="#990000">[</font>day<font color="#990000">]</font>   <font color="#990000">&lt;&lt;</font> <font color="#FF0000">". "</font>         <span class="ding">&#x278D;</span>
+ <font SIZE="-2" color="black">    12.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Stawka wynosi: "</font> <font color="#990000">&lt;&lt;</font> stawka <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" PLN</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    14.  </font>
+ <font SIZE="-2" color="black">    15.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    16.  </font>    <b><font color="#000000">info</font></b><font color="#990000">(</font>pon<font color="#990000">);</font>           <span class="ding">&#x278E;</span>
+ <font SIZE="-2" color="black">    17.  </font>
+ <font SIZE="-2" color="black">    18.  </font>    <font color="#008080">dni</font> dzien <font color="#990000">=</font> sob<font color="#990000">;</font>     <span class="ding">&#x278F;</span>
+ <font SIZE="-2" color="black">    19.  </font>    <b><font color="#000000">info</font></b><font color="#990000">(</font>dzien<font color="#990000">);</font>         <span class="ding">&#x2790;</span>
+ <font SIZE="-2" color="black">    20.  </font>
+ <font SIZE="-2" color="black">    21.  </font>    dzien <font color="#990000">=</font> nie<font color="#990000">;</font>         <span class="ding">&#x2791;</span>
+ <font SIZE="-2" color="black">    22.  </font>    <b><font color="#000000">info</font></b><font color="#990000">(</font>dzien<font color="#990000">);</font>         <span class="ding">&#x2792;</span>
+ <font SIZE="-2" color="black">    23.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Wewnątrz funkcji
+<!--O--><span class='funkcja'>info<!--C--></span>
+ definiujemy
+trzyelementową tablicę obiektów typu
+<!--O--><span class='klasa'>string<!--C--></span>
+
+(słowem
+<!--O--><span class='klucz'>static<!--C--></span>
+ na razie się nie przejmujmy).
+Do elementów tej tablicy odwołujemy się w&nbsp;linii&nbsp;<span class="ding">&#x278D;</span>.
+Zauważmy, że w&nbsp;linii
+tej używamy wartości zmiennej typu
+<!--O--><span class='typ'>dni<!--C--></span>
+ jako indeksów
+tablicy: jest to dozwolone, gdyż nastąpi automatyczna
+konwersja<A NAME="3187"></A> (promocja) tych
+wartości do typu
+<!--O--><span class='typ'>int<!--C--></span>
+ zgodnie z&nbsp;wartościami
+całkowitymi przypisanymi poszczególnym elementom wyliczenia. W&nbsp;naszym
+przypadku mogą to być wyłącznie wartości 0, 1 i&nbsp;2, co
+akurat odpowiada dozwolonym wartościom
+indeksu tablicy
+<!--O--><span class='zmienna'>typDnia<!--C--></span>.
+Podobnie, w&nbsp;wierszu&nbsp;<span class="ding">&#x278C;</span>, widzimy dodawanie '
+<FONT COLOR="#000000"><TT>1 + day</TT></FONT>'.
+Ponieważ jeden argument jest typu
+<!--O--><span class='typ'>int<!--C--></span>, a&nbsp;drugi typu
+<!--O--><span class='typ'>dni<!--C--></span>,
+nastąpi również promocja wartości zmiennej
+<!--O--><span class='zmienna'>day<!--C--></span>
+ do
+wartości typu
+<!--O--><span class='typ'>int<!--C--></span>.
+Co jest jednak ważne, to fakt, że <FONT COLOR="#7b003e"><I>nie</I></FONT>
+będzie konwersji w&nbsp;przeciwną stronę: od
+<!--O--><span class='typ'>int<!--C--></span>
+ do
+
+<!--O--><span class='typ'>dni<!--C--></span>. Tak więc niemożliwe byłoby wywołanie funkcji
+
+<!--O--><span class='funkcja'>info<!--C--></span>
+ z&nbsp;argumentem innego typu niż typ
+<!--O--><span class='typ'>dni<!--C--></span>; na
+przykład,
+wywołanie '
+<FONT COLOR="#000000"><TT>int k = 1; info(k);</TT></FONT>' spowodowałoby błąd
+kompilacji, mimo że jedynka odpowiada jednej z&nbsp;dozwolonych
+wartości dla zmiennej typu
+<!--O--><span class='typ'>dni<!--C--></span>.
+Ta cecha jest bardzo
+pożyteczną cechą wyliczeń: użycie typu wyliczeniowego zapewnia,
+że funkcja
+<!--O--><span class='funkcja'>info<!--C--></span>
+ zostanie zawsze wywołana z&nbsp;legalnym
+argumentem; musi on bowiem być typu
+<!--O--><span class='typ'>dni<!--C--></span>
+  a&nbsp;więc na pewno
+odpowiadać którejś z&nbsp;jedynych dopuszczalnych wartości całkowitych:
+w&nbsp;naszym przypadku 0, 1 lub&nbsp;2. Dzięki temu nie musimy już sprawdzać,
+czy indeks w&nbsp;linii&nbsp;<span class="ding">&#x278D;</span> nie wykracza poza zakres &mdash;&nbsp;użytkownik
+funkcji
+<!--O--><span class='funkcja'>info<!--C--></span>
+ zostanie zmuszony do świadomego wyboru argumentu,
+który na pewno nie spowoduje błędu.
+
+<P>
+Ponieważ nie ma konwersji od typu
+<!--O--><span class='typ'>int<!--C--></span>
+ do typu
+<!--O--><span class='typ'>dni<!--C--></span>,
+zmiennym zadeklarowanym jako zmienne typu
+<!--O--><span class='typ'>dni<!--C--></span>
+ można przypisywać
+wartości wyłącznie tego typu. Choć symbolowi
+<!--O--><span class='zmienna'>sob<!--C--></span>
+
+odpowiada wartość&nbsp;1, to
+<pre><tt>       <font color="#008080">dni</font> day <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font> <i><font color="#9A1900">// ZLE</font></i>
+</tt></pre>
+byłoby nielegalne; należy użyć
+<pre><tt>       <font color="#008080">dni</font> day <font color="#990000">=</font> sob<font color="#990000">;</font>
+</tt></pre>
+
+<P>
+Czytelnik może sprawdzić, że wydruk z&nbsp;powyższego programu
+wygląda następująco:
+<PRE>
+    Dzien  powszedni. Stawka wynosi: 200 PLN
+    Dzien    sobotni. Stawka wynosi: 400 PLN
+    Dzien swiateczny. Stawka wynosi: 600 PLN
+</PRE>
+
+<P>
+Kontrola legalności argumentów wysyłanych do funkcji to
+bardzo częste zastosowanie typów wyliczeniowych.
+
+<P>
+Nowy standard C++11<A NAME="3217"></A><A NAME="3218"></A>
+wprowadza dodatkowo inny sposób na definiowanie typów
+wyliczeniowych &mdash;&nbsp;powiemy o&nbsp;tym po wprowadzeniu pojęcia klas.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html924"
+  HREF="node18.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html930"
+  HREF="node14.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html936"
+  HREF="node20.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html932"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html934"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html925"
+  HREF="node18.html">4.4 Typ logiczny</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html931"
+  HREF="node14.html">4. Podstawowe typy danych</A>
+<B>Dalej:</B> <A NAME="tex2html937"
+  HREF="node20.html">4.6 Wskaźniki</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

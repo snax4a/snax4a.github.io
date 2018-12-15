@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>8.11 Instrukcje skoku</TITLE>
+<META NAME="description" CONTENT="8.11 Instrukcje skoku">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node51.html">
+<LINK REL="previous" HREF="node49.html">
+<LINK REL="up" HREF="node39.html">
+<LINK REL="next" HREF="node51.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1399"
+  HREF="node49.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1405"
+  HREF="node39.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1411"
+  HREF="node51.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1407"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1409"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1400"
+  HREF="node49.html">8.10 Instrukcje zaniechania i&nbsp;kontunuacji</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1406"
+  HREF="node39.html">8. Instrukcje</A>
+<B>Dalej:</B> <A NAME="tex2html1412"
+  HREF="node51.html">8.12 Instrukcje powrotu</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION009110000000000000000"></A>
+           <A NAME="instr:skok"></A>
+<BR>
+<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">11</SPAN> Instrukcje skoku
+</H1>
+
+<P>
+Wykonanie instrukcji skoku<A NAME="8194"></A><A NAME="8195"></A>
+<A NAME="8196"></A> przenosi sterowanie w&nbsp;inne miejsce programu.
+Ma ona postać
+<pre><tt>       <b><font color="#0000FF">goto</font></b> etykieta<font color="#990000">;</font>
+</tt></pre>
+gdzie
+<!--O--><span class='zmienna'>etykieta<!--C--></span>
+ jest etykietą pewnej instrukcji wewnątrz tej
+samej funkcji. Sterowanie zostanie przeniesione właśnie do tej instrukcji.
+
+<P>
+W zasadzie język dopuszcza najdziwniejsze skoki, ale należy unikać
+skoków do wnętrza instrukcji złożonych (choć formalnie takie
+skoki są legalne, jeśli tylko nie omijają deklaracji z&nbsp;inicjatorami).
+Najczęściej używa się instrukcji
+<!--O--><span class='klucz'>goto<!--C--></span>
+ aby wyjść
+z&nbsp;wnętrza zagnieżdżonych pętli, jak w&nbsp;następującym programie:
+<BR><A NAME="oceny.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">54</SPAN>:</SPAN>
+      <A NAME="tex2html57"
+  HREF="source-files/oceny.cpp">
+<!--O--><span class='downl'>oceny.cpp<!--C--></span></A>
+<A NAME="8521"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Instrukcja skoku</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <b><font color="#0000FF">const</font></b> <font color="#009900">int</font> st_size <font color="#990000">=</font> <font color="#993399">7</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>
+ <font SIZE="-2" color="black">     7.  </font>    <font color="#009900">int</font> oceny<font color="#990000">[][</font>st_size<font color="#990000">]</font> <font color="#990000">=</font> <font color="#FF0000">{</font> <font color="#FF0000">{</font> <font color="#993399">5</font><font color="#990000">,</font> <font color="#993399">4</font><font color="#990000">,</font> <font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">4</font><font color="#990000">,</font> <font color="#993399">4</font> <font color="#FF0000">}</font><font color="#990000">,</font>
+ <font SIZE="-2" color="black">     8.  </font>                             <font color="#FF0000">{</font> <font color="#993399">5</font><font color="#990000">,</font> <font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">4</font><font color="#990000">,</font> <font color="#993399">2</font><font color="#990000">,</font> <font color="#993399">3</font> <font color="#FF0000">}</font><font color="#990000">,</font>
+ <font SIZE="-2" color="black">     9.  </font>                             <font color="#FF0000">{</font> <font color="#993399">4</font><font color="#990000">,</font> <font color="#993399">4</font><font color="#990000">,</font> <font color="#993399">4</font><font color="#990000">,</font> <font color="#993399">4</font><font color="#990000">,</font> <font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">5</font> <font color="#FF0000">}</font> <font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>
+ <font SIZE="-2" color="black">    11.  </font>    <font color="#009900">int</font> gr_size <font color="#990000">=</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>oceny<font color="#990000">)/</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>oceny<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">]);</font>
+ <font SIZE="-2" color="black">    12.  </font>
+ <font SIZE="-2" color="black">    13.  </font>    <font color="#009900">bool</font> jestDwoja <font color="#990000">=</font> <b><font color="#0000FF">false</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    14.  </font>
+ <font SIZE="-2" color="black">    15.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> grupa <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> grupa <font color="#990000">&lt;</font> gr_size<font color="#990000">;</font> grupa<font color="#990000">++)</font>  <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">    16.  </font>        <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> student <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> student <font color="#990000">&lt;</font> st_size<font color="#990000">;</font> student<font color="#990000">++)</font>
+ <font SIZE="-2" color="black">    17.  </font>            <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> oceny<font color="#990000">[</font>grupa<font color="#990000">][</font>student<font color="#990000">]</font> <font color="#990000">==</font> <font color="#993399">2</font> <font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    18.  </font>                jestDwoja <font color="#990000">=</font> <b><font color="#0000FF">true</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font>                <b><font color="#0000FF">goto</font></b> KONIEC<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    20.  </font>            <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    21.  </font>KONIEC<font color="#990000">:</font>                                            <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    22.  </font>    <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>jestDwoja<font color="#990000">)</font> cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Byla dwojka"</font>   <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    23.  </font>    <b><font color="#0000FF">else</font></b>           cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Nie ma dwojki"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    24.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+W zagnieżdżonej pętli rozpoczynającej się w&nbsp;linii&nbsp;<span class="ding">&#x278A;</span> szukamy oceny
+niedostatecznej w&nbsp;dwuwymiarowej tablicy ocen indeksowanej numerem grupy
+i&nbsp;numerem studenta. Ponieważ interesuje nas tylko, czy jest choć jedna ocena
+niedostateczna, w&nbsp;momencie, gdy taką znajdziemy, chcemy wyjść z&nbsp;obu pętli.
+Zauważmy, że instrukcja
+<!--O--><span class='klucz'>break<!--C--></span>
+ przerwałaby tylko pętlę wewnętrzną;
+pętla po grupach byłaby kontynuowana. Dlatego użyliśmy instrukcji
+
+<!--O--><span class='klucz'>goto<!--C--></span>, która &bdquo;wyrzuca&rdquo; nas od razu z&nbsp;obu pętli
+aż do linii&nbsp;<span class="ding">&#x278B;</span>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1399"
+  HREF="node49.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1405"
+  HREF="node39.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1411"
+  HREF="node51.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1407"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1409"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1400"
+  HREF="node49.html">8.10 Instrukcje zaniechania i&nbsp;kontunuacji</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1406"
+  HREF="node39.html">8. Instrukcje</A>
+<B>Dalej:</B> <A NAME="tex2html1412"
+  HREF="node51.html">8.12 Instrukcje powrotu</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

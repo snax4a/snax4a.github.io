@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>3.1 Co to jest preprocesor?</TITLE>
+<META NAME="description" CONTENT="3.1 Co to jest preprocesor?">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node12.html">
+<LINK REL="previous" HREF="node10.html">
+<LINK REL="up" HREF="node10.html">
+<LINK REL="next" HREF="node12.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html803"
+  HREF="node10.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html809"
+  HREF="node10.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html815"
+  HREF="node12.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html811"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html813"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html804"
+  HREF="node10.html">3. Preprocesor</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html810"
+  HREF="node10.html">3. Preprocesor</A>
+<B>Dalej:</B> <A NAME="tex2html816"
+  HREF="node12.html">3.2 Dyrektywy preprocesora</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00410000000000000000"></A><A NAME="prepro:coto"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Co to jest preprocesor?
+</H1>
+
+<P>
+<FONT COLOR="#7b003e"><B>Preprocesor</B></FONT><A NAME="1822"></A> to program przetwarzający
+tekst programu w&nbsp;C/C++ <FONT COLOR="#7b003e"><I>przed</I></FONT> jego właściwą kompilacją.
+W&nbsp;szczególności, preprocesor <FONT COLOR="#7b003e"><I>nie</I></FONT> sprawdza poprawności
+składniowej i&nbsp;nie wie nic o&nbsp;języku&nbsp;C++ ani tym bardziej o&nbsp;języku
+maszynowym. Szuka on w&nbsp;tekście programu dyrektyw dla siebie,
+wykonuje je i&nbsp;usuwa z&nbsp;tekstu: kompilator nawet ich nie zobaczy.
+
+<P>
+
+<P>
+
+<div class='wazne'>
+Dyrektywy preprocesora nie są przeznaczone dla kompilatora,
+    zatem <FONT COLOR="#7b003e"><I>nie</I></FONT> kończą się znakiem średnika.
+
+
+</div>
+
+<P>
+Dzięki preprocesorowi możemy natomiast stosunkowo łatwo zmieniać
+tekst programu &bdquo;widziany&rdquo; przez kompilator.
+Należy przy tym pamiętać, że podczas kompilacji
+dyrektywy preprocesora
+nie są już widoczne &mdash;&nbsp;widoczny jest tylko tekst
+przetworzony przez preprocesor, a&nbsp;linie rozpoczynające się od
+znaku &rdquo; są usunięte (gdyż spowodowałyby błąd
+kompilacji). Stwarza to niebezpieczeństwo, że komunikaty
+kompilatora staną się niezrozumiałe dla programisty, gdyż
+trudno czasem ustalić, jaki właściwie tekst programu został
+wysłany do kompilacji po jego przetworzeniu przez preprocesor.
+Generalnie zatem należy stosować tylko najpotrzebniejsze
+dyrektywy preprocesora i&nbsp;nie wykorzystywać ich wszystkich
+możliwości. Wydatnie zwiększa to czytelność kodu. Dlatego nie
+o&nbsp;wszystkich możliwościach preprocesora będziemy mówić;
+zainteresowani mogą znaleźć pozostałe informacje w&nbsp;literaturze.
+
+<P>
+Instrukcje przeznaczone dla preprocesora nazywamy
+<FONT COLOR="#7b003e"><B>dyrektywami</B></FONT>.<A NAME="1829"></A>
+Wszystkie rozpoczynają się od znaku
+&rdquo; jako pierwszego niebiałego znaku linii.
+Zazwyczaj jedna dyrektywa zajmuje jedną linię; jeśli
+jednak nie mieści się w&nbsp;jednej linii, to linię, która ma być
+kontynuowana, kończymy znakiem '&#92;' (odwrócony
+ukośnik); musi to być <FONT COLOR="#7b003e"><I>ostatni</I></FONT> znak linii, za nim nie może
+być nawet (niewidocznej) spacji. Na przykład
+<pre><tt>   <b><font color="#000080">    #define</font></b> wymiar <font color="#993399">256</font>
+</tt></pre>
+jest równoważne
+<pre><tt>   <b><font color="#000080">    #define</font></b> wymiar <font color="#990000">\</font>
+               <font color="#993399">256</font>
+</tt></pre>
+
+<P>
+Wymieńmy zatem najważniejsze dyrektywy preprocesora.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html803"
+  HREF="node10.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html809"
+  HREF="node10.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html815"
+  HREF="node12.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html811"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html813"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html804"
+  HREF="node10.html">3. Preprocesor</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html810"
+  HREF="node10.html">3. Preprocesor</A>
+<B>Dalej:</B> <A NAME="tex2html816"
+  HREF="node12.html">3.2 Dyrektywy preprocesora</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

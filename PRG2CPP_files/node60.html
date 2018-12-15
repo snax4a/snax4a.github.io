@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>11.1 Wstęp</TITLE>
+<META NAME="description" CONTENT="11.1 Wstęp">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node61.html">
+<LINK REL="previous" HREF="node59.html">
+<LINK REL="up" HREF="node59.html">
+<LINK REL="next" HREF="node61.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1577"
+  HREF="node59.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1583"
+  HREF="node59.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1589"
+  HREF="node61.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1585"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1587"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1578"
+  HREF="node59.html">11. Funkcje</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1584"
+  HREF="node59.html">11. Funkcje</A>
+<B>Dalej:</B> <A NAME="tex2html1590"
+  HREF="node61.html">11.2 Deklaracje i&nbsp;definicje funkcji</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001210000000000000000"></A><A NAME="funk:wstep"></A>
+<BR>
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">1</SPAN> Wstęp
+</H1>
+
+<P>
+Funkcje to opisy czynności do wykonania. Generalnie, z&nbsp;punktu
+widzenia programu, funkcja jest definicją instrukcji,
+która na podstawie danych wejściowych (argumentów) dostarcza
+w miejscu jej użycia (wywołania) wartość określonego typu.
+Funkcje są więc sposobem na realizację tego samego czy podobnego
+zadania wielokrotnie, bez potrzeby wielokrotnego powtarzania w&nbsp;naszym
+kodzie tych samych sekwencji instrukcji.
+
+<P>
+Definiowanie funkcji<A NAME="11380"></A> jest podobne do definiowania
+funkcji w&nbsp;Javie<A NAME="11381"></A>
+i wielu innych językach. Jest jednak szereg ważnych
+różnic.
+
+<P>
+W Javie wszystkie funkcje są składowymi jakiejś klasy: albo metodami,
+albo jej funkcjami statycznymi.
+W C/C++ natomiast funkcje można definiować poza wszystkimi
+klasami (w C jest to jedyna możliwość). Zresztą, jak wiemy,
+w C/C++ można w&nbsp;ogóle nie definiować i&nbsp;nie używać żadnych
+klas czy struktur. Tak zdefiniowane funkcje nazywamy
+<FONT COLOR="#7b003e"><B>funkcjami globalnymi</B></FONT>.<A NAME="11383"></A>
+
+<P>
+Przyzwyczaić się też trzeba do innej cechy języka C/C++ (nieznanej
+w Javie):<A NAME="11384"></A>
+użycie funkcji w&nbsp;tekście programu musi być leksykalnie
+poprzedzone jej definicją lub przynajmniej deklaracją.
+Leksykalnie, a&nbsp;więc definicja lub deklaracja funkcji
+musi wystąpić w&nbsp;<SPAN  CLASS="textit">tekście</SPAN> programu wcześniej niż
+jej jakiekolwiek użycie. Jak mówiliśmy
+już w&nbsp;rozdziale <A HREF="node5.html#chap:zaczyn">wstępnym</A> ,
+dyrektywa
+<FONT COLOR="#000000"><TT>#include</TT></FONT> włącza plik do tekstu przetwarzanego
+programu; można więc na przykład definiować czy deklarować
+funkcję we włączanym pliku nagłówkowym i&nbsp;używać tej funkcji
+w dalszej części pliku z&nbsp;programem.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1577"
+  HREF="node59.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1583"
+  HREF="node59.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1589"
+  HREF="node61.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1585"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1587"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1578"
+  HREF="node59.html">11. Funkcje</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1584"
+  HREF="node59.html">11. Funkcje</A>
+<B>Dalej:</B> <A NAME="tex2html1590"
+  HREF="node61.html">11.2 Deklaracje i&nbsp;definicje funkcji</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

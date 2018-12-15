@@ -1,0 +1,549 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>16.4 Zapis i&nbsp;odczyt nieformatowany</TITLE>
+<META NAME="description" CONTENT="16.4 Zapis i&nbsp;odczyt nieformatowany">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node108.html">
+<LINK REL="previous" HREF="node106.html">
+<LINK REL="up" HREF="node103.html">
+<LINK REL="next" HREF="node108.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2277"
+  HREF="node106.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2283"
+  HREF="node103.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2289"
+  HREF="node108.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2285"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2287"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2278"
+  HREF="node106.html">16.3 Formatowanie</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2284"
+  HREF="node103.html">16. Operacje wejścia/wyjścia</A>
+<B>Dalej:</B> <A NAME="tex2html2290"
+  HREF="node108.html">16.5 Pliki</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Podrozdzia&#322;y</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html2291"
+  HREF="node107.html#SECTION001741000000000000000"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Odczyt nieformatowany</A>
+<LI><A NAME="tex2html2292"
+  HREF="node107.html#SECTION001742000000000000000"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Zapis nieformatowany</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION001740000000000000000"></A><A NAME="io:nieform"></A>
+<BR>
+<SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">4</SPAN> Zapis i&nbsp;odczyt nieformatowany
+</H1>
+
+<P>
+Do tej pory mówiliśmy o&nbsp;zapisie/odczycie formatowanym &mdash;&nbsp;
+informacja czytana lub pisana jest w&nbsp;jakiś sposób interpretowana:
+opuszczane są białe znaki, dokonuje się przekształceń liczb do
+napisów w&nbsp;różnych formatach itd. Istnieją też operacje we/wy
+nieformatowane, które czytają lub piszą &bdquo;surowe&rdquo; bajty &mdash;&nbsp;bez
+ich żadnej interpretacji.
+
+<P>
+
+<H2><A NAME="SECTION001741000000000000000"></A><A NAME="io:czytnieform"></A>
+<BR>
+<SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Odczyt nieformatowany
+</H2>
+
+<P>
+Na rzecz obiektu strumieniowego mogą być też wywołane metody
+powodujące wczytanie danych ze strumienia bez ich interpretacji
+i formatowania.<A NAME="19416"></A>
+Należą do nich następujące metody:
+
+<P>
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>istream&amp; get(char&amp; c)<!--C--></span>
+ &mdash;&nbsp;czyta jeden bajt;
+      zwraca<A NAME="19420"></A><A NAME="19421"></A>
+      referencję do strumienia, na rzecz którego została
+      wywołana, więc może być używana kaskadowo.
+      Argument typu
+<!--O--><span class='typ'>char<!--C--></span>
+ jest przesyłany przez referencję;
+      po powrocie jego wartością będzie wczytany znak. Może to
+      być <FONT COLOR="#7b003e"><I>dowolny</I></FONT> znak, również znak kontrolny, biały
+      lub zerowy (czyli '<!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>0').
+      Jeśli czytanie nie powiodło się, bo napotkany został koniec
+      pliku, znak
+<!--O--><span class='zmienna'>c<!--C--></span>
+ będzie równy
+
+<!--O--><span class='zmienna'>EOF<!--C--></span>,<A NAME="19426"></A>
+      czyli
+      znak, który w&nbsp;danym systemie operacyjnym oznacza koniec danych
+      (Ctrl-Z w&nbsp;Windows, Ctrl-D pod Uniksem/Linuksem).
+      Sam strumień będzie wtedy w&nbsp;stanie błędu. Poznać to można
+      przez wymuszenie konwersji zmiennej strumieniowej do typu
+
+<!--O--><span class='typ'>void*<!--C--></span>
+ &mdash;&nbsp;jeśli strumień jest &bdquo;dobry&rdquo; to otrzymamy
+      wartość niezerową, jeśli zły, to otrzymamay
+<!--O--><span class='zmienna'>NULL<!--C--></span>.
+      Taka konwersja zachodzi automatycznie w&nbsp;kontekście, w&nbsp;którym
+      wymagana jest wartość logiczna, a&nbsp;zatem można jej użyć
+      bezpośrednio do części testującej instrukcji
+
+<!--O--><span class='klucz'>if<!--C--></span>,
+<!--O--><span class='klucz'>for<!--C--></span>,
+<!--O--><span class='klucz'>while<!--C--></span>
+ itd. Na przykład, jeśli
+
+<!--O--><span class='zmienna'>strin<!--C--></span>
+ jest strumieniem wejściowym związanym
+      z&nbsp;plikiem, to można zawartość tego pliku przekopiować
+      na standardowe wyjście prostą pętlą
+
+<P></P>
+
+<P>
+<pre><tt>           <font color="#009900">char</font> c<font color="#990000">;</font>
+           <b><font color="#0000FF">while</font></b> <font color="#990000">(</font>strin<font color="#990000">.</font><b><font color="#000000">get</font></b><font color="#990000">(</font>c<font color="#990000">))</font> cout <font color="#990000">&lt;&lt;</font> c<font color="#990000">;</font>
+</tt></pre>
+
+<P>
+Kaskadowość funkcji
+<!--O--><span class='funkcja'>get<!--C--></span>
+ można wykorzystać
+      w&nbsp;konstrukcjach typu
+<pre><tt>           <font color="#009900">char</font> a<font color="#990000">,</font> b<font color="#990000">,</font> c<font color="#990000">;</font>
+           strm<font color="#990000">.</font><b><font color="#000000">get</font></b><font color="#990000">(</font>a<font color="#990000">).</font><b><font color="#000000">get</font></b><font color="#990000">(</font>b<font color="#990000">).</font><b><font color="#000000">get</font></b><font color="#990000">(</font>c<font color="#990000">);</font>
+</tt></pre>
+
+<P>
+przy czym w&nbsp;ten sposób możemy wczytać dowolne znaki;
+      bez żadnego opuszczania białych znaków,
+      interpretacji znaku końca linii itp.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>int get()<!--C--></span>
+ &mdash;&nbsp;zwraca wczytany znak w&nbsp;formie liczby
+      typu
+<!--O--><span class='typ'>int<!--C--></span>; w&nbsp;razie napotkania końca pliku zwrócone
+      zostanie
+<!--O--><span class='zmienna'>EOF<!--C--></span>. Ta forma funkcji
+<!--O--><span class='funkcja'>get<!--C--></span>
+ <FONT COLOR="#7b003e"><I>nie</I></FONT>
+      zwraca referencji do strumienia, więc nie może być używana
+      kaskadowo.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>istream&amp; get(char* buf, streamsize length,            char termin = '<!-- MATH $\backslash$ --><SPAN CLASS="MATH">&#92;</SPAN>n')<!--C--></span>
+ &mdash;&nbsp;
+      czyta do łańcucha (napisu)
+<!--O--><span class='zmienna'>buf<!--C--></span>
+ &mdash;&nbsp;czyli do
+      pamięci
+      poczynając od adresu będącego wartością wskaźnika
+
+<!--O--><span class='zmienna'>buf<!--C--></span>
+ &mdash;&nbsp;maksymalnie
+<!--O--><span class='zmienna'>length-1<!--C--></span>
+ bajtów.
+      Znak
+<!--O--><span class='zmienna'>NUL<!--C--></span>
+ (zerowy) jest
+      automatycznie dodawany na koniec łańcucha
+<!--O--><span class='zmienna'>buf<!--C--></span>.
+      Bajt numer
+<!--O--><span class='zmienna'>length<!--C--></span>
+ ze strumienia nie jest już
+      wczytywany. Wczytywanie kończy się również, jeśli napotkany
+      zostanie znak
+<!--O--><span class='zmienna'>termin<!--C--></span>
+ (domyślnie, jak widać z
+      nagłówka, jest to znak końca linii '&#92;n').
+      Znak
+<!--O--><span class='zmienna'>NUL<!--C--></span>
+ też zostanie
+      wtedy dopisany do łańcucha
+<!--O--><span class='zmienna'>buf<!--C--></span>, ale sam znak
+
+<!--O--><span class='zmienna'>termin<!--C--></span>
+ <FONT COLOR="#7b003e"><I>pozostaje</I></FONT> w&nbsp;strumieniu jako
+      &bdquo;niewyczytany&rdquo; i&nbsp;nie jest umieszczany w&nbsp;wyjściowym buforze
+
+<!--O--><span class='zmienna'>buf<!--C--></span>. Zatem przed wczytaniem kolejnych danych
+      należy go zwykle &bdquo;wyczytać&rdquo; &mdash;&nbsp;można to zrobić za pomocą
+      funkcji
+<!--O--><span class='funkcja'>ignore<!--C--></span>
+ opisanej dalej.
+      Oczywiście przekazany do funkcji bufor musi istnieć, to znaczy
+      pamięć na ten bufor musiała zostać zaalokowana w&nbsp;funkcji
+      wołającej. Drugi parametr funkcji jest typu
+
+<!--O--><span class='typ'>streamsize<!--C--></span>,<A NAME="19466"></A>
+      co jest aliasem pewnego typu całkowitego.
+      Funkcja zwraca referencję do strumienia, na rzecz którego
+      została wywołana (<!--O--><span class='zmienna'>*this<!--C--></span>).
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>istream&amp; getline(char* buf, streamsize length,      char termin = '<!-- MATH $\backslash$ --><SPAN CLASS="MATH">&#92;</SPAN>n')<!--C--></span>
+
+      &mdash;&nbsp;<A NAME="19471"></A><A NAME="19472"></A>
+      działa dokładnie tak jak poprzednia funkcja, ale znak
+
+<!--O--><span class='zmienna'>termin<!--C--></span>
+ <FONT COLOR="#7b003e"><I>jest</I></FONT> wyjmowany ze
+      strumienia, choć <FONT COLOR="#7b003e"><I>nie</I></FONT> jest umieszczany w&nbsp;buforze
+
+<!--O--><span class='zmienna'>buf<!--C--></span>. Jest to zatem metoda znacznie praktyczniejsza
+      od poprzedniej przy wczytywania kolejnych linii tekstu.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>istream&amp; read(char* buf, streamsize length)<!--C--></span>
+
+      &mdash;&nbsp;<A NAME="19480"></A><A NAME="19481"></A>
+      wczytuje
+<!--O--><span class='zmienna'>length<!--C--></span>
+ bajtów do bufora
+<!--O--><span class='zmienna'>buf<!--C--></span>.
+      Czytanie może się zakończyć przedwcześnie tylko, jeśli
+      napotkany został koniec danych. O tym, ile rzeczywiście
+      bajtów zostało wczytanych, można się przekonać wywołując
+      bezpośrednio po czytaniu funkcję
+<!--O--><span class='funkcja'>gcount<!--C--></span>
+ (patrz dalej).
+      Funkcja czyta surowe bajty i&nbsp;nie dostawia znaku końca napisu
+      ani żadnego innego. Stosuje się ją zwykle do czytania danych
+      nietekstowych. Funkcja zwraca referencję do strumienia na
+      rzecz którego została wywołana (<!--O--><span class='zmienna'>*this<!--C--></span>).
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>istream&amp; ignore(streamsize length = 1,      int termin = EOF)<!--C--></span>
+
+      <A NAME="19489"></A><A NAME="19490"></A>
+      &mdash;&nbsp;
+      wczytuje
+<!--O--><span class='zmienna'>length<!--C--></span>
+ znaków
+      (domyślnie jeden znak), nigdzie ich nie wpisuje.
+      Jeśli napotkany został znak
+<!--O--><span class='zmienna'>termin<!--C--></span>
+ (domyślnie
+      koniec pliku), to jest on usuwany ze strumienia i&nbsp;czytanie
+      kończy się.
+      Funkcja zwraca referencję do strumienia, na rzecz którego
+      została wywołana.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>int gcount( )<!--C--></span>
+
+      &mdash;&nbsp;<A NAME="19496"></A><A NAME="19497"></A>
+      zwraca liczbę wczytanych
+      ze strumienia bajtów podczas wykonywania ostatniej funkcji
+      nieformatowanego wejścia.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>int peek( )<!--C--></span>
+
+      &mdash;&nbsp;<A NAME="19501"></A><A NAME="19502"></A>
+      zwraca jeden znak ze
+      strumienia w&nbsp;postaci zmiennej typu
+<!--O--><span class='typ'>int<!--C--></span>
+ &mdash;&nbsp;może to być
+
+<!--O--><span class='zmienna'>EOF<!--C--></span>
+ jeśli napotkany został koniec pliku.
+      Znak pozostaje w&nbsp;strumieniu i&nbsp;będzie pierwszym znakiem
+      wczytanym przy następnej operacji czytania.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>istream&amp; putback(char znak)<!--C--></span>
+
+      &mdash;&nbsp;<A NAME="19508"></A><A NAME="19509"></A>
+      wstawia znak
+<!--O--><span class='zmienna'>znak<!--C--></span>
+ do strumienia; będzie on pierwszym
+      znakiem wczytanym przez następną operację czytania.
+      Zwraca odnośnik do strumienia, na rzecz którego
+      została wywołana. Nie do każdego strumienia i&nbsp;nie zawsze
+      można wstawić znak.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>istream&amp; unget()<!--C--></span>
+
+      &mdash;&nbsp;<A NAME="19514"></A><A NAME="19515"></A>
+      wstawia ostatnio przeczytany znak z&nbsp;powrotem do strumienia;
+      będzie on pierwszym
+      znakiem wczytanym przez następną operację czytania.
+      Zwraca referencję do strumienia, na rzecz którego
+      została wywołana.
+
+<P></P>
+
+<P>
+Kilka z&nbsp;tych funkcji użytych zostało w&nbsp;poniższym programie,
+który czyta kolejne linie ze standardowego wejścia i&nbsp;wyświetla
+je bez zmian, ale pomijając komentarze, czyli fragmenty od dwuznaku
+'//' do końca linii:
+<A NAME="czytnf.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">128</SPAN>:</SPAN>
+      <A NAME="tex2html135"
+  HREF="source-files/czytnf.cpp">
+<!--O--><span class='downl'>czytnf.cpp<!--C--></span></A>
+<A NAME="20220"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Czytanie nieformatowane</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Wpisuj linie tekstu. Zakoncz znakiem konca "</font>
+ <font SIZE="-2" color="black">     6.  </font>            <font color="#FF0000">"pliku</font><font color="#CC33CC">\n</font><font color="#FF0000">(Ctrl-Z w Windows, Ctrl-D w Linuksie) "</font>
+ <font SIZE="-2" color="black">     7.  </font>            <font color="#FF0000">"Komentarze</font><font color="#CC33CC">\n</font><font color="#FF0000">od </font><font color="#CC33CC">\'</font><font color="#FF0000">//</font><font color="#CC33CC">\'</font><font color="#FF0000"> do konca linii beda "</font>
+ <font SIZE="-2" color="black">     8.  </font>            <font color="#FF0000">"pomijane.</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#009900">char</font> c<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font> cin<font color="#990000">.</font><b><font color="#000000">get</font></b><font color="#990000">(</font>c<font color="#990000">)</font> <font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    11.  </font>        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> c <font color="#990000">==</font> <font color="#FF0000">'/'</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    12.  </font>            <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> cin<font color="#990000">.</font><b><font color="#000000">peek</font></b><font color="#990000">()</font> <font color="#990000">==</font> <font color="#FF0000">'/'</font><font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    13.  </font>                cin<font color="#990000">.</font><b><font color="#000000">ignore</font></b><font color="#990000">(</font><font color="#993399">1024</font><font color="#990000">,</font><font color="#FF0000">'</font><font color="#CC33CC">\n</font><font color="#FF0000">'</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    14.  </font>                cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>                <b><font color="#0000FF">continue</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>            <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    17.  </font>        cout <font color="#990000">&lt;&lt;</font> c<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    19.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+Po wczytaniu każdego znaku prgram sprawdza, czy jest to
+znak '/' (linia&nbsp;11). Jeśli tak, to za pomocą
+<!--O--><span class='funkcja'>peek<!--C--></span>
+
+&bdquo;podgądany&rdquo; jest następny znak. Jeśli to też jest
+'/', to linia jest &bdquo;wyczytywana&rdquo; do końca (za pomocą
+funkcji
+<!--O--><span class='funkcja'>ignore<!--C--></span>; linia&nbsp;13), wypisywany jest znak nowej linii,
+po czym funkcja kontunuuje czytanie kolejnych znaków.
+Program kończy się, gdy wczytanym znakiem będzie znak końca
+pliku
+<!--O--><span class='zmienna'>EOF<!--C--></span>, czyli gdy użytkownik wpisze Ctrl-Z (Windows) lub
+Ctrl-D (Linux). Strumień sprawdzany w&nbsp;linii&nbsp;10 będzie wtedy
+przekonwertowany do
+<!--O--><span class='zmienna'>NULL<!--C--></span>, co zakończy pętlę.
+Przykładowe uruchomienie programy dało
+<PRE>
+    Wpisuj linie tekstu. Zakoncz znakiem konca pliku
+    (Ctrl-Z w Windows, Ctrl-D w Linuksie) Komentarze
+    od '//' do konca linii beda pomijane.
+    int main(void) {
+    int main(void) {
+        const int DIM = 15; // wymiar tablicy
+        const int DIM = 15;
+        int tab[DIM];       // tablica znakow
+        int tab[DIM];
+        double x=1, y=2, z=x/y;  // trzy liczby
+        double x=1, y=2, z=x/y;
+        // ...
+
+    }
+    }
+    ^D
+</PRE>
+Zwróćmy też uwagę na linie&nbsp;5-8 programu. Zilustrowana
+tu jest bardzo przydatna cecha kompilatora C/C++: literały
+napisowe, a&nbsp;więc napisy ograniczone znakami cudzysłowu,
+są łączone (konkatenowane) w&nbsp;jeden napis, jeśli
+oddzielone są od siebie tylko białymi znakami (którym jest,
+w szczególności, znak końca linii).
+
+<P>
+
+<H2><A NAME="SECTION001742000000000000000"></A><A NAME="io:zapnieform"></A>
+<BR>
+<SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Zapis nieformatowany
+</H2>
+
+<P>
+Bardzo ważna jest umiejętność nieformatowanego zapisu.
+<A NAME="19527"></A>
+Oczywiście przydaje się ona głównie przy zapisie do pliku
+lub gniazda sieciowego, nie na ekran komputera.
+Pozwala zapisywać dane z&nbsp;pełną dokładnością w&nbsp;formie
+oszczędzającej miejsce na dysku (zauważmy, że zapis liczby
+-1.234567E+19 zajmuje 13 znaków, choć ta sama liczba typu
+
+<!--O--><span class='typ'>float<!--C--></span>
+ z&nbsp;pełną dokładnością zajmuje w&nbsp;pamięci tylko
+4&nbsp;bajty, a&nbsp;więc tylko 4&nbsp;bajty muszą być wyprowadzone do
+binarnego pliku).
+
+<P>
+Pliki takie nie mogą być,
+co prawda, oglądane czy modyfikowane w&nbsp;zwykłych edytorach tekstu,
+ale mogą być czytane przez ten sam lub inne programy, również za
+pomocą operacji nieformatowanych. Nieformatowane operacje we/wy są
+też konieczne do pracy z&nbsp;plikami nietekstowymi, na przykład
+graficznymi, dźwiękowymi itd.
+
+<P>
+Opisane poniżej dwie metody są metodami z&nbsp;klasy
+<!--O--><span class='klasa'>ostream<!--C--></span>:
+mogą zatem być wywoływane na rzecz dowolnego strumienia wyjściowego,
+nie tylko strumienia
+<!--O--><span class='zmienna'>cout<!--C--></span>.
+
+<P>
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>ostream&amp; put(char c)<!--C--></span>
+
+      &mdash;&nbsp;<A NAME="19534"></A><A NAME="19535"></A>
+      wstawia znak (bajt)
+<!--O--><span class='zmienna'>c<!--C--></span>
+ do strumienia.
+      Zwraca referencję do strumienia, na rzecz którego metoda
+      została wywołana.
+
+<P></P>
+
+<P>
+
+
+<!--O--><span class='funkcja'>ostream&amp; write(const char* buf,            streamsize length)<!--C--></span>
+
+      &mdash;&nbsp;<A NAME="19540"></A><A NAME="19541"></A>
+      zapisuje
+<!--O--><span class='zmienna'>length<!--C--></span>
+ znaków (bajtów)
+      z&nbsp;bufora
+<!--O--><span class='zmienna'>buf<!--C--></span>
+ do strumienia.
+      Zwraca referencję do strumienia, na rzecz którego
+      została wywołana.
+
+<P></P>
+
+<P>
+Przykłady na zastosowanie tych operacji podamy po zapoznaniu się
+z obsługą strumieni związanych z&nbsp;plikami.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2277"
+  HREF="node106.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2283"
+  HREF="node103.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2289"
+  HREF="node108.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2285"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2287"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2278"
+  HREF="node106.html">16.3 Formatowanie</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2284"
+  HREF="node103.html">16. Operacje wejścia/wyjścia</A>
+<B>Dalej:</B> <A NAME="tex2html2290"
+  HREF="node108.html">16.5 Pliki</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

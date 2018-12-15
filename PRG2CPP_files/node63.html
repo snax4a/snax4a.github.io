@@ -1,0 +1,324 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>11.4 Argumenty domyślne</TITLE>
+<META NAME="description" CONTENT="11.4 Argumenty domyślne">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node64.html">
+<LINK REL="previous" HREF="node62.html">
+<LINK REL="up" HREF="node59.html">
+<LINK REL="next" HREF="node64.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1619"
+  HREF="node62.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1625"
+  HREF="node59.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1631"
+  HREF="node64.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1627"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1629"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1620"
+  HREF="node62.html">11.3 Wywołanie funkcji</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1626"
+  HREF="node59.html">11. Funkcje</A>
+<B>Dalej:</B> <A NAME="tex2html1632"
+  HREF="node64.html">11.5 Zmienna liczba argumentów</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001240000000000000000"></A><A NAME="funk:argdom"></A>
+<BR>
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">4</SPAN> Argumenty domyślne
+</H1>
+
+<P>
+W C/C++ istnieje<A NAME="11591"></A>
+możliwość definiowania funkcji o&nbsp;domyślnych wartościach
+argumentów.<A NAME="11592"></A><A NAME="11593"></A>
+Znaczy to, że wywołując taką funkcję nie trzeba
+podawać wszystkich argumentów: dla tych argumentów, których wartość
+nie została podana, przyjęta zostanie wartość domyślna.
+
+<P>
+Aby skorzystać z&nbsp;tej możliwości, deklarujemy (lub od razu
+definiujemy) funkcję, określając wartości domyślne dla
+parametrów funkcji bezpośrednio
+w&nbsp;nagłówku. Muszą to być <FONT COLOR="#7b003e"><I>końcowe</I></FONT> parametry: jeśli
+któryś z&nbsp;parametrów ma wartość domyślną, to wszystkie
+parametry występujące na liście parametrów po nim też muszą
+mieć przypisane wartości domyślne. Wartości domyślne można
+przypisać tylko raz: jeśli zrobimy to w&nbsp;deklaracji, to <FONT COLOR="#7b003e"><I>nie</I></FONT>
+powtarzamy tego w&nbsp;definicji ani innych deklaracjach. Na przykład,
+można zadeklarować funkcję
+<!--O--><span class='funkcja'>fun<!--C--></span>
+ o&nbsp;jednym argumencie
+obowiązkowym i&nbsp;dwoma z&nbsp;wartościami domyślnymi:
+<pre><tt>       <font color="#009900">void</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">int</font> i<font color="#990000">,</font> <font color="#009900">int</font> b <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">,</font> <font color="#009900">double</font> x <font color="#990000">=</font> <font color="#993399">3.14</font><font color="#990000">);</font>
+</tt></pre>
+Ponieważ w&nbsp;deklaracji nazwy parametrów są i&nbsp;tak pomijane,
+tę samą deklarację możemy zapisać tak:
+<pre><tt>       <font color="#009900">void</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">,</font> <font color="#009900">int</font> <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">,</font> <font color="#009900">double</font> <font color="#990000">=</font> <font color="#993399">3.14</font><font color="#990000">);</font>
+</tt></pre>
+W dalszej części programu musimy oczywiście
+podać definicję tej funkcji; tam już przypisania wartości
+domyślnych <FONT COLOR="#7b003e"><I>nie</I></FONT> umieszczamy:
+<pre><tt>       <font color="#009900">void</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">int</font> i<font color="#990000">,</font> <font color="#009900">int</font> b<font color="#990000">,</font> <font color="#009900">double</font> x<font color="#990000">)</font> <font color="#FF0000">{</font>
+           <i><font color="#9A1900">// ...</font></i>
+       <font color="#FF0000">}</font>
+</tt></pre>
+Teraz możemy wywoływać funkcję
+<!--O--><span class='funkcja'>fun<!--C--></span>
+ na różne
+sposoby, np.:
+<pre><tt>       <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">4</font><font color="#990000">,</font> <font color="#993399">7.5</font><font color="#990000">);</font>
+       <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">4</font><font color="#990000">);</font>
+       <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#993399">3</font><font color="#990000">);</font>
+
+</tt></pre>
+W linii pierwszej podaliśmy wszystkie argumenty, więc żadna
+wartość domyślna nie zostanie użyta. W drugiej linii podaliśmy
+dwa argumenty: wartość pierwszego zostanie użyta do zainicjowania
+parametru pierwszego (<!--O--><span class='zmienna'>i<!--C--></span>), wartość drugiego &mdash;&nbsp;parametru
+drugiego (<!--O--><span class='zmienna'>b<!--C--></span>);
+tu wartość domyślna 0 zostanie zignorowana). Trzeciego argumentu
+nie podaliśmy, więc parametr trzeci (<!--O--><span class='zmienna'>x<!--C--></span>) zostanie
+zainicjowany wartością domyślną (3,14). W trzeciej linii podaliśmy
+tylko jeden argument; dla dwóch pozostałych przyjęte zostaną
+wartości domyślne.
+Tak więc powyższe trzy wywołania równoważne są wywołaniom:
+<pre><tt>       <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">4</font><font color="#990000">,</font> <font color="#993399">7.5</font><font color="#990000">);</font>
+       <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">4</font><font color="#990000">,</font> <font color="#993399">3.14</font><font color="#990000">);</font>
+       <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#993399">3</font><font color="#990000">,</font> <font color="#993399">0</font><font color="#990000">,</font> <font color="#993399">3.14</font><font color="#990000">);</font>
+
+</tt></pre>
+Zauważmy, że nie ma sposobu, aby podać wartość
+trzeciego argumentu nie podając drugiego, gdyż kolejne argumenty
+przypisywane są zawsze do kolejnych parametrów i, jeśli lista
+parametrów nie została wyczerpana, dla pozostałych użyte będą
+wartości domyślne. Nie da się również wywołać funkcji
+nie podając argumentów odpowiadających parametrom, dla których
+wartości domyślne nie zostały określone.
+W&nbsp;naszym przypadku na przykład, nie byłoby możliwe wywołanie funkcji
+
+<!--O--><span class='funkcja'>fun<!--C--></span>
+ bez żadnych argumentów, ponieważ argument
+odpowiadający pierwszemu parametrowi jest obowiązkowy.
+
+<P>
+Argument domyślny może być wyrażeniem, którego wartość zostanie
+obliczona przy wywoływaniu funkcji (takim wyrażeniem może być
+na przykład wyrażenie zawierające nazwę zmiennej globalnej lub
+wywołanie funkcji).
+Jeśli tak jest, to wartość tego wyrażenia znajdowana jest
+za każdym razem gdy funkcja jest wywoływana, ale
+w&nbsp;zakresie tej deklaracji, gdzie wartości domyślne zostały
+zdefiniowane.
+Na przykład w&nbsp;poniższym programie w&nbsp;zakresie, do którego należy
+deklaracja funkcji
+<!--O--><span class='funkcja'>kolo<!--C--></span>
+ (<span class="ding">&#x278A;</span>), widoczną zmienną
+
+<!--O--><span class='zmienna'>PI<!--C--></span>
+ jest globalna zmienna o&nbsp;tej nazwie.
+<BR><A NAME="wardom.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">67</SPAN>:</SPAN>
+      <A NAME="tex2html72"
+  HREF="source-files/wardom.cpp">
+<!--O--><span class='downl'>wardom.cpp<!--C--></span></A>
+<A NAME="12828"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Wartości domyślne funkcji</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">double</font> PI <font color="#990000">=</font> <font color="#993399">3</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     5.  </font>
+ <font SIZE="-2" color="black">     6.  </font><font color="#009900">double</font> <b><font color="#000000">kolo</font></b><font color="#990000">(</font><font color="#009900">double</font><font color="#990000">,</font> <font color="#009900">double</font> <font color="#990000">=</font> PI<font color="#990000">);</font>          <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">     7.  </font>
+ <font SIZE="-2" color="black">     8.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#009900">double</font> r <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>
+ <font SIZE="-2" color="black">    11.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"1. PI = "</font> <font color="#990000">&lt;&lt;</font> PI <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" Pow = "</font>
+ <font SIZE="-2" color="black">    12.  </font>                       <font color="#990000">&lt;&lt;</font> <b><font color="#000000">kolo</font></b><font color="#990000">(</font>r<font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font> <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    13.  </font>    <font color="#009900">double</font> PI <font color="#990000">=</font> <font color="#993399">3.14</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    14.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"2. PI = "</font> <font color="#990000">&lt;&lt;</font> PI <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" Pow = "</font>
+ <font SIZE="-2" color="black">    15.  </font>                       <font color="#990000">&lt;&lt;</font> <b><font color="#000000">kolo</font></b><font color="#990000">(</font>r<font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font> <span class="ding">&#x278C;</span>
+ <font SIZE="-2" color="black">    16.  </font>    <font color="#990000">::</font>PI <font color="#990000">=</font> <font color="#993399">3.14</font><font color="#990000">;</font>                           <span class="ding">&#x278D;</span>
+ <font SIZE="-2" color="black">    17.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"3. PI = "</font> <font color="#990000">&lt;&lt;</font> PI <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" Pow = "</font>
+ <font SIZE="-2" color="black">    18.  </font>                       <font color="#990000">&lt;&lt;</font> <b><font color="#000000">kolo</font></b><font color="#990000">(</font>r<font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    20.  </font>
+ <font SIZE="-2" color="black">    21.  </font><font color="#009900">double</font> <b><font color="#000000">kolo</font></b><font color="#990000">(</font><font color="#009900">double</font> r<font color="#990000">,</font> <font color="#009900">double</font> pi<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    22.  </font>    <b><font color="#0000FF">return</font></b> pi<font color="#990000">*</font>r<font color="#990000">*</font>r<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    23.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+W pierwszym wywołaniu funkcji (linia&nbsp;<span class="ding">&#x278B;</span>) użyta zostanie wartość&nbsp;3.
+W drugim wywołaniu (<span class="ding">&#x278C;</span>), lokalna zmienna
+<!--O--><span class='zmienna'>PI<!--C--></span>
+ przysłania
+w&nbsp;funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>
+ zmienną globalną o&nbsp;tej samej nazwie, ale
+wartość domyślna drugiego argumentu funkcji
+<!--O--><span class='funkcja'>fun<!--C--></span>
+
+zostanie obliczona w&nbsp;zakresie globalnym, a&nbsp;zatem w&nbsp;dalszym ciągu
+będzie to wartość&nbsp;3! Natomiast jeśli zmienimy wartość zmiennej
+globalnej (<span class="ding">&#x278D;</span>), to ta nowa wartość zostanie użyta przy
+inicjowaniu parametrów domyślnych dla trzeciego wywołania,
+o&nbsp;czym przekonuje nas wydruk:
+<PRE>
+    1. PI = 3 Pow = 3
+    2. PI = 3.14 Pow = 3
+    3. PI = 3.14 Pow = 3.14
+</PRE>
+
+<P>
+Parametry funkcji zadeklarowane jako obowiązkowe można
+przedeklarować tak, aby miały wartości domyślne. Należy tylko
+pamiętać, aby każdy parametr deklarowany jako domyślny był w&nbsp;ten
+sposób deklarowany <FONT COLOR="#7b003e"><I>tylko raz</I></FONT>. Zmienić status parametrów
+z&nbsp;obowiązkowego na parametr z&nbsp;wartością domyślną można tylko
+dla ostatnich obowiązkowych parametrów na liście.
+
+<P>
+Załóżmy, że w&nbsp;pliku nagłówkowym <A NAME="tex2html73"
+  HREF="source-files/wardom1h.h">
+<!--O--><span class='downl'>wardom1h.h<!--C--></span></A>
+<A NAME="12840"></A>
+zadeklarowana jest funkcja z&nbsp;czterema parametrami, w&nbsp;tym tylko
+ostatni ma wartość domyślną (równą 255):
+<pre><tt>       <font color="#009900">void</font> <b><font color="#000000">kolor</font></b><font color="#990000">(</font><font color="#009900">int</font> r<font color="#990000">,</font> <font color="#009900">int</font> g<font color="#990000">,</font> <font color="#009900">int</font> b<font color="#990000">,</font> <font color="#009900">int</font> alpha <font color="#990000">=</font> <font color="#993399">255</font><font color="#990000">);</font>
+</tt></pre>
+Rozpatrzmy teraz program
+<BR><A NAME="wardom1.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">68</SPAN>:</SPAN>
+      <A NAME="tex2html74"
+  HREF="source-files/wardom1.cpp">
+<!--O--><span class='downl'>wardom1.cpp<!--C--></span></A>
+<A NAME="12846"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Przedeklarowywanie wartości domyślnych</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">"wardom1h.h"</font>
+ <font SIZE="-2" color="black">     5.  </font>
+ <font SIZE="-2" color="black">     6.  </font><font color="#009900">void</font> <b><font color="#000000">kolor</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">,</font> <font color="#009900">int</font> <font color="#990000">,</font> <font color="#009900">int</font> <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">,</font> <font color="#009900">int</font><font color="#990000">);</font>        <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">     7.  </font>
+ <font SIZE="-2" color="black">     8.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     9.  </font>    <b><font color="#000000">kolor</font></b><font color="#990000">(</font><font color="#993399">100</font><font color="#990000">,</font><font color="#993399">150</font><font color="#990000">,</font><font color="#993399">250</font><font color="#990000">,</font><font color="#993399">199</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    10.  </font>    <b><font color="#000000">kolor</font></b><font color="#990000">(</font><font color="#993399">100</font><font color="#990000">,</font><font color="#993399">150</font><font color="#990000">,</font><font color="#993399">250</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    11.  </font>    <b><font color="#000000">kolor</font></b><font color="#990000">(</font><font color="#993399">100</font><font color="#990000">,</font><font color="#993399">150</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    12.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    13.  </font>
+ <font SIZE="-2" color="black">    14.  </font><font color="#009900">void</font> <b><font color="#000000">kolor</font></b><font color="#990000">(</font><font color="#009900">int</font> red<font color="#990000">,</font> <font color="#009900">int</font> green<font color="#990000">,</font> <font color="#009900">int</font> blue<font color="#990000">,</font> <font color="#009900">int</font> alpha<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    15.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Alpha = "</font> <font color="#990000">&lt;&lt;</font> alpha <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" (R,G,B) = ("</font> <font color="#990000">&lt;&lt;</font> red
+ <font SIZE="-2" color="black">    16.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">","</font>  <font color="#990000">&lt;&lt;</font> green  <font color="#990000">&lt;&lt;</font>  <font color="#FF0000">","</font> <font color="#990000">&lt;&lt;</font> blue <font color="#990000">&lt;&lt;</font> <font color="#FF0000">")"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Na początku włączamy plik nagłówkowy
+<!--O--><span class='plik'>wardom1h.h<!--C--></span>.
+W&nbsp;zasięgu znajdzie się zatem deklaracja funkcji
+<!--O--><span class='funkcja'>kolor<!--C--></span>
+
+z&nbsp;jednym (czwartym) argumentem domyślnym. Ostatnim na liście parametrem
+obowiązkowym jest parametr trzeci. Możemy więc zmienić jego
+status &mdash;&nbsp;robimy to przedeklarowując funkcję w&nbsp;linii&nbsp;<span class="ding">&#x278A;</span>.
+Zauważmy, że <FONT COLOR="#7b003e"><I>nie</I></FONT> piszemy wartości domyślnej dla czwartego
+parametru: ten parametr <SPAN  CLASS="textit">już jest</SPAN> domyślny (ma wartość
+domyślną 255) i&nbsp;drugi raz przypisywać mu wartości domyślnej,
+nawet tej samej, nie wolno. Redeklaracja zmienia zatem
+status trzeciego parametru na domyślny i&nbsp;możliwe jest teraz
+wywołanie funkcji z&nbsp;czterema, trzema i&nbsp;dwoma argumentami; otrzymujemy
+<PRE>
+    Alpha = 199 (R,G,B) = (100,150,250)
+    Alpha = 255 (R,G,B) = (100,150,250)
+    Alpha = 255 (R,G,B) = (100,150,0)
+</PRE>
+&bdquo;Sztuczek&rdquo; z&nbsp;przedeklarowywaniem funkcji i&nbsp;zmienianiem statusu
+ich parametrów lepiej jednak unikać, gdyż bardzo skutecznie
+zaciemniają kod.
+
+<P>
+Argumenty domyślne stosuje się często w&nbsp;konstruktorach klas.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1619"
+  HREF="node62.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1625"
+  HREF="node59.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1631"
+  HREF="node64.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1627"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1629"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1620"
+  HREF="node62.html">11.3 Wywołanie funkcji</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1626"
+  HREF="node59.html">11. Funkcje</A>
+<B>Dalej:</B> <A NAME="tex2html1632"
+  HREF="node64.html">11.5 Zmienna liczba argumentów</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

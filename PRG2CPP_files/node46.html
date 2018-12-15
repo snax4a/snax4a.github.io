@@ -1,0 +1,319 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>8.7 Instrukcja warunkowa</TITLE>
+<META NAME="description" CONTENT="8.7 Instrukcja warunkowa">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node47.html">
+<LINK REL="previous" HREF="node45.html">
+<LINK REL="up" HREF="node39.html">
+<LINK REL="next" HREF="node47.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1339"
+  HREF="node45.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1345"
+  HREF="node39.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1351"
+  HREF="node47.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1347"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1349"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1340"
+  HREF="node45.html">8.6 Instrukcja wyrażeniowa</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1346"
+  HREF="node39.html">8. Instrukcje</A>
+<B>Dalej:</B> <A NAME="tex2html1352"
+  HREF="node47.html">8.8 Instrukcja wyboru (switch)</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00970000000000000000"></A><A NAME="instr:warunk"></A>
+<BR>
+<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">7</SPAN> Instrukcja warunkowa
+</H1>
+
+<P>
+Instrukcja warunkowa<A NAME="7853"></A> (ang.&nbsp;<FONT COLOR="#7b003e"><I>conditional
+statement</I></FONT>) występuje w&nbsp;dwóch postaciach.
+
+<P>
+Prostsza to
+<pre><tt>       <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> b <font color="#990000">)</font> instr
+</tt></pre>
+gdzie
+<!--O--><span class='zmienna'>b<!--C--></span>
+ jest wyrażeniem o&nbsp;wartości logicznej, a&nbsp;
+<!--O--><span class='zmienna'>instr<!--C--></span>
+
+jest instrukcją. Pamiętamy przy tym, o&nbsp;czym już mówiliśmy, że w&nbsp;C/C++
+również liczbowe wartości całkowite i&nbsp;wskaźnikowe mogą być traktowane jako
+wartości logiczne &mdash;&nbsp;cokolwiek różnego od zera jest traktowane jako
+
+<!--O--><span class='klucz'>true<!--C--></span>, a&nbsp;wartość zerowa jako
+<!--O--><span class='klucz'>false<!--C--></span>. Opracowanie instrukcji
+warunkowej w&nbsp;tej formie polega na obliczeniu wartości
+<!--O--><span class='zmienna'>b<!--C--></span>
+
+a&nbsp;następnie:
+
+<UL>
+<LI>zakończeniu wykonywania całej instrukcji, jeśli
+          obliczoną wartością
+<!--O--><span class='zmienna'>b<!--C--></span>
+ okazało się
+
+<!--O--><span class='klucz'>false<!--C--></span>,
+</LI>
+<LI>wykonaniu instrukcji
+<!--O--><span class='zmienna'>instr<!--C--></span>, jeśli obliczoną
+          wartością
+<!--O--><span class='zmienna'>b<!--C--></span>
+ okazało się
+<!--O--><span class='klucz'>true<!--C--></span>.
+</LI>
+</UL>
+Zauważmy, że składnia mówi o&nbsp;<FONT COLOR="#7b003e"><I>jednej</I></FONT> instrukcji
+
+<!--O--><span class='zmienna'>instr<!--C--></span>. Jeśli zachodzi potrzeba wykonania (lub zaniechania
+wykonania) większej liczby instrukcji, to należy ująć je
+w&nbsp;nawiasy klamrowe, tak aby uczynić z&nbsp;nich jedną instrukcję
+złożoną (grupującą): np.&nbsp;wykonanie następującego fragmentu
+<pre><tt>       <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> s <font color="#990000">!=</font> <font color="#993399">0</font> <font color="#990000">)</font>
+           cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Cos nie w porzadku! Konczymy."</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+           <b><font color="#000000">exit</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">);</font>
+</tt></pre>
+spowoduje <FONT COLOR="#7b003e"><I>zawsze</I></FONT> zakończenie programu, bo instrukcja
+
+<FONT COLOR="#000000"><TT>exit</TT></FONT> nie jest wcale &bdquo;pod ifem&rdquo;!
+Powinniśmy raczej napisać
+<pre><tt>       <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> s <font color="#990000">!=</font> <font color="#993399">0</font> <font color="#990000">)</font> <font color="#FF0000">{</font>
+           cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Cos nie w porzadku! Konczymy."</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+           <b><font color="#000000">exit</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">);</font>
+       <font color="#FF0000">}</font>
+</tt></pre>
+
+<P>
+Innym często popełnianym błędem jest stawianie średnika
+zaraz za zamknięciem nawiasu okrągłego w&nbsp;instrukcji warunkowej
+<pre><tt>       <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> s <font color="#990000">!=</font> <font color="#993399">0</font> <font color="#990000">);</font>
+       <font color="#FF0000">{</font>
+           cerr <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Cos nie w porzadku! Konczymy."</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+           <b><font color="#000000">exit</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">);</font>
+       <font color="#FF0000">}</font>
+</tt></pre>
+Zauważmy, że kompilacja powyższego fragmentu powiedzie się.
+Po
+<FONT COLOR="#000000"><TT>if (...)</TT></FONT> jest tu instrukcja, zgodnie ze
+składnią &mdash;&nbsp;jest nią mianowicie instrukcja pusta (średnik).
+Natomiast instrukcja grupująca, która po niej występuje, nie
+jest już &bdquo;pod ifem&rdquo; i&nbsp;wykona się zawsze, niezależnie od
+prawdziwości warunku '
+<FONT COLOR="#000000"><TT>s != 0</TT></FONT>'.
+
+<P>
+Inna pułapka związana jest z&nbsp;faktem, że w&nbsp;C/C++, jak mówiliśmy
+w&nbsp;rozdziale o <A HREF="node18.html#typydan:logika">typie logicznym</A> ,
+wartość całkowita jest traktowana jak wartość logiczna:
+
+<!--O--><span class='klucz'>false<!--C--></span>
+ odpowiada wartości zerowej,
+<!--O--><span class='klucz'>true<!--C--></span>
+
+każdej innej. Powoduje to niestety częste błędy (które
+w&nbsp;Javie<A NAME="7892"></A> zostałyby
+wychwycone przez kompilator). Na przykład, jeśli
+<!--O--><span class='zmienna'>a<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='zmienna'>b<!--C--></span>
+ są zmiennymi całkowitymi, to wartością
+<FONT COLOR="#7b003e"><I>przypisania</I></FONT> '
+<FONT COLOR="#000000"><TT>a=b</TT></FONT>' jest, zgodnie z&nbsp;zasadą
+obowiązującą zresztą i&nbsp;w Javie, wartość lewej
+strony <FONT COLOR="#7b003e"><I>po</I></FONT> przypisaniu, czyli wartość
+<!--O--><span class='zmienna'>b<!--C--></span>. I&nbsp;to ona
+zostanie zinterpretowana jako wartość logiczna wyrażenia
+
+<FONT COLOR="#000000"><TT>a=b</TT></FONT> w&nbsp;instrukcji
+<pre><tt>       <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> a <font color="#990000">=</font> b <font color="#990000">)</font> instr         <i><font color="#9A1900">// prawdopodobnie źle !!</font></i>
+</tt></pre>
+choć zwykle intencją programisty było raczej <FONT COLOR="#7b003e"><I>porównanie</I></FONT>:
+sprawdzenie, czy wartość
+<!--O--><span class='zmienna'>a<!--C--></span>
+ jest czy nie jest równa
+wartości
+<!--O--><span class='zmienna'>b<!--C--></span>. Jeśli tak, to powinna
+tu być użyta forma
+<FONT COLOR="#000000"><TT>a==b</TT></FONT>.
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Druga forma instrukcji warunkowej to
+<pre><tt>       <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> b <font color="#990000">)</font> instr1
+       <b><font color="#0000FF">else</font></b>     instr2
+</tt></pre>
+gdzie, jak poprzednio,
+<!--O--><span class='zmienna'>b<!--C--></span>
+ jest wyrażeniem o&nbsp;wartości
+logicznej a&nbsp;
+<!--O--><span class='zmienna'>instr1<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>instr2<!--C--></span>
+ są
+instrukcjami &mdash;&nbsp;prostymi lub złożonymi. Opracowanie instrukcji
+warunkowej w&nbsp;tej formie polega na obliczeniu wartości
+<!--O--><span class='zmienna'>b<!--C--></span>,
+a następnie:
+
+<UL>
+<LI>wykonaniu instrukcji
+<!--O--><span class='zmienna'>instr1<!--C--></span>, jeśli
+          obliczoną wartością
+<!--O--><span class='zmienna'>b<!--C--></span>
+ okazało się
+
+<!--O--><span class='klucz'>true<!--C--></span>,
+</LI>
+<LI>wykonaniu instrukcji
+<!--O--><span class='zmienna'>instr2<!--C--></span>, jeśli obliczoną
+          wartością
+<!--O--><span class='zmienna'>b<!--C--></span>
+ okazało się
+<!--O--><span class='klucz'>false<!--C--></span>.
+</LI>
+</UL>
+I znów składnia mówi o&nbsp;jednej instrukcji
+<!--O--><span class='zmienna'>instr1<!--C--></span>
+
+i&nbsp;jednej instrukcji
+<!--O--><span class='zmienna'>instr2<!--C--></span>.
+Jeśli zachodzi potrzeba użycia kilku instrukcji,to
+należy, jak poprzednio, zastosować instrukcję grupującą.
+
+<P>
+Każda z&nbsp;instrukcji
+<!--O--><span class='zmienna'>instr1<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>instr2<!--C--></span>
+ może
+z&nbsp;kolei też być instrukcją warunkową. Obowiązuje przy tym zasada,
+że frazie
+<!--O--><span class='klucz'>else<!--C--></span>
+ odpowiada zawsze najbliższa poprzedzająca
+ją fraza
+<!--O--><span class='klucz'>if<!--C--></span>, po której nie było jeszcze frazy
+<!--O--><span class='klucz'>else<!--C--></span>
+
+i&nbsp;która jest zawarta w&nbsp;tym samym bloku na tym samym poziomie
+zagnieżdżenia co ta fraza
+<!--O--><span class='klucz'>else<!--C--></span>. Na przykład
+<pre><tt>       <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> b1 <font color="#990000">)</font> instr0 <font color="#008080">else</font> <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> b2 <font color="#990000">)</font> <font color="#008080">instr1</font> <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> b3 <font color="#990000">)</font> instr2
+       <b><font color="#0000FF">else</font></b> instr3 <b><font color="#0000FF">else</font></b> instr4
+</tt></pre>
+jest równoważne
+<pre><tt>       <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> b1 <font color="#990000">)</font>           <i><font color="#9A1900">// 1</font></i>
+           instr0
+       <b><font color="#0000FF">else</font></b>                <i><font color="#9A1900">// 1</font></i>
+           <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> b2 <font color="#990000">)</font> <font color="#FF0000">{</font>     <i><font color="#9A1900">// 2</font></i>
+               instr1
+               <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> b3 <font color="#990000">)</font>   <i><font color="#9A1900">// 3</font></i>
+                   instr2
+               <b><font color="#0000FF">else</font></b>        <i><font color="#9A1900">// 3</font></i>
+                   instr3
+           <font color="#FF0000">}</font>
+           <b><font color="#0000FF">else</font></b>            <i><font color="#9A1900">// 2</font></i>
+               instr4
+</tt></pre>
+gdzie tymi samymi liczbami w&nbsp;komentarzach oznaczone
+są odpowiadające sobie frazy
+<!--O--><span class='klucz'>if<!--C--></span>
+ i&nbsp;
+<!--O--><span class='klucz'>else<!--C--></span>.
+
+<P>
+Inny przykład:
+<pre><tt> <font SIZE="-2" color="black">     1.  </font>    <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> val <font color="#990000">&gt;=</font> <font color="#993399">0</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">     2.  </font>    <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     3.  </font>        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> val <font color="#990000">&gt;</font> <font color="#993399">9</font> <font color="#990000">)</font> cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Za duzo"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">     5.  </font>    <b><font color="#0000FF">else</font></b>
+ <font SIZE="-2" color="black">     6.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Za malo!"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+</tt></pre>
+Zauważmy, że w&nbsp;powyższym przykładzie konieczne było ujęcie
+instrukcji z&nbsp;linii trzeciej w&nbsp;blok, mimo że jest to jedyna instrukcja
+&bdquo;pod ifem&rdquo; z&nbsp;linii pierwszej. Gdybyśmy tego nie uczynili,
+fraza
+<!--O--><span class='klucz'>else<!--C--></span>
+ z&nbsp;linii&nbsp;5 zostałaby zinterpretowana jako para
+do frazy
+<!--O--><span class='klucz'>if<!--C--></span>
+ z&nbsp;linii&nbsp;3, a&nbsp;nie do
+<!--O--><span class='klucz'>if<!--C--></span>
+ z&nbsp;linii pierwszej!
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1339"
+  HREF="node45.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1345"
+  HREF="node39.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1351"
+  HREF="node47.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1347"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1349"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1340"
+  HREF="node45.html">8.6 Instrukcja wyrażeniowa</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1346"
+  HREF="node39.html">8. Instrukcje</A>
+<B>Dalej:</B> <A NAME="tex2html1352"
+  HREF="node47.html">8.8 Instrukcja wyboru (switch)</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

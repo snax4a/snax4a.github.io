@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>14.6 Konstruktory</TITLE>
+<META NAME="description" CONTENT="14.6 Konstruktory">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node92.html">
+<LINK REL="previous" HREF="node90.html">
+<LINK REL="up" HREF="node85.html">
+<LINK REL="next" HREF="node92.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2024"
+  HREF="node90.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2030"
+  HREF="node85.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2036"
+  HREF="node92.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2032"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2034"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2025"
+  HREF="node90.html">14.5 Statyczne funkcje składowe</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2031"
+  HREF="node85.html">14. Klasy (I)</A>
+<B>Dalej:</B> <A NAME="tex2html2037"
+  HREF="node92.html">14.7 Destruktory</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001560000000000000000"></A><A NAME="klasy:kon"></A>
+<BR>
+<SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">6</SPAN> Konstruktory
+</H1>
+
+<P>
+W zasadzie każda klasa musi mieć
+<FONT COLOR="#7b003e"><B>konstruktor</B></FONT>:<A NAME="16541"></A>
+funkcję wywoływaną podczas kreowania nowego obiektu danej klasy.
+Jeśli sami żadnego konstruktora nie zdefiniowaliśmy, to możemy
+zakładać, że system dostarczy własny konstuktor
+<FONT COLOR="#7b003e"><B>domyślny</B></FONT>,<A NAME="16543"></A>
+który jest publiczny, nie ma żadnych parametrów i&nbsp;nie wykonuje żadnych
+czynności.
+
+<P>
+
+<P>
+
+<div class='wazne'>
+Jeśli <FONT COLOR="#7b003e"><I>jakikolwiek</I></FONT> konstruktor został w&nbsp;klasie zdefiniowany,
+    to konstruktor domyślny <FONT COLOR="#7b003e"><I>nie</I></FONT> będzie kreowany automatycznie.
+    Konstruktor jest konstruktorem domyślnym wtedy i&nbsp;tylko wtedy
+    gdy może być wywołany bez żadnych argumentów.
+
+
+</div>
+
+<P>
+Nie znaczy to, że konstruktor domyślny koniecznie musi być
+zdefiniowany jako funkcja bezparametrowa; może mieć dowolną
+liczbę parametrów, ale jeśli je ma, to wszystkie muszą mieć
+zdefiniowane wartości domyślne
+<A NAME="16546"></A>
+(patrz rozdział <A HREF="node63.html#funk:argdom">o argumentach domyślnych</A> ).
+
+<P>
+W klasie może oczywiście istnieć tylko jeden konstruktor domyślny.
+Jeśli został wygenerowany automatycznie, to, jak już mówiliśmy,
+jego ciało jest puste (czyli &bdquo;nic nie robi&rdquo;), a&nbsp;jego dostępność
+jest typu
+<!--O--><span class='klucz'>public<!--C--></span>.
+
+<P>
+Konstruktor (niekoniecznie domyślny) jest wywoływany automatycznie
+wyłącznie podczas tworzenia obiektu (ściśle mówiąc, na zakończenie
+tego procesu); nie można go wywołać &bdquo;ręcznie&rdquo;, jak normalnej metody,
+na rzecz obiektu już istniejącego.
+
+<P>
+Nazwa konstruktora musi być identyczna z&nbsp;nazwą klasy; wielkość
+liter, oczywiście, <FONT COLOR="#7b003e"><I>jest</I></FONT> przy tym ważna.
+
+<P>
+Konstruktor nie może być funkcją rezultatową; mimo to
+deklarując/definiując go <FONT COLOR="#7b003e"><I>nie wolno</I></FONT> podać jako typu
+zwracanego
+<!--O--><span class='klucz'>void<!--C--></span>
+ &mdash;&nbsp;typu zwracanego nie podajemy w&nbsp;ogóle.
+
+<P>
+Konstruktory, jak inne funkcje, mogą mieć parametry domyślne.
+Można nawet powiedzieć, że parametry domyślne są właśnie
+w&nbsp;przypadku konstruktorów szczególnie przydatne i&nbsp;często stosowane.
+
+<P>
+Konstruktory mogą też być przeładowywane (przeciążane), jak
+normalne funkcje. Wszystkie mają w&nbsp;danej klasie taką samą nazwę:
+taką jak nazwa tej klasy. Jeśli jest ich kilka, to podczas tworzenia
+obiektu wybierany jest ten &bdquo;najbardziej pasujący", zgodnie z&nbsp;zasadami
+obowiązującymi dla wywoływania funkcji
+przeciążonych<A NAME="16557"></A>
+ (patrz rozdział o <A HREF="node70.html#funk:przec">przeciążaniu funkcji</A> ).
+
+<P>
+Zauważmy, że jeśli zmienne obiektowe definiujemy w&nbsp;zakresie globalnym,
+a&nbsp;więc poza definicjami funkcji, albo jeśli takie zmienne są polami
+statycznymi klasy, to konstruktory dla tych obiektów zostaną wywołane
+w&nbsp;czasie tworzenia tych obiektów, a&nbsp;więc jeszcze <FONT COLOR="#7b003e"><I>przed</I></FONT> wywołaniem
+funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>! Obiekty globalne są tworzone w&nbsp;kolejności,
+w&nbsp;jakiej są w&nbsp;programie definiowane, a&nbsp;zatem w&nbsp;takiej też kolejności
+będą wywoływane konstruktory.
+
+<P>
+W czasie wykonywania konstruktora obiekt <FONT COLOR="#7b003e"><I>jest już</I></FONT> skonstruowany,
+to znaczy został fizycznie utworzony w&nbsp;pamięci, jak również, co bardzo
+ważne, zostały już utworzone wszystkie jego składowe opisane polami klasy.
+Składowe te tworzone są w&nbsp;kolejności takiej, w&nbsp;jakiej zostały
+zadeklarowane w&nbsp;definicji klasy/struktury.
+
+<P>
+Ponieważ obiekt w&nbsp;zasadzie już istnieje, gdy konstruktor rozpoczyna
+działanie, ma sens posługiwanie się wewnątrz konstruktora wskaźnikiem
+
+<!--O--><span class='klucz'>this<!--C--></span>
+ wskazującym na tworzony obiekt. Tym niemniej, do obiektu
+można się na razie odwoływać tylko z&nbsp;wnętrza konstruktora. Dopóki
+konstruktor nie zakończy swej pracy, tworzony obiekt jest niedostępny
+z&nbsp;zewnątrz; ma to znaczenie na przykład w&nbsp;programach wielowątkowych.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2024"
+  HREF="node90.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2030"
+  HREF="node85.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2036"
+  HREF="node92.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2032"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2034"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2025"
+  HREF="node90.html">14.5 Statyczne funkcje składowe</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2031"
+  HREF="node85.html">14. Klasy (I)</A>
+<B>Dalej:</B> <A NAME="tex2html2037"
+  HREF="node92.html">14.7 Destruktory</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

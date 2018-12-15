@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>22.5 Specyfikacje wyjątków</TITLE>
+<META NAME="description" CONTENT="22.5 Specyfikacje wyjątków">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node138.html">
+<LINK REL="previous" HREF="node136.html">
+<LINK REL="up" HREF="node132.html">
+<LINK REL="next" HREF="node138.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2750"
+  HREF="node136.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2756"
+  HREF="node132.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2762"
+  HREF="node138.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2758"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2760"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2751"
+  HREF="node136.html">22.4 Wyjątki w&nbsp;konstruktorach i&nbsp;destruktorach</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2757"
+  HREF="node132.html">22. Wyjątki</A>
+<B>Dalej:</B> <A NAME="tex2html2763"
+  HREF="node138.html">22.6 Ponawianie wyjątku</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002350000000000000000"></A>
+        <A NAME="wyjatki:spec"></A>
+<BR>
+<SPAN CLASS="arabic">22</SPAN>.<SPAN CLASS="arabic">5</SPAN> Specyfikacje wyjątków
+</H1>
+
+<P>
+Definiując funkcję można jawnie wypecyfikować, jakiego typu wyjątki
+mogą zostać zgłoszone, a&nbsp;nie obsłużone podczas jej wykonywania.
+Robi się to<A NAME="27640"></A>
+poprzez podanie frazy
+<!--O--><span class='klucz'>throw<!--C--></span>
+ po liście parametrów, a&nbsp;przed
+średnikiem (w deklaracji) lub ciałem funkcji (w definicji).
+We frazie tej należy podać w&nbsp;nawiasach listę oddzielonych przecinkami
+typów wyjątków, jakie mogą być zgłoszone, a&nbsp;nie obsłużone:
+<pre><tt>                      <i><font color="#9A1900">// deklaracja</font></i>
+       <font color="#009900">int</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">double</font><font color="#990000">)</font> <b><font color="#0000FF">throw</font></b><font color="#990000">(</font>std<font color="#990000">::</font>bad_alloc<font color="#990000">,</font> PozaZakresem<font color="#990000">);</font>
+       <i><font color="#9A1900">// ...</font></i>
+                      <i><font color="#9A1900">// definicja</font></i>
+       <font color="#009900">int</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">double</font> x<font color="#990000">)</font> <b><font color="#0000FF">throw</font></b><font color="#990000">(</font>std<font color="#990000">::</font>bad_alloc<font color="#990000">,</font> PozaZakresem<font color="#990000">)</font> <font color="#FF0000">{</font>
+           <i><font color="#9A1900">// ...</font></i>
+       <font color="#FF0000">}</font>
+</tt></pre>
+Fraza ta musi wystąpić zarówno w&nbsp;deklaracji, jak i&nbsp;w definicji
+funkcji.
+
+<P>
+Jeśli taka fraza została podana dla metody wirtualnej, to wszystkie
+wersje przesłaniające tę metodę w&nbsp;klasach pochodnych mogą tylko
+&bdquo;odejmować&rdquo; niektóre typy &mdash;&nbsp;te, dla których same zapewnią
+obsługę. Nie można natomiast w&nbsp;klasach potomnych rozszerzać listy
+możliwych typów wyjątków metody wirtualnej.
+
+<P>
+Brak specyfikacji wyjątków w&nbsp;definicji funkcji jest równoważny
+podaniu
+<pre><tt>       <b><font color="#0000FF">throw</font></b><font color="#990000">(</font> wszystkie_mozliwe_typy <font color="#990000">)</font>
+</tt></pre>
+natomiast fraza z&nbsp;pustą listą
+<pre><tt>       <b><font color="#0000FF">throw</font></b><font color="#990000">()</font>
+</tt></pre>
+oznacza, że w&nbsp;danej funkcji nie powinny zdarzyć się żadne
+nie obsłużone sytuacje wyjątkowe.
+
+<P>
+Jeśli funkcja może zgłosić nieobsłużony wyjątek typu nie
+wymienionego na liście specyfikacji, to program i&nbsp;tak się skompiluje,
+choć dobry kompilator powinien wypisać stosowne ostrzeżenia. Ta
+niekonsekwencja spowodowana jest koniecznością zachowania zgodności
+z&nbsp;istniejącymi programami i&nbsp;bibliotekami.
+
+<P>
+Jeśli podczas wykonywania programu w&nbsp;pewnej funkcji nastąpi
+nieobsłużone zgłoszenie wyjątku typu nie wymienionego w&nbsp;jej
+specyfikacji wyjątków, to program kończy się wywołaniem funkcji
+
+<!--O--><span class='funkcja'>unexpected<!--C--></span>,<A NAME="27649"></A><A NAME="27650"></A>
+która z&nbsp;kolei woła funkcję
+<!--O--><span class='funkcja'>terminate<!--C--></span>. Tak jak można, za
+pomocą
+<!--O--><span class='funkcja'>set_terminate<!--C--></span>, &bdquo;podstawić&rdquo; własną wersję
+funkcji
+<!--O--><span class='funkcja'>terminate<!--C--></span>, tak za pomocą
+<!--O--><span class='funkcja'>set_unexpected<!--C--></span>
+
+<A NAME="27655"></A><A NAME="27656"></A> można
+określić inną funkcję, która ma pełnić rolę funkcji
+
+<!--O--><span class='funkcja'>unexpected<!--C--></span>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2750"
+  HREF="node136.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2756"
+  HREF="node132.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2762"
+  HREF="node138.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2758"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2760"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2751"
+  HREF="node136.html">22.4 Wyjątki w&nbsp;konstruktorach i&nbsp;destruktorach</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2757"
+  HREF="node132.html">22. Wyjątki</A>
+<B>Dalej:</B> <A NAME="tex2html2763"
+  HREF="node138.html">22.6 Ponawianie wyjątku</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

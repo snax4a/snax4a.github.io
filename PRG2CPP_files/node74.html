@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>12. Zarządzanie pamięcią</TITLE>
+<META NAME="description" CONTENT="12. Zarządzanie pamięcią">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node82.html">
+<LINK REL="previous" HREF="node59.html">
+<LINK REL="up" HREF="PRG2CPP.html">
+<LINK REL="next" HREF="node75.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1771"
+  HREF="node73.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1777"
+  HREF="PRG2CPP.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1783"
+  HREF="node75.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1779"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1781"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1772"
+  HREF="node73.html">11.14 Szablony funkcji</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1778"
+  HREF="PRG2CPP.html">Programowanie w C++</A>
+<B>Dalej:</B> <A NAME="tex2html1784"
+  HREF="node75.html">12.1 Wstęp</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001300000000000000000"></A>
+        <A NAME="chap:pam"></A>
+<BR>
+<SPAN CLASS="arabic">12</SPAN>. Zarządzanie pamięcią
+</H1>
+
+<P>
+Możliwość samodzielnego zarządzania pamięcią przez programistę
+jest z&nbsp;jednej strony siłą C/C++, z&nbsp;drugiej zaś komplikuje
+program i&nbsp;powoduje, że pisanie dużych programów wymaga więcej
+staranności i&nbsp;uwagi.
+
+<P>
+Pamiętać trzeba, że w&nbsp;C/C++ <FONT COLOR="#7b003e"><I>nie ma</I></FONT> &bdquo;odśmiecacza&rdquo;
+<A NAME="14215"></A> pamięci (ang.&nbsp;<FONT COLOR="#7b003e"><I>garbage collector</I></FONT>) znanego
+z&nbsp;Javy,<A NAME="14217"></A>
+Lispu,<A NAME="14218"></A>
+Smalltalk'a,<A NAME="14219"></A>
+Pythona<A NAME="14220"></A>
+i&nbsp;wielu innych języków obiektowych.
+Odpowiedzialność za zwalnianie pamięci zajmowanej przez
+niepotrzebne już obiekty zaalokowane w&nbsp;pamięci
+wolnej (stercie)<A NAME="14221"></A> spoczywa na programiście.
+
+<P>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Podrozdzia&#322;y</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html1785"
+  HREF="node75.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">1</SPAN> Wstęp</A>
+<LI><A NAME="tex2html1786"
+  HREF="node76.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">2</SPAN> Przydzielanie pamięci &mdash;&nbsp;operator <SPAN  CLASS="textsl">new</SPAN></A>
+<LI><A NAME="tex2html1787"
+  HREF="node77.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">3</SPAN> Zwalnianie pamięci &mdash;&nbsp;operator <SPAN  CLASS="textsl">delete</SPAN></A>
+<LI><A NAME="tex2html1788"
+  HREF="node78.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">4</SPAN> Dynamiczne tablice wielowymiarowe</A>
+<LI><A NAME="tex2html1789"
+  HREF="node79.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">5</SPAN> Zarządzanie pamięcią w&nbsp;C</A>
+<LI><A NAME="tex2html1790"
+  HREF="node80.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">6</SPAN> Funkcje operujące na pamięci</A>
+<LI><A NAME="tex2html1791"
+  HREF="node81.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">7</SPAN> Lokalizujący przydział pamięci</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1771"
+  HREF="node73.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1777"
+  HREF="PRG2CPP.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1783"
+  HREF="node75.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1779"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1781"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1772"
+  HREF="node73.html">11.14 Szablony funkcji</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1778"
+  HREF="PRG2CPP.html">Programowanie w C++</A>
+<B>Dalej:</B> <A NAME="tex2html1784"
+  HREF="node75.html">12.1 Wstęp</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,366 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>1.1 Kompilatory</TITLE>
+<META NAME="description" CONTENT="1.1 Kompilatory">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node4.html">
+<LINK REL="previous" HREF="node2.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node4.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html681"
+  HREF="node2.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html687"
+  HREF="node2.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html693"
+  HREF="node4.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html689"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html691"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html682"
+  HREF="node2.html">1. Wprowadzenie</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html688"
+  HREF="node2.html">1. Wprowadzenie</A>
+<B>Dalej:</B> <A NAME="tex2html694"
+  HREF="node4.html">1.2 Literatura</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Podrozdzia&#322;y</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html695"
+  HREF="node3.html#SECTION00211000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Linux</A>
+<LI><A NAME="tex2html696"
+  HREF="node3.html#SECTION00212000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Windows</A>
+<UL>
+<LI><A NAME="tex2html697"
+  HREF="node3.html#SECTION00212100000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Visual C++ i&nbsp;Studio .NET</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00210000000000000000"></A><A NAME="wprow:komp"></A>
+<BR>
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Kompilatory
+</H1>
+
+<P>
+Język C++ należy do języków kompilowanych (tak jak Fortran,
+<A NAME="770"></A> Ada,<A NAME="771"></A>
+Pascal<A NAME="772"></A> i wiele innych).
+
+<P>
+W odróżnieniu np.&nbsp;od Javy,<A NAME="773"></A>
+wynikiem kompilacji nie jest niezależny od platformy
+kod bajtowy<A NAME="774"></A> (ang.&nbsp;<FONT COLOR="#7b003e"><I>byte-code</I></FONT>),
+ale <FONT COLOR="#7b003e"><B>plik wykonywalny</B></FONT><A NAME="777"></A>
+(ang.&nbsp;<FONT COLOR="#7b003e"><I>executable</I></FONT>), czyli taki, który zawiera kod programu
+w&nbsp;języku maszynowym odpowiednim dla platformy (czyli systemu
+operacyjnego i&nbsp;procesora naszego komputera). Tak więc
+dla uruchomienia programu nie jest konieczne specjalne środowisko
+uruchomieniowe (jak maszyna wirtualna Javy czy interpreter
+Pythona) &mdash;&nbsp;wykonanie odbywa się bezpośrednio pod kontrolą systemu
+operacyjnego, choć zwykle do jego działanie są konieczne pewne pliki
+biblioteczne (w&nbsp;wypadku platformy
+<!--O--><span class='plik'>.NET<!--C--></span>
+ wygląda
+to nieco inaczej). Ponieważ w&nbsp;czasie wykonania nie jest już dokonywana
+żadna dodatkowa translacja, programy w&nbsp;C/C++ są zwykle szybkie (programy w&nbsp;C
+są prawie tak szybkie jak programy w&nbsp;Fortranie, programy w&nbsp;C++ są zwykle,
+choć nie zawsze, nieco wolniejsze).
+
+<P>
+
+<div class='wazne'>
+Tak naprawdę kompilacja jest tylko jednym z&nbsp;etapów procesu
+   wytwarzania pliku wykonywalnego. Dla uproszczenia jednak nazywać
+   tu będziemy kompilacją cały proces prowadzący od plików źródłowych
+   do pliku wykonywalnego.
+
+
+</div>
+
+<P>
+W rzeczywistości potrzebny jest jeszcze na przykład preprocesor
+<A NAME="781"></A> i&nbsp;tzw.&nbsp;linker<A NAME="782"></A> (zwany też
+konsolidatorem albo programem łączącym). W dużym skrócie, rolą
+linkera jest połączenie w&nbsp;jeden plik wykonywalny wielu plików
+otrzymanych w&nbsp;wyniku kompilacji poszczególnych plików źródłowych,
+których może być wiele i&nbsp;mogą być kompilowane osobno i&nbsp;w różnym czasie.
+
+<P>
+Zaletą tego podejścia jest duża szybkość wykonywania kodu
+zawartego w&nbsp;pliku wykonywalnym. Kompilacji oczywiście nie trzeba
+powtarzać przed każdym uruchomieniem programu: raz utworzony plik
+wykonywalny można zlecać systemowi operacyjnemu do wykonania,
+czyli <FONT COLOR="#7b003e"><B>uruchamiać</B></FONT>, dowolną liczbę razy. Wadą języków w&nbsp;pełni
+kompilowanych, jak C++, jest, jak wspomnieliśmy, uzależnienie kodu
+wykonywalnego od platformy. Oczywiście sam tekst programu (źródło,
+ang.&nbsp;<FONT COLOR="#7b003e"><I>source</I></FONT>) <FONT COLOR="#7b003e"><I>jest</I></FONT> niezależny od platformy, jeśli trzymamy
+się w&nbsp;nim ściśle standardu języka C++ i&nbsp;nie stosujemy żadnych
+specyficznych dla danego kompilatora rozszerzeń.
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Co dla nas z&nbsp;tego wszystkiego wynika to to, że potrzebujemy kompilatora
+(wraz z&nbsp;linkerem, preprocesorem, bibliotekami itd.). Dla tych, którzy nie
+mają zainstalowanego na swoim komputerze kompilatora C++ (albo mają,
+ale o&nbsp;tym nie wiedzą), podamy więc parę szczegółów dotyczących jego
+instalacji. Do jej sprawdzenia możemy potem użyć następującego
+programu:
+<BR><A NAME="testInst.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">1</SPAN>:</SPAN>
+      <A NAME="tex2html1"
+  HREF="source-files/testInst.cpp">
+<!--O--><span class='downl'>testInst.cpp<!--C--></span></A>
+<A NAME="885"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Test instalacji</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><i><font color="#9A1900">/*</font></i>
+ <font SIZE="-2" color="black">     2.  </font><i><font color="#9A1900"> * Test instalacji. Program powinien wypisać nazwy</font></i>
+ <font SIZE="-2" color="black">     3.  </font><i><font color="#9A1900"> * 4 języków programowania w porządku alfabetycznym.</font></i>
+ <font SIZE="-2" color="black">     4.  </font><i><font color="#9A1900"> */</font></i>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;vector&gt;</font>
+ <font SIZE="-2" color="black">     6.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;algorithm&gt;</font>
+ <font SIZE="-2" color="black">     7.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     8.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;string&gt;</font>
+ <font SIZE="-2" color="black">     9.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>
+ <font SIZE="-2" color="black">    11.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    12.  </font>    <font color="#008080">vector&lt;string&gt;</font> vs<font color="#FF0000">{</font><font color="#FF0000">"Python"</font><font color="#990000">,</font> <font color="#FF0000">"Haskell"</font><font color="#990000">,</font>
+ <font SIZE="-2" color="black">    13.  </font>                      <font color="#FF0000">"C++"</font><font color="#990000">,</font>    <font color="#FF0000">"Java"</font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    14.  </font>    <b><font color="#000000">sort</font></b><font color="#990000">(</font>vs<font color="#990000">.</font><b><font color="#000000">begin</font></b><font color="#990000">(),</font>vs<font color="#990000">.</font><b><font color="#000000">end</font></b><font color="#990000">());</font>
+ <font SIZE="-2" color="black">    15.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><b><font color="#0000FF">const</font></b> <b><font color="#0000FF">auto</font></b><font color="#990000">&amp;</font> e <font color="#990000">:</font> vs<font color="#990000">)</font> cout <font color="#990000">&lt;&lt;</font> e <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+którego uruchomienie powinno spowodować wypisanie na ekranie nazw czterech
+języków programowania w&nbsp;porządku alfabetycznym. Program może na razie być
+niezrozumiały, ale chodzi tu raczej o&nbsp;to by sprawdzić, czy Twoja instalacja
+C++ (kompilator, linker, biblioteki) jest prawidłowa. Spróbuj zapisać
+ten program w&nbsp;oddzielnym katalogu, skompilować go i&nbsp;uruchomić.
+
+<P>
+Przy okazji podkreślmy, że
+
+<P>
+
+<div class='wazne'>
+dla każdego projektu w&nbsp;C++ tworzymy odrębny katalog
+
+
+</div>
+
+<P>
+o umiejętnie dobranej nazwie i&nbsp;przemyślanej lokalizacji
+w&nbsp;strukturze katalogów. Nieprzestrzeganie tego zalecenia
+wcześniej czy później (raczej wcześniej) doprowadzi do powstania
+chaosu niemożliwego do opanowania.
+
+<P>
+
+<H2><A NAME="SECTION00211000000000000000"></A><A NAME="wprow:linux"></A>
+<BR>
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Linux
+</H2>
+
+<P>
+W najprostszej sytuacji są użytkownicy Linuksa: nie potrzebują
+bowiem niczego ponad to, co już prawdopodobnie mają, nawet jeśli
+nie byli tego świadomi. Należy tylko zadbać podczas instalacji
+samego systemu, aby zaznaczyć do instalacji pakiet &bdquo;dla programistów&rdquo;;
+jeśli tego nie zrobiliśmy, to można zainstalować go później jednym
+poleceniem za pomocą instalatora właściwego dla danej dystrybucji
+(dotyczy to również komputerów Mac).
+
+<P>
+Jeśli w&nbsp;aktualnym katalogu mamy plik źródłowy zawierający
+program w&nbsp;C++, np.&nbsp;wspomniany wyżej plik
+<!--O--><span class='plik'>testInst.cpp<!--C--></span>, to
+komenda
+<PRE>
+    g++ -o testInst testInst.cpp
+</PRE>
+powinna spowodować uruchomienie kompilatora i&nbsp;linkera<A NAME="795"></A>
+(konsolidatora) i, jeśli nie
+zostały wykryte żadne błędy, pojawienie się na dysku, w&nbsp;tym
+samym katalogu, pliku
+<!--O--><span class='plik'>testInst<!--C--></span>,
+który właśnie jest plikiem wykonywalnym.<A NAME="797"></A>
+W&nbsp;świecie Linuxa pliki wykonywalne tradycyjnie nie mają żadnego
+rozszerzenia, choć oczywiście nic nie stoi na przeszkodzie,
+abyśmy takie rozszerzenie, np.&nbsp;
+<!--O--><span class='plik'>.exe<!--C--></span>, dodali: nazwa pliku
+wykonywalnego będzie taka, jaką podamy po opcji '<TT>-o</TT>'
+powyższej komendy. Jeśli opcję tę w&nbsp;ogóle pominiemy,
+to przyjęta zostanie domyślna nazwa
+<!--O--><span class='plik'>a.out<!--C--></span>.
+
+<P>
+Jeśli w&nbsp;programie używamy nowych konstrukcji językowych (ze standardów 2011/2014),
+może okazać się konieczne dodanie opcji
+'<TT>-std=c++14</TT>'; dobrze jest też
+dodać opcje które wymuszą sprawdzanie zgodności ze standardem &ndash;&nbsp;na przykład:
+<PRE>
+    g++ -o testInst -std=c++14 -pedantic-errors -Wall testInst.cpp
+</PRE>
+Program zawarty w&nbsp;pliku wykonywalnym uruchamiamy pisząc po prostu
+jego nazwę poprzedzoną znakami '<TT>./</TT>', a więc w&nbsp;naszym przypadku
+'<TT>./testInst</TT>', i&nbsp;wciskając klawisz <TT>Enter</TT>.
+Zatem przebieg takiej sesji mógłby być następujący:
+<PRE>
+    cpp&gt; g++ -o testInst -pedantic-errors -Wall testInst.cpp
+    cpp&gt; ./testInst
+    C++ Haskell Java Python
+</PRE>
+
+<P>
+Jeśli nasz program zapisany jest w&nbsp;wielu plikach, to podajemy je
+wszystkie; można używać znaków uniwersalnych, czyli
+tzw.&nbsp;dżokerów<A NAME="809"></A> (ang.&nbsp;<FONT COLOR="#7b003e"><I>wild cards</I></FONT>), takich jak
+np.&nbsp;gwiazdki
+<PRE>
+    cpp&gt; g++ -o testInst *.cpp
+</PRE>
+Plik wykonywalny powstaje, oczywiście, jeden. Dodatkowe informacje
+i&nbsp;opis wszystkich opcji kompilatora i&nbsp;linkera dostępne są, jak zwykle,
+na stronie pomocy <FONT COLOR="#7b003e"><I>man</I></FONT><A NAME="814"></A> (komenda <TT>man g++</TT>)
+lub poprzez program
+<!--O--><span class='program'>info<!--C--></span><A NAME="817"></A> (<TT>info g++</TT>).
+W wielu edytorach można kompilację
+i&nbsp;uruchamianie programu przypisać do mnemoników klawiszowych;
+istnieją też graficzne programy bardzo ułatwiające pisanie programów
+w&nbsp;C++ (jak
+
+<!--O--><span class='program'>Eclipse<!--C--></span>,<A NAME="820"></A>
+
+<!--O--><span class='program'>Anjuta<!--C--></span>,<A NAME="822"></A>
+
+<!--O--><span class='program'>Geany<!--C--></span>,<A NAME="824"></A>
+
+<!--O--><span class='program'>KDevelop<!--C--></span><A NAME="826"></A>,
+
+<!--O--><span class='program'>CodeWarrior<!--C--></span><A NAME="828"></A>,
+
+<!--O--><span class='program'>Code::Blocks<!--C--></span><A NAME="830"></A>
+&mdash;&nbsp;można je łatwo znaleźć w&nbsp;internecie).
+Większość dobrych edytorów tekstu zapewnia podkreślanie składni,
+zwijanie i&nbsp;rozwijanie struktur, automatyczne wcinanie i&nbsp;inne
+udogodnienia do redagowania plików źródłowych C/C++.
+
+<P>
+
+<H2><A NAME="SECTION00212000000000000000"></A><A NAME="wprow:windows"></A>
+<BR>
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Windows
+</H2>
+
+<P>
+
+<H3><A NAME="SECTION00212100000000000000"></A><A NAME="wprow:visual"></A>
+<BR>
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Visual C++ i&nbsp;Studio .NET
+</H3>
+
+<P>
+Dobry kompilator C++ wchodzi w&nbsp;skład pakietu
+
+<!--O--><span class='program'>Visual Studio<!--C--></span>
+ firmy Microsoft.<A NAME="836"></A>
+Jest on wyposażony w&nbsp;bogaty interfejs graficzny, funkcje pomocy,
+debugger itd. Istnieje wersja darmowa,
+
+<!--O--><span class='program'>Visual Studio Express<!--C--></span>, w&nbsp;zupełności wystarczająca do
+nauki programowania. Osobom posiadającym to narzędzie można tylko
+przypomnieć, aby zawsze przed przystąpieniem do pisania programu
+zadbali o&nbsp;utworzenie najpierw tzw.&nbsp;projektu, w&nbsp;osobnym katalogu,
+przeznaczonym tylko na pliki wchodzące w&nbsp;skład tego projektu.
+Tworząc nowy projekt zadbać trzeba o&nbsp;jego właściwy typ, w&nbsp;naszym
+przypadku będzie to '<TT>Console Application</TT>' a&nbsp;potem
+'<TT>Empty project</TT>'; inaczej mogą pojawić się niewiele
+wyjaśniające komunikaty o&nbsp;błędach podczas kompilacji. Uruchamiać
+kompilator można zarówno korzystając z&nbsp;interfejsu graficznego jak
+i&nbsp;bezpośrednio z&nbsp;linii poleceń (wywołując program
+<!--O--><span class='program'>cl<!--C--></span>
+ (co jest
+skrótem od <FONT COLOR="#7b003e"><I>compile and link</I></FONT>). Kompilator ma wiele opcji, z&nbsp;których
+dobrze będzie wybrać '<TT>-Wall -Za -GR -EHsc</TT>', które, między
+innymi, włączą komunikaty o&nbsp;błędach, a&nbsp;za to wyłączą niestandardowe
+rozszerzenia języka.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html681"
+  HREF="node2.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html687"
+  HREF="node2.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html693"
+  HREF="node4.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html689"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html691"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html682"
+  HREF="node2.html">1. Wprowadzenie</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html688"
+  HREF="node2.html">1. Wprowadzenie</A>
+<B>Dalej:</B> <A NAME="tex2html694"
+  HREF="node4.html">1.2 Literatura</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

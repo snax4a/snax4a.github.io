@@ -1,0 +1,394 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>25.1 Operator typeid</TITLE>
+<META NAME="description" CONTENT="25.1 Operator typeid">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node149.html">
+<LINK REL="previous" HREF="node147.html">
+<LINK REL="up" HREF="node147.html">
+<LINK REL="next" HREF="node149.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2917"
+  HREF="node147.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2923"
+  HREF="node147.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2929"
+  HREF="node149.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2925"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2927"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2918"
+  HREF="node147.html">25. Dynamiczna identyfikacja typu</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2924"
+  HREF="node147.html">25. Dynamiczna identyfikacja typu</A>
+<B>Dalej:</B> <A NAME="tex2html2930"
+  HREF="node149.html">25.2 Operator dynamic_cast</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002610000000000000000"></A>
+        <A NAME="rtti:typeid"></A>
+<BR>
+<SPAN CLASS="arabic">25</SPAN>.<SPAN CLASS="arabic">1</SPAN> Operator <SPAN  CLASS="textsl">typeid</SPAN>
+</H1>
+
+<P>
+Argumentem operatora
+<!--O--><span class='klucz'>typeid<!--C--></span><A NAME="30175"></A><A NAME="30176"></A>
+(z nagłówka
+<!--O--><span class='plik'>typeinfo<!--C--></span>)<A NAME="30178"></A> może być nazwa typu
+lub dowolne wyrażenie o&nbsp;określonej wartości. Operator zwraca
+identyfikator typu argumentu, który jest obiektem klasy
+
+<!--O--><span class='klasa'>type_info<!--C--></span>.<A NAME="30180"></A> Klasa ta, poprzez przeciążenie
+operatorów '
+<FONT COLOR="#000000"><TT>==</TT></FONT>' i&nbsp;'
+<FONT COLOR="#000000"><TT>!=</TT></FONT>' zapewnia możliwość
+porównywania obiektów reprezentujących typy, na przykład:
+<pre><tt>   <b><font color="#000080">    #include</font></b> <font color="#FF0000">&lt;typeinfo&gt;</font>
+       <i><font color="#9A1900">// ...</font></i>
+       <font color="#009900">double</font> x <font color="#990000">=</font> <font color="#993399">1.5</font><font color="#990000">;</font>
+       <i><font color="#9A1900">// ...</font></i>
+       <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>x<font color="#990000">)</font> <font color="#990000">==</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font><font color="#009900">double</font><font color="#990000">))</font> <font color="#990000">...</font> <i><font color="#9A1900">// true</font></i>
+       <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>x<font color="#990000">)</font> <font color="#990000">==</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font><font color="#993399">36.0</font><font color="#990000">))</font>   <font color="#990000">...</font> <i><font color="#9A1900">// true</font></i>
+       <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>x<font color="#990000">)</font> <font color="#990000">==</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font><font color="#993399">3</font><font color="#990000">))</font>      <font color="#990000">...</font> <i><font color="#9A1900">// false</font></i>
+       <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>x<font color="#990000">)</font> <font color="#990000">!=</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font><font color="#993399">3</font><font color="#990000">))</font>      <font color="#990000">...</font> <i><font color="#9A1900">// true</font></i>
+       <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>x<font color="#990000">)</font> <font color="#990000">!=</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">))</font>    <font color="#990000">...</font> <i><font color="#9A1900">// true</font></i>
+</tt></pre>
+Klasa
+<!--O--><span class='klasa'>type_info<!--C--></span>
+ posiada metodę
+<!--O--><span class='funkcja'>name<!--C--></span>, która
+zwraca C-napis zawierający nazwę typu: nazwy te nie muszą
+pokrywać się ze standardowymi nazwami typów, choć mogą.
+Na przykład
+<pre><tt>       <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">).</font><b><font color="#000000">name</font></b><font color="#990000">()</font>
+</tt></pre>
+zwraca nazwę '
+<FONT COLOR="#000000"><TT>int</TT></FONT>' w&nbsp;środowisku
+<!--O--><span class='program'>VC++<!--C--></span>, ale
+
+<!--O--><span class='program'>g++<!--C--></span>
+ i&nbsp;Intelowski
+<!--O--><span class='program'>icpc<!--C--></span>
+ dają po prostu nazwę
+'
+<FONT COLOR="#000000"><TT>i</TT></FONT>'. Zwykle nazwy nie są nam do niczego potrzebne, ważne
+jest tylko porównywanie typów.
+
+<P>
+Ciekawsze i&nbsp;bardziej pożyteczne jest rozpoznawanie typów w&nbsp;warunkach
+dziedziczenia. Szczegóły rozpatrzmy na przykładzie następującego
+programu:
+<A NAME="rtti.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">200</SPAN>:</SPAN>
+      <A NAME="tex2html213"
+  HREF="source-files/rtti.cpp">
+<!--O--><span class='downl'>rtti.cpp<!--C--></span></A>
+<A NAME="30389"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Dynamiczne rozpoznawanie typu</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;typeinfo&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">Pojazd</font> <font color="#FF0000">{</font> <font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">Samochod</font> <font color="#990000">:</font> Pojazd <font color="#FF0000">{</font> <font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>
+ <font SIZE="-2" color="black">     8.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">Budynek</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     9.  </font>    <b><font color="#0000FF">virtual</font></b> <font color="#990000">~</font><b><font color="#000000">Budynek</font></b><font color="#990000">()</font> <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    10.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">Stacja</font> <font color="#990000">:</font> Budynek <font color="#FF0000">{</font> <font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    12.  </font>
+ <font SIZE="-2" color="black">    13.  </font>
+ <font SIZE="-2" color="black">    14.  </font>
+ <font SIZE="-2" color="black">    15.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    16.  </font>    <font color="#008080">Pojazd</font>    poj<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font>    <font color="#008080">Samochod</font>  sam1<font color="#990000">,</font>sam2<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font>    Samochod<font color="#990000">*</font> p_sam1 <font color="#990000">=</font> <font color="#990000">&amp;</font>sam1<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font>    Pojazd<font color="#990000">*</font>   p_sam2 <font color="#990000">=</font> <font color="#990000">&amp;</font>sam2<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    20.  </font>    Pojazd<font color="#990000">&amp;</font>   r_sam1 <font color="#990000">=</font> sam1<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    21.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"    poj: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>poj<font color="#990000">).</font><b><font color="#000000">name</font></b><font color="#990000">()</font>     <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    22.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"   sam1: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>sam1<font color="#990000">).</font><b><font color="#000000">name</font></b><font color="#990000">()</font>    <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    23.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"   sam2: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>sam2<font color="#990000">).</font><b><font color="#000000">name</font></b><font color="#990000">()</font>    <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    24.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" p_sam1: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>p_sam1<font color="#990000">).</font><b><font color="#000000">name</font></b><font color="#990000">()</font>  <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    25.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" p_sam2: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>p_sam2<font color="#990000">).</font><b><font color="#000000">name</font></b><font color="#990000">()</font>  <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    26.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"*p_sam1: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(*</font>p_sam1<font color="#990000">).</font><b><font color="#000000">name</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    27.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"*p_sam2: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(*</font>p_sam2<font color="#990000">).</font><b><font color="#000000">name</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    28.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" r_sam1: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>r_sam1<font color="#990000">).</font><b><font color="#000000">name</font></b><font color="#990000">()</font>  <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    29.  </font>
+ <font SIZE="-2" color="black">    30.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Typy *p_sam1 i *p_sam2 sa "</font>
+ <font SIZE="-2" color="black">    31.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font><b><font color="#0000FF">typeid</font></b><font color="#990000">(*</font>p_sam1<font color="#990000">)</font> <font color="#990000">==</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(*</font>p_sam2<font color="#990000">)</font> <font color="#990000">?</font>
+ <font SIZE="-2" color="black">    32.  </font>                    <font color="#FF0000">"takie same</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font> <font color="#990000">:</font> <font color="#FF0000">"rozne</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">)</font>   <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    33.  </font>
+ <font SIZE="-2" color="black">    34.  </font>    <font color="#008080">Budynek</font>  bud<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    35.  </font>    <font color="#008080">Stacja</font>   sta1<font color="#990000">,</font>sta2<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    36.  </font>    Stacja<font color="#990000">*</font>  p_sta1 <font color="#990000">=</font> <font color="#990000">&amp;</font>sta1<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    37.  </font>    Budynek<font color="#990000">*</font> p_sta2 <font color="#990000">=</font> <font color="#990000">&amp;</font>sta2<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    38.  </font>    Budynek<font color="#990000">&amp;</font> r_sta1 <font color="#990000">=</font> sta1<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    39.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"    bud: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>bud<font color="#990000">).</font><b><font color="#000000">name</font></b><font color="#990000">()</font>     <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    40.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"   sta1: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>sta1<font color="#990000">).</font><b><font color="#000000">name</font></b><font color="#990000">()</font>    <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    41.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"   sta2: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>sta2<font color="#990000">).</font><b><font color="#000000">name</font></b><font color="#990000">()</font>    <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    42.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" p_sta1: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>p_sta1<font color="#990000">).</font><b><font color="#000000">name</font></b><font color="#990000">()</font>  <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    43.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" p_sta2: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>p_sta2<font color="#990000">).</font><b><font color="#000000">name</font></b><font color="#990000">()</font>  <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    44.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"*p_sta1: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(*</font>p_sta1<font color="#990000">).</font><b><font color="#000000">name</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    45.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"*p_sta2: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(*</font>p_sta2<font color="#990000">).</font><b><font color="#000000">name</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    46.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" r_sta1: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(</font>r_sta1<font color="#990000">).</font><b><font color="#000000">name</font></b><font color="#990000">()</font>  <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    47.  </font>
+ <font SIZE="-2" color="black">    48.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Typy *p_sta1 i *p_sta2 sa "</font>
+ <font SIZE="-2" color="black">    49.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#990000">(</font><b><font color="#0000FF">typeid</font></b><font color="#990000">(*</font>p_sta1<font color="#990000">)</font> <font color="#990000">==</font> <b><font color="#0000FF">typeid</font></b><font color="#990000">(*</font>p_sta2<font color="#990000">)</font> <font color="#990000">?</font>
+ <font SIZE="-2" color="black">    50.  </font>                    <font color="#FF0000">"takie same</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font> <font color="#990000">:</font> <font color="#FF0000">"rozne</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    51.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+Mamy w&nbsp;programie dwie pary klas: klasę
+<!--O--><span class='klasa'>Pojazd<!--C--></span>
+ i&nbsp;dziedziczącą
+z niej klasę
+<!--O--><span class='klasa'>Samochod<!--C--></span>
+ oraz analogicznie klasę
+<!--O--><span class='klasa'>Budynek<!--C--></span>
+
+i dziedziczącą z&nbsp;niej klasę
+<!--O--><span class='klasa'>Stacja<!--C--></span>. Między tymi parami
+klas zachodzi jednak głęboka różnica: para
+<!--O--><span class='klasa'>Pojazd<!--C--></span>
+
+<!-- MATH
+ $\leftarrow$
+ -->
+<SPAN CLASS="MATH">&#8592;</SPAN>
+<!--O--><span class='klasa'>Samochod<!--C--></span>
+ nie zawiera metod wirtualnych, a&nbsp;więc
+nie są to klasy polimorficzne. Natomiast para
+<!--O--><span class='klasa'>Budynek<!--C--></span>
+
+<!-- MATH
+ $\leftarrow$
+ -->
+<SPAN CLASS="MATH">&#8592;</SPAN>
+<!--O--><span class='klasa'>Stacja<!--C--></span>
+ jest polimorficzna, bo destruktor klasy
+
+<!--O--><span class='klasa'>Budynek<!--C--></span>
+ jest wirtualny, a&nbsp;dziedziczenie jest publiczne
+(nie napisaliśmy tego jawnie, ale użyliśmy słowa kluczowego
+
+<!--O--><span class='klucz'>struct<!--C--></span>, a&nbsp;nie
+<!--O--><span class='klasa'>class<!--C--></span>). Przypatrzmy się wydrukowi tego
+programu:
+<PRE>
+        poj: 6Pojazd                         ( 1)
+       sam1: 8Samochod                       ( 2)
+       sam2: 8Samochod                       ( 3)
+     p_sam1: P8Samochod                      ( 4)
+     p_sam2: P6Pojazd                        ( 5)
+    *p_sam1: 8Samochod                       ( 6)
+    *p_sam2: 6Pojazd                         ( 7)
+     r_sam1: 6Pojazd                         ( 8)
+    Typy *p_sam1 i *p_sam2 sa rozne          ( 9)
+
+        bud: 7Budynek                        (11)
+       sta1: 6Stacja                         (12)
+       sta2: 6Stacja                         (13)
+     p_sta1: P6Stacja                        (14)
+     p_sta2: P7Budynek                       (15)
+    *p_sta1: 6Stacja                         (16)
+    *p_sta2: 6Stacja                         (17)
+     r_sta1: 6Stacja                         (18)
+    Typy *p_sta1 i *p_sta2 sa takie same     (19)
+</PRE>
+Linie&nbsp;1-3 i&nbsp;11-13 wydruku nie wymagają komentarza: typ jest dokładnie
+taki, jaki jest typ obiektu (wiodące znaki są dodawane do nazw typów
+przez kompilator; nie musimy się nimi przejmować &mdash;&nbsp;inny kompilator
+może wewnętrznie używać innych nazw typów). Ponieważ argumentami
+operatora
+<!--O--><span class='klucz'>typeid<!--C--></span>
+ są tu obiekty, do których odnosimy się
+przez ich nazwę, a&nbsp;nie poprzez wskaźnik lub referencję, żadnego
+polimorfizmu tak czy owak nie ma.
+
+<P>
+Typem drukowanym w&nbsp;liniach&nbsp;4-5 (oraz&nbsp;14-15) wydruku jest typ
+<FONT COLOR="#7b003e"><I>wskaźnika</I></FONT>, a&nbsp;nie wskazywanego przez ten wskaźnik obiektu
+(nazwa 'P8Samochod' to nazwa typu <SPAN  CLASS="textit">wskaźnik do 8Samochod</SPAN>;
+'P' od <FONT COLOR="#7b003e"><I>pointer</I></FONT>). Porównując wydruk z&nbsp;linii&nbsp;4 i&nbsp;5 oraz z&nbsp;linii
+14 i&nbsp;15 widzimy, że w&nbsp;tym przypadku polimorfizm też nie ma nic do
+rzeczy: typem jest prawdziwy, zadeklarowany typ <FONT COLOR="#7b003e"><I>wskaźnika</I></FONT>.
+
+<P>
+
+<P>
+
+<div class='wazne'>
+Jeśli
+<!--O--><span class='zmienna'>p<!--C--></span>
+ jest wskaźnikiem, to wyrażenie
+
+<!--O--><span class='klucz'>typeid(p)<!--C--></span>
+ określa typ tego wskaźnika, a&nbsp;nie typ obiektu
+    wskazywanego przez ten wskaźnik.
+
+
+</div>
+
+<P>
+Inaczej jest, kiedy pytamy bezpośrednio o&nbsp;typ obiektu wskazywanego
+przez wskaźnik, a&nbsp;więc o&nbsp;typ wartości wyrażenia
+<!--O--><span class='zmienna'>*p<!--C--></span>, gdzie
+
+<!--O--><span class='zmienna'>p<!--C--></span>
+ jest wskaźnikiem. Ponieważ do obiektu odnosimy się teraz
+przez wskaźnik, polimorfizm może zadziałać, pod warunkiem, że mamy
+do czynienia z&nbsp;klasami polimorficznymi, a&nbsp;więc zadeklarowana w&nbsp;nich
+jest choć jedna metoda wirtualna; może nią być sam destruktor,
+jak to jest w&nbsp;naszym przykładzie dla pary klas
+<!--O--><span class='klasa'>Budynek<!--C--></span>
+
+<!-- MATH
+ $\leftarrow$
+ -->
+<SPAN CLASS="MATH">&#8592;</SPAN>
+<!--O--><span class='klasa'>Stacja<!--C--></span>.
+
+<P>
+Spójrzmy na linie 6 i&nbsp;7 wydruku.
+Prawdziwym typem obiektów wskazywanych zarówno przez wskaźnik
+
+<!--O--><span class='zmienna'>p_sam1<!--C--></span>
+ jak i&nbsp;
+<!--O--><span class='zmienna'>p_sam2<!--C--></span>
+ jest typ pochodny
+
+<!--O--><span class='klasa'>Samochod<!--C--></span>.
+Jednak typem wskaźnika w&nbsp;pierwszym przypadku jest
+<!--O--><span class='typ'>Samochod*<!--C--></span>,
+a w&nbsp;drugim
+<!--O--><span class='typ'>Pojazd*<!--C--></span>. Ponieważ te klasy nie są polimorficzne,
+typ obiektów wskazywanych
+<!--O--><span class='zmienna'>*p_sam1<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>*p_sam2<!--C--></span>
+
+zostanie rozpoznany według deklaracji wskaźników, a&nbsp;więc statycznie.
+Tak więc znalezionym typem wartości wyrażeń
+<!--O--><span class='zmienna'>*p_sam1<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='zmienna'>*p_sam2<!--C--></span>
+ będzie odpowiednio
+<!--O--><span class='klasa'>Samochod<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='klasa'>Pojazd<!--C--></span>. Inaczej jest dla obiektów będących wartościami
+wyrażeń
+<!--O--><span class='zmienna'>*p_sta1<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>*p_sta2<!--C--></span>. Prawdziwy ich typ
+to typ pochodny
+<!--O--><span class='klasa'>Stacja<!--C--></span>. Odnosimy się do tych obiektów przez
+wskaźnik, a&nbsp;klasy są polimorficzne. Zatem tym razem rozpoznany
+zostanie w&nbsp;obu wypadkach prawdziwy typ wskazywanych obiektów
+&mdash;&nbsp;patrz linie 16 i&nbsp;17.
+
+<P>
+Rozpoznawanie prawdziwych typów dla klas polimorficznych zachodzi,
+jak wiemy, również wtedy, gdy do obiektów odnosimy się poprzez
+referencję. Przykład mamy w&nbsp;liniach&nbsp;8 i&nbsp;18: bez polimorfizmu
+rozpoznany został typ statyczny
+<!--O--><span class='klasa'>Pojazd<!--C--></span>, według
+zadeklarowanego typu referencji
+<!--O--><span class='zmienna'>r_sam1<!--C--></span>, a&nbsp;nie prawdziwy typ
+obiektu, do którego ta referencja się odnosi, czyli
+
+<!--O--><span class='klasa'>Samochod<!--C--></span>
+ (linia&nbsp;8). Natomiast dla klas polimorficznych
+rozpoznany został prawdziwy typ obiektu (linia&nbsp;18).
+
+<P>
+Linie 9 i&nbsp;19 wskazują jeszcze raz, że porównanie typów obiektów
+wskazywanych przez wskaźniki lub referencje może zawieść dla klas,
+które polimorficzne nie są. Typy obiektów
+<!--O--><span class='zmienna'>*p_sam1<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='zmienna'>*p_sam2<!--C--></span>
+ zostały rozpoznane jako różne (linia&nbsp;9), choć
+tak naprawdę są takie same, tylko typy wskaźników wskazujących na
+te obiekty są różne. Dla klas polimorficznych typy
+<!--O--><span class='zmienna'>*p_sta1<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='zmienna'>*p_sta2<!--C--></span>
+ zostały prawidłowo rozpoznane jako takie same
+(linia&nbsp;19), mimo że typy wskaźników były różne.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2917"
+  HREF="node147.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2923"
+  HREF="node147.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2929"
+  HREF="node149.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2925"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2927"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2918"
+  HREF="node147.html">25. Dynamiczna identyfikacja typu</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2924"
+  HREF="node147.html">25. Dynamiczna identyfikacja typu</A>
+<B>Dalej:</B> <A NAME="tex2html2930"
+  HREF="node149.html">25.2 Operator dynamic_cast</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

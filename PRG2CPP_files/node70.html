@@ -1,0 +1,540 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>11.11 Przeciążanie funkcji</TITLE>
+<META NAME="description" CONTENT="11.11 Przeciążanie funkcji">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node71.html">
+<LINK REL="previous" HREF="node69.html">
+<LINK REL="up" HREF="node59.html">
+<LINK REL="next" HREF="node71.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1717"
+  HREF="node69.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1723"
+  HREF="node59.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1729"
+  HREF="node71.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1725"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1727"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1718"
+  HREF="node69.html">11.10 Funkcje rozwijane</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1724"
+  HREF="node59.html">11. Funkcje</A>
+<B>Dalej:</B> <A NAME="tex2html1730"
+  HREF="node71.html">11.12 Wskaźniki funkcyjne</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0012110000000000000000"></A><A NAME="funk:przec"></A>
+<BR>
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">11</SPAN> Przeciążanie funkcji
+</H1>
+
+<P>
+Funkcje można w&nbsp;C++ (ale nie w&nbsp;C) <FONT COLOR="#7b003e"><B>przeciążać</B></FONT>.
+<A NAME="11966"></A><A NAME="11967"></A>
+Oznacza to sytuację, gdy w&nbsp;tym samym zakresie są widoczne
+deklaracje/definicje kilku funkcji o&nbsp;tej samej nazwie. Oczywiście,
+aby na etapie
+kompilacji było wiadomo, o&nbsp;wywołanie której funkcji nam chodzi,
+wszystkie wersje funkcji muszą się wystarczająco różnić. Co to
+znaczy wystarczająco? Generalnie, muszą się różnić na tyle, aby
+można było jednoznacznie wybrać jedną z&nbsp;nich na podstawie
+wywołania.
+
+<P>
+Warunkiem koniecznym, choć niewystarczającym jest, aby funkcje
+o&nbsp;tej samej nazwie różniły się <FONT COLOR="#7b003e"><B>sygnaturą</B></FONT>.
+<A NAME="11969"></A><A NAME="11970"></A>
+
+<P>
+
+<P>
+
+<div class='wazne'>
+Do sygnatury funkcji należy jej nazwa oraz liczba i&nbsp;typ
+    parametrów <FONT COLOR="#7b003e"><I>nie</I></FONT> licząc tych z&nbsp;wartościami domyślnymi.
+    Typ funkcji, czyli typ wartości zwracanej, zwykle do sygnatury
+    <FONT COLOR="#7b003e"><I>nie</I></FONT> jest zaliczany.
+
+
+</div>
+
+<P>
+Tak więc na przykład
+<pre><tt>       <font color="#009900">int</font>    <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">double</font> x<font color="#990000">,</font> <font color="#009900">int</font> k <font color="#990000">=</font><font color="#993399">0</font><font color="#990000">);</font>
+       <font color="#009900">double</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">double</font> z<font color="#990000">);</font>
+</tt></pre>
+to dwie deklaracje różnych funkcji, ale o&nbsp;takiej samej sygnaturze,
+a&nbsp;mianowicie o&nbsp;sygnaturze
+<FONT COLOR="#000000"><TT>fun(double)</TT></FONT>.
+I rzeczywiście, wywołanie
+
+<FONT COLOR="#000000"><TT>fun(1.5)</TT></FONT> byłoby najzupełniej legalnym i&nbsp;nie
+wymagającym żadnej niejawnej konwersji wywołaniem zarówno
+pierwszej, jak i&nbsp;drugiej z&nbsp;tych funkcji. Takie przeciążenie jest
+zatem nielegalne.
+
+<P>
+Natomiast
+<pre><tt>       <font color="#009900">double</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">);</font>
+       <font color="#009900">double</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">unsigned</font><font color="#990000">);</font>
+</tt></pre>
+to deklaracje funkcji różniących się sygnaturą. Wywołanie
+
+<FONT COLOR="#000000"><TT>fun(15)</TT></FONT> jest wywołaniem pierwszej z&nbsp;nich,
+bo '15'
+jest literałem wartości typu
+<!--O--><span class='typ'>int<!--C--></span>
+ i&nbsp;do przekształcenia tej
+wartości do typu
+<!--O--><span class='typ'>unsigned<!--C--></span>
+ potrzebna byłaby konwersja.
+Zatem takie przeciążenie jest prawidłowe.
+
+<P>
+Z drugiej strony, różne sygnatury nie są jeszcze warunkiem
+dostatecznym na legalność przeciążenia.  Widzimy to na przykładzie funkcji
+<pre><tt>       <font color="#009900">void</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">int</font> i<font color="#990000">);</font>
+       <font color="#009900">void</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">&amp;</font> i<font color="#990000">);</font>
+</tt></pre>
+które mają różną sygnaturę, ale wywołanie
+<FONT COLOR="#000000"><TT>fun(k)</TT></FONT>, gdzie
+
+<!--O--><span class='zmienna'>k<!--C--></span>
+ jest typu
+<!--O--><span class='typ'>int<!--C--></span>, może być traktowane
+jako wywołanie zarówno pierwszej, jak i&nbsp;drugiej z&nbsp;nich.
+Zatem takie przeciążenie byłoby nieprawidłowe.
+Podobnie nieprawidłowe byłoby przeciążenie
+<pre><tt>       <font color="#009900">void</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">int</font> tab<font color="#990000">[]);</font>
+       <font color="#009900">void</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">int</font> <font color="#990000">*</font> p<font color="#990000">);</font>
+</tt></pre>
+lub
+<pre><tt>       <font color="#009900">void</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font>tab<font color="#990000">[</font><font color="#993399">3</font><font color="#990000">][</font><font color="#993399">3</font><font color="#990000">]);</font>
+       <font color="#009900">void</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font>tab<font color="#990000">[</font><font color="#993399">5</font><font color="#990000">][</font><font color="#993399">3</font><font color="#990000">]);</font>
+</tt></pre>
+bo pierwszy wymiar tablicy wielowymiarowej nie ma znaczenia do
+określenia typu (jest i&nbsp;tak pomijany w&nbsp;tego rodzaju
+deklaracji/definicji). Natomiast
+<pre><tt>       <font color="#009900">void</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font>tab<font color="#990000">[</font><font color="#993399">3</font><font color="#990000">][</font><font color="#993399">3</font><font color="#990000">]);</font>
+       <font color="#009900">void</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font>tab<font color="#990000">[</font><font color="#993399">3</font><font color="#990000">][</font><font color="#993399">5</font><font color="#990000">]);</font>
+</tt></pre>
+prawidłowo deklaruje dwie przeciążone funkcje
+<!--O--><span class='funkcja'>fun<!--C--></span>,
+gdyż tablice wielowymiarowe różniące się wymiarem innym niż
+pierwszy <FONT COLOR="#7b003e"><I>są</I></FONT> różnych typów i&nbsp;pomiędzy tymi typami nie ma
+niejawnej konwersji.
+
+<P>
+Argument typu
+<!--O--><span class='typ'>T<!--C--></span>
+ może być użyty przy wywołaniu funkcji
+z&nbsp;parametrem typu
+<!--O--><span class='typ'>T<!--C--></span>,
+<!--O--><span class='typ'>const T<!--C--></span>
+ i&nbsp;
+<!--O--><span class='typ'>volatile T<!--C--></span>,
+więc funkcje przeciążone nie mogą się różnić tylko typem
+takiego parametru. Zatem
+<pre><tt>       <font color="#009900">int</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">int</font> k<font color="#990000">);</font>
+       <font color="#009900">int</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">int</font> k<font color="#990000">);</font>
+</tt></pre>
+byłoby nielegalne.
+
+<P>
+Natomiast typy parametrów
+
+<!--O--><span class='typ'>T*<!--C--></span>,
+<!--O--><span class='typ'>volatile T*<!--C--></span>
+ i&nbsp;
+<!--O--><span class='typ'>const T*<!--C--></span>
+
+(i analogicznie
+
+<!--O--><span class='typ'>T&amp;<!--C--></span>,
+<!--O--><span class='typ'>volatile T&amp;<!--C--></span>
+ i&nbsp;
+<!--O--><span class='typ'>const T&amp;<!--C--></span>) są
+wystarczająco różne: patrząc na wywołanie funkcji kompilator
+może stwierdzić, czy użyta tam zmienna była ustalona lub ulotna
+czy nie; przeciążenie
+<pre><tt>       <font color="#009900">int</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">&amp;</font> k<font color="#990000">);</font>
+       <font color="#009900">int</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">int</font><font color="#990000">&amp;</font> k<font color="#990000">);</font>
+</tt></pre>
+jest zatem prawidłowe.
+
+<P>
+Może się jednak zdarzyć, że to samo wywołanie funkcji
+pasuje do kilku jej przeciążonych wersji po ewentualnym
+dokonaniu dozwolonych konwersji. Jak rozstrzygnąć, która z&nbsp;tych
+funkcji będzie wywołana?
+
+<P>
+Proces poszukiwania takiej funkcji przebiega etapami i&nbsp;kończy się,
+gdy zostanie znalezione dopasowanie funkcji do wywołania.
+Tak więc sprawdzane są kolejno różne typy (stopnie)
+dopasowania:
+
+<P>
+
+<SPAN  CLASS="textit">Dopasowanie dokładne.</SPAN>
+     Wszystkie typy argumentów są identyczne jak typy
+     odpowiednich parametrów.<A NAME="12014"></A>
+
+<P>
+
+<SPAN  CLASS="textit">Dopasowanie po konwersji trywialnej.</SPAN>
+     Do pełnego dopasowania wystarczy konwersja trywialna argumentu
+     <A NAME="12016"></A> (ang.&nbsp;<FONT COLOR="#7b003e"><I>minor conversion</I></FONT>).
+     <A NAME="12018"></A>
+     Konwersje trywialne to
+     (<FONT COLOR="#000000"><TT>T</TT></FONT> oznacza pewien typ,
+<FONT COLOR="#000000"><TT>fun</TT></FONT> funkcję &mdash;&nbsp;
+     o&nbsp;wskaźnikach funkcyjnych powiemy w
+     rozdziale <A HREF="node71.html#funk:wskazfun">im poświęconym</A> ):
+<DIV ALIGN="CENTER">
+<A NAME="12032"></A>
+<TABLE CELLPADDING=3>
+<CAPTION><STRONG>Tabela 11.1:</STRONG>
+Konwersje trywialne</CAPTION>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">T</TD>
+<TD ALIGN="CENTER"><A NAME="tabelakontryw"></A>     <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN></TD>
+<TD ALIGN="CENTER">T&amp;</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">T&amp;</TD>
+<TD ALIGN="CENTER"><!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN></TD>
+<TD ALIGN="CENTER">T</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">T[]</TD>
+<TD ALIGN="CENTER"><!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN></TD>
+<TD ALIGN="CENTER">T*</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">fun()</TD>
+<TD ALIGN="CENTER"><!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN></TD>
+<TD ALIGN="CENTER">(*fun)()</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">T</TD>
+<TD ALIGN="CENTER"><!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN></TD>
+<TD ALIGN="CENTER">const T</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">T</TD>
+<TD ALIGN="CENTER"><!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN></TD>
+<TD ALIGN="CENTER">volatile T</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">T*</TD>
+<TD ALIGN="CENTER"><!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN></TD>
+<TD ALIGN="CENTER">const T*</TD>
+</TR>
+<TR VALIGN="BASELINE"><TD ALIGN="CENTER">T*</TD>
+<TD ALIGN="CENTER"><!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN></TD>
+<TD ALIGN="CENTER">volatile T*</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<SPAN  CLASS="textit">Dopasowanie po promocji.</SPAN>
+     Do uzyskania
+     <A NAME="12037"></A>
+     dopasowania wystarczą standardowe promocje całościowe lub
+     zmiennopozycyjne &mdash;&nbsp;patrz
+     rozdział <A HREF="node57.html#konwporz:konwersje">o konwersjach standardowych</A>
+     &mdash;&nbsp;na przykład
+<!--O--><span class='typ'>char<!--C--></span>
+ <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='typ'>int<!--C--></span>.
+
+<P>
+
+<SPAN  CLASS="textit">Dopasowanie po innej konwersji niejawnej.</SPAN>
+     Do uzyskania
+     <A NAME="12047"></A>
+     dopasowania wystarczą standardowe konwersje nie będące
+     promocjami całościowymi lub zmiennopozycyjnymi &mdash;&nbsp;patrz
+     rozdział <A HREF="node57.html#konwporz:konwersje">o konwersjach standardowych</A>
+     &mdash;&nbsp;na przykład
+<!--O--><span class='typ'>int<!--C--></span>
+ <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='typ'>double<!--C--></span>
+
+     lub odwrotnie.
+
+<P>
+
+<SPAN  CLASS="textit">Dopasowanie po konwersji zdefiniowanej przez użytkownika.</SPAN>
+     Do uzyskania
+     <A NAME="12057"></A>
+     dopasowania potrzebne są konwersje zdefiniowane przez
+     użytkownika &mdash;&nbsp;jak takie konwersje definiować, omówimy
+     w rozdziale o <A HREF="node120.html#konw:oddo">konwersjach</A> .
+
+<P>
+
+<SPAN  CLASS="textit">Dopasowanie do funkcji o&nbsp;zmiennej liczbie parametrów.</SPAN>
+     Ostatnia, rozpaczliwa próba dopasowania może być podjęta,
+     jeśli wywołanie może pasować do funkcji
+     o&nbsp;nieustalonej liczbie parametrów.
+
+<P>
+Znajdowanie dopasowania to skomplikowany proces, którego wynik nie
+zawsze jest intuicyjny. Rozpatrzmy program:
+<BR><A NAME="match.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">75</SPAN>:</SPAN>
+      <A NAME="tex2html82"
+  HREF="source-files/match.cpp">
+<!--O--><span class='downl'>match.cpp<!--C--></span></A>
+<A NAME="13145"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Dopasowywanie funkcji przeciążonych do wywołania</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;string&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><font color="#008080">string</font> <b><font color="#000000">fun1</font></b><font color="#990000">(</font>   <font color="#009900">int</font><font color="#990000">)</font> <font color="#FF0000">{</font> <b><font color="#0000FF">return</font></b> <font color="#FF0000">"</font><font color="#CC33CC">\'</font><font color="#FF0000">int</font><font color="#CC33CC">\'\n</font><font color="#FF0000">"</font><font color="#990000">;</font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">     6.  </font><font color="#008080">string</font> <b><font color="#000000">fun1</font></b><font color="#990000">(</font>  <font color="#009900">char</font><font color="#990000">)</font> <font color="#FF0000">{</font> <b><font color="#0000FF">return</font></b> <font color="#FF0000">"</font><font color="#CC33CC">\'</font><font color="#FF0000">char</font><font color="#CC33CC">\'\n</font><font color="#FF0000">"</font><font color="#990000">;</font>   <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">     7.  </font><font color="#008080">string</font> <b><font color="#000000">fun1</font></b><font color="#990000">(</font><font color="#009900">double</font><font color="#990000">)</font> <font color="#FF0000">{</font> <b><font color="#0000FF">return</font></b> <font color="#FF0000">"</font><font color="#CC33CC">\'</font><font color="#FF0000">double</font><font color="#CC33CC">\'\n</font><font color="#FF0000">"</font><font color="#990000">;</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">     8.  </font>
+ <font SIZE="-2" color="black">     9.  </font><font color="#008080">string</font> <b><font color="#000000">fun2</font></b><font color="#990000">(</font> <font color="#009900">short</font><font color="#990000">)</font> <font color="#FF0000">{</font> <b><font color="#0000FF">return</font></b> <font color="#FF0000">"</font><font color="#CC33CC">\'</font><font color="#FF0000">short</font><font color="#CC33CC">\'\n</font><font color="#FF0000">"</font><font color="#990000">;</font>  <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    10.  </font><font color="#008080">string</font> <b><font color="#000000">fun2</font></b><font color="#990000">(</font><font color="#009900">double</font><font color="#990000">)</font> <font color="#FF0000">{</font> <b><font color="#0000FF">return</font></b> <font color="#FF0000">"</font><font color="#CC33CC">\'</font><font color="#FF0000">double</font><font color="#CC33CC">\'\n</font><font color="#FF0000">"</font><font color="#990000">;</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    11.  </font>
+ <font SIZE="-2" color="black">    12.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    13.  </font>    <font color="#009900">int</font>    kin <font color="#990000">=</font>   <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    14.  </font>    <font color="#009900">char</font>   kch <font color="#990000">=</font> <font color="#FF0000">'</font><font color="#CC33CC">\0</font><font color="#FF0000">'</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>    <font color="#009900">float</font>  kfl <font color="#990000">=</font>   <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>    <font color="#009900">double</font> kdo <font color="#990000">=</font>   <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font>
+ <font SIZE="-2" color="black">    18.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"fun1(   int) -&gt; "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#000000">fun1</font></b><font color="#990000">(</font>kin<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    19.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"fun1(  char) -&gt; "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#000000">fun1</font></b><font color="#990000">(</font>kch<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    20.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"fun1( float) -&gt; "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#000000">fun1</font></b><font color="#990000">(</font>kfl<font color="#990000">);</font>  <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">    21.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"fun1(double) -&gt; "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#000000">fun1</font></b><font color="#990000">(</font>kdo<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    22.  </font>
+ <font SIZE="-2" color="black">    23.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"fun2( float) -&gt; "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#000000">fun2</font></b><font color="#990000">(</font>kfl<font color="#990000">);</font>  <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    24.  </font>  <i><font color="#9A1900">//cout &lt;&lt; "fun2(  char) -&gt; " &lt;&lt; fun2(kch);</font></i>
+ <font SIZE="-2" color="black">    25.  </font>  <i><font color="#9A1900">//cout &lt;&lt; "fun2(   int) -&gt; " &lt;&lt; fun2(kin);</font></i>
+ <font SIZE="-2" color="black">    26.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Definiujemy trzy funkcje o&nbsp;tej samej nazwie
+<!--O--><span class='funkcja'>fun1<!--C--></span>.
+Funkcje zwracają identyfikujący je napis.
+Wywołujemy je w&nbsp;funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>
+ z&nbsp;argumentami różnych typów.
+Z wydruku
+<PRE>
+    fun1(   int) -&gt; 'int'
+    fun1(  char) -&gt; 'char'
+    fun1( float) -&gt; 'double'
+    fun1(double) -&gt; 'double'
+    fun2( float) -&gt; 'double'
+</PRE>
+widzimy, że zawsze wywołana jest ta funkcja, której parametr
+dokładnie pasuje do typu argumentu. Wyjątkiem jest wywołanie
+z&nbsp;argumentem typu
+<!--O--><span class='typ'>float<!--C--></span>
+ z&nbsp;linii&nbsp;<span class="ding">&#x278A;</span> &mdash;&nbsp;tu jednak nie dziwi nas,
+że wybrana została funkcja z&nbsp;parametrem typu
+<!--O--><span class='typ'>double<!--C--></span>:
+wystarczyła tu jedna standardowa promocja zmiennopozycyjna (konwersja
+
+<!--O--><span class='typ'>float<!--C--></span>
+ <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='typ'>int<!--C--></span>
+ też jest standardową konwersją,
+ale nie standardową promocją).
+
+<P>
+Ciekawsze są natomiast wywołania funkcji
+<!--O--><span class='funkcja'>fun2<!--C--></span>.
+Istnieją jej dwie wersje: z&nbsp;argumentem typu
+<!--O--><span class='typ'>short<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='typ'>double<!--C--></span>. Nie ma kłopotów z&nbsp;wywołaniem funkcji z&nbsp;argumentem
+typu
+<!--O--><span class='typ'>float<!--C--></span>
+ (<span class="ding">&#x278B;</span>) &mdash;&nbsp;konwersja
+<!--O--><span class='typ'>float<!--C--></span>
+ <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='typ'>double<!--C--></span>
+
+jest standardową promocją.
+Ale zakomentowane wywołanie
+<FONT COLOR="#000000"><TT>fun2(kch)</TT></FONT>, gdzie
+<!--O--><span class='zmienna'>kch<!--C--></span>
+
+jest typu
+<!--O--><span class='typ'>char<!--C--></span>
+ jest błędne! Argument jest tu typu
+<!--O--><span class='typ'>char<!--C--></span>,
+więc wydawałoby się, że ma &bdquo;bliżej&rdquo; do typu
+<!--O--><span class='typ'>short<!--C--></span>
+ niż do typu
+
+<!--O--><span class='typ'>double<!--C--></span>. Standardową promocją całościową jest jednak
+promocja
+<!--O--><span class='typ'>char<!--C--></span>
+ <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='typ'>int<!--C--></span>; promocja
+
+<!--O--><span class='typ'>char<!--C--></span>
+ <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='typ'>short<!--C--></span>
+ nią nie jest i&nbsp;wobec tego jest
+uznana za &bdquo;dopasowanie po innej konwersji niejawnej", a&nbsp;więc takie
+samo jak
+<!--O--><span class='typ'>char<!--C--></span>
+ <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='typ'>double<!--C--></span>. Zatem kompilator zgłosi
+błąd uznając obie wersje funkcji
+<!--O--><span class='funkcja'>fun2<!--C--></span>
+ za tak samo dobre
+(albo tak samo złe).
+
+<P>
+Podobnie jest dla wykomentowanego wywołania tej samej funkcji
+z&nbsp;argumentem typu
+<!--O--><span class='typ'>int<!--C--></span>
+ (ostatnia linia). Wydaje się, że
+lepsza jest promocja
+<!--O--><span class='typ'>int<!--C--></span>
+ <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='typ'>double<!--C--></span>, będąca
+konwersją rozszerzającą, niż przekształcenie
+
+<!--O--><span class='typ'>int<!--C--></span>
+ <!-- MATH
+ $\rightarrow$
+ -->
+<SPAN CLASS="MATH">&#8594;</SPAN>
+<!--O--><span class='typ'>short<!--C--></span>, które jest konwersją
+zawężającą, a&nbsp;więc potencjalnie &bdquo;gubiącą&rdquo; informację.
+A&nbsp;jednak są one tak samo dobre/złe: ponieważ konwersja pierwsza jest,
+co prawda, promocją, ale nie całościową, obie znowu wpadają do
+tej samej kategorii &bdquo;dopasowanie po innej konwersji niejawnej".
+
+<P>
+Oczywiście stosowanie takich nieczytelnych przeciążeń może prowadzić
+do trudno wykrywalnych błędów i&nbsp;generalnie powinniśmy ich unikać.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1717"
+  HREF="node69.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1723"
+  HREF="node59.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1729"
+  HREF="node71.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1725"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1727"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1718"
+  HREF="node69.html">11.10 Funkcje rozwijane</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1724"
+  HREF="node59.html">11. Funkcje</A>
+<B>Dalej:</B> <A NAME="tex2html1730"
+  HREF="node71.html">11.12 Wskaźniki funkcyjne</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,308 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>11.7 Referencje jako wartości zwracane funkcji</TITLE>
+<META NAME="description" CONTENT="11.7 Referencje jako wartości zwracane funkcji">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node67.html">
+<LINK REL="previous" HREF="node65.html">
+<LINK REL="up" HREF="node59.html">
+<LINK REL="next" HREF="node67.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1661"
+  HREF="node65.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1667"
+  HREF="node59.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1673"
+  HREF="node67.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1669"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1671"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1662"
+  HREF="node65.html">11.6 Argumenty referencyjne</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1668"
+  HREF="node59.html">11. Funkcje</A>
+<B>Dalej:</B> <A NAME="tex2html1674"
+  HREF="node67.html">11.8 Funkcje rekurencyjne</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001270000000000000000"></A>
+     <A NAME="funk:referet"></A>
+<BR>
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">7</SPAN> Referencje jako wartości zwracane funkcji
+</H1>
+
+<P>
+Odniesienie (referencja) może nie tylko być parametrem, ale i&nbsp;wartością
+zwracaną<A NAME="11810"></A>
+przez funkcję. Następująca deklaracja
+<pre><tt>       <font color="#009900">int</font><font color="#990000">&amp;</font> <b><font color="#000000">fun</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">);</font>
+</tt></pre>
+oznacza, że funkcja zwraca pewną zmienną typu
+<!--O--><span class='typ'>int<!--C--></span>
+ przez
+referencję, czyli na przykład wyrażenie
+<FONT COLOR="#000000"><TT>fun(3)</TT></FONT> jest
+inną nazwą pewnej istniejącej zmiennej, która została podana
+w&nbsp;funkcji w&nbsp;instrukcji
+<!--O--><span class='klucz'>return<!--C--></span>.
+
+<P>
+
+<P>
+
+<div class='wazne'>
+Funkcja nie może zwracać przez referencję (ani przez wskaźnik)
+    swoich zmiennych lokalnych, gdyż po powrocie do funkcji
+    wywołującej zmienne lokalne funkcji już nie istnieją.
+    Może natomiast zwrócić zmienną lokalną przez wartość: po powrocie
+    z&nbsp;funkcji zmienna lokalna nie istnieje, ale kopia jej wartości,
+    po ewentualnej konwersji do typu zadeklarowanego jako typ zwracany,
+    przekazana zostaje do funkcji wywołującej (poprzez stos, rejestr
+    procesora lub jeszcze inaczej; to już jest szczegół implementacyjny,
+    którym nie musimy się zajmować).
+
+
+</div>
+
+<P>
+To, że wyrażenie z&nbsp;wywołaniem funkcji jest traktowane jako nazwa
+istniejącej zmiennej, a&nbsp;więc jako l-wartość, oznacza, że
+wywołanie funkcji zwracającej referencję może pojawić się po
+lewej stronie przypisania, co wygląda trochę szokująco i&nbsp;nie
+stosuje się zbyt często; tym niemniej nie ma tu błędu.
+Przykładem może być funkcja
+<!--O--><span class='funkcja'>funmax<!--C--></span>
+ z&nbsp;poniższego programu:
+<BR><A NAME="varepo.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">72</SPAN>:</SPAN>
+      <A NAME="tex2html78"
+  HREF="source-files/varepo.cpp">
+<!--O--><span class='downl'>varepo.cpp<!--C--></span></A>
+<A NAME="12982"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Różne typy argumentów i&nbsp;wartości zwracanych</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cmath&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><font color="#009900">double</font> <b><font color="#000000">potegi</font></b><font color="#990000">(</font><font color="#009900">double</font><font color="#990000">&amp;,</font><font color="#009900">double</font><font color="#990000">*);</font>
+ <font SIZE="-2" color="black">     6.  </font><font color="#009900">int</font><font color="#990000">*</font>   <b><font color="#000000">kwadrat</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">*);</font>
+ <font SIZE="-2" color="black">     7.  </font><font color="#009900">int</font><font color="#990000">&amp;</font>   <b><font color="#000000">funmax</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">[],</font><font color="#009900">int</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">     8.  </font>
+ <font SIZE="-2" color="black">     9.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    10.  </font>
+ <font SIZE="-2" color="black">    11.  </font>      <i><font color="#9A1900">// argumenty wskaźnikowe i referencyjne</font></i>
+ <font SIZE="-2" color="black">    12.  </font>    <font color="#009900">double</font> u <font color="#990000">=</font> <font color="#993399">4</font><font color="#990000">,</font> v<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>    <font color="#009900">double</font> szesc <font color="#990000">=</font> <b><font color="#000000">potegi</font></b><font color="#990000">(</font>u<font color="#990000">,</font> <font color="#990000">&amp;</font>v<font color="#990000">);</font>                     <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">    14.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Szescian: "</font> <font color="#990000">&lt;&lt;</font> szesc  <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"; kwadrat: "</font>
+ <font SIZE="-2" color="black">    15.  </font>         <font color="#990000">&lt;&lt;</font> u <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"; pierwiastek: "</font> <font color="#990000">&lt;&lt;</font> v  <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>
+ <font SIZE="-2" color="black">    17.  </font>      <i><font color="#9A1900">// to też ma sens</font></i>
+ <font SIZE="-2" color="black">    18.  </font>    <font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">4</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"20? : "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">++*</font><b><font color="#000000">kwadrat</font></b><font color="#990000">(&amp;</font>i<font color="#990000">)+</font><font color="#993399">3</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>     <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    20.  </font>
+ <font SIZE="-2" color="black">    21.  </font>    <i><font color="#9A1900">// funkcja zwracająca referencję</font></i>
+ <font SIZE="-2" color="black">    22.  </font>    <font color="#009900">int</font> tab<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">{</font><font color="#993399">1</font><font color="#990000">,</font><font color="#993399">4</font><font color="#990000">,</font><font color="#993399">6</font><font color="#990000">,</font><font color="#993399">2</font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    23.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Tablica przed: "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    24.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> <font color="#993399">4</font><font color="#990000">;</font> i<font color="#990000">++</font> <font color="#990000">)</font> cout <font color="#990000">&lt;&lt;</font> tab<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    25.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    26.  </font>
+ <font SIZE="-2" color="black">    27.  </font>    <b><font color="#000000">funmax</font></b><font color="#990000">(</font>tab<font color="#990000">,</font><font color="#993399">4</font><font color="#990000">)</font> <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>                                <span class="ding">&#x278C;</span>
+ <font SIZE="-2" color="black">    28.  </font>
+ <font SIZE="-2" color="black">    29.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Tablica po   : "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    30.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> <font color="#993399">4</font><font color="#990000">;</font> i<font color="#990000">++</font> <font color="#990000">)</font> cout <font color="#990000">&lt;&lt;</font> tab<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    31.  </font>    cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    32.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    33.  </font>
+ <font SIZE="-2" color="black">    34.  </font><font color="#009900">double</font> <b><font color="#000000">potegi</font></b><font color="#990000">(</font><font color="#009900">double</font><font color="#990000">&amp;</font> u<font color="#990000">,</font> <font color="#009900">double</font><font color="#990000">*</font> v<font color="#990000">)</font> <font color="#FF0000">{</font>                 <span class="ding">&#x278D;</span>
+ <font SIZE="-2" color="black">    35.  </font>    <font color="#009900">double</font> x <font color="#990000">=</font> u<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    36.  </font>    u <font color="#990000">*=</font> u<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    37.  </font>    <font color="#990000">*</font>v <font color="#990000">=</font> <b><font color="#000000">sqrt</font></b><font color="#990000">(</font>x<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    38.  </font>    <b><font color="#0000FF">return</font></b> u<font color="#990000">*</font>x<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    39.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    40.  </font>
+ <font SIZE="-2" color="black">    41.  </font><font color="#009900">int</font><font color="#990000">*</font> <b><font color="#000000">kwadrat</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">*</font> p<font color="#990000">)</font> <font color="#FF0000">{</font>                                <span class="ding">&#x278E;</span>
+ <font SIZE="-2" color="black">    42.  </font>    <font color="#990000">*</font>p <font color="#990000">*=</font> <font color="#990000">*</font>p<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    43.  </font>    <b><font color="#0000FF">return</font></b> p<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    44.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    45.  </font>
+ <font SIZE="-2" color="black">    46.  </font><font color="#009900">int</font><font color="#990000">&amp;</font> <b><font color="#000000">funmax</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">*</font> tab<font color="#990000">,</font> <font color="#009900">int</font> ile<font color="#990000">)</font> <font color="#FF0000">{</font>                      <span class="ding">&#x278F;</span>
+ <font SIZE="-2" color="black">    47.  </font>    <font color="#009900">int</font> i<font color="#990000">,</font> ind <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    48.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font> i <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> ile<font color="#990000">;</font> i<font color="#990000">++</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    49.  </font>        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> tab<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">&gt;</font> tab<font color="#990000">[</font>ind<font color="#990000">]</font> <font color="#990000">)</font> ind <font color="#990000">=</font> i<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    50.  </font>    <b><font color="#0000FF">return</font></b> tab<font color="#990000">[</font>ind<font color="#990000">];</font>
+ <font SIZE="-2" color="black">    51.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Funkcja
+<!--O--><span class='funkcja'>potegi<!--C--></span>
+ ma jeden argument referencyjny i&nbsp;jeden
+wskaźnikowy. Przez referencję, jako pierwszy argument, przesyłamy
+liczbę dodatnią: funkcja oblicza jej kwadrat, sześcian
+i&nbsp;pierwiatek kwadratowy (<span class="ding">&#x278D;</span>). Kwadrat argumentu
+jest w&nbsp;funkcji przypisywany do tej samej zmiennej
+<!--O--><span class='zmienna'>u<!--C--></span>,
+która była pierwszym argumentem tej funkcji. Ponieważ argument jest
+referencyjny, w&nbsp;funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>
+ po wywołaniu funkcji
+
+<!--O--><span class='funkcja'>potegi<!--C--></span>
+ wartość ta będzie nową wartością zmiennej
+
+<!--O--><span class='zmienna'>u<!--C--></span>
+ &mdash;&nbsp;stara wartość, wynosząca&nbsp;4, zostanie zamazana.
+
+<P>
+Jako drugi argument wysyłamy do funkcji kopię adresu zmiennej
+
+<!--O--><span class='zmienna'>v<!--C--></span>
+ (<span class="ding">&#x278A;</span>). W&nbsp;funkcji do zmiennej o&nbsp;tym adresie wpisywana jest
+wartość pierwiastka kwadratowego pierwszego argumentu.
+Tak więc po powrocie z&nbsp;funkcji zmienna
+<!--O--><span class='zmienna'>v<!--C--></span>
+ w&nbsp;programie
+głównym będzie miała wartość&nbsp;2. Funkcja
+<!--O--><span class='funkcja'>potegi<!--C--></span>
+ zwraca, przez
+wartość, sześcian argumentu.
+
+<P>
+Po wywołaniu funkcji
+<!--O--><span class='funkcja'>potegi<!--C--></span>
+ sześcian pierwotnej wartości
+zmiennej
+<!--O--><span class='zmienna'>u<!--C--></span>
+ mamy w&nbsp;zmiennej
+<!--O--><span class='zmienna'>szesc<!--C--></span>, kwadrat jest nową
+wartością zmiennej
+<!--O--><span class='zmienna'>u<!--C--></span>, a&nbsp;pierwiastek jest wartością zmiennej
+
+<!--O--><span class='zmienna'>v<!--C--></span>: potwierdza to wydruk z&nbsp;programu
+<PRE>
+    Szescian: 64; kwadrat: 16; pierwiastek: 2
+    20? : 20
+    Tablica przed: 1 4 6 2
+    Tablica po   : 1 4 0 2
+</PRE>
+Dość karkołomna konstrukcja użyta jest w&nbsp;linii&nbsp;<span class="ding">&#x278B;</span>. Funkcja
+
+<!--O--><span class='funkcja'>kwadrat<!--C--></span>
+ (<span class="ding">&#x278E;</span>) oblicza kwadrat argumentu przekazanego przez
+wskaźnik (do funkcji przekazujemy kopię <SPAN  CLASS="textit">adresu</SPAN> zmiennej
+
+<!--O--><span class='zmienna'>i<!--C--></span>). Obliczona wartość jest wpisywana do zmiennej wskazywanej
+przez wskaźnik, a&nbsp;więc do zmiennej
+<!--O--><span class='zmienna'>i<!--C--></span>
+ z&nbsp;programu głównego.
+Jednocześnie wskaźnik do tej samej zmiennej jest zwracany
+w&nbsp;instrukcji
+<!--O--><span class='klucz'>return<!--C--></span>
+ &mdash;&nbsp;zauważmy, że nie jest to wskaźnik
+do zmiennej lokalnej, ale do istniejącej w&nbsp;programie głównym
+zmiennej
+<!--O--><span class='zmienna'>i<!--C--></span>. Po wywołaniu funkcji wartością wyrażenia
+
+<FONT COLOR="#000000"><TT>kwadrat(&amp;i)</TT></FONT>
+jest zatem wskaźnik do zmiennej
+<!--O--><span class='zmienna'>i<!--C--></span>,
+której wartość uległa zmianie i&nbsp;wynosi teraz 16 (<SPAN CLASS="MATH">= 4&#215;4</SPAN>). Za pomocą
+operatora gwiazdki dokonujemy dereferencji, a&nbsp;więc wyrażenie
+
+<FONT COLOR="#000000"><TT>*kwadrat(&amp;i)</TT></FONT>
+jest równoważne zmiennej
+<FONT COLOR="#000000"><TT>i</TT></FONT>,
+o&nbsp;wartości&nbsp;16. Tę wartość zwiększamy o&nbsp;jeden za pomocą operatora
+zwiększenia i&nbsp;do wyniku dodajemy 3; zatem wartością całego wyrażenia
+
+<FONT COLOR="#000000"><TT>++*kwadrat(&amp;i)+3</TT></FONT> jest 20. Wbrew pozorom
+takie zawiłe konstrukcje dość często zdarzają się w&nbsp;realnych
+programach (choć może nie powinny).
+
+<P>
+Przyjrzyjmy się teraz funkcji
+<!--O--><span class='funkcja'>funmax<!--C--></span>
+ (<span class="ding">&#x278F;</span>). Do funkcji
+w&nbsp;tradycyjny sposób wysyłamy tablicę i&nbsp;jej wymiar (<span class="ding">&#x278C;</span>). Funkcja szuka
+największego elementu i&nbsp;zwraca tenże element <SPAN  CLASS="textit">przez referencję</SPAN>,
+czego z&nbsp;linii zawierającej instrukcję
+<!--O--><span class='klucz'>return<!--C--></span>
+ nie widać, ale widać
+z&nbsp;nagłówka w&nbsp;deklaracji/definicji. Zatem wyrażenie
+<FONT COLOR="#000000"><TT>funmax(tab,4)</TT></FONT>
+jest nazwą tej zmiennej, która jest największym elementem tablicy, czyli
+w&nbsp;naszym przykładzie
+<!--O--><span class='zmienna'>tab[2]<!--C--></span>. Wyrażenie to stoi po lewej stronie
+przypisania, zatem zmienna ta jest zerowana, o&nbsp;czym przekonuje nas wydruk.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1661"
+  HREF="node65.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1667"
+  HREF="node59.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1673"
+  HREF="node67.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1669"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1671"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1662"
+  HREF="node65.html">11.6 Argumenty referencyjne</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1668"
+  HREF="node59.html">11. Funkcje</A>
+<B>Dalej:</B> <A NAME="tex2html1674"
+  HREF="node67.html">11.8 Funkcje rekurencyjne</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

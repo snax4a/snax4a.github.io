@@ -1,0 +1,239 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>5.7 Wektory (std::vector)</TITLE>
+<META NAME="description" CONTENT="5.7 Wektory (std::vector)">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="previous" HREF="node28.html">
+<LINK REL="up" HREF="node22.html">
+<LINK REL="next" HREF="node30.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1075"
+  HREF="node28.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1079"
+  HREF="node22.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1085"
+  HREF="node30.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1081"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1083"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1076"
+  HREF="node28.html">5.6 Tablice typu std::array</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1080"
+  HREF="node22.html">5. Tablice statyczne i&nbsp;wskaźniki</A>
+<B>Dalej:</B> <A NAME="tex2html1086"
+  HREF="node30.html">6. Typy &bdquo;złożone&rdquo;</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00670000000000000000"></A><A NAME="tabstat:vect"></A>
+<BR>
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">7</SPAN> Wektory (<SPAN  CLASS="textsl">std::vector</SPAN>)
+</H1>
+
+<P>
+Tablice statyczne, o&nbsp;których mówiliśmy, należy znać
+(i&nbsp;czasem stosować...), ale nie są one zbyt wygodne.
+Tworząc je, musimy z&nbsp;góry znać ich wymiar i&nbsp;to już na
+etapie pisania kodu źródłowego, bo wymiarem może być tylko
+stała kompilacji. Niewygodne jest też przesyłanie zwykłych
+C-tablic do funkcji, bo trzeba osobno przesyłać wymiar, jako
+że do funkcji przesyłany jest tak naprawdę tylko adres
+pierwszego elementu. Znacznie wygodniejszym typem tablicy jest
+<FONT COLOR="#7b003e"><B>wektor</B></FONT><A NAME="5199"></A><A NAME="5200"></A>
+(<!--O--><span class='klasa'>vector<!--C--></span>
+ z&nbsp;nagłówka
+<!--O--><span class='plik'>vector<!--C--></span>).
+Jest to typ kolekcji bardzo podobny, i&nbsp;podobnie implementowany,
+jak
+<!--O--><span class='klasa'>ArrayList<!--C--></span>, znany nam z&nbsp;Javy. Tak jak
+<!--O--><span class='klasa'>array<!--C--></span>
+
+jest to właściwie szablon, który musimy parametryzować
+(w&nbsp;nawiasach kątowych) typem elementów. Wektory, w&nbsp;porównaniu
+z&nbsp;C-tablicami, mają szereg zalet:
+
+<UL>
+<LI>można tworzyć puste wektory, a potem dodawać
+        tyle elementów ile potrzeba;
+</LI>
+<LI>można tworzyć wektory o zadanej zawartości,
+        a&nbsp;potem dodawać następne elementy;
+</LI>
+<LI>wektory &bdquo;znają&rdquo; swój wymiar: w&nbsp;każdej chwili,
+        dla wektora
+<!--O--><span class='zmienna'>vec<!--C--></span>
+ możemy za pomocą
+        wywołania <TT>vec.size()</TT> dowiedzieć się, jaki
+        jest jego aktualny wymiar;
+</LI>
+<LI>informacja o&nbsp;wymiarze zachowuje się, jeśli przesyłamy
+        wektor do funkcji (raczej przez referencję, choć
+        niekoniecznie);
+</LI>
+<LI>można wektor zmniejszyć, jeśli nie potrzebujemy
+        wszystkich jego elementów;
+</LI>
+<LI>dostęp do i-tego (licząc, oczywiście, od zera)
+        elementu poprzez <TT>vec.at(i)</TT> (ale nie
+        <TT>vec[i]</TT>) zapewnia kontrolę legalności wartości
+        indeksu (w&nbsp;przypadku C-tablic żadnej kontroli nie ma).
+</LI>
+</UL>
+O kolekcjach, w&nbsp;tym wektorach, będziemy mówić później, bo na
+razie nie wiemy co to są klasy, metody i&nbsp;szablony, ale poniższy
+przykład (i&nbsp;dokumentacja) pozwolą nam już je stosować.
+<BR><A NAME="vecsimple.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">29</SPAN>:</SPAN>
+      <A NAME="tex2html31"
+  HREF="source-files/vecsimple.cpp">
+<!--O--><span class='downl'>vecsimple.cpp<!--C--></span></A>
+<A NAME="5687"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Wektory</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;string&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;vector&gt;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>    <b><font color="#0000FF">using</font></b> std<font color="#990000">::</font>vector<font color="#990000">;</font> <b><font color="#0000FF">using</font></b> std<font color="#990000">::</font>cout<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#008080">vector&lt;int&gt;</font> v1<font color="#FF0000">{</font><font color="#993399">2</font><font color="#990000">,</font><font color="#993399">1</font><font color="#FF0000">}</font><font color="#990000">;</font>                            <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#008080">vector&lt;int&gt;</font> <b><font color="#000000">v2</font></b><font color="#990000">(</font><font color="#993399">3</font><font color="#990000">,</font><font color="#993399">1</font><font color="#990000">);</font>                            <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    10.  </font>    v1<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><font color="#993399">0</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    11.  </font>    v2<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    12.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"v1: size = "</font> <font color="#990000">&lt;&lt;</font> v1<font color="#990000">.</font><b><font color="#000000">size</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" -&gt; "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><b><font color="#0000FF">const</font></b> <b><font color="#0000FF">auto</font></b><font color="#990000">&amp;</font> e <font color="#990000">:</font> v1<font color="#990000">)</font> cout <font color="#990000">&lt;&lt;</font> e <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    14.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"v2: size = "</font> <font color="#990000">&lt;&lt;</font> v2<font color="#990000">.</font><b><font color="#000000">size</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" -&gt; "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><b><font color="#0000FF">const</font></b> <b><font color="#0000FF">auto</font></b><font color="#990000">&amp;</font> e <font color="#990000">:</font> v2<font color="#990000">)</font> cout <font color="#990000">&lt;&lt;</font> e <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font>
+ <font SIZE="-2" color="black">    19.  </font>    <font color="#008080">vector&lt;std::string&gt;</font> v3<font color="#990000">;</font>                         <span class="ding">&#x278C;</span>
+ <font SIZE="-2" color="black">    20.  </font>    <i><font color="#9A1900">// v3[0] = "A";  // WRONG!!</font></i>
+ <font SIZE="-2" color="black">    21.  </font>    v3<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><font color="#FF0000">"A"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    22.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> <font color="#993399">5</font><font color="#990000">;</font> <font color="#990000">++</font>i<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    23.  </font>        v3<font color="#990000">.</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font>v3<font color="#990000">.</font><b><font color="#000000">at</font></b><font color="#990000">(</font>i<font color="#990000">-</font><font color="#993399">1</font><font color="#990000">)</font> <font color="#990000">+</font> <font color="#009900">char</font><font color="#990000">(</font><font color="#FF0000">'A'</font> <font color="#990000">+</font> i<font color="#990000">));</font>   <span class="ding">&#x278D;</span>
+ <font SIZE="-2" color="black">    24.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><b><font color="#0000FF">const</font></b> <b><font color="#0000FF">auto</font></b><font color="#990000">&amp;</font> e <font color="#990000">:</font> v3<font color="#990000">)</font> cout <font color="#990000">&lt;&lt;</font> e <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    25.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    26.  </font>
+ <font SIZE="-2" color="black">    27.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"First: "</font> <font color="#990000">&lt;&lt;</font> v3<font color="#990000">.</font><b><font color="#000000">front</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">", last : "</font>  <span class="ding">&#x278E;</span>
+ <font SIZE="-2" color="black">    28.  </font>         <font color="#990000">&lt;&lt;</font> v3<font color="#990000">.</font><b><font color="#000000">back</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    29.  </font>    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font>v3<font color="#990000">.</font><b><font color="#000000">size</font></b><font color="#990000">()</font> <font color="#990000">&gt;</font> <font color="#993399">0</font><font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    30.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Removing "</font> <font color="#990000">&lt;&lt;</font> v3<font color="#990000">.</font><b><font color="#000000">back</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    31.  </font>        v3<font color="#990000">.</font><b><font color="#000000">pop_back</font></b><font color="#990000">();</font>                              <span class="ding">&#x278F;</span>
+ <font SIZE="-2" color="black">    32.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    33.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Powyższy program drukuje
+<PRE>
+    v1: size = 3 -&gt; 2 1 0
+    v2: size = 4 -&gt; 1 1 1 1
+    A AB ABC ABCD ABCDE
+    First: A, last : ABCDE
+    Removing ABCDE
+    Removing ABCD
+    Removing ABC
+    Removing AB
+    Removing A
+</PRE>
+Stosując nawiasy klamrowe, możemy utworzyć wektor o&nbsp;z&nbsp;góry zadanej
+zawartości. Na przykład wektor
+<!--O--><span class='zmienna'>v1<!--C--></span>, utworzony
+w&nbsp;linii&nbsp;<span class="ding">&#x278A;</span>, zawiera dwie liczby typu
+<!--O--><span class='typ'>int<!--C--></span>
+ o&nbsp;wartościach
+2 i&nbsp;1. Można też do zainicjowania wektora użyć nawiasów
+okrągłych (jak w&nbsp;linii&nbsp;<span class="ding">&#x278B;</span>). Taki zapis znaczy jednak co innego:
+zainicjuj trzy elementy wektora (pierwszy argument&nbsp;3) wartością&nbsp;1
+(drugi argument&nbsp;1). Można w&nbsp;końcu utworzyć wektor pusty, jak
+w&nbsp;linii&nbsp;<span class="ding">&#x278C;</span>. Zauważmy, że wtedy nie zawiera on żadnego elementu,
+więc przypisanie <TT>v3[0]=&#34;A&#34;</TT> byłoby nielegalne,
+bo <TT>v3[0]</TT> znaczy <SPAN  CLASS="textit">pierwszy</SPAN> element, ale przecież
+w&nbsp;pustym wektorze nie ma ani jednego! Nowe elementy można dodawać
+do wektora za pomocą
+<!--O--><span class='funkcja'>push_back<!--C--></span>, jak w&nbsp;przykładzie
+(albo, jeszcze lepiej,
+<!--O--><span class='funkcja'>emplace_back<!--C--></span>, którą to funkcję
+poznamy później). Elementy są wtedy dodawane &ndash;&nbsp;co, oczywiście,
+wiąże się ze zmianą wymiaru &ndash;&nbsp;na końcu kolekcji. Istnieją co
+prawda sposoby, aby dodać nowe elementy na dowolnej pozycji,
+ale należy ich unikać, bo są bardzo nieefektywne. Dostęp do
+poszczególnych elementów wektora mamy za pomocą składni
+<TT>vec[i]</TT> (bez kontroli zakresu indeksu) albo
+<TT>vec.at(i)</TT> (<span class="ding">&#x278D;</span>, z&nbsp;kontrolą indeksu).
+Do pierwszego i&nbsp;ostatniego elementu można też się odwołać
+poprzez <TT>vec.front()</TT> i&nbsp;<TT>vec.back()</TT> (<span class="ding">&#x278E;</span>).
+Ostatni element możemy usunąć za pomocą
+<TT>vec.pop_back()</TT> (<span class="ding">&#x278F;</span>).
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1075"
+  HREF="node28.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1079"
+  HREF="node22.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1085"
+  HREF="node30.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1081"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1083"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1076"
+  HREF="node28.html">5.6 Tablice typu std::array</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1080"
+  HREF="node22.html">5. Tablice statyczne i&nbsp;wskaźniki</A>
+<B>Dalej:</B> <A NAME="tex2html1086"
+  HREF="node30.html">6. Typy &bdquo;złożone&rdquo;</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

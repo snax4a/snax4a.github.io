@@ -1,0 +1,732 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>5.5 Tablice wielowymiarowe</TITLE>
+<META NAME="description" CONTENT="5.5 Tablice wielowymiarowe">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node28.html">
+<LINK REL="previous" HREF="node26.html">
+<LINK REL="up" HREF="node22.html">
+<LINK REL="next" HREF="node28.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1045"
+  HREF="node26.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1051"
+  HREF="node22.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1057"
+  HREF="node28.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1053"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1055"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1046"
+  HREF="node26.html">5.4 Tablice znaków (C-napisy)</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1052"
+  HREF="node22.html">5. Tablice statyczne i&nbsp;wskaźniki</A>
+<B>Dalej:</B> <A NAME="tex2html1058"
+  HREF="node28.html">5.6 Tablice typu std::array</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Podrozdzia&#322;y</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html1059"
+  HREF="node27.html#SECTION00651000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Macierze</A>
+<LI><A NAME="tex2html1060"
+  HREF="node27.html#SECTION00652000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Tablice napisów</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00650000000000000000"></A><A NAME="tabstat:tabwiel"></A>
+<BR>
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN> Tablice wielowymiarowe
+</H1>
+
+<P>
+Tablice w&nbsp;C/C++
+mogą być wielowymiarowe, choć ich implementacja
+nie jest tak efektywna jak w&nbsp;innych językach programowania
+(w szczególności Fortranie).<A NAME="4980"></A>
+W zasadzie tablica <SPAN CLASS="MATH"><I>n</I></SPAN>-wymiarowa jest jednowymiarową tablicą wskaźników
+do tablic <SPAN CLASS="MATH">(<I>n</I> - 1)</SPAN>-wymiarowych,..., i&nbsp;tak dalej, rekursywnie.
+Implementacja takich tablic jest nieco inna
+dla napisów i&nbsp;dla danych innych typów. Jako przykład tablic tego drugiego
+rodzaju rozpatrzymy macierze liczbowe; tablice napisów przedstawimy
+w podrozdziale następnym. Pamiętajmy, że w&nbsp;tym rozdziale mówimy tylko
+o&nbsp;tablicach statycznych, a&nbsp;więc takich które tworzone są jako zmienne
+lokalne (na stosie) i&nbsp;ich wymiar jest znany na etapie kompilacji.
+
+<P>
+
+<H2><A NAME="SECTION00651000000000000000"></A><A NAME="tabstat:macierze"></A>
+<BR>
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Macierze
+</H2>
+
+<P>
+Rozpatrzmy<A NAME="4983"></A>
+następującą deklarację/definicję dwuwymiarowej
+tablicy:
+<pre><tt>       <font color="#009900">int</font> tab<font color="#990000">[</font><font color="#993399">2</font><font color="#990000">][</font><font color="#993399">4</font><font color="#990000">]</font> <font color="#990000">=</font> <font color="#FF0000">{</font> <font color="#FF0000">{</font><font color="#993399">1</font><font color="#990000">,</font><font color="#993399">2</font><font color="#990000">,</font><font color="#993399">3</font><font color="#FF0000">}</font><font color="#990000">,</font> <font color="#FF0000">{</font><font color="#993399">5</font><font color="#990000">,</font><font color="#993399">6</font><font color="#990000">,</font><font color="#993399">7</font><font color="#990000">,</font><font color="#993399">8</font><font color="#FF0000">}</font> <font color="#FF0000">}</font><font color="#990000">;</font>
+</tt></pre>
+Zadeklarowaliśmy tu tablicę dwuwymiarową (macierz)
+o&nbsp;dwóch &bdquo;wierszach&rdquo; i&nbsp;czterech &bdquo;kolumnach&rdquo;. Umawiamy się bowiem,
+że pierwszy indeks numeruje wiersze, a&nbsp;drugi kolumny
+(jest to oczywiście konwencja, w&nbsp;pamięci komputera struktura
+tych danych i&nbsp;tak będzie liniowa).
+
+<P>
+Liczba elementów naszej tablicy będzie&nbsp;8. Znaną nam techniką od razu
+inicjujemy utworzoną tablicę (dwoma tablicami opowiadającymi wierszom
+tworzonej macierzy). Aby to prawidłowo zrobić, musimy pamiętać
+o&nbsp;kolejności, w&nbsp;jakiej ułożone są elementy tablicy w&nbsp;pamięci
+komputera. W C/C++ zapis danych macierzy następuje <FONT COLOR="#7b003e"><I>wierszami</I></FONT>
+(a&nbsp;nie kolumnami, jak na przykład w&nbsp;Fortranie)<A NAME="4987"></A>
+a&nbsp;więc najpierw kolejne elementy wiersza o&nbsp;indeksie&nbsp;0:
+<PRE>
+    tab[0][0]  tab[0][1]  tab[0][2]  tab[0][3]
+</PRE>
+potem elementy wiersza o&nbsp;indeksie&nbsp;1
+<PRE>
+    tab[1][0]  tab[1][1]  tab[1][2]  tab[1][3]
+</PRE>
+Inicjując tablicę ujmujemy poszczególne wiersze
+w&nbsp;nawiasy klamrowe: tu było to konieczne, gdyż w&nbsp;pierwszym z&nbsp;nich
+nie podaliśmy wszystkich
+czterech wartości, a&nbsp;tylko trzy. Ostatni element pierwszego wiersza,
+czyli element
+<!--O--><span class='zmienna'>tab[0][3]<!--C--></span>, zostanie zainicjowany zerem.
+Gdybyśmy nie zostawili żadnych &bdquo;dziur&rdquo; i&nbsp;podali wszystkie wartości,
+to nawiasów klamrowych do zaznaczenia poszczególnych wierszy zwykle
+nie musimy podawać
+<pre><tt>       <font color="#009900">int</font> tab<font color="#990000">[</font><font color="#993399">2</font><font color="#990000">][</font><font color="#993399">4</font><font color="#990000">]</font> <font color="#990000">=</font> <font color="#FF0000">{</font> <font color="#993399">1</font><font color="#990000">,</font><font color="#993399">2</font><font color="#990000">,</font><font color="#993399">3</font><font color="#990000">,</font><font color="#993399">4</font><font color="#990000">,</font><font color="#993399">5</font><font color="#990000">,</font><font color="#993399">6</font><font color="#990000">,</font><font color="#993399">7</font><font color="#990000">,</font><font color="#993399">8</font> <font color="#FF0000">}</font><font color="#990000">;</font>
+</tt></pre>
+choć nie jest to zbyt czytelne. Lepiej więc
+zawsze ujmować nawet &bdquo;pełne&rdquo; wiersze w&nbsp;nawiasy klamrowe; ma to tę
+dodatkową zaletę, że oddaje prawdziwą naturę takiej tablicy jako
+tablicy tablic.
+
+<P>
+Do elementów tablicy dwuwymiarowej
+odwołujemy się poprzez nazwę tablicy z&nbsp;dwoma indeksami, każdy w
+osobnej parze nawiasów kwadratowych &mdash;&nbsp;np.&nbsp;
+<!--O--><span class='zmienna'>tab[1][2]<!--C--></span>
+
+ma w&nbsp;naszym przykładzie wartość&nbsp;7; indeksowanie jest od&nbsp;zera.
+
+<P>
+Załóżmy, że zadeklarowaliśmy tablicę dwuwymiarową
+o&nbsp;
+<!--O--><span class='zmienna'>dim1<!--C--></span>
+ wierszach i&nbsp;
+<!--O--><span class='zmienna'>dim2<!--C--></span>
+ kolumnach
+<pre><tt>       constexpr <font color="#008080">int</font> dim1 <font color="#990000">=</font> <font color="#990000">...;</font>
+       constexpr <font color="#008080">int</font> dim2 <font color="#990000">=</font> <font color="#990000">...;</font>
+
+       <font color="#009900">int</font> tab<font color="#990000">[</font>dim1<font color="#990000">][</font>dim2<font color="#990000">];</font>
+</tt></pre>
+Wiemy, że elementy rozmieszczone są w&nbsp;pamięci wierszami.
+Jak, mając adres początku tablicy i&nbsp;dwa indeksy
+<!--O--><span class='zmienna'>m<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='zmienna'>n<!--C--></span>, znaleźć
+odpowiadający tym indeksom element
+<!--O--><span class='zmienna'>tab[m][n]<!--C--></span>?
+Szukany element jest w&nbsp;wierszu <SPAN CLASS="MATH">(<I>m</I> + 1)</SPAN>-szym (o&nbsp;indeksie
+<!--O--><span class='zmienna'>m<!--C--></span>),
+a więc, licząc od początku tablicy, musimy najpierw
+&bdquo;przeskoczyć&rdquo; <SPAN CLASS="MATH"><I>m</I></SPAN> wierszy, każdy o&nbsp;długości
+<!--O--><span class='zmienna'>dim2<!--C--></span>,
+czyli <!-- MATH
+ $m\cdot\text{dim2}$
+ -->
+<SPAN CLASS="MATH"><I>m</I>&#8901;dim2</SPAN> elementów. Następnie musimy
+&bdquo;przeskoczyć&rdquo;
+<!--O--><span class='zmienna'>n<!--C--></span>
+ elementów tego wiersza, w&nbsp;którym
+znajduje się szukany element (który ma indeks kolumnowy
+<!--O--><span class='zmienna'>n<!--C--></span>,
+czyli jest w&nbsp;tym wierszu <SPAN CLASS="MATH">(<I>n</I> + 1)</SPAN>-szym elementem). Zatem przesunięcie
+elementu
+<!--O--><span class='zmienna'>tab[m][n]<!--C--></span>
+ względem elementu
+<!--O--><span class='zmienna'>tab[0][0]<!--C--></span>
+
+wynosi
+<!-- MATH
+ \begin{displaymath}
+\htmlimage{}
+    \text{shift} = n + m\cdot\text{dim2}
+\end{displaymath}
+ -->
+<P ALIGN="CENTER" CLASS="mathdisplay"><IMG
+ WIDTH="268" HEIGHT="96" BORDER="0"
+ SRC="img8.png"
+ ALT="\begin{displaymath}
+\text{shift} = n + m\cdot\text{dim2}
+\end{displaymath}"></P>
+Co jest tu ważne, to fakt, że do obliczenia tego przesunięcia
+<FONT COLOR="#7b003e"><I>nie</I></FONT> jest potrzebna znajomość pierwszego wymiaru
+tablicy, czyli liczby wierszy
+<!--O--><span class='zmienna'>dim1<!--C--></span>. Ogólnie, dla
+tablic wielowymiarowych, do prawidłowego obliczenia
+przesunięcia elementu względem początku tablicy potrzebna jest
+znajomość wszystkich wymiarów <FONT COLOR="#7b003e"><I>prócz</I></FONT> pierwszego.
+Rozpatrzmy przykład
+<BR><A NAME="tab2dim.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">24</SPAN>:</SPAN>
+      <A NAME="tex2html26"
+  HREF="source-files/tab2dim.cpp">
+<!--O--><span class='downl'>tab2dim.cpp<!--C--></span></A>
+<A NAME="5543"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Tablice wielowymiarowe</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">void</font> <b><font color="#000000">zamien</font></b><font color="#990000">(</font><font color="#009900">int</font> tab<font color="#990000">[][</font><font color="#993399">4</font><font color="#990000">],</font> <font color="#009900">int</font> w1<font color="#990000">,</font> <font color="#009900">int</font> w2<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">int</font> t<font color="#990000">,</font>k<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font>k <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> k <font color="#990000">&lt;</font> <font color="#993399">4</font><font color="#990000">;</font> k<font color="#990000">++)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     7.  </font>        t          <font color="#990000">=</font> tab<font color="#990000">[</font>w1<font color="#990000">][</font>k<font color="#990000">];</font>
+ <font SIZE="-2" color="black">     8.  </font>        tab<font color="#990000">[</font>w1<font color="#990000">][</font>k<font color="#990000">]</font> <font color="#990000">=</font> tab<font color="#990000">[</font>w2<font color="#990000">][</font>k<font color="#990000">];</font>
+ <font SIZE="-2" color="black">     9.  </font>        tab<font color="#990000">[</font>w2<font color="#990000">][</font>k<font color="#990000">]</font> <font color="#990000">=</font> t<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    11.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    12.  </font>
+ <font SIZE="-2" color="black">    13.  </font><font color="#009900">void</font> <b><font color="#000000">printTable</font></b><font color="#990000">(</font><font color="#009900">int</font> tab<font color="#990000">[][</font><font color="#993399">4</font><font color="#990000">],</font> <font color="#009900">int</font> dim1<font color="#990000">)</font> <font color="#FF0000">{</font>    <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">    14.  </font>    <font color="#009900">int</font> w<font color="#990000">,</font>k<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font>w <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> w <font color="#990000">&lt;</font> dim1<font color="#990000">;</font> w<font color="#990000">++)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    16.  </font>        <b><font color="#0000FF">for</font></b> <font color="#990000">(</font>k <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> k <font color="#990000">&lt;</font> <font color="#993399">4</font><font color="#990000">;</font> k<font color="#990000">++)</font>
+ <font SIZE="-2" color="black">    17.  </font>            cout <font color="#990000">&lt;&lt;</font> tab<font color="#990000">[</font>w<font color="#990000">][</font>k<font color="#990000">]</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    18.  </font>        cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    20.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    21.  </font>
+ <font SIZE="-2" color="black">    22.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    23.  </font>    <font color="#009900">int</font> tab<font color="#990000">[</font><font color="#993399">3</font><font color="#990000">][</font><font color="#993399">4</font><font color="#990000">]</font> <font color="#990000">=</font> <font color="#FF0000">{</font> <font color="#FF0000">{</font><font color="#993399">1</font><font color="#990000">,</font><font color="#993399">2</font><font color="#990000">,</font><font color="#993399">3</font><font color="#990000">,</font><font color="#993399">4</font><font color="#FF0000">}</font><font color="#990000">,</font> <font color="#FF0000">{</font><font color="#993399">5</font><font color="#990000">,</font><font color="#993399">6</font><font color="#FF0000">}</font><font color="#990000">,</font> <font color="#FF0000">{</font><font color="#993399">1</font><font color="#FF0000">}</font> <font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    24.  </font>
+ <font SIZE="-2" color="black">    25.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Tablica przed:</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font> <b><font color="#000000">printTable</font></b><font color="#990000">(</font>tab<font color="#990000">,</font><font color="#993399">3</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    26.  </font>    <b><font color="#000000">zamien</font></b><font color="#990000">(</font>tab<font color="#990000">,</font><font color="#993399">0</font><font color="#990000">,</font><font color="#993399">1</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    27.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Tablica    po:</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font> <b><font color="#000000">printTable</font></b><font color="#990000">(</font>tab<font color="#990000">,</font><font color="#993399">3</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    28.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Wynik tego programu to
+<PRE>
+    Tablica przed:
+    1 2 3 4
+    5 6 0 0
+    1 0 0 0
+    Tablica    po:
+    5 6 0 0
+    1 2 3 4
+    1 0 0 0
+</PRE>
+W programie głównym deklarujemy/definiujemy tablicę dwuwymiarową
+o wymiarach <SPAN CLASS="MATH">3&#215;4</SPAN>. W części inicjującej
+używamy nawiasów dla każdego wiersza, gdyż inicjujemy tylko
+niektóre elementy poszczególnych wierszy &mdash;&nbsp;pozostałe, jak widać
+z wydruku, są automatycznie inicjowane zerami.
+
+<P>
+Funkcja
+<!--O--><span class='funkcja'>zamien<!--C--></span>
+ zamienia dwa wiersze o&nbsp;podanych
+indeksach. Indeksy tych wierszy są podane jako dwa ostatnie
+parametry funkcji. Pierwszym parametrem funkcji jest natomiast
+tablica dwuwymiarowa: zauważmy, że typ parametru został określony
+jako
+<FONT COLOR="#000000"><TT>int[][4]</TT></FONT> &mdash;&nbsp;informacja o&nbsp;drugim wymiarze <FONT COLOR="#7b003e"><I>musi</I></FONT> być
+podana. Informacja o&nbsp;wymiarze pierwszym jest niepotrzebna
+do prawidłowego określenia typu i, nawet jeśli ją podamy, zostanie
+zignorowana. Zauważmy, że informacji o&nbsp;pierwszym
+wymiarze w&nbsp;ogóle nie przesyłamy do funkcji
+<!--O--><span class='funkcja'>zamien<!--C--></span>.
+Przesyłamy ją natomiast do funkcji
+
+<!--O--><span class='funkcja'>printTable<!--C--></span>, gdyż tam będzie potrzebna do wydrukowania całej
+tablicy: pierwszy wymiar przesyłamy jednak
+nie jako część typu tablicy, ale jako dodatkowy argument
+funkcji (parametr
+<!--O--><span class='zmienna'>dim1<!--C--></span>
+ &mdash;&nbsp;linia&nbsp;<span class="ding">&#x278A;</span>).
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Zastanówmy się, czym, z&nbsp;punktu widzenia związku
+między tablicami a&nbsp;wskaźnikami,
+jest zmienna
+<!--O--><span class='zmienna'>tab<!--C--></span>
+ po następującej
+deklaracji/definicji:
+<pre><tt>       <font color="#009900">int</font> tab<font color="#990000">[</font>dim1<font color="#990000">][</font>dim2<font color="#990000">];</font>
+</tt></pre>
+Mówiliśmy już w
+rozdziale o <A HREF="node25.html#tabstat:arytm">arytmetyce wskaźników</A> ,
+że
+<!--O--><span class='zmienna'>tab[i]<!--C--></span>
+ jest równoważne
+
+<FONT COLOR="#000000"><TT>*(tab+i)</TT></FONT>. Na tej samej zasadzie
+
+<!--O--><span class='zmienna'>tab[i][j]<!--C--></span>, które ma wartość
+typu
+<!--O--><span class='typ'>int<!--C--></span>, to to samo co
+<FONT COLOR="#000000"><TT>*(tab[i]+j)</TT></FONT>. Zatem
+
+<!--O--><span class='zmienna'>tab[i]<!--C--></span>
+ musi być typu
+<!--O--><span class='typ'>int*<!--C--></span>. To jest logiczne:
+
+<!--O--><span class='zmienna'>tab[i]<!--C--></span>
+ <FONT COLOR="#7b003e"><I>wskazuje</I></FONT> na początek wiersza o&nbsp;indeksie
+
+<!--O--><span class='zmienna'>i<!--C--></span>. Ale
+<!--O--><span class='zmienna'>tab[i]<!--C--></span>
+ to
+<FONT COLOR="#000000"><TT>*(tab+i)</TT></FONT> i&nbsp;wyłuskana
+wartość ma być typu
+<!--O--><span class='typ'>int*<!--C--></span>, a&nbsp;więc
+<!--O--><span class='zmienna'>tab<!--C--></span>
+ musi być
+typu &bdquo;wskaźnik do wskaźnika do
+<!--O--><span class='typ'>int<!--C--></span>&rdquo;. Zatem taki typ tablicowy
+odpowiada typowi
+<!--O--><span class='typ'>int**<!--C--></span>. Odpowiada, ale nie jest z&nbsp;nim tożsamy!
+
+<P>
+W funkcjach
+<!--O--><span class='funkcja'>printTable<!--C--></span>
+ i&nbsp;
+<!--O--><span class='funkcja'>zamien<!--C--></span>
+ musieliśmy
+jawnie specyfikować drugi wymiar tablicy. A więc funkcje te
+mogą być zastosowane tylko do takich tablic. Gdybyśmy chcieli
+zamieniać wiersze w&nbsp;macierzach o&nbsp;innej liczbie kolumn, musielibyśmy
+napisać do tego osobną funkcję. Jak zatem napisać funkcję bardziej
+ogólną?
+
+<P>
+Rozwiązaniem może być zastąpienie macierzy jednowymiarową
+tablicą wskaźników do poszczególnych wierszy, które są
+jednowymiarowymi tablicami liczb. Dla tablic jednowymiarowych
+mamy standardową konwersję do typu wskaźnikowego.
+
+<P>
+Powyższy program można więc zastąpić takim:
+<BR><A NAME="tab2dim2.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">25</SPAN>:</SPAN>
+      <A NAME="tex2html27"
+  HREF="source-files/tab2dim2.cpp">
+<!--O--><span class='downl'>tab2dim2.cpp<!--C--></span></A>
+<A NAME="5577"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Macierz jako tablica wskaźników</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">void</font> <b><font color="#000000">zamien</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">*</font> tab<font color="#990000">[],</font><font color="#009900">int</font> w1<font color="#990000">,</font><font color="#009900">int</font> w2<font color="#990000">,</font><font color="#009900">int</font> dim1<font color="#990000">,</font><font color="#009900">int</font> dim2<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> k <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> k <font color="#990000">&lt;</font> dim2<font color="#990000">;</font> k<font color="#990000">++)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>        <font color="#009900">int</font> t          <font color="#990000">=</font> tab<font color="#990000">[</font>w1<font color="#990000">][</font>k<font color="#990000">];</font>
+ <font SIZE="-2" color="black">     7.  </font>        tab<font color="#990000">[</font>w1<font color="#990000">][</font>k<font color="#990000">]</font> <font color="#990000">=</font> tab<font color="#990000">[</font>w2<font color="#990000">][</font>k<font color="#990000">];</font>
+ <font SIZE="-2" color="black">     8.  </font>        tab<font color="#990000">[</font>w2<font color="#990000">][</font>k<font color="#990000">]</font> <font color="#990000">=</font> t<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    10.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    11.  </font>
+ <font SIZE="-2" color="black">    12.  </font><font color="#009900">void</font> <b><font color="#000000">printTable</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">*</font> tab<font color="#990000">[],</font> <font color="#009900">int</font> dim1<font color="#990000">,</font> <font color="#009900">int</font> dim2<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    13.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> w <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> w <font color="#990000">&lt;</font> dim1<font color="#990000">;</font> w<font color="#990000">++)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    14.  </font>        <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> k <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> k <font color="#990000">&lt;</font> dim2<font color="#990000">;</font> k<font color="#990000">++)</font>
+ <font SIZE="-2" color="black">    15.  </font>            cout <font color="#990000">&lt;&lt;</font> tab<font color="#990000">[</font>w<font color="#990000">][</font>k<font color="#990000">]</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>        cout <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    18.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    19.  </font>
+ <font SIZE="-2" color="black">    20.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    21.  </font>    <font color="#009900">int</font> tt<font color="#990000">[</font><font color="#993399">3</font><font color="#990000">][</font><font color="#993399">4</font><font color="#990000">]</font> <font color="#990000">=</font> <font color="#FF0000">{</font> <font color="#FF0000">{</font><font color="#993399">1</font><font color="#990000">,</font><font color="#993399">2</font><font color="#990000">,</font><font color="#993399">3</font><font color="#990000">,</font><font color="#993399">4</font><font color="#FF0000">}</font><font color="#990000">,</font> <font color="#FF0000">{</font><font color="#993399">7</font><font color="#990000">,</font><font color="#993399">6</font><font color="#FF0000">}</font><font color="#990000">,</font> <font color="#FF0000">{</font><font color="#993399">1</font><font color="#FF0000">}</font> <font color="#FF0000">}</font><font color="#990000">;</font>      <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">    22.  </font>
+ <font SIZE="-2" color="black">    23.  </font>    <b><font color="#0000FF">const</font></b> <font color="#009900">int</font> dim1 <font color="#990000">=</font> <font color="#993399">3</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    24.  </font>    <b><font color="#0000FF">const</font></b> <font color="#009900">int</font> dim2 <font color="#990000">=</font> <font color="#993399">4</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    25.  </font>
+ <font SIZE="-2" color="black">    26.  </font>    <font color="#009900">int</font><font color="#990000">*</font> tab<font color="#990000">[</font>dim1<font color="#990000">];</font>                                <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">    27.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> dim1<font color="#990000">;</font> i<font color="#990000">++)</font>
+ <font SIZE="-2" color="black">    28.  </font>        tab<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">=</font> tt<font color="#990000">[</font>i<font color="#990000">];</font>
+ <font SIZE="-2" color="black">    29.  </font>
+ <font SIZE="-2" color="black">    30.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Przed:</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font> <b><font color="#000000">printTable</font></b><font color="#990000">(</font>tab<font color="#990000">,</font>dim1<font color="#990000">,</font>dim2<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    31.  </font>    <b><font color="#000000">zamien</font></b><font color="#990000">(</font>tab<font color="#990000">,</font><font color="#993399">0</font><font color="#990000">,</font><font color="#993399">1</font><font color="#990000">,</font>dim1<font color="#990000">,</font>dim2<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    32.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Po:</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>    <b><font color="#000000">printTable</font></b><font color="#990000">(</font>tab<font color="#990000">,</font>dim1<font color="#990000">,</font>dim2<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    33.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Zauważmy, że teraz typem pierwszego parametru funkcji
+
+<!--O--><span class='funkcja'>zamien<!--C--></span>
+ jest tablica
+wskaźników typu
+<!--O--><span class='typ'>int*<!--C--></span>. Nie ma tu wyspecyfikowanego
+raz na zawsze żadnego wymiaru. Aktualne wymiary tablicy przesyłamy
+osobno poprzez argumenty
+<!--O--><span class='zmienna'>dim1<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>dim2<!--C--></span>.
+Zatem funkcję tę można stosować do wszelkich tablic dwuwymiarowych,
+o dowolnym pierwszym i&nbsp;drugim wymiarze.
+
+<P>
+Tyle tylko, że co innego trzeba do funkcji &bdquo;wysłać&rdquo;.
+W linii&nbsp;<span class="ding">&#x278A;</span> tworzymy tablicę dwuwymiarową &mdash;&nbsp;tym razem o&nbsp;nazwie
+
+<!--O--><span class='zmienna'>tt<!--C--></span>. Ale funkcja potrzebuje tablicy jednowymiarowej wskaźników
+wskazujących na początki wierszy.
+Zatem tworzymy taką tablicę, o&nbsp;nazwie
+<!--O--><span class='zmienna'>tab<!--C--></span>, w&nbsp;linii&nbsp;<span class="ding">&#x278B;</span>.
+Jej wymiar to liczba wierszy tablicy
+<!--O--><span class='zmienna'>tt<!--C--></span>.
+W następnych dwóch liniach do kolejnych jej elementów wpisujemy
+wskaźniki do początków wierszy tablicy
+<!--O--><span class='zmienna'>tt<!--C--></span>, a&nbsp;więc
+wartości elementów
+<!--O--><span class='zmienna'>tt[0]<!--C--></span>,
+<!--O--><span class='zmienna'>tt[1]<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='zmienna'>tt[2]<!--C--></span>. Do funkcji posyłamy teraz nie tablicę
+<!--O--><span class='zmienna'>tt<!--C--></span>,
+tylko tak przygotowaną tablicę
+<!--O--><span class='zmienna'>tab<!--C--></span>.
+Zauważmy, że dzięki arytmetyce wskaźników wewnątrz funkcji
+możemy odnosić się do elementów naszej tablicy używając
+notacji z&nbsp;dwoma indeksami, choć posłana do funkcji tablica
+
+<!--O--><span class='zmienna'>tab<!--C--></span>
+ była jednowymiarowa; była za to tablicą nie wartości
+typu
+<!--O--><span class='typ'>int<!--C--></span>, ale wskaźników typu
+<!--O--><span class='typ'>int*<!--C--></span>.
+
+<P>
+Rezultat
+<PRE>
+    Przed:
+    1 2 3 4
+    7 6 0 0
+    1 0 0 0
+    Po:
+    7 6 0 0
+    1 2 3 4
+    1 0 0 0
+</PRE>
+przekonuje nas, że obie funkcje działają prawidłowo, bez
+konieczności wpisywania do ich kodu &bdquo;na sztywno&rdquo; żadnych wymiarów.
+
+<P>
+
+<H2><A NAME="SECTION00652000000000000000"></A><A NAME="tabstat:tabnap"></A>
+<BR>
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Tablice napisów
+</H2>
+
+<P>
+Powyższe<A NAME="5081"></A>
+stwierdzenia mogą dla początkujących wydawać się nieco
+zagmatwane. Aby oswoić się z&nbsp;zapisem wskaźnikowym i&nbsp;tablicami,
+rozpatrzmy teraz jednowymiarowe tablice napisów, które będziemy traktować
+jak dwuwymiarowe tablice znaków.
+<BR><A NAME="tabnap.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">26</SPAN>:</SPAN>
+      <A NAME="tex2html28"
+  HREF="source-files/tabnap.cpp">
+<!--O--><span class='downl'>tabnap.cpp<!--C--></span></A>
+<A NAME="5588"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Tablice napisów</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <b><font color="#0000FF">const</font></b> <font color="#009900">char</font> <font color="#990000">**</font>v<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    <b><font color="#0000FF">const</font></b> <font color="#009900">char</font> <font color="#990000">*</font>t<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">{</font><font color="#FF0000">"abcd"</font><font color="#990000">,</font> <font color="#FF0000">"efghi"</font><font color="#990000">,</font> <font color="#FF0000">"jklmno"</font> <font color="#FF0000">}</font><font color="#990000">;</font>  <span class="ding">&#x278A;</span>
+ <font SIZE="-2" color="black">     7.  </font>    v <font color="#990000">=</font> t<font color="#990000">;</font>                                           <span class="ding">&#x278B;</span>
+ <font SIZE="-2" color="black">     8.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"v+2         = "</font> <font color="#990000">&lt;&lt;</font> v<font color="#990000">+</font><font color="#993399">2</font>         <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"v[2]        = "</font> <font color="#990000">&lt;&lt;</font> v<font color="#990000">[</font><font color="#993399">2</font><font color="#990000">]</font>        <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"*(v+2)      = "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">*(</font>v<font color="#990000">+</font><font color="#993399">2</font><font color="#990000">)</font>      <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font>
+ <font SIZE="-2" color="black">    12.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"*(*(t+1)+2) = "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">*(*(</font>t<font color="#990000">+</font><font color="#993399">1</font><font color="#990000">)+</font><font color="#993399">2</font><font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font> <span class="ding">&#x278C;</span>
+ <font SIZE="-2" color="black">    13.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"t[1][2]     = "</font> <font color="#990000">&lt;&lt;</font> t<font color="#990000">[</font><font color="#993399">1</font><font color="#990000">][</font><font color="#993399">2</font><font color="#990000">]</font>     <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    14.  </font>
+ <font SIZE="-2" color="black">    15.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"*(*(v+1)+2) = "</font> <font color="#990000">&lt;&lt;</font> <font color="#990000">*(*(</font>v<font color="#990000">+</font><font color="#993399">1</font><font color="#990000">)+</font><font color="#993399">2</font><font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"v[1][2]     = "</font> <font color="#990000">&lt;&lt;</font> v<font color="#990000">[</font><font color="#993399">1</font><font color="#990000">][</font><font color="#993399">2</font><font color="#990000">]</font>     <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    17.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Czym jest
+<!--O--><span class='zmienna'>t<!--C--></span>
+ zadeklarowane w&nbsp;wierszu&nbsp;<span class="ding">&#x278A;</span>? Jest
+tablicą (bo na prawo są nawiasy kwadratowe) wskaźników do
+
+<!--O--><span class='typ'>const char<!--C--></span>
+ (bo na lewo mamy
+<!--O--><span class='typ'>const char*<!--C--></span>).
+Wskaźniki do
+<!--O--><span class='typ'>char<!--C--></span>
+ odpowiadają, jak wiemy, jednowymiarowym tablicom
+znaków, czyli napisom: są one zainicjowane napisami podanymi w&nbsp;formie
+literałów (i&nbsp;dlatego zastosowaliśmy typ ustalony znaków).
+Ponieważ <SPAN  CLASS="textit">'tablica elementów
+typu
+<!--O--><span class='typ'>Typ<!--C--></span>'</SPAN> odpowiada typowi
+<!--O--><span class='typ'>Typ*<!--C--></span>, zatem
+w&nbsp;naszym przykładzie
+<!--O--><span class='zmienna'>t<!--C--></span>, jako tablica elementów typu
+
+<!--O--><span class='typ'>const char*<!--C--></span>, odpowiada typowi
+<!--O--><span class='typ'>const char**<!--C--></span>.
+Dlatego właśnie przypisanie w&nbsp;linii&nbsp;<span class="ding">&#x278B;</span> jest prawidłowe.
+
+<P>
+Następnie drukujemy wartość
+<FONT COLOR="#000000"><TT>v+2</TT></FONT>. Jest to przesunięty
+adres zawarty w&nbsp;zmiennej
+<!--O--><span class='zmienna'>v<!--C--></span>. Gdyby
+<!--O--><span class='zmienna'>v<!--C--></span>
+ było typu
+
+<!--O--><span class='typ'>char*<!--C--></span>, to wydrukowany zostałby napis, ale
+<!--O--><span class='zmienna'>v<!--C--></span>
+ jest
+typu
+<!--O--><span class='typ'>char**<!--C--></span>, więc wydrukowany zostanie po prostu adres.
+
+<P>
+Natomiast w&nbsp;następnych liniach drukujemy wartość zmiennej wskazywanej
+przez adres
+<FONT COLOR="#000000"><TT>v+2</TT></FONT>, czyli wartość
+<!--O--><span class='zmienna'>v[2]<!--C--></span>
+ lub,
+równoważnie,
+<FONT COLOR="#000000"><TT>*(v+2)</TT></FONT>. Ta wartość <FONT COLOR="#7b003e"><I>jest</I></FONT> typu
+
+<!--O--><span class='typ'>char*<!--C--></span>, czyli zawiera adres znaku, więc wydrukowany zostanie
+nie ten adres, ale napis rozpoczynający się od znaku pod tym adresem.
+A zatem obie linie spowodują wydrukowanie napisu o&nbsp;indeksie&nbsp;2, czyli
+trzeciego: '
+<FONT COLOR="#000000"><TT>jklmno</TT></FONT>'.
+
+<P>
+Dość okropnie wyglądające linie poczynając od <span class="ding">&#x278C;</span> ilustrują podobne
+rozumowanie na poziomie pojedynczych znaków.
+
+<P>
+Spójrzmy na dwie pierwsze z&nbsp;nich. Zauważmy, że
+<FONT COLOR="#000000"><TT>*(t+1)</TT></FONT> to to
+samo, co
+<!--O--><span class='zmienna'>t[1]<!--C--></span>, a&nbsp;zatem <FONT COLOR="#7b003e"><I>wskaźnik</I></FONT> do znaku (konkretnie:
+adres pierwszego znaku drugiego napisu). Zatem, jeśli ten adres
+chcemy przesunąć o&nbsp;dwie długości odpowiadające rozmiarowi zmiennej typu
+
+<!--O--><span class='typ'>char<!--C--></span>, to napiszemy
+<FONT COLOR="#000000"><TT>*(t+1)+2</TT></FONT>; jeśli teraz spod tego adresu
+chcemy wyłuskać wartość (typu
+<!--O--><span class='typ'>char<!--C--></span>), to napiszemy
+
+<FONT COLOR="#000000"><TT>*(*(t+1)+2)</TT></FONT>, co jest równoważne
+<!--O--><span class='zmienna'>t[1][2]<!--C--></span>.
+W&nbsp;sumie oboma sposobami wydobyliśmy trzeci znak z&nbsp;drugiego napisu
+(literę&nbsp;'g'), o czym przekonuje nas wydruk z&nbsp;programu:
+<PRE>
+    v+2         = 0x7fff364d7080
+    v[2]        = jklmno
+    *(v+2)      = jklmno
+    *(*(t+1)+2) = g
+    t[1][2]     = g
+    *(*(v+1)+2) = g
+    v[1][2]     = g
+</PRE>
+W ostatnich dwóch liniach programu pokazujemy, że do tych wszystkich
+operacji możemy też używać zmiennej
+<!--O--><span class='zmienna'>v<!--C--></span>, która w&nbsp;ogóle
+nie została zadeklarowana jako tablicowa, tylko jako typu
+
+<!--O--><span class='typ'>const char**<!--C--></span>.
+
+<P>
+Opisane tu konstrukcje dotyczą również tablicy napisów, jaką jest
+tablica argumentów wywołania &mdash;&nbsp;omówiliśmy ją
+w jednym z&nbsp;pierwszych <A HREF="node9.html#zaczyn:argum">rozdziałów</A> ,
+a przykład zastosowania pokazaliśmy w
+programie <A HREF="node9.html#argumenty.cpp">
+<!--O--><span class='plik'>argumenty.cpp<!--C--></span></A>.
+
+<P>
+Chociaż tablica argumentów wywołania jest zadeklarowana jako
+
+<!--O--><span class='zmienna'>char* argv[]<!--C--></span>
+ a&nbsp;nie
+<!--O--><span class='zmienna'>const char* argv[]<!--C--></span>,
+nie powinniśmy nigdy próbować modyfikować napisów
+wskazywanych przez elementy tej tablicy!
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Pewną trudność może sprawić wczytywanie napisów.
+Związane jest to z&nbsp;tym, że wszelkie białe znaki interpretowane
+są przez proces czytający jako separatory danych.
+Jeden ze sposobów jest przedstawiony w&nbsp;poniższym programie
+(ale, ze względów bezpieczeństwa, nie jest to sposób polecany!);
+polega na wczytywaniu kolejnych fragmentów do osobnych tablic znaków:
+<BR><A NAME="czytab.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">27</SPAN>:</SPAN>
+      <A NAME="tex2html29"
+  HREF="source-files/czytab.cpp">
+<!--O--><span class='downl'>czytab.cpp<!--C--></span></A>
+<A NAME="5633"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Czytanie napisów</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>   <font color="#009900">char</font> nap1<font color="#990000">[</font><font color="#993399">100</font><font color="#990000">],</font> nap2<font color="#990000">[</font><font color="#993399">100</font><font color="#990000">];</font>
+ <font SIZE="-2" color="black">     6.  </font>
+ <font SIZE="-2" color="black">     7.  </font>   cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">Wpisz dwa napisy oddzielone bialymi znakami: "</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>   cin  <font color="#990000">&gt;&gt;</font>  nap1 <font color="#990000">&gt;&gt;</font> nap2<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>   cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">Napis 1: "</font> <font color="#990000">&lt;&lt;</font> nap1 <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>   cout <font color="#990000">&lt;&lt;</font>   <font color="#FF0000">"Napis 2: "</font> <font color="#990000">&lt;&lt;</font> nap2 <font color="#990000">&lt;&lt;</font> endl <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    11.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Tworzymy tablice znakowe (w przykładzie
+<!--O--><span class='zmienna'>nap1<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='zmienna'>nap2<!--C--></span>) o&nbsp;rozmiarze wystarczającym, aby pomieścić
+spodziewane napisy. Następnie, za pomocą normalnego mechanizmu
+zapewnianego przez
+<!--O--><span class='zmienna'>cin<!--C--></span>, wczytujemy napisy do tych
+tablic. Tak jak wspominaliśmy
+     w&nbsp;rozdziale o <A HREF="node7.html#zaczyn:wej">wczytywaniu danych</A> ,
+wczytywanie jednej danej kończy się, gdy napotkany zostanie
+biały znak, traktowany jako separator między danymi.
+Możemy zatem wczytać dwa napisy, jak poniżej
+<PRE>
+    Wpisz dwa napisy oddzielone bialym znakiem: 'Ala Ola'
+
+    Napis 1: 'Ala
+    Napis 2: Ola'
+</PRE>
+Zauważmy, że ujęcie napisu w&nbsp;apostrofy nic nie pomaga:
+tak czy owak znak odstępu jest traktowany jako separator.
+Zauważmy też, że mechanizm dostarczany przez użycie obiektu
+
+<!--O--><span class='zmienna'>cin<!--C--></span>
+ zapewnia przy wczytywaniu napisów do tablicy znaków
+dodanie na końcu wczytanego ciągu znaku '<!-- MATH
+ $\backslash$
+ -->
+<SPAN CLASS="MATH">&#92;</SPAN>0' kończącego napis.
+Oczywiście, wymiar tablicy musi być taki, aby ten znak jeszcze w&nbsp;niej
+się zmieścił.
+Lepsze sposoby na wczytanie napisów do
+programu poznamy
+      w&nbsp;rozdziale o <A HREF="node103.html#chap:io">operacjach wejścia/wyjścia</A> .
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1045"
+  HREF="node26.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1051"
+  HREF="node22.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1057"
+  HREF="node28.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1053"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1055"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1046"
+  HREF="node26.html">5.4 Tablice znaków (C-napisy)</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1052"
+  HREF="node22.html">5. Tablice statyczne i&nbsp;wskaźniki</A>
+<B>Dalej:</B> <A NAME="tex2html1058"
+  HREF="node28.html">5.6 Tablice typu std::array</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

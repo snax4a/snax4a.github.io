@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>18. Przeciążanie operatorów</TITLE>
+<META NAME="description" CONTENT="18. Przeciążanie operatorów">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node119.html">
+<LINK REL="previous" HREF="node111.html">
+<LINK REL="up" HREF="PRG2CPP.html">
+<LINK REL="next" HREF="node115.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2387"
+  HREF="node113.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2393"
+  HREF="PRG2CPP.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2399"
+  HREF="node115.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2395"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2397"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2388"
+  HREF="node113.html">17.2 Napisy w&nbsp;C++</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2394"
+  HREF="PRG2CPP.html">Programowanie w C++</A>
+<B>Dalej:</B> <A NAME="tex2html2400"
+  HREF="node115.html">18.1 Wstęp</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001900000000000000000"></A>
+        <A NAME="chap:przec"></A>
+<BR>
+<SPAN CLASS="arabic">18</SPAN>. Przeciążanie operatorów
+</H1>
+
+<P>
+Przeciążanie operatorów to sposób na nadanie znaczenia takich
+operatorów, jak&nbsp;'
+<FONT COLOR="#000000"><TT>+</TT></FONT>', '
+<FONT COLOR="#000000"><TT>&amp;</TT></FONT>' czy&nbsp;'
+<FONT COLOR="#000000"><TT>&#171;</TT></FONT>'
+w&nbsp;sytuacji, gdy ich argumentami są obiekty klas przez nas
+definiowanych. Przeciążanie nie jest zwykle absolutnie konieczne,
+choć bywa bardzo wygodne (zamiast przeciążać operatory, można
+definiować zwykłe funkcje i&nbsp;metody wykonujące te same zadania).
+Na przykład w&nbsp;C czy w&nbsp;Javie<A NAME="22925"></A>
+użytkownik nie może przeciążać operatorów, a&nbsp;nie można
+przecież powiedzieć, że z&nbsp;tego powodu są to języki ubogie.
+Przeciążanie operatorów występuje natomiast w&nbsp;Pythonie,
+<A NAME="22926"></A>
+Haskellu<A NAME="22927"></A>
+czy C#.<A NAME="22928"></A>
+
+<P>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Podrozdzia&#322;y</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html2401"
+  HREF="node115.html"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">1</SPAN> Wstęp</A>
+<LI><A NAME="tex2html2402"
+  HREF="node116.html"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">2</SPAN> Przeciążenia za pomocą funkcji globalnych</A>
+<UL>
+<LI><A NAME="tex2html2403"
+  HREF="node116.html#SECTION001921000000000000000"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Operatory dwuargumentowe</A>
+<LI><A NAME="tex2html2404"
+  HREF="node116.html#SECTION001922000000000000000"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Operatory jednoargumentowe</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html2405"
+  HREF="node117.html"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">3</SPAN> Przeciążenia za pomocą metod klasy</A>
+<UL>
+<LI><A NAME="tex2html2406"
+  HREF="node117.html#SECTION001931000000000000000"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Operatory dwuargumentowe</A>
+<LI><A NAME="tex2html2407"
+  HREF="node117.html#SECTION001932000000000000000"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Operatory jednoargumentowe</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html2408"
+  HREF="node118.html"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">4</SPAN> Operatory &bdquo;specjalne&rdquo;</A>
+<UL>
+<LI><A NAME="tex2html2409"
+  HREF="node118.html#SECTION001941000000000000000"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Operator przypisania</A>
+<LI><A NAME="tex2html2410"
+  HREF="node118.html#SECTION001942000000000000000"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Operator indeksowania</A>
+<LI><A NAME="tex2html2411"
+  HREF="node118.html#SECTION001943000000000000000"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> Operator wywołania</A>
+<LI><A NAME="tex2html2412"
+  HREF="node118.html#SECTION001944000000000000000"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> Operator wyboru składowej przez wskaźnik</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2387"
+  HREF="node113.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2393"
+  HREF="PRG2CPP.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2399"
+  HREF="node115.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2395"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2397"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2388"
+  HREF="node113.html">17.2 Napisy w&nbsp;C++</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2394"
+  HREF="PRG2CPP.html">Programowanie w C++</A>
+<B>Dalej:</B> <A NAME="tex2html2400"
+  HREF="node115.html">18.1 Wstęp</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,289 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>11.3 Wywołanie funkcji</TITLE>
+<META NAME="description" CONTENT="11.3 Wywołanie funkcji">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node63.html">
+<LINK REL="previous" HREF="node61.html">
+<LINK REL="up" HREF="node59.html">
+<LINK REL="next" HREF="node63.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html1605"
+  HREF="node61.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1611"
+  HREF="node59.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1617"
+  HREF="node63.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1613"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1615"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1606"
+  HREF="node61.html">11.2 Deklaracje i&nbsp;definicje funkcji</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1612"
+  HREF="node59.html">11. Funkcje</A>
+<B>Dalej:</B> <A NAME="tex2html1618"
+  HREF="node63.html">11.4 Argumenty domyślne</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001230000000000000000"></A><A NAME="funk:wywol"></A>
+<BR>
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">3</SPAN> Wywołanie funkcji
+</H1>
+
+<P>
+Wywołanie funkcji<A NAME="11540"></A><A NAME="11541"></A>
+ma postać nazwy tej funkcji z&nbsp;podaną w&nbsp;nawiasach
+okrągłych listą oddzielonych przecinkami argumentów. Oczywiście
+liczba argumentów wywołania musi być dokładnie taka jak liczba
+parametrów w&nbsp;deklaracji i&nbsp;definicji funkcji. Nawet jeśli funkcja jest
+bezargumentowa, nawiasy musimy podać: w&nbsp;przeciwnym przypadku nazwa
+zostanie potraktowana nie jako wywołanie, ale jak nazwa
+wskaźnika wskazującej funkcję (więcej o&nbsp;wskaźnikach funkcyjnych
+powiemy w&nbsp;osobnym podrozdziale <A HREF="node71.html#funk:wskazfun">na ich temat</A> ).
+
+<P>
+Rolę argumentów<A NAME="11548"></A><A NAME="11549"></A>
+mogą pełnić dowolne wyrażenia, których wartość
+jest typu zgodnego z&nbsp;zadeklarowanym typem odpowiedniego
+parametru funkcji. Nie musi być to typ identyczny z
+typem parametru: wywołanie będzie prawidłowe, jeśli
+wartość argumentu można niejawnie przekształcić na wartość
+zadeklarowanego typu parametru
+(patrz podrozdział <A HREF="node57.html#konwporz:konwersje">o konwersjach standardowych</A> ).
+Jeśli przy takiej konwersji może być tracona informacja
+(czyli jest to konwersja zawężająca, a&nbsp;nie promocja), to zazwyczaj
+podczas kompilacji otrzymamy ostrzeżenia.
+
+<P>
+Jeśli funkcja zwraca rezultat, to ostatnią wykonywaną
+instrukcją musi być <FONT COLOR="#7b003e"><I>zawsze</I></FONT> instrukcja
+<!--O--><span class='klucz'>return<!--C--></span>
+ zwracająca
+wartość typu, jaki został zadeklarowany jako typ funkcji, albo typu,
+który może być niejawnie przekształcony do typu funkcji.
+
+<P>
+Jeśli funkcja jest bezrezultatowa, to
+instrukcja
+<!--O--><span class='klucz'>return<!--C--></span>
+ może (choć nie musi) w&nbsp;niej występować
+&mdash;&nbsp;jeśli występuje, to nie może zawierać żadnego wyrażenia,
+którego wartość miałaby być zwrócona.
+Dla funkcji bezrezultatowych domniemywa się instrukcję
+<!--O--><span class='klucz'>return<!--C--></span>
+
+tuż przed nawiasem kończącym definicję ciała tej funkcji.
+
+<P>
+Proces wywoływania możemy sobie wyobrażać tak (szczegóły mogą
+zależeć od platformy i&nbsp;od kompilatora):
+
+<UL>
+<LI>Obliczne są wartości argumentów, po czym dokonywane
+          są konwersje potrzebne do przekształcenia tych wartości
+          w&nbsp;wartości typu odpowiedniego parametru funkcji (co,
+          oczywiście, powinno być wykonalne &mdash;&nbsp;w&nbsp;przeciwnym razie
+          program jest błędny).
+</LI>
+<LI>Tak uzyskane wartości kopiowane są na stos programu.
+          Zauważmy, że jeśli argumentem była zmienna, to na stos
+          kładziona jest <FONT COLOR="#7b003e"><I>kopia</I></FONT> jej wartości
+          (po ewentualnej konwersji &mdash;&nbsp;wartość kładziona na stosie
+          musi już być <SPAN  CLASS="textit">dokładnie</SPAN> takiego typu jak
+          zadeklarowany typ odpowiadającego temu argumentowi parametru
+          funkcji). Tak więc funkcja <FONT COLOR="#7b003e"><I>nie</I></FONT> uzyskuje dostępu do
+          zmiennej, która pełniła rolę argumentu, a&nbsp;tylko do kopii
+          jej wartości w&nbsp;momencie wywołania.
+</LI>
+<LI>Sterowanie przechodzi do funkcji: kopie wartości argumentów
+          na stosie są utożsamiane ze zmiennymi lokalnymi
+          odpowiadającymi poszczególnym parametrom funkcji.
+          Zmienne lokalne (definiowane w&nbsp;funkcji) umieszczane są
+          również na stosie.
+<BR>
+Wyjątek stanowią zmienne definiowane z
+          modyfikatorem
+<!--O--><span class='klucz'>static<!--C--></span>.<A NAME="11565"></A>
+          Takie zmienne tworzone są raz: podczas pierwszego
+          wywołania. Przy kolejnych wywołaniach funkcja ma
+          dostęp do
+          <FONT COLOR="#7b003e"><I>tej samej</I></FONT> zmiennej statycznej. Istnieje ona aż do
+          zakończenia
+          programu. Różni się od zmiennej globalnej tym, że
+          jej zasięgiem jest zasięg funkcji (od miejsca deklaracji
+          do końca funkcji).
+</LI>
+<LI>Po zakończeniu wykonywania funkcji część stosu
+          ze zmiennymi lokalnymi (również tymi
+          odpowiadającymi parametrom funkcji), jest usuwana, tak
+          aby stan stosu odpowiadał temu sprzed wywołania
+          (<SPAN  CLASS="textit">zwijanie</SPAN> stosu). Jeśli funkcja jest rezultatowa, to
+          wynik jest zwracany do funkcji wywołującej
+          (możemy sobie wyobrażać, że również poprzez stos,
+          choć w&nbsp;praktyce stosuje się inne mechanizmy).
+</LI>
+</UL>
+
+<P>
+Rozpatrzmy przykład ilustrujący konwersje argumentów i&nbsp;rezultatu
+funkcji:
+<BR><A NAME="function.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">66</SPAN>:</SPAN>
+      <A NAME="tex2html71"
+  HREF="source-files/function.cpp">
+<!--O--><span class='downl'>function.cpp<!--C--></span></A>
+<A NAME="12806"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Konwersje argumentów i&nbsp;wartości zwracanej</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">int</font> <b><font color="#000000">d2i</font></b><font color="#990000">(</font><font color="#009900">double</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">     5.  </font><font color="#009900">double</font> <b><font color="#000000">i2d</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">     6.  </font>
+ <font SIZE="-2" color="black">     7.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#009900">double</font> x <font color="#990000">=</font> <font color="#993399">3.5</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>
+ <font SIZE="-2" color="black">    10.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"d2i(x) = "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#000000">d2i</font></b><font color="#990000">(</font>x<font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    11.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"i2d(x) = "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#000000">i2d</font></b><font color="#990000">(</font>x<font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    12.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    13.  </font>
+ <font SIZE="-2" color="black">    14.  </font><font color="#009900">int</font> <b><font color="#000000">d2i</font></b><font color="#990000">(</font><font color="#009900">double</font> x<font color="#990000">)</font> <font color="#FF0000">{</font> <b><font color="#0000FF">return</font></b> <font color="#993399">3</font><font color="#990000">*</font>x<font color="#990000">;</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    15.  </font><font color="#009900">double</font> <b><font color="#000000">i2d</font></b><font color="#990000">(</font><font color="#009900">int</font> k<font color="#990000">)</font> <font color="#FF0000">{</font> <b><font color="#0000FF">return</font></b> <font color="#993399">3</font><font color="#990000">*</font>k<font color="#990000">;</font> <font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Obie funkcje,
+<!--O--><span class='funkcja'>d2i<!--C--></span>
+ i&nbsp;
+<!--O--><span class='funkcja'>i2d<!--C--></span>, zwracają wartość
+otrzymanego argumentu pomnożoną przez trzy. Wynikiem powinna
+być liczba 10,5.
+Kompilator wypisał ostrzeżenia, ale program skompilował się
+i&nbsp;uruchomił:
+<PRE>
+    cpp&gt; g++ -o function function.cpp
+    function.cpp: In function `int main()':
+    function.cpp:11: warning: passing `double' for converting 1
+                     of `double i2d(int)'
+    function.cpp: In function `int d2i(double)':
+    function.cpp:14: warning: converting to `int' from `double'
+    cpp&gt; ./function
+    d2i(x) = 10
+    i2d(x) = 9
+    cpp&gt;
+</PRE>
+Jak widać, obie funkcje zwracają inne rezultaty, jednak żadnego z
+nich nie uznalibyśmy za prawidłowy! Dlaczego tak się stało?
+
+<P>
+Parametr funkcji
+<!--O--><span class='funkcja'>d2i<!--C--></span>
+
+jest typu
+<!--O--><span class='typ'>double<!--C--></span>. Zatem wartość zmiennej
+<!--O--><span class='zmienna'>x<!--C--></span>, która
+też jest typu
+<!--O--><span class='typ'>double<!--C--></span>, została przekazana do funkcji jako
+
+<!--O--><span class='typ'>double<!--C--></span>.
+W&nbsp;funkcji wartość ta została pomnożona przez trzy;
+wynikiem jest&nbsp;10,5. Ale typem funkcji (typem jej wartości zwracanej)
+jest typ
+<!--O--><span class='typ'>int<!--C--></span>, zatem przed zwróceniem wynik jest
+przekształcany do tego typu. Część ułamkowa jest więc &bdquo;obcinana&rdquo;
+i&nbsp;zwrócona wartość to liczba całkowita&nbsp;10 (typu
+<!--O--><span class='typ'>int<!--C--></span>).
+
+<P>
+W przypadku funkcji
+<!--O--><span class='funkcja'>i2d<!--C--></span>
+ parametr jest typu
+<!--O--><span class='typ'>int<!--C--></span>.
+Zatem wartość argumentu, czyli&nbsp;3,5, zostanie przekształcona do
+typu
+<!--O--><span class='typ'>int<!--C--></span>
+ i&nbsp;będzie wynosić 3. Po pomnożeniu przez&nbsp;3 wynik
+będzie całkowity i&nbsp;równy 9. Funkcja jest typu
+<!--O--><span class='typ'>double<!--C--></span>, więc
+przed zwróceniem wynik zostanie przekształcony do tego właśnie typu;
+tym niemniej jego wartość pozostanie&nbsp;9.
+
+<P>
+Zauważmy, że w&nbsp;powyższym programie definicje obu funkcji
+umieściliśmy po funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>. Na początku programu
+są one jednak zadeklarowane, a&nbsp;zatem kompilator zna ich prototyp,
+gdy napotyka ich użycie wewnątrz funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html1605"
+  HREF="node61.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html1611"
+  HREF="node59.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html1617"
+  HREF="node63.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html1613"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html1615"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html1606"
+  HREF="node61.html">11.2 Deklaracje i&nbsp;definicje funkcji</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html1612"
+  HREF="node59.html">11. Funkcje</A>
+<B>Dalej:</B> <A NAME="tex2html1618"
+  HREF="node63.html">11.4 Argumenty domyślne</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

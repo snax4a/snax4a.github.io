@@ -1,0 +1,491 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>20.3 Operator przypisania dla klas pochodnych</TITLE>
+<META NAME="description" CONTENT="20.3 Operator przypisania dla klas pochodnych">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node126.html">
+<LINK REL="previous" HREF="node124.html">
+<LINK REL="up" HREF="node122.html">
+<LINK REL="next" HREF="node126.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2578"
+  HREF="node124.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2584"
+  HREF="node122.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2590"
+  HREF="node126.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2586"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2588"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2579"
+  HREF="node124.html">20.2 Konstruktory i&nbsp;destruktory klas</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2585"
+  HREF="node122.html">20. Dziedziczenie i polimorfizm</A>
+<B>Dalej:</B> <A NAME="tex2html2591"
+  HREF="node126.html">20.4 Metody wirtualne i&nbsp;polimorfizm</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002130000000000000000"></A><A NAME="dzie:przyp"></A>
+<BR>
+<SPAN CLASS="arabic">20</SPAN>.<SPAN CLASS="arabic">3</SPAN> Operator przypisania dla klas pochodnych
+</H1>
+
+<P>
+Dużo trudności sprawia czasem właściwe zdefiniowanie
+(przeciążenie) operatora przypisania dla klasy pochodnej.
+
+<P>
+Jeżeli w&nbsp;klasie bazowej jest zdefiniowany nieprywatny operator
+przypisania, a&nbsp;w&nbsp;klasie pochodnej nie jest, to do przypisania
+odziedziczonego podobiektu klasy bazowej zostanie użyty operator
+przypisania zdefiniowany w&nbsp;klasie bazowej. Natomiast dla części
+&bdquo;własnej&rdquo; obiektu klasy pochodnej zostanie wtedy użyte przypisanie
+dostarczone przez system (a więc &bdquo;pole po polu&rdquo;; prawdopodobnie
+nieprawidłowo, jeśli są w&nbsp;klasie pola wskaźnikowe).
+Rozpatrzmy na przykład poniższy program, w&nbsp;którym definiujemy
+prostą klasę
+<!--O--><span class='klasa'>A<!--C--></span>
+ i&nbsp;klasę dziedziczącą
+<!--O--><span class='klasa'>B<!--C--></span>:
+<A NAME="inhas.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">164</SPAN>:</SPAN>
+      <A NAME="tex2html172"
+  HREF="source-files/inhas.cpp">
+<!--O--><span class='downl'>inhas.cpp<!--C--></span></A>
+<A NAME="26630"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Dziedziczenie operatora przypisania</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">A</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">char</font> a<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    <b><font color="#000000">A</font></b><font color="#990000">(</font><font color="#009900">char</font> aa <font color="#990000">=</font> <font color="#FF0000">'a'</font><font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     7.  </font>        a <font color="#990000">=</font> aa<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">     9.  </font>
+ <font SIZE="-2" color="black">    10.  </font>    A<font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">=(</font><b><font color="#0000FF">const</font></b> A<font color="#990000">&amp;</font> aa<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    11.  </font>        a <font color="#990000">=</font> aa<font color="#990000">.</font>a<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    12.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"A::operator=()</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>        <b><font color="#0000FF">return</font></b> <font color="#990000">*</font><b><font color="#0000FF">this</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    14.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    15.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    16.  </font>
+ <font SIZE="-2" color="black">    17.  </font><b><font color="#0000FF">struct</font></b> <font color="#008080">B</font><font color="#990000">:</font> <b><font color="#0000FF">public</font></b> A <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    18.  </font>    <font color="#009900">char</font> b<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font>    <b><font color="#000000">B</font></b><font color="#990000">(</font><font color="#009900">char</font> bb <font color="#990000">=</font> <font color="#FF0000">'b'</font><font color="#990000">)</font> <font color="#990000">:</font> <b><font color="#000000">A</font></b><font color="#990000">(</font>bb<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    20.  </font>        b <font color="#990000">=</font> bb<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    21.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    22.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    23.  </font>
+ <font SIZE="-2" color="black">    24.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    25.  </font>    <font color="#008080">B</font> <b><font color="#000000">b1</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">),</font><b><font color="#000000">b2</font></b><font color="#990000">(</font><font color="#993399">2</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    26.  </font>    b1 <font color="#990000">=</font> b2<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    27.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+Program ten drukuje
+<PRE>
+    A::operator=()
+</PRE>
+co świadczy o&nbsp;tym, że podczas wykonywania przypisania dla
+obiektów klasy pochodnej&nbsp;
+<!--O--><span class='klasa'>B<!--C--></span>
+ została automatycznie wywołana
+metoda
+<!--O--><span class='funkcja'>operator=()<!--C--></span>
+ z&nbsp;klasy nadrzędnej&nbsp;
+<!--O--><span class='klasa'>A<!--C--></span>.
+Ta odziedziczona z&nbsp;klasy bazowej metoda
+<!--O--><span class='funkcja'>operator=()<!--C--></span>
+
+nie może oczywiście wiedzieć o&nbsp;składowych klasy pochodnej,
+których nie było w&nbsp;klasie bazowej.
+
+<P>
+Przeanalizujmy zatem sytuację, gdy operator przypisania został
+w klasie bazowej zdefiniowany, ale dla części &bdquo;własnej&rdquo;
+również chcemy przedefiniować przypisanie.
+Zatem w&nbsp;klasie pochodnej musimy również przeciążyć
+operator '
+<FONT COLOR="#000000"><TT>=</TT></FONT>'. Metoda przeciążająca operator przypisania
+w&nbsp;klasie pochodnej powinna uwzględniać składowe klasy pochodnej
+nieobecne w&nbsp;klasie bazowej oraz musi <FONT COLOR="#7b003e"><I>jawnie</I></FONT> wywołać ten
+operator z&nbsp;klasy bazowej, by &bdquo;zajął się&rdquo; podobiektem z&nbsp;niej
+odziedziczonym: ponieważ zostanie wtedy uruchomiona wersja
+przypisania zdefiniowana w&nbsp;klasie pochodnej, więc dla części
+odziedziczonej metoda
+<!--O--><span class='funkcja'>operator=()<!--C--></span>
+ z&nbsp;klasy bazowej nie
+zostanie teraz wywołana &bdquo;sama z&nbsp;siebie&rdquo;.
+
+<P>
+Zauważmy, że można to zrobić przez jawne, &bdquo;po nazwie&rdquo;, wywołanie
+metody przeciążającej operator przypisania z&nbsp;klasy bazowej. Można
+też osiągnąć ten sam cel przez proste przypisanie do
+
+<!--O--><span class='zmienna'>*this<!--C--></span>, jeśli tylko podpowiemy kompilatorowi, żeby traktował
+wskazywany obiekt jako obiekt klasy bazowej (obiektem tym jest
+podobiekt klasy bazowej zawarty w&nbsp;obiekcie klasy pochodnej). Wtedy
+bowiem, zgodnie z&nbsp;regułami przeciążania operatorów, na rzecz tego
+podobiektu wywołana zostanie funkcja
+<!--O--><span class='funkcja'>operator=()<!--C--></span>
+
+zdefiniowana w klasie bazowej.
+
+<P>
+Brzmi to zawile, ale jest całkiem proste. Załóżmy,
+jak zwykle, że klasa&nbsp;
+<!--O--><span class='klasa'>B<!--C--></span>
+ dziedziczy z&nbsp;klasy&nbsp;
+<!--O--><span class='klasa'>A<!--C--></span>. Załóżmy
+też, że w&nbsp;klasie
+<!--O--><span class='klasa'>A<!--C--></span>
+ operator przypisania został przeciążony,
+czyli jest w&nbsp;niej zdefiniowana metoda
+<!--O--><span class='funkcja'>operator=()<!--C--></span>. Parametrem
+tej metody jest referencja (zwykle z&nbsp;modyfikatorem
+<!--O--><span class='klucz'>const<!--C--></span>) do
+obiektu klasy
+<!--O--><span class='klasa'>A<!--C--></span>, ale, jak wiemy, można taką metodę wywołać
+z&nbsp;argumentem typu pochodnego, którym to argumentem będzie referencja
+do przypisywanego obiektu klasy pochodnej (czyli tego, który
+występuje po prawej stronie przypisania). Na marginesie zauważmy,
+że cały mechanizm nie zadziałałby, gdybyśmy w klasie
+<!--O--><span class='klasa'>A<!--C--></span>,
+najzupełniej legalnie, zdefiniowali metodę
+<!--O--><span class='funkcja'>operator=()<!--C--></span>
+
+z&nbsp;parametrem typu
+<!--O--><span class='typ'>A<!--C--></span>
+ lub
+<!--O--><span class='typ'>const A<!--C--></span>
+ zamiast
+<!--O--><span class='typ'>A&amp;<!--C--></span>
+ lub
+
+<!--O--><span class='typ'>const A&amp;<!--C--></span>. Tak więc, przedefiniowując operator przypisania
+w&nbsp;klasie pochodnej&nbsp;
+<!--O--><span class='klasa'>B<!--C--></span>, moglibyśmy napisać (zakładając, że
+definicja ta jest poza klasą):
+<pre><tt>       B<font color="#990000">&amp;</font> B<font color="#990000">::</font><b><font color="#0000FF">operator</font></b><font color="#990000">=(</font><b><font color="#0000FF">const</font></b> B<font color="#990000">&amp;</font> b<font color="#990000">)</font> <font color="#FF0000">{</font>
+           <b><font color="#0000FF">this</font></b><font color="#990000">-&gt;</font>A<font color="#990000">::</font><b><font color="#0000FF">operator</font></b><font color="#990000">=(</font>b<font color="#990000">);</font>
+           <i><font color="#9A1900">// ...</font></i>
+           <b><font color="#0000FF">return</font></b> <font color="#990000">*</font><b><font color="#0000FF">this</font></b><font color="#990000">;</font>
+       <font color="#FF0000">}</font>
+</tt></pre>
+W ten sposób, na rzecz
+<!--O--><span class='zmienna'>*this<!--C--></span>, a&nbsp;więc obiektu klasy
+pochodnej&nbsp;
+<!--O--><span class='klasa'>B<!--C--></span>, który pojawił się po lewej stronie przypisania,
+wywołujemy
+jawnie metodę
+<!--O--><span class='funkcja'>operator=()<!--C--></span>
+ z&nbsp;klasy bazowej kwalifikując
+nazwę za pomocą operatora zakresu. Posyłamy jako argument przez
+referencję obiekt
+<!--O--><span class='zmienna'>b<!--C--></span>, w&nbsp;więc ten, który pojawił się po
+prawej stronie przypisania. Ten sam efekt można uzyskać też tak:
+<pre><tt>       B<font color="#990000">&amp;</font> B<font color="#990000">::</font><b><font color="#0000FF">operator</font></b><font color="#990000">=(</font><b><font color="#0000FF">const</font></b> B<font color="#990000">&amp;</font> b<font color="#990000">)</font> <font color="#FF0000">{</font>
+           <font color="#990000">(</font>A<font color="#990000">&amp;)(*</font><b><font color="#0000FF">this</font></b><font color="#990000">)</font> <font color="#990000">=</font> b<font color="#990000">;</font>
+           <i><font color="#9A1900">// ...</font></i>
+           <b><font color="#0000FF">return</font></b> <font color="#990000">*</font><b><font color="#0000FF">this</font></b><font color="#990000">;</font>
+       <font color="#FF0000">}</font>
+</tt></pre>
+W tej metodzie referencja do obiektu
+<!--O--><span class='zmienna'>*this<!--C--></span>
+ klasy
+<!--O--><span class='klasa'>B<!--C--></span>
+
+została zrzutowana w&nbsp;górę do typu
+<!--O--><span class='typ'>A&amp;<!--C--></span>: tak więc przypisanie
+z&nbsp;trzeciej linii tego przykładu spowoduje automatycznie wywołanie
+metody
+<!--O--><span class='funkcja'>operator=()<!--C--></span>
+ z&nbsp;klasy bazowej
+<!--O--><span class='klasa'>A<!--C--></span>, podobnie jak
+w&nbsp;przypadku poprzednim. Oczywiście, zamiast rzutowania w&nbsp;stylu&nbsp;C,
+czyli za pomocą
+
+<FONT COLOR="#000000"><TT>(A&amp;)</TT></FONT>
+możemy użyć operatora rzutowania
+w&nbsp;stylu C++, czyli trzecią linię powyższego przykładu zastąpić
+przez
+<pre><tt>       <b><font color="#0000FF">static_cast</font></b><font color="#990000">&lt;</font>A<font color="#990000">&amp;&gt;(*</font><b><font color="#0000FF">this</font></b><font color="#990000">)</font> <font color="#990000">=</font> b<font color="#990000">;</font>
+</tt></pre>
+Wreszcie, równoważnie, można  użyć rzutowania wskaźników
+i&nbsp;następnie wyłuskania (dereferencji) obiektu:
+<pre><tt>       B<font color="#990000">&amp;</font> B<font color="#990000">::</font><b><font color="#0000FF">operator</font></b><font color="#990000">=(</font><b><font color="#0000FF">const</font></b> B<font color="#990000">&amp;</font> b<font color="#990000">)</font> <font color="#FF0000">{</font>
+           <font color="#990000">*((</font>A<font color="#990000">*)</font><b><font color="#0000FF">this</font></b><font color="#990000">)</font> <font color="#990000">=</font> b<font color="#990000">;</font>
+           <i><font color="#9A1900">// ...</font></i>
+           <b><font color="#0000FF">return</font></b> <font color="#990000">*</font><b><font color="#0000FF">this</font></b><font color="#990000">;</font>
+       <font color="#FF0000">}</font>
+</tt></pre>
+choć wygląda to chyba najmniej czytelnie.
+
+<P>
+W poniższym programie zademonstrowane są przeciążenia operatora
+przypisania, konstruktory, w&nbsp;tym kopiujące, i&nbsp;destruktory dla
+dwóch klas:
+<!--O--><span class='klasa'>Osoba<!--C--></span>
+ i&nbsp;dziedziczącej z&nbsp;niej klasy
+
+<!--O--><span class='klasa'>Pracownik<!--C--></span>. W&nbsp;obu klasach istnieją pola wskaźnikowe, a&nbsp;więc
+prawidłowe zdefiniowanie konstruktorów kopiujących, destruktorów
+i&nbsp;operatorów przypisania jest niezbędne.
+<A NAME="inh.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">165</SPAN>:</SPAN>
+      <A NAME="tex2html173"
+  HREF="source-files/inh.cpp">
+<!--O--><span class='downl'>inh.cpp<!--C--></span></A>
+<A NAME="26648"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Klasy z&nbsp;polami wskaźnikowymi: dziedzieczenie</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cstring&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Osoba</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">char</font><font color="#990000">*</font> nazwis<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">     8.  </font>    <b><font color="#000000">Osoba</font></b><font color="#990000">()</font>
+ <font SIZE="-2" color="black">     9.  </font>        <font color="#990000">:</font> <b><font color="#000000">nazwis</font></b><font color="#990000">(</font><b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><font color="#993399">14</font><font color="#990000">],</font> <font color="#FF0000">"Nazw.Nieznane"</font><font color="#990000">))</font>
+ <font SIZE="-2" color="black">    10.  </font>    <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    11.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Konstr. domyslny Osoba: "</font>
+ <font SIZE="-2" color="black">    12.  </font>             <font color="#990000">&lt;&lt;</font> nazwis <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    14.  </font>
+ <font SIZE="-2" color="black">    15.  </font>    <b><font color="#000000">Osoba</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> n<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    16.  </font>        <font color="#990000">:</font> <b><font color="#000000">nazwis</font></b><font color="#990000">(</font><b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><b><font color="#000000">strlen</font></b><font color="#990000">(</font>n<font color="#990000">)+</font><font color="#993399">1</font><font color="#990000">],</font> n<font color="#990000">))</font>
+ <font SIZE="-2" color="black">    17.  </font>    <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    18.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Konstr. char* Osoba: "</font> <font color="#990000">&lt;&lt;</font> nazwis <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    19.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    20.  </font>
+ <font SIZE="-2" color="black">    21.  </font>    <b><font color="#000000">Osoba</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> Osoba<font color="#990000">&amp;</font> os<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    22.  </font>        <font color="#990000">:</font> <b><font color="#000000">nazwis</font></b><font color="#990000">(</font><b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><b><font color="#000000">strlen</font></b><font color="#990000">(</font>os<font color="#990000">.</font>nazwis<font color="#990000">)+</font><font color="#993399">1</font><font color="#990000">],</font>
+ <font SIZE="-2" color="black">    23.  </font>                                           os<font color="#990000">.</font>nazwis<font color="#990000">))</font>
+ <font SIZE="-2" color="black">    24.  </font>    <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    25.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Konstr. kopiujacy Osoba: "</font>
+ <font SIZE="-2" color="black">    26.  </font>             <font color="#990000">&lt;&lt;</font> nazwis <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    27.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    28.  </font>
+ <font SIZE="-2" color="black">    29.  </font>    Osoba<font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">=(</font><b><font color="#0000FF">const</font></b> Osoba<font color="#990000">&amp;</font> os<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    30.  </font>        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> <b><font color="#0000FF">this</font></b> <font color="#990000">!=</font> <font color="#990000">&amp;</font>os <font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    31.  </font>            <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> nazwis<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    32.  </font>            nazwis <font color="#990000">=</font> <b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><b><font color="#000000">strlen</font></b><font color="#990000">(</font>os<font color="#990000">.</font>nazwis<font color="#990000">)+</font><font color="#993399">1</font><font color="#990000">],</font>
+ <font SIZE="-2" color="black">    33.  </font>                                               os<font color="#990000">.</font>nazwis<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    34.  </font>            cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Przypisanie Osoba: "</font>
+ <font SIZE="-2" color="black">    35.  </font>                 <font color="#990000">&lt;&lt;</font> nazwis <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    36.  </font>        <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    37.  </font>        <b><font color="#0000FF">return</font></b> <font color="#990000">*</font><b><font color="#0000FF">this</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    38.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    39.  </font>
+ <font SIZE="-2" color="black">    40.  </font>    <font color="#990000">~</font><b><font color="#000000">Osoba</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    41.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Usuwamy Osoba: "</font> <font color="#990000">&lt;&lt;</font> nazwis <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    42.  </font>        <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> nazwis<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    43.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    44.  </font>
+ <font SIZE="-2" color="black">    45.  </font>    <b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> <b><font color="#000000">getNazwisko</font></b><font color="#990000">()</font> <b><font color="#0000FF">const</font></b> <font color="#FF0000">{</font> <b><font color="#0000FF">return</font></b> nazwis<font color="#990000">;</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    46.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    47.  </font>
+ <font SIZE="-2" color="black">    48.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Pracownik</font> <font color="#990000">:</font> <b><font color="#0000FF">public</font></b> Osoba <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    49.  </font>    <font color="#009900">char</font><font color="#990000">*</font> funkcja<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    50.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    51.  </font>    <b><font color="#000000">Pracownik</font></b><font color="#990000">()</font>
+ <font SIZE="-2" color="black">    52.  </font>        <font color="#990000">:</font> <b><font color="#000000">funkcja</font></b><font color="#990000">(</font><b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><font color="#993399">14</font><font color="#990000">],</font> <font color="#FF0000">"Stan.Nieznane"</font><font color="#990000">))</font>
+ <font SIZE="-2" color="black">    53.  </font>    <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    54.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Konstruktor domyslny Pracownik: "</font>
+ <font SIZE="-2" color="black">    55.  </font>             <font color="#990000">&lt;&lt;</font> funkcja <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    56.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    57.  </font>
+ <font SIZE="-2" color="black">    58.  </font>    <b><font color="#000000">Pracownik</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> s<font color="#990000">,</font> <b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> n<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    59.  </font>        <font color="#990000">:</font> <b><font color="#000000">Osoba</font></b><font color="#990000">(</font>n<font color="#990000">),</font><b><font color="#000000">funkcja</font></b><font color="#990000">(</font><b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><b><font color="#000000">strlen</font></b><font color="#990000">(</font>s<font color="#990000">)+</font><font color="#993399">1</font><font color="#990000">],</font> s<font color="#990000">))</font>
+ <font SIZE="-2" color="black">    60.  </font>    <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    61.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Konstruktor char* char* Pracownik: "</font>
+ <font SIZE="-2" color="black">    62.  </font>             <font color="#990000">&lt;&lt;</font> funkcja <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    63.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    64.  </font>
+ <font SIZE="-2" color="black">    65.  </font>    <b><font color="#000000">Pracownik</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> Pracownik<font color="#990000">&amp;</font> prac<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    66.  </font>        <font color="#990000">:</font> <b><font color="#000000">Osoba</font></b><font color="#990000">(</font>prac<font color="#990000">),</font> <b><font color="#000000">funkcja</font></b><font color="#990000">(</font><b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b>
+ <font SIZE="-2" color="black">    67.  </font>              <font color="#009900">char</font><font color="#990000">[</font><b><font color="#000000">strlen</font></b><font color="#990000">(</font>prac<font color="#990000">.</font>funkcja<font color="#990000">)+</font><font color="#993399">1</font><font color="#990000">],</font>prac<font color="#990000">.</font>funkcja<font color="#990000">))</font>
+ <font SIZE="-2" color="black">    68.  </font>    <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    69.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Konstruktor kopiujacy Pracownik: "</font>
+ <font SIZE="-2" color="black">    70.  </font>             <font color="#990000">&lt;&lt;</font> funkcja <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    71.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    72.  </font>
+ <font SIZE="-2" color="black">    73.  </font>    Pracownik<font color="#990000">&amp;</font> <b><font color="#0000FF">operator</font></b><font color="#990000">=(</font><b><font color="#0000FF">const</font></b> Pracownik<font color="#990000">&amp;</font> prac<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    74.  </font>        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> <b><font color="#0000FF">this</font></b> <font color="#990000">!=</font> <font color="#990000">&amp;</font>prac <font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    75.  </font>            <font color="#990000">(</font>Osoba<font color="#990000">&amp;)(*</font><b><font color="#0000FF">this</font></b><font color="#990000">)</font> <font color="#990000">=</font> prac<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    76.  </font>            <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> funkcja<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    77.  </font>            funkcja <font color="#990000">=</font> <b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b>
+ <font SIZE="-2" color="black">    78.  </font>                <font color="#009900">char</font><font color="#990000">[</font><b><font color="#000000">strlen</font></b><font color="#990000">(</font>prac<font color="#990000">.</font>funkcja<font color="#990000">)+</font><font color="#993399">1</font><font color="#990000">],</font>
+ <font SIZE="-2" color="black">    79.  </font>                prac<font color="#990000">.</font>funkcja<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    80.  </font>            cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Przypisanie Pracownik: "</font>
+ <font SIZE="-2" color="black">    81.  </font>                 <font color="#990000">&lt;&lt;</font> funkcja <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    82.  </font>        <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    83.  </font>        <b><font color="#0000FF">return</font></b> <font color="#990000">*</font><b><font color="#0000FF">this</font></b><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    84.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    85.  </font>
+ <font SIZE="-2" color="black">    86.  </font>    <font color="#990000">~</font><b><font color="#000000">Pracownik</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    87.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Usuwamy Pracownik: "</font> <font color="#990000">&lt;&lt;</font> funkcja <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    88.  </font>        <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> funkcja<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    89.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    90.  </font>
+ <font SIZE="-2" color="black">    91.  </font>    <b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> <b><font color="#000000">getFunkcja</font></b><font color="#990000">()</font> <b><font color="#0000FF">const</font></b> <font color="#FF0000">{</font> <b><font color="#0000FF">return</font></b> funkcja<font color="#990000">;</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    92.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    93.  </font>
+ <font SIZE="-2" color="black">    94.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    95.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">Main: Tworzymy obiekt nem"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    96.  </font>    <font color="#008080">Pracownik</font> nem<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    97.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Main: obiekt nemo utworzony: "</font>
+ <font SIZE="-2" color="black">    98.  </font>         <font color="#990000">&lt;&lt;</font> nem<font color="#990000">.</font><b><font color="#000000">getFunkcja</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font>
+ <font SIZE="-2" color="black">    99.  </font>         <font color="#990000">&lt;&lt;</font> nem<font color="#990000">.</font><b><font color="#000000">getNazwisko</font></b><font color="#990000">()</font>   <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">   100.  </font>
+ <font SIZE="-2" color="black">   101.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">Main: Tworzymy obiekt mal"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">   102.  </font>    <font color="#008080">Pracownik</font> <b><font color="#000000">mal</font></b><font color="#990000">(</font><font color="#FF0000">"Szef"</font><font color="#990000">,</font> <font color="#FF0000">"Malinowski"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">   103.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Main: obiekt mal utworzony: "</font>
+ <font SIZE="-2" color="black">   104.  </font>         <font color="#990000">&lt;&lt;</font> mal<font color="#990000">.</font><b><font color="#000000">getFunkcja</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font>
+ <font SIZE="-2" color="black">   105.  </font>         <font color="#990000">&lt;&lt;</font> mal<font color="#990000">.</font><b><font color="#000000">getNazwisko</font></b><font color="#990000">()</font>   <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">   106.  </font>
+ <font SIZE="-2" color="black">   107.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">Main: Kopiujemy mal -&gt; kop"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">   108.  </font>    <font color="#008080">Pracownik</font> <b><font color="#000000">kop</font></b><font color="#990000">(</font>mal<font color="#990000">);</font>
+ <font SIZE="-2" color="black">   109.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Main: obiekt kop utworzony: "</font>
+ <font SIZE="-2" color="black">   110.  </font>         <font color="#990000">&lt;&lt;</font> kop<font color="#990000">.</font><b><font color="#000000">getFunkcja</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font>
+ <font SIZE="-2" color="black">   111.  </font>         <font color="#990000">&lt;&lt;</font> kop<font color="#990000">.</font><b><font color="#000000">getNazwisko</font></b><font color="#990000">()</font>   <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">   112.  </font>
+ <font SIZE="-2" color="black">   113.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">Main: Przypisujemy nem = kop"</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">   114.  </font>    nem <font color="#990000">=</font> kop<font color="#990000">;</font>
+ <font SIZE="-2" color="black">   115.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Main: nem = kop przypisane: "</font>
+ <font SIZE="-2" color="black">   116.  </font>         <font color="#990000">&lt;&lt;</font> nem<font color="#990000">.</font><b><font color="#000000">getFunkcja</font></b><font color="#990000">()</font>  <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" "</font>
+ <font SIZE="-2" color="black">   117.  </font>         <font color="#990000">&lt;&lt;</font> nem<font color="#990000">.</font><b><font color="#000000">getNazwisko</font></b><font color="#990000">()</font> <font color="#990000">&lt;&lt;</font> endl <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">   118.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+Zauważmy w&nbsp;liniach&nbsp;59 i&nbsp;66 jawne wywołania konstruktora klasy bazowej
+
+<!--O--><span class='klasa'>Osoba<!--C--></span>
+ z&nbsp;listy inicjalizacyjnej konstruktorów klasy pochodnej
+
+<!--O--><span class='klasa'>Pracownik<!--C--></span>. W linii&nbsp;75 z&nbsp;kolei następuje, w&nbsp;ciele metody
+przeciążającej operator przypisania, jawne wywołanie analogicznej
+metody z&nbsp;klasy bazowej. Wydruk tego programu
+<PRE>
+    Main: Tworzymy obiekt nem
+    Konstr. domyslny Osoba: Nazw.Nieznane
+    Konstruktor domyslny Pracownik: Stan.Nieznane
+    Main: obiekt nemo utworzony: Stan.Nieznane Nazw.Nieznane
+
+    Main: Tworzymy obiekt mal
+    Konstr. char* Osoba: Malinowski
+    Konstruktor char* char* Pracownik: Szef
+    Main: obiekt mal utworzony: Szef Malinowski
+
+    Main: Kopiujemy mal -&gt; kop
+    Konstr. kopiujacy Osoba: Malinowski
+    Konstruktor kopiujacy Pracownik: Szef
+    Main: obiekt kop utworzony: Szef Malinowski
+
+    Main: Przypisujemy nem = kop
+    Przypisanie Osoba: Malinowski
+    Przypisanie Pracownik: Szef
+    Main: nem = kop przypisane: Szef Malinowski
+
+    Usuwamy Pracownik: Szef
+    Usuwamy Osoba: Malinowski
+    Usuwamy Pracownik: Szef
+    Usuwamy Osoba: Malinowski
+    Usuwamy Pracownik: Szef
+    Usuwamy Osoba: Malinowski
+</PRE>
+demonstruje kolejność wywoływania konstruktorów
+i&nbsp;metod przeciążających operator przypisania. Po zakończeniu
+programu wszystkie trzy obiekty są usuwane: co prawda wszystkie
+przechowują takie same dane, ale są to trzy niezależne obiekty,
+o&nbsp;czym świadczy fakt, że wszystkie wywołania destruktorów
+powiodły się. Widzimy, że przy konstrukcji obiektów klasy
+pochodnej
+<!--O--><span class='klasa'>Pracownik<!--C--></span>
+ najpierw tworzone są podobiekty klasy
+
+<!--O--><span class='klasa'>Osoba<!--C--></span>. Natomiast podczas destrukcji najpierw wywoływany
+jest destruktor klasy
+<!--O--><span class='klasa'>Pracownik<!--C--></span>, a&nbsp;potem destruktor klasy
+bazowej
+<!--O--><span class='klasa'>Osoba<!--C--></span>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2578"
+  HREF="node124.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2584"
+  HREF="node122.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2590"
+  HREF="node126.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2586"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2588"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2579"
+  HREF="node124.html">20.2 Konstruktory i&nbsp;destruktory klas</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2585"
+  HREF="node122.html">20. Dziedziczenie i polimorfizm</A>
+<B>Dalej:</B> <A NAME="tex2html2591"
+  HREF="node126.html">20.4 Metody wirtualne i&nbsp;polimorfizm</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,403 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>4.1 Wstęp</TITLE>
+<META NAME="description" CONTENT="4.1 Wstęp">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node16.html">
+<LINK REL="previous" HREF="node14.html">
+<LINK REL="up" HREF="node14.html">
+<LINK REL="next" HREF="node16.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html867"
+  HREF="node14.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html873"
+  HREF="node14.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html879"
+  HREF="node16.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html875"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html877"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html868"
+  HREF="node14.html">4. Podstawowe typy danych</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html874"
+  HREF="node14.html">4. Podstawowe typy danych</A>
+<B>Dalej:</B> <A NAME="tex2html880"
+  HREF="node16.html">4.2 Typy całkowite</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00510000000000000000"></A><A NAME="typydan:wstep"></A>
+<BR>
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Wstęp
+</H1>
+
+<P>
+Tak jak w&nbsp;Javie czy Pascalu,
+<A NAME="2754"></A>
+<A NAME="2755"></A>
+obowiązuje w&nbsp;C/C++ zasada <FONT COLOR="#7b003e"><B>ścisłej kontroli
+typu</B></FONT>.<A NAME="2757"></A>
+Dla wszystkich występujących w&nbsp;programie zmiennych ich typ musi
+być określony (zadeklarowany) zanim mogą być użyte.
+Samą zmienną<A NAME="2758"></A>
+możemy uważać za nazwane miejsce w&nbsp;pamięci, w&nbsp;którym przechowywana
+jest wartość o&nbsp;znanym kompilatorowi typie.
+Kompilator potrzebuje tej informacji, aby zarezerwować na zmienną
+odpowiednią ilość pamięci i&nbsp;aby wiedzieć, jak interpretować
+różne operacje na tej zmiennej.
+
+<P>
+Zasady poprawności identyfikatorów (nazw) zmiennych
+są w&nbsp;C/C++ podobne jak w&nbsp;innych
+językach: identyfikatory
+mogą składać się z&nbsp;liter, cyfr i&nbsp;znaku podkreślenia;
+nie mogą rozpoczynać się cyfrą (w&nbsp;odróżnieniu od niektórych
+innych języków, znaki waluty nie są w&nbsp;identyfikatorach dozwolone).
+
+<P>
+
+<div class='wazne'>
+Duże i&nbsp;małe litery <FONT COLOR="#7b003e"><I>są</I></FONT> rozróżnialne
+
+
+</div>
+
+<P>
+Tak więc  nazwy (identyfikatory)
+<!--O--><span class='zmienna'>A_book<!--C--></span>
+
+i&nbsp;
+<!--O--><span class='zmienna'>a_book<!--C--></span>
+ będą traktowane jako różne.
+
+<P>
+Wbudowane typy podstawowe są podobne do tych, jakie być może
+Czytelnik zna z&nbsp;Javy. Występują jednak pewne różnice.
+W szczególności, <FONT COLOR="#7b003e"><I>nie</I></FONT> jest
+gwarantowana stała długość (w bajtach)
+reprezentacji maszynowej zmiennych poszczególnych typów.
+Na przykład, zmienne typu
+<!--O--><span class='typ'>int<!--C--></span>
+ mogą mieć rozmiar, w&nbsp;zależności od
+implementacji, 2, 4 lub 8 bajtów (obecnie jednak prawie zawsze są to
+cztery bajty). W związku z&nbsp;tym istnieje przydatny, wbudowany operator
+
+<!--O--><span class='funkcja'>sizeof<!--C--></span>,<A NAME="2765"></A>
+który zwraca długość reprezentacji binarnej
+zmiennej danego typu na danej platformie (w bajtach).
+Użyć tego operatora możemy tak jak funkcji, której jedynym
+argumentem jest albo dowolna zmienna typu, dla którego chcemy poznać
+długość reprezentacji, albo nazwa samego typu (w pierwszym z&nbsp;tych
+przypadków nawias jest opcjonalny). Podanie nazwy typu wystarczy,
+gdyż
+
+<P>
+
+<P>
+
+<div class='wazne'>
+Wszystkie zmienne tego samego typu mają ten sam rozmiar.
+
+
+</div>
+
+<P>
+
+<P>
+Jak powiedzieliśmy, wszystkie zmienne<A NAME="2767"></A> &mdash;&nbsp;nazwane
+obszary pamięci o&nbsp;określonym adresie i&nbsp;typie &mdash;&nbsp;muszą być przed
+pierwszym użyciem zadeklarowane i&nbsp;zdefiniowane. Jak to zrobić, pokażmy
+na przykładzie zmiennych typu
+<!--O--><span class='typ'>int<!--C--></span>:
+<A NAME="vardecl.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">10</SPAN>:</SPAN>
+      <A NAME="tex2html10"
+  HREF="source-files/vardecl.cpp">
+<!--O--><span class='downl'>vardecl.cpp<!--C--></span></A>
+<A NAME="3645"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Definiowanie zmiennych</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <font color="#009900">int</font> k1<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">int</font> <b><font color="#000000">k2</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">     7.  </font>    <font color="#009900">int</font> k3<font color="#FF0000">{}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#009900">int</font> k4<font color="#FF0000">{</font><font color="#993399">1</font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#009900">int</font> n<font color="#990000">=</font><font color="#993399">1</font><font color="#990000">,</font> m <font color="#990000">=</font> n<font color="#990000">,</font> i<font color="#FF0000">{</font><font color="#993399">1</font><font color="#FF0000">}</font><font color="#990000">,</font> j<font color="#FF0000">{</font>i<font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Jak widać, podajemy najpierw nazwę typu, a&nbsp;potem nazwę definiowanej
+zmiennej. Nie musimy, ale raczej powinniśmy, nadać nowowprowadzonej
+zmiennej jakąś sensowną wartość. Robimy to poprzez <FONT COLOR="#7b003e"><B>zainicjowanie</B></FONT>
+<A NAME="2773"></A><A NAME="2774"></A> zmiennej od razu
+w&nbsp;miejscu definicji. Na przykład w&nbsp;powyższym programie:
+
+<UL>
+<LI>
+<!--O--><span class='zmienna'>k1<!--C--></span>
+ jest zdefiniowana, ale nie zainicjowana;
+        jej wartość jest całkowicie nieokreślona;
+</LI>
+<LI>
+<!--O--><span class='zmienna'>k2<!--C--></span>
+ jest zdefiniowana i zainicjowana wartością&nbsp;1;
+</LI>
+<LI>
+<!--O--><span class='zmienna'>k3<!--C--></span>
+ i
+<!--O--><span class='zmienna'>k4<!--C--></span>
+ są zdefiniowane i&nbsp;zainicjowane,
+        ale z&nbsp;użyciem
+        nowej składni wprowadzonej w&nbsp;standardzie C++11.<A NAME="2780"></A>
+        Jest to przykład tzw.&nbsp;<FONT COLOR="#7b003e"><B>jednolitej inicjalizacji</B></FONT>
+        <A NAME="2782"></A>
+        (<FONT COLOR="#7b003e"><I>uniform initializer</I></FONT>): z&nbsp;nawiasami klamrowymi (zwana
+        w&nbsp;standardzie <FONT COLOR="#7b003e"><B>brace-init</B></FONT>).<A NAME="2785"></A>
+</LI>
+</UL>
+Ostatnia linia pokazuje, że wiele deklaracji/definicji zmiennych tego
+samego typu można zapisać w&nbsp;jednej instrukcji; taki zapis jest równoważny
+serii definicji
+<pre><tt>       <font color="#009900">int</font> n <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font>
+       <font color="#009900">int</font> m <font color="#990000">=</font> n<font color="#990000">;</font>
+       <font color="#009900">int</font> i<font color="#FF0000">{</font><font color="#993399">1</font><font color="#FF0000">}</font><font color="#990000">;</font>
+       <font color="#009900">int</font> j<font color="#FF0000">{</font>i<font color="#FF0000">}</font><font color="#990000">;</font>
+</tt></pre>
+z&nbsp;czego widać, że, na przykład, definiując
+<!--O--><span class='zmienna'>m<!--C--></span>
+ możemy traktować
+
+<!--O--><span class='zmienna'>n<!--C--></span>
+ jako już istniejącą zmienną. Pierwsze dwie linijki pokazują
+tu &bdquo;klasyczny&rdquo; sposób inicjowania definiowanych zmiennych, poprzez użycie
+znaku równości (normalnie znak równości oznacza <SPAN  CLASS="textit">przypisanie</SPAN>,
+ale jeśli obiekt po lewej stronie nie istniał wcześniej i&nbsp;jest właśnie tworzony,
+to <SPAN  CLASS="textit">nie</SPAN> jest to przypisanie, ale właśnie inicjalizacja).
+
+<P>
+Na przykład poniższy program
+<BR><A NAME="lengths.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">11</SPAN>:</SPAN>
+      <A NAME="tex2html11"
+  HREF="source-files/lengths.cpp">
+<!--O--><span class='downl'>lengths.cpp<!--C--></span></A>
+<A NAME="3669"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Długości danych różnych typów</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;string&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>    <font color="#009900">long</font> <font color="#009900">double</font> ld <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>    <font color="#008080">string</font>      st <font color="#990000">=</font> <font color="#FF0000">"Hermenegilda"</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>    <font color="#009900">short</font>       sh <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#009900">long</font>       <font color="#990000">*</font>lo <font color="#990000">=</font> nullptr<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"long double: "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b> ld         <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    11.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"double     : "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">double</font><font color="#990000">)</font>    <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    12.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"float      : "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">float</font><font color="#990000">)</font>     <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    13.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"long long  : "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">long</font> <font color="#009900">long</font><font color="#990000">)</font> <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    14.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"long       : "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">long</font><font color="#990000">)</font>      <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    15.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"int        : "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)</font>       <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    16.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"short      : "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b> sh         <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    17.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"char       : "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">char</font><font color="#990000">)</font>      <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    18.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"wchar_t    : "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">wchar_t</font><font color="#990000">)</font>   <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    19.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"char16_t   : "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>char16_t<font color="#990000">)</font>  <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    20.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"char32_t   : "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>char32_t<font color="#990000">)</font>  <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    21.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"bool       : "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font><font color="#009900">bool</font><font color="#990000">)</font>      <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    22.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"string     : "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b> st         <font color="#990000">&lt;&lt;</font> endl
+ <font SIZE="-2" color="black">    23.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"long*      : "</font> <font color="#990000">&lt;&lt;</font> <b><font color="#0000FF">sizeof</font></b> lo         <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    24.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+dał wyniki następujące ma linuksowej maszynie 64-bitowej
+<PRE>
+    long double: 16
+    double     : 8
+    float      : 4
+    long long  : 8
+    long       : 8
+    int        : 4
+    short      : 2
+    char       : 1
+    wchar_t    : 4
+    char16_t   : 2
+    char32_t   : 4
+    bool       : 1
+    string     : 32
+    long*      : 8
+</PRE>
+Jak widać, w&nbsp;tym systemie typ
+<!--O--><span class='typ'>long<!--C--></span>
+ ma tę samą
+reprezentację co
+<!--O--><span class='typ'>long long<!--C--></span>; na maszynach 32-bitowych
+
+<!--O--><span class='typ'>long<!--C--></span>
+ ma zwykle ten sam wymiar co
+<!--O--><span class='typ'>int<!--C--></span>
+ (ale jest traktowany
+jako osobny typ).
+Zauważmy też, że wymiar obiektów typu
+<!--O--><span class='klasa'>std::string<!--C--></span>
+ zależy
+od implementacji i&nbsp;może być bardzo różny dla różnych kompilatorów.
+
+<P>
+Jak widać, deklaracja typu ma postać
+<pre><tt>       <font color="#008080">Typ</font> zmienna<font color="#990000">;</font>
+</tt></pre>
+choć może to być też
+<pre><tt>       <b><font color="#0000FF">auto</font></b> zmienna <font color="#990000">=</font> wartość<font color="#990000">;</font>
+</tt></pre>
+lub
+<pre><tt>       <b><font color="#000000">decltype</font></b><font color="#990000">(</font>wyrażenie<font color="#990000">)</font> zmienna<font color="#990000">;</font>
+</tt></pre>
+Słowo kluczowe
+<!--O--><span class='klucz'>auto<!--C--></span><A NAME="2810"></A> znaczy tu, że kompilator
+sam ma się domyślić, patrząc na wartość inicjującą, jaki ma być typ
+deklarowanej/definiowanej zmiennej (oczywiście typ ten będzie ściśle
+ustalony i&nbsp;nie może być potem zmieniony). Z&nbsp;kolei
+
+<!--O--><span class='klucz'>decltype<!--C--></span><A NAME="2812"></A> znaczy, że
+<!--O--><span class='zmienna'>zmienna<!--C--></span>
+ ma być tego
+typu, jakiego jest typu wyrażenie podane
+w&nbsp;nawiasie. Wyrażenie to <SPAN  CLASS="textit">nie</SPAN> będzie obliczane, kompilator
+sprawdzi tylko jaki byłby typ wyniku. Przykład powinien wyjaśnić sposób,
+w&nbsp;jaki sposób obie konstrukcje mogą być zastosowane:
+<BR><A NAME="autodecl.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">12</SPAN>:</SPAN>
+      <A NAME="tex2html12"
+  HREF="source-files/autodecl.cpp">
+<!--O--><span class='downl'>autodecl.cpp<!--C--></span></A>
+<A NAME="3677"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Konstrukcje
+<!--O--><span class='klucz'>auto<!--C--></span>
+ i
+<!--O--><span class='klucz'>decltype<!--C--></span>.</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>
+ <font SIZE="-2" color="black">     4.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     5.  </font>    <b><font color="#0000FF">auto</font></b> k <font color="#990000">=</font> <font color="#993399">7</font><font color="#990000">;</font>             <i><font color="#9A1900">// k jest typu int</font></i>
+ <font SIZE="-2" color="black">     6.  </font>    <b><font color="#0000FF">auto</font></b> x <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">.;</font>            <i><font color="#9A1900">// x jest typu double</font></i>
+ <font SIZE="-2" color="black">     7.  </font>    <b><font color="#000000">decltype</font></b><font color="#990000">(</font>x<font color="#990000">)</font> y <font color="#990000">=</font> <font color="#993399">7</font><font color="#990000">;</font>      <i><font color="#9A1900">// y jest typu double, choć</font></i>
+ <font SIZE="-2" color="black">     8.  </font>                            <i><font color="#9A1900">// '7' jest literałem typu int</font></i>
+ <font SIZE="-2" color="black">     9.  </font>    <b><font color="#000000">decltype</font></b><font color="#990000">(</font>k<font color="#990000">*</font>x<font color="#990000">)</font> z <font color="#990000">=</font> <font color="#993399">7</font><font color="#990000">;</font>    <i><font color="#9A1900">// iloczyn k*x jest typu double</font></i>
+ <font SIZE="-2" color="black">    10.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"k/2="</font>   <font color="#990000">&lt;&lt;</font> k<font color="#990000">/</font><font color="#993399">2</font> <font color="#990000">&lt;&lt;</font> <font color="#FF0000">", y/2="</font> <font color="#990000">&lt;&lt;</font> y<font color="#990000">/</font><font color="#993399">2</font>
+ <font SIZE="-2" color="black">    11.  </font>         <font color="#990000">&lt;&lt;</font> <font color="#FF0000">", z/2="</font> <font color="#990000">&lt;&lt;</font> z<font color="#990000">/</font><font color="#993399">2</font> <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    12.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Programik ten drukuje
+<PRE>
+    k/2=3, y/2=3.5, z/2=3.5
+</PRE>
+co pokazuje, że rzeczywiście
+<!--O--><span class='zmienna'>y<!--C--></span>
+ i&nbsp;
+<!--O--><span class='zmienna'>z<!--C--></span>
+ są typu
+
+<!--O--><span class='typ'>double<!--C--></span>
+ &mdash;&nbsp;gdyby były typu
+<!--O--><span class='typ'>int<!--C--></span>, to dzielenie przez
+2&nbsp;dałoby wynik dokładnie 3 (tak jak to jest w&nbsp;przypadku
+<!--O--><span class='zmienna'>k<!--C--></span>)
+Inne aspekty użycia
+<!--O--><span class='klucz'>auto<!--C--></span>
+ i&nbsp;
+<!--O--><span class='klucz'>decltype<!--C--></span>
+ rozpatrzymy później.
+Przydatność tych konstrukcji może się na tym etapie wydawać wątpliwa,
+ale przekonamy się, że są one <FONT COLOR="#7b003e"><I>niezwykle</I></FONT> przydatne!
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html867"
+  HREF="node14.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html873"
+  HREF="node14.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html879"
+  HREF="node16.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html875"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html877"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html868"
+  HREF="node14.html">4. Podstawowe typy danych</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html874"
+  HREF="node14.html">4. Podstawowe typy danych</A>
+<B>Dalej:</B> <A NAME="tex2html880"
+  HREF="node16.html">4.2 Typy całkowite</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

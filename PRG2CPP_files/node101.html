@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>15.5 Klasy zagnieżdżone</TITLE>
+<META NAME="description" CONTENT="15.5 Klasy zagnieżdżone">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node102.html">
+<LINK REL="previous" HREF="node100.html">
+<LINK REL="up" HREF="node96.html">
+<LINK REL="next" HREF="node102.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2174"
+  HREF="node100.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2180"
+  HREF="node96.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2186"
+  HREF="node102.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2182"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2184"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2175"
+  HREF="node100.html">15.4 Funkcje zaprzyjaźnione</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2181"
+  HREF="node96.html">15. Klasy (II)</A>
+<B>Dalej:</B> <A NAME="tex2html2187"
+  HREF="node102.html">15.6 Wskaźniki do składowych</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001650000000000000000"></A><A NAME="klasyd:funzag"></A>
+<BR>
+<SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">5</SPAN> Klasy zagnieżdżone
+</H1>
+
+<P>
+Możliwe jest definiowanie klas wewnątrz definicji klasy.
+Takie klasy, których definicja jest zanurzona w&nbsp;definicji innej
+klasy, nazywamy klasami <FONT COLOR="#7b003e"><B>zagnieżdżonymi</B></FONT>
+lub klasami<A NAME="17980"></A>
+<FONT COLOR="#7b003e"><B>wewnętrznymi</B></FONT>.
+Klasę, we wnętrzu której podana jest definicja klasy zagnieżdżonej,
+nazywamy <FONT COLOR="#7b003e"><B>klasą otaczającą</B></FONT>.<A NAME="17983"></A>
+Zagnieżdżenie definicji oznacza, że nazwa tej klasy leży w&nbsp;zakresie
+klasy otaczającej, a&nbsp;nie w&nbsp;zakresie globalnym.
+W zasadzie nie znaczy nic więcej. Klasy otaczająca i&nbsp;zagnieżdżona
+nie są specjalnie ze sobą związane. W&nbsp;szczególności,
+w odróżnieniu od Javy,<A NAME="17984"></A>
+obowiązują dla nich normalne
+zasady dostępności, czyli na przykład pola prywatne lub chronione
+jednej z&nbsp;nich nie są widoczne w&nbsp;drugiej. Z tego, że zakresem
+definicji klasy zagnieżdżonej jest klasa otaczająca, wynika, że
+widoczne są w&nbsp;niej, bez żadnych kwalifikacji, nazwy aliasów
+zdefiniowanych za pomocą
+<!--O--><span class='klucz'>typedef<!--C--></span>
+ wewnątrz klasy otaczającej,
+czy na przykład nazwy zdefiniowanych w&nbsp;niej typów wyliczeniowych.
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Rozpatrzmy jako przykład następujący program:
+<BR><A NAME="klawew.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">122</SPAN>:</SPAN>
+      <A NAME="tex2html129"
+  HREF="source-files/klawew.cpp">
+<!--O--><span class='downl'>klawew.cpp<!--C--></span></A>
+<A NAME="18424"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Klasy zagnieżdżone</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cstring&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Klient</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>    <b><font color="#0000FF">static</font></b> <font color="#009900">int</font> ID<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     7.  </font>    <font color="#009900">char</font><font color="#990000">*</font>  nazwisko<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font>    <b><font color="#0000FF">const</font></b>  <font color="#009900">int</font> id<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     9.  </font>    <font color="#009900">int</font>    ma<font color="#990000">,</font>winien<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    10.  </font>
+ <font SIZE="-2" color="black">    11.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    12.  </font>    <b><font color="#0000FF">class</font></b> <font color="#008080">Saldo</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    13.  </font>        <font color="#009900">int</font> id<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    14.  </font>        <font color="#009900">int</font> saldo<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>    <b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    16.  </font>        <b><font color="#000000">Saldo</font></b><font color="#990000">(</font><font color="#009900">int</font> id<font color="#990000">,</font> <font color="#009900">int</font> saldo<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    17.  </font>            <font color="#990000">:</font> <b><font color="#000000">id</font></b><font color="#990000">(</font>id<font color="#990000">),</font> <b><font color="#000000">saldo</font></b><font color="#990000">(</font>saldo<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    18.  </font>        <font color="#FF0000">{}</font>
+ <font SIZE="-2" color="black">    19.  </font>
+ <font SIZE="-2" color="black">    20.  </font>        <font color="#009900">void</font> <b><font color="#000000">printinfo</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    21.  </font>    <font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    22.  </font>
+ <font SIZE="-2" color="black">    23.  </font>    <b><font color="#000000">Klient</font></b><font color="#990000">(</font><b><font color="#0000FF">const</font></b> <font color="#009900">char</font><font color="#990000">*</font> n<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    24.  </font>        <font color="#990000">:</font> <b><font color="#000000">nazwisko</font></b><font color="#990000">(</font><b><font color="#000000">strcpy</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <font color="#009900">char</font><font color="#990000">[</font><b><font color="#000000">strlen</font></b><font color="#990000">(</font>n<font color="#990000">)+</font><font color="#993399">1</font><font color="#990000">],</font>n<font color="#990000">)),</font>
+ <font SIZE="-2" color="black">    25.  </font>          <b><font color="#000000">id</font></b><font color="#990000">(++</font>ID<font color="#990000">),</font> <b><font color="#000000">ma</font></b><font color="#990000">(</font><font color="#993399">0</font><font color="#990000">),</font> <b><font color="#000000">winien</font></b><font color="#990000">(</font><font color="#993399">0</font><font color="#990000">)</font>
+ <font SIZE="-2" color="black">    26.  </font>    <font color="#FF0000">{}</font>
+ <font SIZE="-2" color="black">    27.  </font>
+ <font SIZE="-2" color="black">    28.  </font>    Klient<font color="#990000">&amp;</font> <b><font color="#000000">wplata</font></b><font color="#990000">(</font><font color="#009900">int</font> w<font color="#990000">)</font>  <font color="#FF0000">{</font> ma     <font color="#990000">+=</font> w<font color="#990000">;</font> <b><font color="#0000FF">return</font></b> <font color="#990000">*</font><b><font color="#0000FF">this</font></b><font color="#990000">;</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    29.  </font>    Klient<font color="#990000">&amp;</font> <b><font color="#000000">wyplata</font></b><font color="#990000">(</font><font color="#009900">int</font> w<font color="#990000">)</font> <font color="#FF0000">{</font> winien <font color="#990000">+=</font> w<font color="#990000">;</font> <b><font color="#0000FF">return</font></b> <font color="#990000">*</font><b><font color="#0000FF">this</font></b><font color="#990000">;</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    30.  </font>
+ <font SIZE="-2" color="black">    31.  </font>    Saldo<font color="#990000">*</font> <b><font color="#000000">dajSaldo</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    32.  </font>
+ <font SIZE="-2" color="black">    33.  </font>    <font color="#990000">~</font><b><font color="#000000">Klient</font></b><font color="#990000">()</font> <font color="#FF0000">{</font> <b><font color="#0000FF">delete</font></b> <font color="#990000">[]</font> nazwisko<font color="#990000">;</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    34.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    35.  </font><font color="#009900">int</font> Klient<font color="#990000">::</font>ID <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    36.  </font>
+ <font SIZE="-2" color="black">    37.  </font>Klient<font color="#990000">::</font>Saldo<font color="#990000">*</font> Klient<font color="#990000">::</font><b><font color="#000000">dajSaldo</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    38.  </font>    <b><font color="#0000FF">return</font></b> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Saldo</font></b><font color="#990000">(</font>id<font color="#990000">,</font> ma <font color="#990000">-</font> winien<font color="#990000">);</font>
+ <font SIZE="-2" color="black">    39.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    40.  </font>
+ <font SIZE="-2" color="black">    41.  </font><font color="#009900">void</font> Klient<font color="#990000">::</font>Saldo<font color="#990000">::</font><b><font color="#000000">printinfo</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    42.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"id: "</font> <font color="#990000">&lt;&lt;</font> id <font color="#990000">&lt;&lt;</font> <font color="#FF0000">" Saldo: "</font> <font color="#990000">&lt;&lt;</font> saldo <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    43.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    44.  </font>
+ <font SIZE="-2" color="black">    45.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    46.  </font>    <font color="#008080">Klient</font>  <b><font color="#000000">kow</font></b><font color="#990000">(</font><font color="#FF0000">"Kowalski"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    47.  </font>    Klient<font color="#990000">*</font> pmal <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Klient</font></b><font color="#990000">(</font><font color="#FF0000">"Malinowski"</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    48.  </font>
+ <font SIZE="-2" color="black">    49.  </font>    kow<font color="#990000">.</font><b><font color="#000000">wplata</font></b><font color="#990000">(</font><font color="#993399">100</font><font color="#990000">).</font><b><font color="#000000">wplata</font></b><font color="#990000">(</font><font color="#993399">50</font><font color="#990000">).</font><b><font color="#000000">wyplata</font></b><font color="#990000">(</font><font color="#993399">75</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    50.  </font>    pmal<font color="#990000">-&gt;</font><b><font color="#000000">wplata</font></b><font color="#990000">(</font><font color="#993399">200</font><font color="#990000">).</font><b><font color="#000000">wyplata</font></b><font color="#990000">(</font><font color="#993399">50</font><font color="#990000">).</font><b><font color="#000000">wyplata</font></b><font color="#990000">(</font><font color="#993399">25</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    51.  </font>
+ <font SIZE="-2" color="black">    52.  </font>    Klient<font color="#990000">::</font>Saldo<font color="#990000">*</font> pskow <font color="#990000">=</font>   kow<font color="#990000">.</font><b><font color="#000000">dajSaldo</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    53.  </font>    Klient<font color="#990000">::</font>Saldo<font color="#990000">*</font> psmal <font color="#990000">=</font> pmal<font color="#990000">-&gt;</font><b><font color="#000000">dajSaldo</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    54.  </font>
+ <font SIZE="-2" color="black">    55.  </font>    pskow<font color="#990000">-&gt;</font><b><font color="#000000">printinfo</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    56.  </font>    psmal<font color="#990000">-&gt;</font><b><font color="#000000">printinfo</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    57.  </font>
+ <font SIZE="-2" color="black">    58.  </font>    Klient<font color="#990000">::</font><font color="#008080">Saldo</font> <b><font color="#000000">anonim</font></b><font color="#990000">(</font><font color="#993399">9</font><font color="#990000">,</font><font color="#993399">500</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    59.  </font>    anonim<font color="#990000">.</font><b><font color="#000000">printinfo</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    60.  </font>
+ <font SIZE="-2" color="black">    61.  </font>    <b><font color="#0000FF">delete</font></b> pskow<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    62.  </font>    <b><font color="#0000FF">delete</font></b> psmal<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    63.  </font>    <b><font color="#0000FF">delete</font></b> pmal<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    64.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+<P>
+Wewnątrz klasy
+<!--O--><span class='klasa'>Klient<!--C--></span>
+ zdefiniowna jest klasa
+<!--O--><span class='klasa'>Saldo<!--C--></span>.
+Jej metoda
+<!--O--><span class='funkcja'>printinfo<!--C--></span>
+ jest w&nbsp;klasie zadeklarowana, ale
+zdefiniowana poza klasą. Zauważmy, że w&nbsp;lini&nbsp;41 musieliśmy
+do jej zdefiniowania użyć podwójnej kwalifikacji: jest to funkcja
+
+<!--O--><span class='funkcja'>printinfo<!--C--></span>
+ z&nbsp;zakresu klasy
+<!--O--><span class='klasa'>Saldo<!--C--></span>, który z&nbsp;kolei
+zawarty jest w&nbsp;zakresie klasy
+<!--O--><span class='klasa'>Klient<!--C--></span>.
+
+<P>
+W liniach&nbsp;52 i&nbsp;53
+tworzymy zmienne wskaźnikowe typu
+<!--O--><span class='klasa'>Saldo*<!--C--></span>. Zauważmy, że
+i&nbsp;tutaj musieliśmy użyć kwalifikacji nazwą klasy otaczającej,
+ponieważ w&nbsp;zakresie globalnym nazwa klasy
+<!--O--><span class='klasa'>Saldo<!--C--></span>
+ jest
+niewidoczna.
+
+<P>
+Nie jest jednak tak, że nie da się tworzyć obiektów klasy
+
+<!--O--><span class='klasa'>Saldo<!--C--></span>
+ poza klasą otaczającą (czyli klasą
+<!--O--><span class='klasa'>Klient<!--C--></span>).
+Jak widzimy w&nbsp;linii&nbsp;58, i&nbsp;o czym przekonuje nas wydruk programu
+<PRE>
+    id: 1 Saldo: 75
+    id: 2 Saldo: 125
+    id: 9 Saldo: 500
+</PRE>
+można utworzyć obiekt klasy
+<!--O--><span class='klasa'>Saldo<!--C--></span>
+ w&nbsp;funkcji
+<!--O--><span class='funkcja'>main<!--C--></span>
+
+w&nbsp;ogóle nie odwołując się do żadnego obiektu ani metody klasy
+otaczającej (inaczej jest w&nbsp;Javie).
+
+<P>
+Klasy wewnętrzne występują w&nbsp;programach C++ rzadko, bo w&nbsp;zasadzie
+nie są nigdy absolutnie konieczne, choć mogą być wygodne.
+
+<P>
+Na marginesie zauważmy w&nbsp;tym miejscu, że możliwe jest też
+definiowanie <FONT COLOR="#7b003e"><B>klas lokalnych</B></FONT>,<A NAME="18004"></A>
+definiowanych wewnątrz <FONT COLOR="#7b003e"><I>funkcji</I></FONT>. Wtedy rzeczywiście nazwa
+tej klasy nie jest dostępna nigdzie poza tą funkcją, tak jak
+nie są dostępne nazwy żadnych zmiennych lokalnych funkcji.
+Klasy lokalne stosuje się jeszcze rzadziej niż klasy zagnieżdżone.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2174"
+  HREF="node100.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2180"
+  HREF="node96.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2186"
+  HREF="node102.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2182"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2184"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2175"
+  HREF="node100.html">15.4 Funkcje zaprzyjaźnione</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2181"
+  HREF="node96.html">15. Klasy (II)</A>
+<B>Dalej:</B> <A NAME="tex2html2187"
+  HREF="node102.html">15.6 Wskaźniki do składowych</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

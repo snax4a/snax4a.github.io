@@ -1,0 +1,477 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>25.2 Operator dynamic_cast</TITLE>
+<META NAME="description" CONTENT="25.2 Operator dynamic_cast">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="previous" HREF="node148.html">
+<LINK REL="up" HREF="node147.html">
+<LINK REL="next" HREF="node150.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2931"
+  HREF="node148.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2935"
+  HREF="node147.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2941"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2937"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2939"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2932"
+  HREF="node148.html">25.1 Operator typeid</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2936"
+  HREF="node147.html">25. Dynamiczna identyfikacja typu</A>
+<B>Dalej:</B> <A NAME="tex2html2942"
+  HREF="node150.html">Skorowidz</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002620000000000000000"></A>
+        <A NAME="rtti:dyncast"></A>
+<BR>
+<SPAN CLASS="arabic">25</SPAN>.<SPAN CLASS="arabic">2</SPAN> Operator <SPAN  CLASS="textsl">dynamic_cast</SPAN>
+</H1>
+
+<P>
+Operator <FONT COLOR="#7b003e"><B>dynamicznego rzutowania</B></FONT> (konwersji)
+<A NAME="30249"></A>
+<A NAME="30250"></A>
+<A NAME="30251"></A>
+<A NAME="30252"></A>
+stosuje się, gdy prawidłowość przekształcenia nie może być
+sprawdzona na etapie kompilacji, bo zależy od typu obiektu klasy
+polimorficznej, który znany jest dopiero w&nbsp;czasie wykonania. Jego
+użycie ma sens w&nbsp;sytuacjach, gdy mamy do czynienia z&nbsp;obiektami
+różnych klas powiązanych ze sobą hierarchią dziedziczenia.
+
+<P>
+Wyobraźmy sobie, że zdefiniowane są klasy&nbsp;
+<!--O--><span class='klasa'>A<!--C--></span>
+ i&nbsp;dziedzicząca
+z&nbsp;niej klasa&nbsp;
+<!--O--><span class='klasa'>B<!--C--></span>. Klasy muszą być polimorficzne, a&nbsp;więc
+w&nbsp;klasie
+<!--O--><span class='klasa'>A<!--C--></span>
+ musi istnieć choć jedna metoda wirtualna (patrz
+     rozdział o <A HREF="node126.html#dzie:wirt">dziedziczeniu</A> ).
+Załóżmy, że istnieje też funkcja, której parametr ma typ
+
+<!--O--><span class='typ'>A*<!--C--></span>
+ lub
+<!--O--><span class='typ'>A&amp;<!--C--></span>. Czy można wywołać tę funkcję z&nbsp;argumentem
+typu
+<!--O--><span class='typ'>B*<!--C--></span>
+ lub
+<!--O--><span class='typ'>B<!--C--></span>? Ponieważ obiekt klasy
+<!--O--><span class='klasa'>B<!--C--></span>
+ można
+traktować jako obiekt klasy
+<!--O--><span class='klasa'>A<!--C--></span>, bo zawiera na pewno wszystkie
+składowe zadeklarowane w&nbsp;klasie
+<!--O--><span class='klasa'>A<!--C--></span>
+ (i,&nbsp;być może, inne),
+więc takie wywołanie jest legalne i&nbsp;konwersja od typu
+<!--O--><span class='typ'>B*<!--C--></span>
+ do typu
+
+<!--O--><span class='typ'>A*<!--C--></span>
+ zajdzie niejawnie. Na marginesie zauważmy, że mówimy tu o
+przekazywaniu obiektów do funkcji przez wskaźnik lub referencję:
+<FONT COLOR="#7b003e"><I>nie</I></FONT> przez wartość. Wartości typu&nbsp;
+<!--O--><span class='klasa'>B<!--C--></span>
+ nie mogą wystąpić
+w&nbsp;roli wartości typu&nbsp;
+<!--O--><span class='klasa'>A<!--C--></span>
+ na stosie programu, bo, na przykład,
+mają inny rozmiar (formalnie jest to możliwe, ale wiąże się
+z&nbsp;&bdquo;szatkowaniem&rdquo; obiektu &mdash;&nbsp;na stosie położony zostanie podobiekt
+klasy&nbsp;
+<!--O--><span class='klasa'>A<!--C--></span>
+ obiektu klasy&nbsp;
+<!--O--><span class='klasa'>B<!--C--></span>, co zazwyczaj nie jest tym
+czego byśmy chcieli).
+
+<P>
+Inna jest sytuacja, jeśli, odwrotnie, mamy zmienną typu
+<!--O--><span class='typ'>B*<!--C--></span>, a
+przypisać jej chcielibyśmy wartość typu
+<!--O--><span class='typ'>A*<!--C--></span>. Obiekt wskazywany
+przez ten wskaźnik może, ale nie musi być obiektem klasy pochodnej
+
+<!--O--><span class='klasa'>B<!--C--></span>. Konwersja zatem w&nbsp;tę stronę, od wskaźnika na obiekt
+klasy bazowej do wskaźnika na obiekt klasy pochodnej, może się nie
+powieść. Musi zatem być dokonana jawnie. Ale kompilator nie jest
+w&nbsp;stanie stwierdzić, czy takie przekształcenie jest prawidłowe, bo
+nie wie, jaki będzie typ obiektu wskazywanego podczas wykonania
+programu. Nie można zatem użyć statycznego operatora konwersji.
+I&nbsp;właśnie wtedy przydaje się operator konwersji dynamicznej
+
+<!--O--><span class='klucz'>dynamic_cast<!--C--></span>. Składnia jego użycia jest następująca:
+<pre><tt>       <b><font color="#0000FF">dynamic_cast</font></b><font color="#990000">&lt;</font>Typ<font color="#990000">&gt;(</font>wyrazenie<font color="#990000">)</font>
+</tt></pre>
+Zachodzą dwa przypadki:
+
+<UL>
+<LI>Typ
+<!--O--><span class='klasa'>Typ<!--C--></span>
+ jest typem wskaźnikowym do polimorficznej
+          klasy pochodnej, czyli
+<!--O--><span class='typ'>Typ<!--C--></span>
+ =
+<!--O--><span class='typ'>B*<!--C--></span>, a
+          wartością wyrażenia
+<!--O--><span class='zmienna'>wyrazenie<!--C--></span>
+ jest
+          wskazanie na obiekt klasy bazowej
+<!--O--><span class='klasa'>A<!--C--></span>, czyli
+          wartość o&nbsp;typie
+<!--O--><span class='typ'>A*<!--C--></span>. Operacja rzutowania polega wtedy
+          na sprawdzeniu, czy obiekt wskazywany przez
+
+<!--O--><span class='zmienna'>wyrazenie<!--C--></span>
+ jest w&nbsp;rzeczywistości obiektem klasy
+          pochodnej
+<!--O--><span class='klasa'>B<!--C--></span>; po tym teście wartością całego
+          tego wyrażenia staje się
+
+<UL>
+<LI>wartość wskaźnikowa typu
+<!--O--><span class='typ'>B*<!--C--></span>
+ wskazująca
+                    na obiekt wskazywany przez
+<!--O--><span class='zmienna'>wyrazenie<!--C--></span>,
+                    jeśli test wypadł pomyślnie;
+</LI>
+<LI>zero (wskaźnik pusty,
+<!--O--><span class='zmienna'>NULL<!--C--></span>), jeśli
+                    test się nie powiódł, czyli obiekt wskazywany
+                    przez
+<!--O--><span class='zmienna'>wyrazenie<!--C--></span>
+ nie jest obiektem klasy
+
+<!--O--><span class='klasa'>B<!--C--></span>. Można to w&nbsp;programie sprawdzić
+                    odpowiednim
+<!--O--><span class='klucz'>if<!--C--></span>'em i&nbsp;podjąć stosowne
+                    działania bez przerywania programu.
+
+</LI>
+</UL>
+</LI>
+<LI>Typ
+<!--O--><span class='typ'>Typ<!--C--></span>
+ jest typem referencyjnym do polimorficznej
+          klasy pochodnej, czyli
+<!--O--><span class='typ'>Typ<!--C--></span>
+ =
+<!--O--><span class='typ'>B&amp;<!--C--></span>, a
+          wartością wyrażenia
+<!--O--><span class='zmienna'>wyrazenie<!--C--></span>
+ jest l-wartość
+          obiektu klasy
+<!--O--><span class='klasa'>A<!--C--></span>. Operacja rzutowania polega wtedy
+          na sprawdzeniu, czy obiekt
+<!--O--><span class='zmienna'>wyrazenie<!--C--></span>
+ jest w
+          rzeczywistości obiektem klasy pochodnej
+<!--O--><span class='klasa'>B<!--C--></span>;
+          po tym teście,
+
+<UL>
+<LI>jeśli wypadł pomyślnie, wartością całego
+                    wyrażenia staje się referencja typu
+
+<!--O--><span class='typ'>B&amp;<!--C--></span>
+ do obiektu
+<!--O--><span class='zmienna'>wyrazenie<!--C--></span>;
+</LI>
+<LI>jeśli wypadł niepomyślnie, bo obiekt
+
+<!--O--><span class='zmienna'>wyrazenie<!--C--></span>
+ nie jest typu
+<!--O--><span class='klasa'>B<!--C--></span>, to
+                    zgłaszany jest wyjątek typu
+<!--O--><span class='typ'>bad_cast<!--C--></span>
+
+                    (z nagłówka
+<!--O--><span class='plik'>typeinfo<!--C--></span>), który można
+                    przechwycić i&nbsp;podjąć stosowne działania bez
+                    przerywania programu. Tym razem nie można
+                    przekazać informacji o&nbsp;niepowodzeniu zerową
+                    wartością wyrażenia, bo nie ma
+                    czegoś takiego jak pusta referencja (tak jak
+                    jest pusty, czyli zerowy, wskaźnik). Dlatego do
+                    obsługi tego przypadku wybrano metodę zgłoszenia
+                    wyjątku.
+
+</LI>
+</UL>
+</LI>
+</UL>
+Rozpatrzmy przykład:
+<A NAME="prgr.cpp"></A>
+<BR CLEAR='ALL'>
+<div class='kodpro'><HR>
+      <SPAN  CLASS="textbf">P<SPAN CLASS="arabic">201</SPAN>:</SPAN>
+      <A NAME="tex2html214"
+  HREF="source-files/prgr.cpp">
+<!--O--><span class='downl'>prgr.cpp<!--C--></span></A>
+<A NAME="30424"></A>
+      &nbsp;&nbsp;&nbsp;&nbsp;<SMALL CLASS="SMALL">Rzutowanie dynamiczne</SMALL>
+      <BR CLEAR="ALL">
+<HR>
+<pre><tt> <font SIZE="-2" color="black">     1.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+ <font SIZE="-2" color="black">     2.  </font><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;string&gt;</font>
+ <font SIZE="-2" color="black">     3.  </font><b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     4.  </font>
+ <font SIZE="-2" color="black">     5.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Program</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font><b><font color="#0000FF">protected</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">     7.  </font>    <font color="#008080">string</font> name<font color="#990000">;</font>
+ <font SIZE="-2" color="black">     8.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">     9.  </font>    <b><font color="#000000">Program</font></b><font color="#990000">(</font><font color="#008080">string</font> n<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    10.  </font>        <font color="#990000">:</font> <b><font color="#000000">name</font></b><font color="#990000">(</font>n<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    11.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    12.  </font>    <b><font color="#0000FF">virtual</font></b> <font color="#009900">void</font> <b><font color="#000000">print</font></b><font color="#990000">()</font> <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    13.  </font>    <b><font color="#0000FF">virtual</font></b> <font color="#990000">~</font><b><font color="#000000">Program</font></b><font color="#990000">()</font> <font color="#FF0000">{</font> <font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    14.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    15.  </font>
+ <font SIZE="-2" color="black">    16.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Freeware</font> <font color="#990000">:</font> <b><font color="#0000FF">public</font></b> Program <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    17.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    18.  </font>    <b><font color="#000000">Freeware</font></b><font color="#990000">(</font><font color="#008080">string</font> n<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    19.  </font>        <font color="#990000">:</font> <b><font color="#000000">Program</font></b><font color="#990000">(</font>n<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    20.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    21.  </font>    <font color="#009900">void</font> <b><font color="#000000">print</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    22.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Free : "</font> <font color="#990000">&lt;&lt;</font> name <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    23.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    24.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    25.  </font>
+ <font SIZE="-2" color="black">    26.  </font><b><font color="#0000FF">class</font></b> <font color="#008080">Shareware</font> <font color="#990000">:</font> <b><font color="#0000FF">public</font></b> Program <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    27.  </font>    <font color="#009900">int</font> price<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    28.  </font><b><font color="#0000FF">public</font></b><font color="#990000">:</font>
+ <font SIZE="-2" color="black">    29.  </font>    <b><font color="#000000">Shareware</font></b><font color="#990000">(</font><font color="#008080">string</font> n<font color="#990000">,</font> <font color="#009900">int</font> c<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    30.  </font>        <font color="#990000">:</font> <b><font color="#000000">Program</font></b><font color="#990000">(</font>n<font color="#990000">),</font> <b><font color="#000000">price</font></b><font color="#990000">(</font>c<font color="#990000">)</font>
+ <font SIZE="-2" color="black">    31.  </font>    <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    32.  </font>    <font color="#009900">void</font> <b><font color="#000000">print</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    33.  </font>        cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"Share: "</font>  <font color="#990000">&lt;&lt;</font> name
+ <font SIZE="-2" color="black">    34.  </font>             <font color="#990000">&lt;&lt;</font> <font color="#FF0000">", price "</font> <font color="#990000">&lt;&lt;</font> price <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    35.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    36.  </font>    <font color="#009900">int</font> <b><font color="#000000">getPrice</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    37.  </font>        <b><font color="#0000FF">return</font></b> price<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    38.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    39.  </font><font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    40.  </font>
+ <font SIZE="-2" color="black">    41.  </font><font color="#009900">int</font> <b><font color="#000000">total</font></b><font color="#990000">(</font>Program<font color="#990000">*</font> prgs<font color="#990000">[],</font> <font color="#009900">int</font> size<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    42.  </font>    Shareware<font color="#990000">*</font> sh<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    43.  </font>    <font color="#009900">int</font> tot <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    44.  </font>    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> size<font color="#990000">;</font> <font color="#990000">++</font>i<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    45.  </font>        prgs<font color="#990000">[</font>i<font color="#990000">]-&gt;</font><b><font color="#000000">print</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    46.  </font>        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font> sh <font color="#990000">=</font> <b><font color="#0000FF">dynamic_cast</font></b><font color="#990000">&lt;</font>Shareware<font color="#990000">*&gt;(</font>prgs<font color="#990000">[</font>i<font color="#990000">])</font> <font color="#990000">)</font>
+ <font SIZE="-2" color="black">    47.  </font>            tot <font color="#990000">+=</font> sh<font color="#990000">-&gt;</font><b><font color="#000000">getPrice</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">    48.  </font>    <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    49.  </font>    <b><font color="#0000FF">return</font></b> tot<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    50.  </font><font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    51.  </font>
+ <font SIZE="-2" color="black">    52.  </font><font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">    53.  </font>    <font color="#008080">Freeware</font> <b><font color="#000000">anjuta</font></b><font color="#990000">(</font><font color="#FF0000">"Anjuta"</font><font color="#990000">);</font> <font color="#008080">Shareware</font> <b><font color="#000000">wz</font></b><font color="#990000">(</font><font color="#FF0000">"WinZip"</font><font color="#990000">,</font><font color="#993399">30</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    54.  </font>    <font color="#008080">Freeware</font> <b><font color="#000000">mysql</font></b><font color="#990000">(</font><font color="#FF0000">"MySQL"</font><font color="#990000">);</font>   <font color="#008080">Shareware</font> <b><font color="#000000">rar</font></b><font color="#990000">(</font><font color="#FF0000">"RAR"</font><font color="#990000">,</font><font color="#993399">25</font><font color="#990000">);</font>
+ <font SIZE="-2" color="black">    55.  </font>
+ <font SIZE="-2" color="black">    56.  </font>    Program<font color="#990000">*</font> prgs<font color="#990000">[]</font> <font color="#990000">=</font> <font color="#FF0000">{</font> <font color="#990000">&amp;</font>anjuta<font color="#990000">,</font> <font color="#990000">&amp;</font>wz<font color="#990000">,</font> <font color="#990000">&amp;</font>mysql<font color="#990000">,</font> <font color="#990000">&amp;</font>rar <font color="#FF0000">}</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">    57.  </font>
+ <font SIZE="-2" color="black">    58.  </font>    <font color="#009900">int</font> tot <font color="#990000">=</font> <b><font color="#000000">total</font></b><font color="#990000">(</font>prgs<font color="#990000">,</font> <b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>prgs<font color="#990000">)/</font><b><font color="#0000FF">sizeof</font></b><font color="#990000">(</font>prgs<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">]));</font>
+ <font SIZE="-2" color="black">    59.  </font>
+ <font SIZE="-2" color="black">    60.  </font>    cout <font color="#990000">&lt;&lt;</font> <font color="#FF0000">"</font><font color="#CC33CC">\n</font><font color="#FF0000">Total: $"</font> <font color="#990000">&lt;&lt;</font> tot <font color="#990000">&lt;&lt;</font> endl<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    61.  </font><font color="#FF0000">}</font>
+</tt></pre>
+<hr>
+
+</div>
+
+Definiujemy w&nbsp;tym programie klasę abstrakcyjną
+<!--O--><span class='klasa'>Program<!--C--></span>
+ i&nbsp;dwie
+klasy pochodne:
+<!--O--><span class='klasa'>Freeware<!--C--></span>
+ i&nbsp;
+<!--O--><span class='klasa'>Shareware<!--C--></span>. Klasy są
+polimorficzne, bo w&nbsp;klasie bazowej zadeklarowana została metoda
+(czysto) wirtualna
+<!--O--><span class='funkcja'>print<!--C--></span>. Zauważmy, że w&nbsp;klasie
+
+<!--O--><span class='klasa'>Shareware<!--C--></span>
+ zadeklarowaliśmy dodatkowe składowe, których
+nie było w&nbsp;klasie bazowej. Są nimi pole
+<!--O--><span class='zmienna'>price<!--C--></span>
+ i&nbsp;metoda
+
+<!--O--><span class='funkcja'>getPrice<!--C--></span>. Funkcja
+<!--O--><span class='funkcja'>total<!--C--></span>
+ pobiera tablicę
+wskaźników typu
+<!--O--><span class='typ'>Program*<!--C--></span>. W pętli, dla każdego wskaźnika
+z tablicy, wywołuje metodę
+<!--O--><span class='funkcja'>print<!--C--></span>. Żadne rzutowanie nie jest
+potrzebne: polimorfizm zadba o&nbsp;to, aby za każdym razem wywołana
+została metoda z&nbsp;prawdziwej klasy wskazywanego obiektu.
+Ale funkcja
+<!--O--><span class='funkcja'>total<!--C--></span>
+ oprócz wypisania listy programów ma
+obliczyć całkowity ich koszt. Nie da się jednak wywołać
+metody
+<!--O--><span class='funkcja'>getPrice<!--C--></span>
+ dla wskaźnika typu
+<!--O--><span class='typ'>Program*<!--C--></span>, bo w
+klasie
+<!--O--><span class='klasa'>Program<!--C--></span>
+ takiej metody nie ma. Wiemy jednak, że
+niektóre programy są klasy
+<!--O--><span class='klasa'>Shareware<!--C--></span>
+ i&nbsp;tylko dla nich cena
+jest w&nbsp;ogóle zdefiniowana. Rzutujemy zatem wskaźnik typu bazowego
+
+<!--O--><span class='typ'>Program*<!--C--></span>, który jest typem każdego elementu tablicy, na typ
+pochodny
+<!--O--><span class='typ'>Shareware*<!--C--></span>
+ (linia&nbsp;46). Jeśli to się powiedzie, to
+zmienna
+<!--O--><span class='zmienna'>sh<!--C--></span>
+ typu
+<!--O--><span class='typ'>Shareware*<!--C--></span>
+ będzie niezerowa
+i&nbsp;będzie wskazywać na obiekt, który jest na pewno obiektem
+klasy pochodnej
+<!--O--><span class='klasa'>Shareware<!--C--></span>, a&nbsp;nie klasy
+<!--O--><span class='klasa'>Freeware<!--C--></span>.
+Zatem teraz będzie możliwe wywołanie dla tego obiektu
+metody
+<!--O--><span class='funkcja'>getPrice<!--C--></span>
+ (linia&nbsp;47). Jeśli natomiast wskazywany
+przez kolejny element tablicy obiekt nie jest obiektem typu
+
+<!--O--><span class='klasa'>Shareware<!--C--></span>
+ (tylko
+<!--O--><span class='klasa'>Freeware<!--C--></span>, bo innej możliwości nie
+ma), to zmienna
+<!--O--><span class='zmienna'>sh<!--C--></span>
+ będzie zerowa, test w&nbsp;instrukcji
+warunkowej
+<!--O--><span class='klucz'>if<!--C--></span>
+ z&nbsp;linii&nbsp;46 da wartość
+<!--O--><span class='klucz'>false<!--C--></span>
+
+i&nbsp;wywołania funkcji
+<!--O--><span class='funkcja'>getPrice<!--C--></span>
+ nie będzie &mdash;&nbsp;nie mogłoby
+się ono powieść, bo w&nbsp;klasie
+<!--O--><span class='klasa'>Freeware<!--C--></span>
+ metody
+
+<!--O--><span class='funkcja'>getPrice<!--C--></span>
+ nie ma.
+
+<P>
+Wynikiem działania programu jest
+<PRE>
+    Free : Anjuta
+    Share: WinZip, price 30
+    Free : MySQL
+    Share: RAR, price 25
+
+    Total: $55
+</PRE>
+Aby zilustrować drugą możliwość, w&nbsp;powyższym programie
+moglibyśmy zapisać funkcję
+<!--O--><span class='funkcja'>total<!--C--></span>
+ następująco:
+<pre><tt> <font SIZE="-2" color="black">     1.  </font>    <font color="#009900">int</font> <b><font color="#000000">total</font></b><font color="#990000">(</font>Program<font color="#990000">*</font> prgs<font color="#990000">[],</font> <font color="#009900">int</font> size<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     2.  </font>        <font color="#009900">int</font> tot <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+ <font SIZE="-2" color="black">     3.  </font>        <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> size<font color="#990000">;</font> <font color="#990000">++</font>i<font color="#990000">)</font> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     4.  </font>            prgs<font color="#990000">[</font>i<font color="#990000">]-&gt;</font><b><font color="#000000">print</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">     5.  </font>            <b><font color="#0000FF">try</font></b> <font color="#FF0000">{</font>
+ <font SIZE="-2" color="black">     6.  </font>                Shareware<font color="#990000">&amp;</font> sh <font color="#990000">=</font>
+ <font SIZE="-2" color="black">     7.  </font>                    <b><font color="#0000FF">dynamic_cast</font></b><font color="#990000">&lt;</font>Shareware<font color="#990000">&amp;&gt;(*</font>prgs<font color="#990000">[</font>i<font color="#990000">]);</font>
+ <font SIZE="-2" color="black">     8.  </font>                tot <font color="#990000">+=</font> sh<font color="#990000">.</font><b><font color="#000000">getPrice</font></b><font color="#990000">();</font>
+ <font SIZE="-2" color="black">     9.  </font>            <font color="#FF0000">}</font> <b><font color="#0000FF">catch</font></b><font color="#990000">(</font>bad_cast<font color="#990000">)</font> <font color="#FF0000">{</font> <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    10.  </font>        <font color="#FF0000">}</font>
+ <font SIZE="-2" color="black">    11.  </font>        <b><font color="#0000FF">return</font></b> tot<font color="#990000">;</font>
+ <font SIZE="-2" color="black">    12.  </font>    <font color="#FF0000">}</font>
+</tt></pre>
+Tym razem rzutujemy (linia&nbsp;7) nie wskaźnik, ale wartość
+obiektową wskazywaną przez ten wskaźnik:
+
+<!--O--><span class='zmienna'>prgs[i]<!--C--></span>
+ jest  wskaźnikiem, więc
+<!--O--><span class='zmienna'>*prgs[i]<!--C--></span>
+ jest
+l-wartością wskazywanego obiektu. Jeśli rzutowanie do typu
+
+<!--O--><span class='typ'>Shareware&amp;<!--C--></span>
+ powiedzie się, to odczytujemy i&nbsp;dodajemy cenę.
+Jeśli nie powiedzie się, to znaczy obiekt nie był klasy pochodnej
+
+<!--O--><span class='klasa'>Shareware<!--C--></span>, zgłaszany jest wyjątek i&nbsp;sterowanie nie dochodzi do
+linii&nbsp;8, tylko wchodzi do frazy
+<!--O--><span class='klucz'>catch<!--C--></span>, gdzie wyjątek ten
+jest po prostu ignorowany, po czym program przechodzi do wykonania
+kolejnego obrotu pętli.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2931"
+  HREF="node148.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2935"
+  HREF="node147.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2941"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2937"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2939"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2932"
+  HREF="node148.html">25.1 Operator typeid</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2936"
+  HREF="node147.html">25. Dynamiczna identyfikacja typu</A>
+<B>Dalej:</B> <A NAME="tex2html2942"
+  HREF="node150.html">Skorowidz</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>

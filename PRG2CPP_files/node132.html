@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>22. Wyjątki</TITLE>
+<META NAME="description" CONTENT="22. Wyjątki">
+<META NAME="keywords" CONTENT="PRG2CPP">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2016">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="PRG2CPP.css">
+
+<LINK REL="next" HREF="node140.html">
+<LINK REL="previous" HREF="node130.html">
+<LINK REL="up" HREF="PRG2CPP.html">
+<LINK REL="next" HREF="node133.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation">
+<A NAME="tex2html2673"
+  HREF="node131.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2679"
+  HREF="PRG2CPP.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2685"
+  HREF="node133.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2681"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2683"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2674"
+  HREF="node131.html">21.1 Szablony klas</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2680"
+  HREF="PRG2CPP.html">Programowanie w C++</A>
+<B>Dalej:</B> <A NAME="tex2html2686"
+  HREF="node133.html">22.1 Zgłaszanie wyjątków</A>
+<BR> <HR> <P>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002300000000000000000"></A>
+        <A NAME="chap:wyjatki"></A>
+<BR>
+<SPAN CLASS="arabic">22</SPAN>. Wyjątki
+</H1>
+
+<P>
+Tak jak Java,<A NAME="27440"></A>Python
+<A NAME="27441"></A> i&nbsp;wiele innych języków
+obiektowych, język C++ umożliwia obsługę
+<FONT COLOR="#7b003e"><B>wyjątków</B></FONT><A NAME="27443"></A> (ang.&nbsp;<FONT COLOR="#7b003e"><I>exception</I></FONT>), czyli
+sytuacji, gdy powstaje w&nbsp;czasie wykonania
+programu błąd uniemożliwiający dalszy jego przebieg (na przykład
+dzielenie przez zero czy wywołanie metody za pomocą pustego
+wskaźnika). Normalnie, powstanie takiej sytuacji powoduje przerwanie
+programu, zwykle z&nbsp;mało czytelnym komunikatem o&nbsp;naturze błędu.
+Obsługa wyjątków pozwala na zdefiniowanie przez programistę akcji,
+które należy podjąć po powstaniu sytuacji wyjątkowej &mdash;&nbsp;w
+szczególności programista może świadomie podjąć decyzję o&nbsp;ich
+całkowitym zignorowaniu.
+
+<P>
+W profesjonalnych programach właściwa obsługa sytuacji wyjątkowych
+może stanowić znaczną część całego kodu; żaden bank nie
+chciałby bowiem, aby jego klientom ukazywał się nagle na ekranie
+komunikat <SPAN  CLASS="textit">&bdquo;segmentation fault, core dumped&rdquo;</SPAN> lub
+<SPAN  CLASS="textit">&bdquo;skontaktuj się ze sprzedawcą&rdquo;</SPAN>.
+
+<P>
+Właściwa i&nbsp;pełna obsługa sytuacji wyjątkowych to zadanie
+trudne. Jedną z&nbsp;przyczyn jest fakt, że język C++ był zaprojektowany
+tak, aby był zgodny z&nbsp;językiem&nbsp;C, gdzie osługi wyjątków nie ma.
+W&nbsp;tym rozdziale podamy parę podstawowych informacji na ten temat:
+szerszego omówienia należy szukać w&nbsp;bardziej zaawansowanych
+tekstach na temat języka C++ (wiele można znaleźć w książce
+Stroustrupa).<A NAME="27447"></A>
+
+<P>
+
+<P>
+<BR> <HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Podrozdzia&#322;y</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html2687"
+  HREF="node133.html"><SPAN CLASS="arabic">22</SPAN>.<SPAN CLASS="arabic">1</SPAN> Zgłaszanie wyjątków</A>
+<LI><A NAME="tex2html2688"
+  HREF="node134.html"><SPAN CLASS="arabic">22</SPAN>.<SPAN CLASS="arabic">2</SPAN> Wychwytywanie wyjątków</A>
+<LI><A NAME="tex2html2689"
+  HREF="node135.html"><SPAN CLASS="arabic">22</SPAN>.<SPAN CLASS="arabic">3</SPAN> Hierarchie wyjątków</A>
+<LI><A NAME="tex2html2690"
+  HREF="node136.html"><SPAN CLASS="arabic">22</SPAN>.<SPAN CLASS="arabic">4</SPAN> Wyjątki w&nbsp;konstruktorach i&nbsp;destruktorach</A>
+<LI><A NAME="tex2html2691"
+  HREF="node137.html"><SPAN CLASS="arabic">22</SPAN>.<SPAN CLASS="arabic">5</SPAN> Specyfikacje wyjątków</A>
+<LI><A NAME="tex2html2692"
+  HREF="node138.html"><SPAN CLASS="arabic">22</SPAN>.<SPAN CLASS="arabic">6</SPAN> Ponawianie wyjątku</A>
+<LI><A NAME="tex2html2693"
+  HREF="node139.html"><SPAN CLASS="arabic">22</SPAN>.<SPAN CLASS="arabic">7</SPAN> Standardowe wyjątki</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><HR>
+<A NAME="tex2html2673"
+  HREF="node131.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="ikonypng/prev.png"></A>
+<A NAME="tex2html2679"
+  HREF="PRG2CPP.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="ikonypng/up.png"></A>
+<A NAME="tex2html2685"
+  HREF="node133.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="ikonypng/next.png"></A>
+<A NAME="tex2html2681"
+  HREF="node1.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="ikonypng/contents.png"></A>
+<A NAME="tex2html2683"
+  HREF="node150.html">
+<IMG WIDTH="48" HEIGHT="48" ALIGN="BOTTOM" BORDER="0" ALT="index"
+ SRC="ikonypng/index.png"></A> <BR>
+<B>Wstecz:</B> <A NAME="tex2html2674"
+  HREF="node131.html">21.1 Szablony klas</A>
+<B>W g&#243;r&#281;:</B> <A NAME="tex2html2680"
+  HREF="PRG2CPP.html">Programowanie w C++</A>
+<B>Dalej:</B> <A NAME="tex2html2686"
+  HREF="node133.html">22.1 Zgłaszanie wyjątków</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<p style="text-align:right;"><I><font size=-2>T.R. Werner, 28 września 2018; 23:31</font></I></p>
+</ADDRESS>
+</BODY>
+</HTML>
